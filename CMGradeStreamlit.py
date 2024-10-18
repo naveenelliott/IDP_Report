@@ -18,7 +18,12 @@ def CMFunction(dataframe):
     #details = selected.loc[:, ['Player Full Name', 'Team Name', 'As At Date', 'Position Tag']]
     details.reset_index(drop=True, inplace=True)
     selected = dataframe.loc[:, ~dataframe.columns.duplicated()]
-    st.write(selected)
+    for col in number_columns:
+    try:
+        # Attempt to convert each column to float and identify issues
+        selected[col] = pd.to_numeric(selected[col], errors='raise')  # raises error for non-convertible values
+    except Exception as e:
+        st.write(f"Error converting column '{col}': {e}")
     selected_p90 = selected.loc[:, number_columns].astype(float)
 
     per90 = ['Yellow Card', 'Red Card', 'Goal', 'Assist', 'Dribble',
