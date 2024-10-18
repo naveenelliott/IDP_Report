@@ -11,6 +11,10 @@ import pandas as pd
 from xGModel import xGModel
 import numpy as np
 import streamlit as st
+from mplsoccer import Radar
+import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
+from scipy.stats import norm
 
 def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, player_data, actions, fc_python, full_actions, xg):
 
@@ -255,6 +259,7 @@ def getPrimaryPosition(player_full_name):
     end = end.drop_duplicates()
     end['mins played'] = end['mins played'].astype(float)
     end['As At Date'] = pd.to_datetime(end['As At Date'])
+    end = end.loc[end['Player Full Name'] == player_full_name]
 
     # Sort by Player Full Name and Match Date in descending order
     end = end.sort_values(by=['Player Full Name', 'As At Date'], ascending=[True, False])
@@ -262,7 +267,6 @@ def getPrimaryPosition(player_full_name):
     as_at_date = end['As At Date'].max()
 
     end = end.loc[end['As At Date'] == as_at_date]
-    end = end.loc[end['Player Full Name'] == player_full_name]
     end_grouped = end.groupby(['Player Full Name', 'Position Tag'])['mins played'].sum().reset_index()
     end_grouped = end_grouped.sort_values(by=['Player Full Name', 'mins played'], ascending=[True, False])
 
@@ -273,3 +277,291 @@ def getPrimaryPosition(player_full_name):
 
 
     return most_played_position
+
+
+def getPlayerStatistics(player_full_name, position):
+    def read_all_csvs_from_folder(folder_path):
+        # List all files in the folder
+        files = os.listdir(folder_path)
+        
+        # Filter the list to include only CSV files
+        csv_files = [file for file in files if file.endswith('.csv')]
+        
+        # Read each CSV file and store it in a list of DataFrames
+        data_frames = []
+        for file in csv_files:
+            file_path = os.path.join(folder_path, file)
+            df = pd.read_csv(file_path)
+            # formatting the files
+            df.columns = df.iloc[3]
+            df = df.iloc[4:]
+            df = df.reset_index(drop=True)
+            # this is getting us the player data
+            start_index = df.index[df["Period Name"] == "Running By Player"][0]
+
+            # Find the index where "period name" is equal to "running by position player"
+            end_index = df.index[df["Period Name"] == "Running By Position Player"][0]
+
+            df = df.iloc[start_index:end_index]
+
+            # Reset the index (optional if you want a clean integer index)
+            df = df.reset_index(drop=True)
+            remove_first = ['Period Name', 'Squad Number', 'Match Name', 'Round Name']
+            df = df.drop(columns=remove_first, errors='ignore')
+            df = df.dropna(axis=1, how='all')
+            df = df.iloc[1:]
+            data_frames.append(df)
+            
+        
+        # Optionally, combine all DataFrames into a single DataFrame
+        combined_df = pd.concat(data_frames, ignore_index=True)
+        
+        return combined_df
+
+    # Example usage
+    # THIS COULD NEED CHANGED WITH 18 NEW TEAMS
+    folder_path = 'IDP_Plan/WeeklyReport PSD/'  # Replace with your folder path
+    end = read_all_csvs_from_folder(folder_path)
+        
+    end = end.drop_duplicates()
+    end['mins played'] = end['mins played'].astype(float)
+    end['As At Date'] = pd.to_datetime(end['As At Date'])
+    end = end.loc[end['Player Full Name'] == player_full_name]
+
+    # Sort by Player Full Name and Match Date in descending order
+    end = end.sort_values(by=['Player Full Name', 'As At Date'], ascending=[True, False])
+
+    as_at_date = end['As At Date'].max()
+
+    end = end.loc[end['As At Date'] == as_at_date]
+
+    number_columns = ['mins played', 'Yellow Card', 'Red Card', 'Goal', 'Assist', 'Dribble',
+           'Goal Against', 'Stand. Tackle', 'Unsucc Stand. Tackle', 'Def Aerial', 'Unsucc Def Aerial',
+           'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Att 1v1', 'Efforts on Goal', 'Att Aerial',
+           'Shot on Target', 'Pass into Oppo Box', 'Tackle', 'Clear', 'Unsucc Tackle', 'Own Box Clear', 'Blocked Shot', 'Blocked Cross',
+           'Forward', 'Unsucc Forward', 'Line Break', 'Header on Target', 'Cross', 'Unsucc Cross', 'Att Shot Blockd', 'Long', 'Unsucc Long',
+           'Loss of Poss', 'Success', 'Unsuccess', 'Foul Won', 'Progr Regain ', 'Stand. Tackle Success ', 'Def Aerial Success ',
+           'Pass Completion ', 'Progr Pass Attempt ', 'Progr Pass Completion ', 'Efficiency ', 'PK Missed', 'PK Scored', 'Foul Conceded']
+    
+    end = end[number_columns].astype(float)
+
+    per90 = ['Yellow Card', 'Red Card', 'Goal', 'Assist', 'Dribble',
+           'Stand. Tackle', 'Unsucc Stand. Tackle', 'Tackle', 'Def Aerial', 'Unsucc Def Aerial',
+           'Own Box Clear', 'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Blocked Shot',
+           'Blocked Cross', 'Att 1v1', 'Efforts on Goal', 'Clear', 'Unsucc Tackle',
+           'Shot on Target', 'Att Shot Blockd',
+           'Long', 'Unsucc Long', 'Forward', 'Unsucc Forward', 'Line Break', 
+           'Loss of Poss', 'Success', 'Unsuccess', 'Foul Conceded', 'PK Missed', 'PK Scored']
+
+    end['minutes per 90'] = end['mins played']/90
+
+    for column in per90:
+        if column not in ['Goal', 'Assist', 'Shot on Target', 'Yellow Card', 'Red Card', 'PK Missed', 'PK Scored']:
+            end[column] = end[column] / end['minutes per 90']
+
+    end = end.drop(columns=['minutes per 90'])
+    end.reset_index(drop=True, inplace=True)
+    end.fillna(0, inplace=True)
+
+    if position == 'ATT':
+        total_att_actions_columns = ['Goal', 'Assist', 'Att 1v1', 'Att Aerial', 'Efforts on Goal', 'Header on Target', 
+                             'Shot on Target', 'Cross', 'Unsucc Cross', 'Pass into Oppo Box', 'Foul Won']
+        end['Total Att Actions'] = end[total_att_actions_columns].sum(axis=1)
+
+        total_def_actions_columns = ['Tackle', 'Clear', 'Progr Inter', 'Unprogr Inter', 'Progr Rec', 
+                             'Unprogr Rec', 'Stand. Tackle', 'Unsucc Stand. Tackle', 
+                             'Unsucc Tackle']
+        end['Total Def Actions'] = end[total_def_actions_columns].sum(axis=1)
+        end = end[['Total Def Actions', 'Efforts on Goal', 'Dribble', 'Total Att Actions', 'mins played']]
+    elif position == 'Wing':
+        total_def_actions_columns = ['Tackle', 'Clear', 'Progr Inter', 'Unprogr Inter', 'Progr Rec', 
+                             'Unprogr Rec', 'Stand. Tackle', 'Unsucc Stand. Tackle', 
+                             'Unsucc Tackle']
+        end['Total Def Actions'] = end[total_def_actions_columns].sum(axis=1)
+
+        total_att_actions_columns = ['Goal', 'Assist', 'Att 1v1', 'Att Aerial', 'Efforts on Goal', 'Header on Target', 
+                                'Shot on Target', 'Cross', 'Unsucc Cross', 'Pass into Oppo Box', 'Foul Won']
+        end['Total Att Actions'] = end[total_att_actions_columns].sum(axis=1)
+        end = end[['Total Def Actions', 'Pass into Oppo Box', 'Dribble', 'Total Att Actions', 'mins played']]
+    elif position == 'CM':
+        success_total_actions_columns = ['Tackle', 'Progr Rec', 'Progr Inter', 'Blocked Shot', 'Stand. Tackle', 
+                                 'Blocked Cross', 'Success', 'Efforts on Goal', 
+                                 'Dribble', 'Foul Won']
+        end['Total Successful Actions'] = end[success_total_actions_columns].sum(axis=1)
+
+        end['Retention %'] = 100 - (((end['Loss of Poss'] + end['Unsuccess'])/(end['Success'] + end['Unsuccess'] + end['Dribble'] + end['Loss of Poss']))*100)
+
+        total_def_actions_columns = ['Tackle', 'Clear', 'Progr Inter', 'Unprogr Inter', 'Progr Rec', 
+                                'Unprogr Rec', 'Stand. Tackle', 'Unsucc Stand. Tackle', 
+                                'Unsucc Tackle']
+        end['Total Def Actions'] = end[total_def_actions_columns].sum(axis=1)
+
+        end['Forward Passes'] = end['Forward'] + end['Unsucc Forward']
+        end = end[['Total Successful Actions', 'Retention %', 'Total Def Actions', 'Forward Passes', 'Progr Pass Completion ', 'mins played']]
+    elif position == 'DM':
+        success_total_actions_columns = ['Tackle', 'Progr Rec', 'Progr Inter', 'Blocked Shot', 'Stand. Tackle', 
+                                    'Blocked Cross', 'Success', 'Efforts on Goal', 
+                                    'Dribble', 'Foul Won']
+        end['Total Successful Actions'] = end[success_total_actions_columns].sum(axis=1)
+
+        end['Retention %'] = 100 - (((end['Loss of Poss'] + end['Unsuccess'])/(end['Success'] + end['Unsuccess'] + end['Dribble'] + end['Loss of Poss']))*100)
+
+        total_def_actions_columns = ['Tackle', 'Clear', 'Progr Inter', 'Unprogr Inter', 'Progr Rec', 
+                                'Unprogr Rec', 'Stand. Tackle', 'Unsucc Stand. Tackle', 
+                                'Unsucc Tackle']
+        end['Total Def Actions'] = end[total_def_actions_columns].sum(axis=1)
+
+        end['Forward Passes'] = end['Forward'] + end['Unsucc Forward']
+        end = end[['Total Successful Actions', 'Total Def Actions', 'Retention %', 'Forward Passes', 'Progr Pass Completion ', 'mins played']]
+    elif position == 'CB':
+        total_def_actions_columns = ['Tackle', 'Clear', 'Progr Inter', 'Unprogr Inter', 'Progr Rec', 
+                             'Unprogr Rec', 'Stand. Tackle', 'Unsucc Stand. Tackle', 
+                             'Unsucc Tackle']
+        end['Total Def Actions'] = end[total_def_actions_columns].sum(axis=1)
+
+        end['Def Aerial %'] = (end['Def Aerial']/(end['Def Aerial'] + end['Unsucc Def Aerial'])) * 100
+
+        end['Forward Passes'] = end['Forward'] + end['Unsucc Forward']
+        end = end[['Total Def Actions', 'Def Aerial %', 'Forward Passes', 'Progr Pass Completion ', 'Progr Regain ', 'Pass Completion ', 'mins played']]
+    elif position == 'FB': 
+        total_def_actions_columns = ['Tackle', 'Clear', 'Progr Inter', 'Unprogr Inter', 'Progr Rec', 
+                             'Unprogr Rec', 'Stand. Tackle', 'Unsucc Stand. Tackle', 
+                             'Unsucc Tackle']
+        end['Total Def Actions'] = end[total_def_actions_columns].sum(axis=1)
+
+        end['Forward Passes'] = end['Forward'] + end['Unsucc Forward']
+
+        end = end[['Total Def Actions', 'Progr Regain ', 'Forward Passes', 'Pass Completion ', 'Pass into Oppo Box', 'Progr Pass Completion ']]
+    
+    return end
+
+
+def getStandardizedValues(metrics, team_name, position):
+    
+    def calculate_percentile(value):
+        return norm.cdf(value) * 100
+
+    # Function to calculate z-score for each element in a column
+    def calculate_zscore(column, mean, std):
+        return (column - mean) / std
+    
+    if position == 'ATT':
+        if ('U13' in team_name) or ('U14' in team_name):
+            cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerThresholds1314.csv")
+        elif ('U15' in team_name) or ('U16' in team_name):
+            cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerThresholds1516.csv")
+        elif ('U17' in team_name) or ('U19' in team_name):
+            cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerThresholds1719.csv")
+
+        mean_values = cf_df.iloc[0, 0:].values
+        std_values = cf_df.iloc[1, 0:].values
+        # Calculate the z-score for each data point
+        z_scores_df = metrics.apply(lambda col: calculate_zscore(col, mean_values, std_values), axis=1)
+        percentiles = z_scores_df.map(calculate_percentile)
+    elif position == 'Wing':
+        if ('U13' in team_name) or ('U14' in team_name):
+            wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerThresholds1314.csv")
+        elif ('U15' in team_name) or ('U16' in team_name):
+            wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerThresholds1516.csv")
+        elif ('U17' in team_name) or ('U19' in team_name):
+            wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerThresholds1719.csv")
+
+        mean_values = wing_df.iloc[0, 0:].values
+        std_values = wing_df.iloc[1, 0:].values
+        # Calculate the z-score for each data point
+        z_scores_df = metrics.apply(lambda col: calculate_zscore(col, mean_values, std_values), axis=1)
+        percentiles = z_scores_df.map(calculate_percentile)
+    elif position == 'CM':
+        if ('U13' in team_name) or ('U14' in team_name):
+            cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldThresholds1314.csv")
+        elif ('U15' in team_name) or ('U16' in team_name):
+            cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldThresholds1516.csv")
+        elif ('U17' in team_name) or ('U19' in team_name):
+            cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldThresholds1719.csv")
+
+        mean_values = cm_df.iloc[0, 0:].values
+        std_values = cm_df.iloc[1, 0:].values
+        # Calculate the z-score for each data point
+        z_scores_df = metrics.apply(lambda col: calculate_zscore(col, mean_values, std_values), axis=1)
+        percentiles = z_scores_df.map(calculate_percentile)
+    elif position == 'DM':
+        if ('U13' in team_name) or ('U14' in team_name):
+            dm_df = pd.read_csv("IDP_Plan/Thresholds/DefensiveMidfieldThresholds1314.csv")
+        elif ('U15' in team_name) or ('U16' in team_name):
+            dm_df = pd.read_csv("IDP_Plan/Thresholds/DefensiveMidfieldThresholds1516.csv")
+        elif ('U17' in team_name) or ('U19' in team_name):
+            dm_df = pd.read_csv("IDP_Plan/Thresholds/DefensiveMidfieldThresholds1719.csv")
+
+        mean_values = dm_df.iloc[0, 0:].values
+        std_values = dm_df.iloc[1, 0:].values
+        # Calculate the z-score for each data point
+        z_scores_df = metrics.apply(lambda col: calculate_zscore(col, mean_values, std_values), axis=1)
+        percentiles = z_scores_df.map(calculate_percentile)
+    elif position == 'CB':
+        if ('U13' in team_name) or ('U14' in team_name):
+            cb_df = pd.read_csv("IDP_Plan/Thresholds/CenterBackThresholds1314.csv")
+        elif ('U15' in team_name) or ('U16' in team_name):
+            cb_df = pd.read_csv("IDP_Plan/Thresholds/CenterBackThresholds1516.csv")
+        elif ('U17' in team_name) or ('U19' in team_name):
+            cb_df = pd.read_csv("IDP_Plan/Thresholds/CenterBackThresholds1719.csv")
+
+        mean_values = cb_df.iloc[0, 0:].values
+        std_values = cb_df.iloc[1, 0:].values
+        # Calculate the z-score for each data point
+        z_scores_df = metrics.apply(lambda col: calculate_zscore(col, mean_values, std_values), axis=1)
+        percentiles = z_scores_df.map(calculate_percentile)
+    elif position == 'FB':
+        if ('U13' in team_name) or ('U14' in team_name):
+            fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackThresholds1314.csv")
+        elif ('U15' in team_name) or ('U16' in team_name):
+            fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackThresholds1516.csv")
+        elif ('U17' in team_name) or ('U19' in team_name):
+            fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackThresholds1719.csv")
+        mean_values = fb_df.iloc[0, 0:].values
+        std_values = fb_df.iloc[1, 0:].values
+        # Calculate the z-score for each data point
+        z_scores_df = metrics.apply(lambda col: calculate_zscore(col, mean_values, std_values), axis=1)
+        percentiles = z_scores_df.map(calculate_percentile)
+
+    return percentiles
+
+
+
+def getRadarChart(metric_names, metric_values):
+    params = metric_names
+
+
+    font_path = 'Roboto-Bold.ttf'
+    font_bold = FontProperties(fname=font_path)
+
+
+    low = [0] * len(params)
+    high = [100] * len(params)
+
+
+    radar = Radar(params, low, high,
+                # whether to round any of the labels to integers instead of decimal places
+                round_int=[True]*len(params),
+                num_rings=4,  # the number of concentric circles (excluding center circle)
+                # if the ring_width is more than the center_circle_radius then
+                # the center circle radius will be wider than the width of the concentric circles
+                ring_width=1, center_circle_radius=1)
+
+    fig, ax = radar.setup_axis()
+    rings_inner = radar.draw_circles(ax=ax, facecolor='lightgray', edgecolor='black')
+
+    radar1, vertices1 = radar.draw_radar_solid(metric_values.values.flatten(), ax=ax,
+                                            kwargs={'facecolor': 'lightblue',
+                                                    'alpha': 0.6,
+                                                    'edgecolor': 'lightblue',
+                                                    'lw': 2})
+
+    ax.scatter(vertices1[:, 0], vertices1[:, 1],
+            c='lightblue', edgecolors='lightblue', marker='o', s=100, zorder=2)
+
+    range_labels = radar.draw_range_labels(ax=ax, fontsize=15)
+    param_labels = radar.draw_param_labels(ax=ax, fontsize=17)
+
+    fig.set_dpi(600)
+
+    return fig

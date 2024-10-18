@@ -12,7 +12,7 @@ def WingerFunction(dataframe):
            'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Att 1v1', 'Efforts on Goal', 'Cross', 'Unsucc Cross',
            'Shot on Target', 'Pass into Oppo Box', 'Tackle', 'Clear', 'Unsucc Tackle',
            'Long', 'Unsucc Long', 'Forward', 'Unsucc Forward', 'Line Break', 
-           'Loss of Poss', 'Success', 'Unsuccess',  'Foul Won', 'Progr Regain ', 'Stand. Tackle Success ',
+           'Loss of Poss', 'Success', 'Unsuccess',  'Foul Won', 'Progr Regain ', 'Stand. Tackle Success ', 'Def Aerial Success ',
            'Pass Completion ', 'Progr Pass Attempt ', 'Progr Pass Completion ', 'PK Missed', 'PK Scored', 'Att Aerial', 'Header on Target']
     details = dataframe.loc[:, ['Player Full Name', 'Team Name', 'Match Date', 'Position Tag', 'Starts']]
     #details = selected.loc[:, ['Player Full Name', 'Team Name', 'As At Date', 'Position Tag']]

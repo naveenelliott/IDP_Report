@@ -11,15 +11,13 @@ def CBFunction(dataframe):
            'Blocked Cross', 'Att 1v1', 'Efforts on Goal', 'Shot on Target', 'Att Shot Blockd',
            'Long', 'Unsucc Long', 'Forward', 'Unsucc Forward', 'Line Break', 'Clear', 'Unsucc Tackle',
            'Loss of Poss', 'Success', 'Unsuccess', 'Foul Conceded', 'Progr Regain ', 'Stand. Tackle Success ', 
-           'Pass Completion ', 'Progr Pass Attempt ', 'Progr Pass Completion ', 
+           'Def Aerial Success ', 'Pass Completion ', 'Progr Pass Attempt ', 'Progr Pass Completion ', 
            'PK Missed', 'PK Scored']
 
     details = dataframe.loc[:, ['Player Full Name', 'Team Name', 'Match Date', 'Position Tag', 'Starts']]
     #details = selected.loc[:, ['Player Full Name', 'Team Name', 'As At Date', 'Position Tag']]
     details.reset_index(drop=True, inplace=True)
     selected = dataframe.loc[:, ~dataframe.columns.duplicated()]
-    if 'Def Aerial Success ' in selected.columns:
-        selected['Def Aerial Success '] = selected['Def Aerial Success '].astype(float)
     selected_p90 = selected.loc[:, number_columns].astype(float)
 
 

@@ -13,7 +13,7 @@ def CMFunction(dataframe):
            'Shot on Target',  'Pass into Oppo Box',
            'Long', 'Unsucc Long', 'Forward', 'Unsucc Forward', 'Line Break', 
            'Loss of Poss', 'Success', 'Unsuccess', 'Foul Won', 'Foul Conceded', 'Progr Regain ', 'Stand. Tackle Success ', 
-           'Pass Completion ', 'Progr Pass Attempt ', 'Progr Pass Completion ', 'PK Missed', 'PK Scored']
+           'Def Aerial Success ', 'Pass Completion ', 'Progr Pass Attempt ', 'Progr Pass Completion ', 'PK Missed', 'PK Scored']
     details = dataframe.loc[:, ['Player Full Name', 'Team Name', 'Match Date', 'Position Tag', 'Starts']]
     #details = selected.loc[:, ['Player Full Name', 'Team Name', 'As At Date', 'Position Tag']]
     details.reset_index(drop=True, inplace=True)

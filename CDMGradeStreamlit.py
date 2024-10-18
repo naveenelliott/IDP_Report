@@ -11,7 +11,7 @@ def CDMFunction(dataframe):
            'Blocked Cross',  'Att 1v1', 'Efforts on Goal', 'Foul Won', 'Clear', 'Unsucc Tackle',
            'Shot on Target', 'Att Shot Blockd', 'Pass into Oppo Box',
            'Long', 'Unsucc Long', 'Forward', 'Unsucc Forward', 'Line Break', 
-           'Loss of Poss', 'Success', 'Unsuccess', 'Foul Conceded', 'Progr Regain ', 'Stand. Tackle Success ', 
+           'Loss of Poss', 'Success', 'Unsuccess', 'Foul Conceded', 'Progr Regain ', 'Stand. Tackle Success ', 'Def Aerial Success ', 
            'Pass Completion ', 'Progr Pass Attempt ', 'Progr Pass Completion ', 'PK Missed', 'PK Scored']
     details = dataframe.loc[:, ['Player Full Name', 'Team Name', 'Match Date', 'Position Tag', 'Starts']]
     #details = selected.loc[:, ['Player Full Name', 'Team Name', 'As At Date', 'Position Tag']]
