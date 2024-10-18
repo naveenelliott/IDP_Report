@@ -101,11 +101,11 @@ def StrikerFunction(dataframe):
         date = more_data['Match Date']
         
         if ('U13' in team_name) or ('U14' in team_name):
-            cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerThresholds1314.csv")
+            cf_df = pd.read_csv("Thresholds/StrikerThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerThresholds1516.csv")
+            cf_df = pd.read_csv("Thresholds/StrikerThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerThresholds1719.csv")
+            cf_df = pd.read_csv("Thresholds/StrikerThresholds1719.csv")
 
 
         mean_values = cf_df.iloc[0, 0]
