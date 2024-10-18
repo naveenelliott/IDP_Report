@@ -101,11 +101,11 @@ def FBFunction(dataframe):
         date = more_data['Match Date']
         
         if ('U13' in team_name) or ('U14' in team_name):
-            fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackThresholds1314.csv")
+            fb_df = pd.read_csv("Thresholds/FullBackThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackThresholds1516.csv")
+            fb_df = pd.read_csv("Thresholds/FullBackThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackThresholds1719.csv")
+            fb_df = pd.read_csv("Thresholds/FullBackThresholds1719.csv")
 
 
         mean_values = fb_df.iloc[0, 2]
