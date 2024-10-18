@@ -29,7 +29,7 @@ if matching_files:
     # Open the image
     player_pic = Image.open(image_file)
 else:
-    player_pic = Image.open('IDP_Plan/Player_Photos/other_person.jpg')
+    player_pic = Image.open('Player_Photos/other_person.jpg')
 
 col1, col2 = st.columns(2)
 
