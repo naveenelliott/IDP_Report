@@ -96,11 +96,11 @@ def WingerFunction(dataframe):
         date = more_data['Match Date']
         
         if ('U13' in team_name) or ('U14' in team_name):
-            wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerThresholds1314.csv")
+            wing_df = pd.read_csv("Thresholds/WingerThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerThresholds1516.csv")
+            wing_df = pd.read_csv("Thresholds/WingerThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerThresholds1719.csv")
+            wing_df = pd.read_csv("Thresholds/WingerThresholds1719.csv")
 
 
         mean_values = wing_df.iloc[0, 0]
