@@ -112,11 +112,11 @@ def CMFunction(dataframe):
         date = more_data['Match Date']
 
         if ('U13' in team_name) or ('U14' in team_name):
-            cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldThresholds1314.csv")
+            cm_df = pd.read_csv("Thresholds/CenterMidfieldThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldThresholds1516.csv")
+            cm_df = pd.read_csv("Thresholds/CenterMidfieldThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldThresholds1719.csv")
+            cm_df = pd.read_csv("Thresholds/CenterMidfieldThresholds1719.csv")
         
 
 
