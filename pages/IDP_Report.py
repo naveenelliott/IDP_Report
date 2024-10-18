@@ -139,8 +139,10 @@ primary_position = primary_position['Position Tag'].values[0]
 
 if primary_position == 'LW' or primary_position == 'RW':
     primary_position = 'Wing'
-if primary_position == 'LB' or primary_position == 'RB' or primary_position == 'RWB' or primary_position == 'LWB':
+elif primary_position == 'LB' or primary_position == 'RB' or primary_position == 'RWB' or primary_position == 'LWB':
     primary_position = 'FB'
+elif primary_position == 'LCB' or primary_position == 'RCB':
+    primary_position = 'CB'
 
 player_metrics = getPlayerStatistics(player_full_name=player_name, position=primary_position)
 
