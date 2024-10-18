@@ -253,7 +253,7 @@ def getPrimaryPosition(player_full_name):
 
     # Example usage
     # THIS COULD NEED CHANGED WITH 18 NEW TEAMS
-    folder_path = 'IDP_Plan/WeeklyReport PSD/'  # Replace with your folder path
+    folder_path = 'WeeklyReport PSD/'  # Replace with your folder path
     end = read_all_csvs_from_folder(folder_path)
         
     end = end.drop_duplicates()
@@ -320,7 +320,7 @@ def getPlayerStatistics(player_full_name, position):
 
     # Example usage
     # THIS COULD NEED CHANGED WITH 18 NEW TEAMS
-    folder_path = 'IDP_Plan/WeeklyReport PSD/'  # Replace with your folder path
+    folder_path = 'WeeklyReport PSD/'  # Replace with your folder path
     end = read_all_csvs_from_folder(folder_path)
         
     end = end.drop_duplicates()
@@ -447,11 +447,11 @@ def getStandardizedValues(metrics, team_name, position):
     
     if position == 'ATT':
         if ('U13' in team_name) or ('U14' in team_name):
-            cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerThresholds1314.csv")
+            cf_df = pd.read_csv("Thresholds/StrikerThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerThresholds1516.csv")
+            cf_df = pd.read_csv("Thresholds/StrikerThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerThresholds1719.csv")
+            cf_df = pd.read_csv("Thresholds/StrikerThresholds1719.csv")
 
         mean_values = cf_df.iloc[0, 0:].values
         std_values = cf_df.iloc[1, 0:].values
@@ -460,11 +460,11 @@ def getStandardizedValues(metrics, team_name, position):
         percentiles = z_scores_df.map(calculate_percentile)
     elif position == 'Wing':
         if ('U13' in team_name) or ('U14' in team_name):
-            wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerThresholds1314.csv")
+            wing_df = pd.read_csv("Thresholds/WingerThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerThresholds1516.csv")
+            wing_df = pd.read_csv("Thresholds/WingerThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerThresholds1719.csv")
+            wing_df = pd.read_csv("Thresholds/WingerThresholds1719.csv")
 
         mean_values = wing_df.iloc[0, 0:].values
         std_values = wing_df.iloc[1, 0:].values
@@ -473,11 +473,11 @@ def getStandardizedValues(metrics, team_name, position):
         percentiles = z_scores_df.map(calculate_percentile)
     elif position == 'CM':
         if ('U13' in team_name) or ('U14' in team_name):
-            cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldThresholds1314.csv")
+            cm_df = pd.read_csv("Thresholds/CenterMidfieldThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldThresholds1516.csv")
+            cm_df = pd.read_csv("Thresholds/CenterMidfieldThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldThresholds1719.csv")
+            cm_df = pd.read_csv("Thresholds/CenterMidfieldThresholds1719.csv")
 
         mean_values = cm_df.iloc[0, 0:].values
         std_values = cm_df.iloc[1, 0:].values
@@ -486,11 +486,11 @@ def getStandardizedValues(metrics, team_name, position):
         percentiles = z_scores_df.map(calculate_percentile)
     elif position == 'DM':
         if ('U13' in team_name) or ('U14' in team_name):
-            dm_df = pd.read_csv("IDP_Plan/Thresholds/DefensiveMidfieldThresholds1314.csv")
+            dm_df = pd.read_csv("Thresholds/DefensiveMidfieldThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            dm_df = pd.read_csv("IDP_Plan/Thresholds/DefensiveMidfieldThresholds1516.csv")
+            dm_df = pd.read_csv("Thresholds/DefensiveMidfieldThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            dm_df = pd.read_csv("IDP_Plan/Thresholds/DefensiveMidfieldThresholds1719.csv")
+            dm_df = pd.read_csv("Thresholds/DefensiveMidfieldThresholds1719.csv")
 
         mean_values = dm_df.iloc[0, 0:].values
         std_values = dm_df.iloc[1, 0:].values
@@ -499,11 +499,11 @@ def getStandardizedValues(metrics, team_name, position):
         percentiles = z_scores_df.map(calculate_percentile)
     elif position == 'CB':
         if ('U13' in team_name) or ('U14' in team_name):
-            cb_df = pd.read_csv("IDP_Plan/Thresholds/CenterBackThresholds1314.csv")
+            cb_df = pd.read_csv("Thresholds/CenterBackThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            cb_df = pd.read_csv("IDP_Plan/Thresholds/CenterBackThresholds1516.csv")
+            cb_df = pd.read_csv("Thresholds/CenterBackThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            cb_df = pd.read_csv("IDP_Plan/Thresholds/CenterBackThresholds1719.csv")
+            cb_df = pd.read_csv("Thresholds/CenterBackThresholds1719.csv")
 
         mean_values = cb_df.iloc[0, 0:].values
         std_values = cb_df.iloc[1, 0:].values
@@ -512,11 +512,11 @@ def getStandardizedValues(metrics, team_name, position):
         percentiles = z_scores_df.map(calculate_percentile)
     elif position == 'FB':
         if ('U13' in team_name) or ('U14' in team_name):
-            fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackThresholds1314.csv")
+            fb_df = pd.read_csv("Thresholds/FullBackThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackThresholds1516.csv")
+            fb_df = pd.read_csv("Thresholds/FullBackThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackThresholds1719.csv")
+            fb_df = pd.read_csv("Thresholds/FullBackThresholds1719.csv")
         mean_values = fb_df.iloc[0, 0:].values
         std_values = fb_df.iloc[1, 0:].values
         # Calculate the z-score for each data point
