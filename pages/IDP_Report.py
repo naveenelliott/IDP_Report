@@ -17,7 +17,7 @@ team_name = st.session_state['selected_team']
 
 
 
-directory_path = 'IDP_Plan/Player_Photos'
+directory_path = 'Player_Photos'
     
 # Search for files that match the variable name
 matching_files = glob.glob(os.path.join(directory_path, f"{player_name}.*"))
