@@ -40,6 +40,7 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
 
     # Getting the chances created, is this something that PSD will consistently have in actions tab??
     chances_created = full_actions.loc[full_actions['Action'] == 'Chance Created']
+    st.write(chances_created)
 
     # converting everything to seconds
     def time_to_seconds(time_str):
