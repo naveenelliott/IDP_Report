@@ -37,6 +37,7 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
     player_data_copy = player_data_copy[player_data_copy['Match Identifier'].isin(match_identifiers)]
 
     full_actions = full_actions.loc[(full_actions['Team'] == selected_team) & (full_actions['Opposition'] == selected_opp) & (full_actions['Match Date'] == selected_date)].reset_index(drop=True)
+    st.write(full_actions)
 
     # Getting the chances created, is this something that PSD will consistently have in actions tab??
     chances_created = full_actions.loc[full_actions['Action'] == 'Chance Created']
