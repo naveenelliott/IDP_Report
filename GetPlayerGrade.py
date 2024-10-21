@@ -37,12 +37,10 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
     player_data_copy = player_data_copy[player_data_copy['Match Identifier'].isin(match_identifiers)]
 
     full_actions = full_actions.loc[(full_actions['Team'] == selected_team) & (full_actions['Opposition'] == selected_opp) & (full_actions['Match Date'] == selected_date)].reset_index(drop=True)
-    st.write(full_actions)
+
 
     # Getting the chances created, is this something that PSD will consistently have in actions tab??
     chances_created = full_actions.loc[full_actions['Action'] == 'Chance Created']
-    st.write(chances_created)
-
     # converting everything to seconds
     def time_to_seconds(time_str):
             minutes, seconds = map(int, time_str.split(':'))
@@ -54,7 +52,6 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
     # creating a copy for later
     if not xg.empty:
         xg_copy = xg.copy()
-        st.write(xg_copy)
 
 
         xg = xg.loc[(xg['Bolts Team'] == selected_team) & (xg['Opposition'] == selected_opp) & (xg['Match Date'] == selected_date)]
@@ -89,7 +86,6 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
         # summing the xA and xG for each player
         chances_created = chances_created.groupby(['Player Full Name', 'Team', 'Opposition', 'Match Date'])[['xG', 'xA']].sum()
         chances_created.reset_index(inplace=True)
-        st.write(chances_created)
 
 
         player_data_copy.rename(columns={'Team Name': 'Team'}, inplace=True)
@@ -193,7 +189,6 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
             select_temp_df = WingerEventFunction(temp_event_df, select_temp_df)
             final_grade_df.at[index, 'Final Grade'] = row['Final Grade'] + ((select_temp_df.at[0, 'Finishing'])*.2)
         elif (row['Position'] == 'CM') or (row['Position'] == 'RM') or (row['Position'] == 'LM') or (row['Position'] == 'AM'):
-            st.write(chances_created)
             temp_event_df = chances_created.loc[(chances_created['Primary Position'] == 'RM') | (chances_created['Primary Position'] == 'LM')
                                             | (chances_created['Primary Position'] == 'AM') | (chances_created['Primary Position'] == 'CM')]
             wanted = ['xG + xA', 'Team']
