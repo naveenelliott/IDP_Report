@@ -26,6 +26,8 @@ end_df = end_df.loc[end_df['Team Name'] == st.session_state['selected_team']]
 
 players = sorted(list(end_df['Player Full Name'].unique()))
 
+st.session_state['all_players'] = players
+
 selected_player = st.session_state.get('selected_player', players[0])
 if selected_player not in players:
     selected_player = players[0]  # Default to the first date if not found
@@ -91,5 +93,4 @@ with st.form("input_form"):
         conn.update(worksheet='IDP_Plan', data=updated_df)
         st.success("Input updated!")
         st.rerun()  # Rerun to refresh the displayed DataFrame
-
 
