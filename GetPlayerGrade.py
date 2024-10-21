@@ -54,6 +54,7 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
     # creating a copy for later
     if not xg.empty:
         xg_copy = xg.copy()
+        st.write(xg_copy)
 
 
         xg = xg.loc[(xg['Bolts Team'] == selected_team) & (xg['Opposition'] == selected_opp) & (xg['Match Date'] == selected_date)]
