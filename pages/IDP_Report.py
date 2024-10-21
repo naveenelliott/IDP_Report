@@ -6,7 +6,7 @@ from PIL import Image, ImageOps
 from GettingPSDLineupData import getting_PSD_min_data, getting_weeklyReport
 import matplotlib.pyplot as plt
 from GettingPercentOfMins import plottingMinsPlayed, plottingStarts
-from GetPlayerGrade import gettingFinalGradeForEachTeam, getPrimaryPosition, getPlayerStatistics, getStandardizedValues, getRadarChart
+from GetPlayerGrade import gettingFinalGradeForEachTeam, getPrimaryPosition, getPlayerStatistics, getStandardizedValues, getRadarChart, getRadarChartAdvanced
 from xGModel import xGModel
 import plotly.graph_objs as go
 from plottingTimeSeries import plottingStatistics
@@ -17,7 +17,7 @@ team_name = st.session_state['selected_team']
 
 
 
-directory_path = 'Player_Photos'
+directory_path = 'IDP_Plan/Player_Photos'
     
 # Search for files that match the variable name
 matching_files = glob.glob(os.path.join(directory_path, f"{player_name}.*"))
@@ -29,11 +29,11 @@ if matching_files:
     # Open the image
     player_pic = Image.open(image_file)
 else:
-    player_pic = Image.open('Player_Photos/other_person.jpg')
+    player_pic = Image.open('IDP_Plan/Player_Photos/other_person.jpg')
 
 col1, col2 = st.columns(2)
 
-folder_path = 'Height_Weight'      
+folder_path = 'IDP_Plan/Height_Weight'      
 # List all files in the folder
 files = os.listdir(folder_path)
 
@@ -154,7 +154,7 @@ player_metrics = temp_player_metrics
 
 weekly_report['Primary Position'] = primary_position
 
-folder_path = 'xG Input Files'
+folder_path = 'IDP_Plan/xG Input Files'
 
 # Find all CSV files in the folder
 csv_files = glob.glob(os.path.join(folder_path, '*.csv'))
@@ -188,7 +188,7 @@ for index, row in fc_python.iterrows():
         fc_python.at[index, 'Y'] = flipped_y
 
 # Path to the folder containing CSV files
-folder_path = 'Actions PSD'
+folder_path = 'IDP_Plan/Actions PSD'
 
 # Find all CSV files in the folder
 csv_files = glob.glob(os.path.join(folder_path, '*.csv'))
@@ -260,7 +260,7 @@ if primary_position in xg_positions:
     xg_us = xg_copy.loc[xg_copy['Action'].isin(our_wanted_actions)]
 
     xg_us = xg_us.groupby(['Player Full Name'])['xG'].sum().reset_index()
-
+    xg_us_copy = xg_us.copy()
 
     xg_us = xg_us.loc[xg_us['Player Full Name'] == player_name].reset_index()
 
@@ -287,7 +287,7 @@ if primary_position in xg_positions:
     # Replace Age Group with the grouped values
     age_group = age_group_mapping.get(age_group, age_group)
 
-    thresholds = pd.read_csv('xGPositionAgeGroupAvgs.csv')
+    thresholds = pd.read_csv('IDP_Plan/xGPositionAgeGroupAvgs.csv')
     thresholds = thresholds.loc[thresholds['Age Group'] == age_group]
     thresholds = thresholds.loc[thresholds['Position Tag'] == primary_position].reset_index(drop=True)
 
@@ -308,13 +308,11 @@ if primary_position in xg_positions:
     player_metrics['xG per 90'] = xg_percentile
 
     player_metrics.drop(columns={'xG', 'mins played'}, inplace=True)
-
+else:
+    player_metrics.drop(columns={'mins played'}, inplace=True)
 
 
 metric_columns = player_metrics.columns
-
-
-fig3 = getRadarChart(metric_names=metric_columns, metric_values=player_metrics)
 
 def read_all_csvs_from_folder(folder_path):
     # List all files in the folder
@@ -355,6 +353,8 @@ def read_all_csvs_from_folder(folder_path):
         player_df['Match Identifier'] = player_df['Team Name'] + ' vs ' + player_df['Opposition'] + ' on ' + player_df['Match Date'].astype(str)
         unique_match_identifiers = player_df['Match Identifier'].drop_duplicates().reset_index(drop=True)
         st.session_state['match_identifiers'] = unique_match_identifiers
+        if 'xg' not in locals():
+            xg = pd.DataFrame()
         if player_name in player_df['Player Full Name'].values:
             player_df = player_df.loc[player_df['Player Full Name'] == player_name]
             temp_grade_df = gettingFinalGradeForEachTeam(team, opp, match_date, player_df, actions, fc_python, full_actions, xg)
@@ -367,7 +367,7 @@ def read_all_csvs_from_folder(folder_path):
     return combined_df
 
 
-temp_folder_path = 'WeeklyReport PSD'
+temp_folder_path = 'IDP_Plan/WeeklyReport PSD'
 idp_report = read_all_csvs_from_folder(temp_folder_path)
 
 idp_report = idp_report.sort_values('Match Date').reset_index(drop=True)
@@ -463,7 +463,7 @@ st.plotly_chart(fig)
 
 
 # Path to the folder containing CSV files
-folder_path = 'PlayerData Files'
+folder_path = 'IDP_Plan/PlayerData Files'
 
 # Find all CSV files in the folder
 csv_files = glob.glob(os.path.join(folder_path, '*.csv'))
@@ -526,6 +526,94 @@ with col1:
     st.plotly_chart(fig1)
     st.plotly_chart(fig2)
 
+all_available_players = st.session_state['all_players']
+
+positions = []
+player_names = []
+for available_player_name in all_available_players:
+    temp_primary_position = getPrimaryPosition(available_player_name)
+    position_tag = temp_primary_position['Position Tag'].values[0]
+    if position_tag == 'LW' or position_tag == 'RW':
+        position_tag = 'Wing'
+    elif position_tag == 'LB' or position_tag == 'RB' or position_tag == 'RWB' or position_tag == 'LWB':
+        position_tag = 'FB'
+    elif position_tag == 'LCB' or position_tag == 'RCB':
+        position_tag = 'CB'
+    positions.append(position_tag)
+    temp_player_name = temp_primary_position['Player Full Name'].values[0]
+    player_names.append(temp_player_name)
+
+players_df = pd.DataFrame()
+players_df['Player Full Name'] = player_names
+players_df['Position Tag'] = positions
+
+players_df = players_df[players_df['Position Tag'] == primary_position]
+players_df = players_df[players_df['Player Full Name'] != player_name].reset_index(drop=True)
+
+
+available_players = players_df['Player Full Name']
+none_series = pd.Series(['None'])
+available_players = pd.concat([none_series, available_players], ignore_index=True)
+
 
 with col2:
+    compare_player = st.selectbox('Choose a Comparison Player:', available_players, index=0)
+
+    if compare_player == 'None':
+        fig3 = getRadarChart(metric_names=metric_columns, metric_values=player_metrics)
+
+    else:
+        player_metrics_2 = getPlayerStatistics(player_full_name=compare_player, position=primary_position)
+
+        temp_player_metrics = player_metrics_2.drop(columns={'mins played'})
+        temp_player_metrics = getStandardizedValues(temp_player_metrics, team_name, primary_position)
+
+        temp_player_metrics['mins played'] = player_metrics_2['mins played']
+        player_metrics_2 = temp_player_metrics
+
+        if primary_position in xg_positions:
+
+            xg_us = xg_us_copy.loc[xg_us_copy['Player Full Name'] == compare_player].reset_index()
+
+
+            player_metrics_2['xG'] = xg_us.at[0, 'xG']
+
+
+            player_metrics_2['xG per 90'] = (player_metrics_2['xG']/player_metrics_2['mins played']) * 90
+            xg_per_90 = player_metrics_2.loc[0, 'xG per 90']
+
+
+            team_series = pd.Series(team_name)
+            age_group = team_series.str.extract(r'(U\d{2})')
+            age_group = age_group.at[0,0]
+            age_group_mapping = {
+                'U13': 'U13-U14',
+                'U14': 'U13-U14',
+                'U15': 'U15-U16',
+                'U16': 'U15-U16',
+                'U17': 'U17-U19',
+                'U19': 'U17-U19'
+            }
+
+            # Replace Age Group with the grouped values
+            age_group = age_group_mapping.get(age_group, age_group)
+
+            thresholds = pd.read_csv('IDP_Plan/xGPositionAgeGroupAvgs.csv')
+            thresholds = thresholds.loc[thresholds['Age Group'] == age_group]
+            thresholds = thresholds.loc[thresholds['Position Tag'] == primary_position].reset_index(drop=True)
+
+
+
+            mean_values = thresholds.loc[0, 'mean']
+            std_values = thresholds.loc[0, 'std']
+            
+            z_scores = calculate_zscore(xg_per_90, mean_values, std_values)
+            xg_percentile = calculate_percentile(z_scores)
+            player_metrics_2['xG per 90'] = xg_percentile
+
+            player_metrics_2.drop(columns={'xG', 'mins played'}, inplace=True)
+        else:
+            player_metrics_2.drop(columns={'mins played'}, inplace=True)
+
+        fig3 = getRadarChartAdvanced(metric_names=metric_columns, metric_values_1=player_metrics, metric_values_2=player_metrics_2)
     st.pyplot(fig3)
