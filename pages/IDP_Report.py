@@ -353,11 +353,8 @@ def read_all_csvs_from_folder(folder_path):
         player_df['Match Identifier'] = player_df['Team Name'] + ' vs ' + player_df['Opposition'] + ' on ' + player_df['Match Date'].astype(str)
         unique_match_identifiers = player_df['Match Identifier'].drop_duplicates().reset_index(drop=True)
         st.session_state['match_identifiers'] = unique_match_identifiers
-        if 'xg' not in locals():
-            xg = pd.DataFrame()
         if player_name in player_df['Player Full Name'].values:
             player_df = player_df.loc[player_df['Player Full Name'] == player_name]
-            st.write(xg)
             temp_grade_df = gettingFinalGradeForEachTeam(team, opp, match_date, player_df, actions, fc_python, full_actions, xg)
             temp_grade_df['Match Date'] = match_date
             temp_grade_df['Opposition'] = opp
