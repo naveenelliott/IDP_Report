@@ -189,6 +189,7 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
             select_temp_df = WingerEventFunction(temp_event_df, select_temp_df)
             final_grade_df.at[index, 'Final Grade'] = row['Final Grade'] + ((select_temp_df.at[0, 'Finishing'])*.2)
         elif (row['Position'] == 'CM') or (row['Position'] == 'RM') or (row['Position'] == 'LM') or (row['Position'] == 'AM'):
+            st.write(chances_created)
             temp_event_df = chances_created.loc[(chances_created['Primary Position'] == 'RM') | (chances_created['Primary Position'] == 'LM')
                                             | (chances_created['Primary Position'] == 'AM') | (chances_created['Primary Position'] == 'CM')]
             wanted = ['xG + xA', 'Team']
