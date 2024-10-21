@@ -50,53 +50,54 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
     chances_created['Time'] = chances_created['Time'].apply(time_to_seconds)
 
     # creating a copy for later
-    xg_copy = xg.copy()
+    if not xg.empty:
+        xg_copy = xg.copy()
 
 
-    xg = xg.loc[(xg['Bolts Team'] == selected_team) & (xg['Opposition'] == selected_opp) & (xg['Match Date'] == selected_date)]
+        xg = xg.loc[(xg['Bolts Team'] == selected_team) & (xg['Opposition'] == selected_opp) & (xg['Match Date'] == selected_date)]
 
 
-    # getting Bolts info
-    our_wanted_actions = ['Att Shot Blockd',  'Goal', 'Header on Target', 
-                    'Header off Target', 'Shot off Target', 'Shot on Target']
-    xg_us = xg_copy.loc[xg_copy['Action'].isin(our_wanted_actions)]
+        # getting Bolts info
+        our_wanted_actions = ['Att Shot Blockd',  'Goal', 'Header on Target', 
+                        'Header off Target', 'Shot off Target', 'Shot on Target']
+        xg_us = xg_copy.loc[xg_copy['Action'].isin(our_wanted_actions)]
 
-    # combining chances created rows and shots rows and sorting by time
-    chances_created = pd.concat([chances_created, xg_us], ignore_index=True)
-    chances_created = chances_created.sort_values('Time', ascending=True).reset_index(drop=True)
+        # combining chances created rows and shots rows and sorting by time
+        chances_created = pd.concat([chances_created, xg_us], ignore_index=True)
+        chances_created = chances_created.sort_values('Time', ascending=True).reset_index(drop=True)
 
-    # Initialize columns for pairing
-    chances_created['xA'] = None
+        # Initialize columns for pairing
+        chances_created['xA'] = None
 
-    # Keep track of the last "Chance Created" event
-    last_chance_idx = None
+        # Keep track of the last "Chance Created" event
+        last_chance_idx = None
 
-    # this will check if there is an associated chances created with each shot
-    for idx, row in chances_created.iterrows():
-        if row['Action'] == 'Chance Created':
-            last_chance_idx = idx
-        elif row['Action'] in our_wanted_actions and last_chance_idx is not None:
-            chances_created.at[last_chance_idx, 'xA'] = row['xG']
-            last_chance_idx = None
-
-
-    # final formatting of chances created
-    chances_created = chances_created[['Player Full Name', 'Team', 'Opposition', 'Match Date', 'xG', 'xA']]
-    # summing the xA and xG for each player
-    chances_created = chances_created.groupby(['Player Full Name', 'Team', 'Opposition', 'Match Date'])[['xG', 'xA']].sum()
-    chances_created.reset_index(inplace=True)
+        # this will check if there is an associated chances created with each shot
+        for idx, row in chances_created.iterrows():
+            if row['Action'] == 'Chance Created':
+                last_chance_idx = idx
+            elif row['Action'] in our_wanted_actions and last_chance_idx is not None:
+                chances_created.at[last_chance_idx, 'xA'] = row['xG']
+                last_chance_idx = None
 
 
-    player_data_copy.rename(columns={'Team Name': 'Team'}, inplace=True)
-    chances_created = pd.merge(chances_created, player_data_copy[['Player Full Name', 'Team', 'Opposition', 'Match Date', 'mins played', 'Primary Position']], 
-                            on=['Player Full Name', 'Team', 'Opposition', 'Match Date'], how='outer')
+        # final formatting of chances created
+        chances_created = chances_created[['Player Full Name', 'Team', 'Opposition', 'Match Date', 'xG', 'xA']]
+        # summing the xA and xG for each player
+        chances_created = chances_created.groupby(['Player Full Name', 'Team', 'Opposition', 'Match Date'])[['xG', 'xA']].sum()
+        chances_created.reset_index(inplace=True)
 
-    chances_created['xG + xA'] = chances_created['xG'] + chances_created['xA']
 
-    # converting this to p90
-    chances_created['xG + xA'] = (chances_created['xG + xA']/chances_created['mins played']) * 90
+        player_data_copy.rename(columns={'Team Name': 'Team'}, inplace=True)
+        chances_created = pd.merge(chances_created, player_data_copy[['Player Full Name', 'Team', 'Opposition', 'Match Date', 'mins played', 'Primary Position']], 
+                                on=['Player Full Name', 'Team', 'Opposition', 'Match Date'], how='outer')
 
-    select_event_df = chances_created.loc[(chances_created['Team'] == selected_team) & (chances_created['Opposition'] == selected_opp) & (chances_created['Match Date'] == selected_date)]
+        chances_created['xG + xA'] = chances_created['xG'] + chances_created['xA']
+
+        # converting this to p90
+        chances_created['xG + xA'] = (chances_created['xG + xA']/chances_created['mins played']) * 90
+
+        select_event_df = chances_created.loc[(chances_created['Team'] == selected_team) & (chances_created['Opposition'] == selected_opp) & (chances_created['Match Date'] == selected_date)]
 
 
 
@@ -253,7 +254,7 @@ def getPrimaryPosition(player_full_name):
 
     # Example usage
     # THIS COULD NEED CHANGED WITH 18 NEW TEAMS
-    folder_path = 'WeeklyReport PSD/'  # Replace with your folder path
+    folder_path = 'IDP_Plan/WeeklyReport PSD/'  # Replace with your folder path
     end = read_all_csvs_from_folder(folder_path)
         
     end = end.drop_duplicates()
@@ -320,7 +321,7 @@ def getPlayerStatistics(player_full_name, position):
 
     # Example usage
     # THIS COULD NEED CHANGED WITH 18 NEW TEAMS
-    folder_path = 'WeeklyReport PSD/'  # Replace with your folder path
+    folder_path = 'IDP_Plan/WeeklyReport PSD/'  # Replace with your folder path
     end = read_all_csvs_from_folder(folder_path)
         
     end = end.drop_duplicates()
@@ -431,7 +432,7 @@ def getPlayerStatistics(player_full_name, position):
 
         end['Forward Passes'] = end['Forward'] + end['Unsucc Forward']
 
-        end = end[['Total Def Actions', 'Progr Regain ', 'Forward Passes', 'Pass Completion ', 'Pass into Oppo Box', 'Progr Pass Completion ']]
+        end = end[['Total Def Actions', 'Progr Regain ', 'Forward Passes', 'Pass Completion ', 'Pass into Oppo Box', 'Progr Pass Completion ', 'mins played']]
     
     return end
 
@@ -447,11 +448,11 @@ def getStandardizedValues(metrics, team_name, position):
     
     if position == 'ATT':
         if ('U13' in team_name) or ('U14' in team_name):
-            cf_df = pd.read_csv("Thresholds/StrikerThresholds1314.csv")
+            cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            cf_df = pd.read_csv("Thresholds/StrikerThresholds1516.csv")
+            cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            cf_df = pd.read_csv("Thresholds/StrikerThresholds1719.csv")
+            cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerThresholds1719.csv")
 
         mean_values = cf_df.iloc[0, 0:].values
         std_values = cf_df.iloc[1, 0:].values
@@ -460,11 +461,11 @@ def getStandardizedValues(metrics, team_name, position):
         percentiles = z_scores_df.map(calculate_percentile)
     elif position == 'Wing':
         if ('U13' in team_name) or ('U14' in team_name):
-            wing_df = pd.read_csv("Thresholds/WingerThresholds1314.csv")
+            wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            wing_df = pd.read_csv("Thresholds/WingerThresholds1516.csv")
+            wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            wing_df = pd.read_csv("Thresholds/WingerThresholds1719.csv")
+            wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerThresholds1719.csv")
 
         mean_values = wing_df.iloc[0, 0:].values
         std_values = wing_df.iloc[1, 0:].values
@@ -473,11 +474,11 @@ def getStandardizedValues(metrics, team_name, position):
         percentiles = z_scores_df.map(calculate_percentile)
     elif position == 'CM':
         if ('U13' in team_name) or ('U14' in team_name):
-            cm_df = pd.read_csv("Thresholds/CenterMidfieldThresholds1314.csv")
+            cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            cm_df = pd.read_csv("Thresholds/CenterMidfieldThresholds1516.csv")
+            cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            cm_df = pd.read_csv("Thresholds/CenterMidfieldThresholds1719.csv")
+            cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldThresholds1719.csv")
 
         mean_values = cm_df.iloc[0, 0:].values
         std_values = cm_df.iloc[1, 0:].values
@@ -486,11 +487,11 @@ def getStandardizedValues(metrics, team_name, position):
         percentiles = z_scores_df.map(calculate_percentile)
     elif position == 'DM':
         if ('U13' in team_name) or ('U14' in team_name):
-            dm_df = pd.read_csv("Thresholds/DefensiveMidfieldThresholds1314.csv")
+            dm_df = pd.read_csv("IDP_Plan/Thresholds/DefensiveMidfieldThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            dm_df = pd.read_csv("Thresholds/DefensiveMidfieldThresholds1516.csv")
+            dm_df = pd.read_csv("IDP_Plan/Thresholds/DefensiveMidfieldThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            dm_df = pd.read_csv("Thresholds/DefensiveMidfieldThresholds1719.csv")
+            dm_df = pd.read_csv("IDP_Plan/Thresholds/DefensiveMidfieldThresholds1719.csv")
 
         mean_values = dm_df.iloc[0, 0:].values
         std_values = dm_df.iloc[1, 0:].values
@@ -499,11 +500,11 @@ def getStandardizedValues(metrics, team_name, position):
         percentiles = z_scores_df.map(calculate_percentile)
     elif position == 'CB':
         if ('U13' in team_name) or ('U14' in team_name):
-            cb_df = pd.read_csv("Thresholds/CenterBackThresholds1314.csv")
+            cb_df = pd.read_csv("IDP_Plan/Thresholds/CenterBackThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            cb_df = pd.read_csv("Thresholds/CenterBackThresholds1516.csv")
+            cb_df = pd.read_csv("IDP_Plan/Thresholds/CenterBackThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            cb_df = pd.read_csv("Thresholds/CenterBackThresholds1719.csv")
+            cb_df = pd.read_csv("IDP_Plan/Thresholds/CenterBackThresholds1719.csv")
 
         mean_values = cb_df.iloc[0, 0:].values
         std_values = cb_df.iloc[1, 0:].values
@@ -512,11 +513,11 @@ def getStandardizedValues(metrics, team_name, position):
         percentiles = z_scores_df.map(calculate_percentile)
     elif position == 'FB':
         if ('U13' in team_name) or ('U14' in team_name):
-            fb_df = pd.read_csv("Thresholds/FullBackThresholds1314.csv")
+            fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackThresholds1314.csv")
         elif ('U15' in team_name) or ('U16' in team_name):
-            fb_df = pd.read_csv("Thresholds/FullBackThresholds1516.csv")
+            fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackThresholds1516.csv")
         elif ('U17' in team_name) or ('U19' in team_name):
-            fb_df = pd.read_csv("Thresholds/FullBackThresholds1719.csv")
+            fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackThresholds1719.csv")
         mean_values = fb_df.iloc[0, 0:].values
         std_values = fb_df.iloc[1, 0:].values
         # Calculate the z-score for each data point
@@ -557,6 +558,54 @@ def getRadarChart(metric_names, metric_values):
                                                     'lw': 2})
 
     ax.scatter(vertices1[:, 0], vertices1[:, 1],
+            c='lightblue', edgecolors='lightblue', marker='o', s=100, zorder=2)
+
+    range_labels = radar.draw_range_labels(ax=ax, fontsize=15)
+    param_labels = radar.draw_param_labels(ax=ax, fontsize=17)
+
+    fig.set_dpi(600)
+
+    return fig
+
+def getRadarChartAdvanced(metric_names, metric_values_1, metric_values_2):
+    params = metric_names
+
+
+    font_path = 'Roboto-Bold.ttf'
+    font_bold = FontProperties(fname=font_path)
+
+
+    low = [0] * len(params)
+    high = [100] * len(params)
+
+
+    radar = Radar(params, low, high,
+                # whether to round any of the labels to integers instead of decimal places
+                round_int=[True]*len(params),
+                num_rings=4,  # the number of concentric circles (excluding center circle)
+                # if the ring_width is more than the center_circle_radius then
+                # the center circle radius will be wider than the width of the concentric circles
+                ring_width=1, center_circle_radius=1)
+
+    fig, ax = radar.setup_axis()
+    rings_inner = radar.draw_circles(ax=ax, facecolor='lightgray', edgecolor='black')
+
+    radar1, vertices1 = radar.draw_radar_solid(metric_values_2.values.flatten(), ax=ax,
+                                            kwargs={'facecolor': 'black',
+                                                    'alpha': 0.6,
+                                                    'edgecolor': 'black',
+                                                    'lw': 2})
+
+    ax.scatter(vertices1[:, 0], vertices1[:, 1],
+            c='black', edgecolors='black', marker='o', s=100, zorder=2)
+
+    radar1, vertices2 = radar.draw_radar_solid(metric_values_1.values.flatten(), ax=ax,
+                                            kwargs={'facecolor': 'lightblue',
+                                                    'alpha': 0.6,
+                                                    'edgecolor': 'lightblue',
+                                                    'lw': 2})
+
+    ax.scatter(vertices2[:, 0], vertices2[:, 1],
             c='lightblue', edgecolors='lightblue', marker='o', s=100, zorder=2)
 
     range_labels = radar.draw_range_labels(ax=ax, fontsize=15)
