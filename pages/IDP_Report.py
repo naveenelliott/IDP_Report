@@ -17,7 +17,7 @@ team_name = st.session_state['selected_team']
 
 
 
-directory_path = 'IDP_Plan/Player_Photos'
+directory_path = 'Player_Photos'
     
 # Search for files that match the variable name
 matching_files = glob.glob(os.path.join(directory_path, f"{player_name}.*"))
@@ -29,11 +29,11 @@ if matching_files:
     # Open the image
     player_pic = Image.open(image_file)
 else:
-    player_pic = Image.open('IDP_Plan/Player_Photos/other_person.jpg')
+    player_pic = Image.open('Player_Photos/other_person.jpg')
 
 col1, col2 = st.columns(2)
 
-folder_path = 'IDP_Plan/Height_Weight'      
+folder_path = 'Height_Weight'      
 # List all files in the folder
 files = os.listdir(folder_path)
 
@@ -154,7 +154,7 @@ player_metrics = temp_player_metrics
 
 weekly_report['Primary Position'] = primary_position
 
-folder_path = 'IDP_Plan/xG Input Files'
+folder_path = 'xG Input Files'
 
 # Find all CSV files in the folder
 csv_files = glob.glob(os.path.join(folder_path, '*.csv'))
@@ -188,7 +188,7 @@ for index, row in fc_python.iterrows():
         fc_python.at[index, 'Y'] = flipped_y
 
 # Path to the folder containing CSV files
-folder_path = 'IDP_Plan/Actions PSD'
+folder_path = 'Actions PSD'
 
 # Find all CSV files in the folder
 csv_files = glob.glob(os.path.join(folder_path, '*.csv'))
@@ -287,7 +287,7 @@ if primary_position in xg_positions:
     # Replace Age Group with the grouped values
     age_group = age_group_mapping.get(age_group, age_group)
 
-    thresholds = pd.read_csv('IDP_Plan/xGPositionAgeGroupAvgs.csv')
+    thresholds = pd.read_csv('xGPositionAgeGroupAvgs.csv')
     thresholds = thresholds.loc[thresholds['Age Group'] == age_group]
     thresholds = thresholds.loc[thresholds['Position Tag'] == primary_position].reset_index(drop=True)
 
@@ -367,7 +367,7 @@ def read_all_csvs_from_folder(folder_path):
     return combined_df
 
 
-temp_folder_path = 'IDP_Plan/WeeklyReport PSD'
+temp_folder_path = 'WeeklyReport PSD'
 idp_report = read_all_csvs_from_folder(temp_folder_path)
 
 idp_report = idp_report.sort_values('Match Date').reset_index(drop=True)
@@ -463,7 +463,7 @@ st.plotly_chart(fig)
 
 
 # Path to the folder containing CSV files
-folder_path = 'IDP_Plan/PlayerData Files'
+folder_path = 'PlayerData Files'
 
 # Find all CSV files in the folder
 csv_files = glob.glob(os.path.join(folder_path, '*.csv'))
@@ -598,7 +598,7 @@ with col2:
             # Replace Age Group with the grouped values
             age_group = age_group_mapping.get(age_group, age_group)
 
-            thresholds = pd.read_csv('IDP_Plan/xGPositionAgeGroupAvgs.csv')
+            thresholds = pd.read_csv('xGPositionAgeGroupAvgs.csv')
             thresholds = thresholds.loc[thresholds['Age Group'] == age_group]
             thresholds = thresholds.loc[thresholds['Position Tag'] == primary_position].reset_index(drop=True)
 
