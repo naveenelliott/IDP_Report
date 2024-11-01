@@ -63,7 +63,7 @@ def creatingPercentilesWing(merged_df):
     player_name = merged_df.at[0, 'Player Full Name']
     team_name = merged_df.at[0, 'Team Name']
     
-    wing_df = pd.read_csv("IDP_Plan/Thresholds/WingerSeasonThresholds.csv")
+    wing_df = pd.read_csv("Thresholds/WingerSeasonThresholds.csv")
 
     mean_values = wing_df.iloc[0, [5, 6, 7, 8, 9]]
     std_values = wing_df.iloc[1, [5, 6, 7, 8, 9]]
