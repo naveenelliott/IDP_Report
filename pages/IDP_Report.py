@@ -579,12 +579,12 @@ col1, col2 = st.columns(2)
 with col2:
     st.pyplot(fig_pd)
 
-file_path = 'IDP_Plan/Last_Year'
+file_path = 'Last_Year'
 last_season = gettingPostSpringGames(file_path)
 last_season['Year'] = '2023'
 last_season = pd.merge(last_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
 
-file_path = 'IDP_Plan/This_Year'
+file_path = 'This_Year'
 this_season = gettingPostSpringGames(file_path)
 this_season['Year'] = '2024'
 this_season = pd.merge(this_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
