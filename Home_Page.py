@@ -62,12 +62,12 @@ if player_exists:
     updated_df = existing_data.copy()
 
     if not index.empty:
-        coach_notes = existing_data.loc[index, 'Coach Notes'].values[0]
+        coach_notes = existing_data.loc[index, 'Coach's Summary'].values[0]
 
 
 # Form to update the DataFrame
 with st.form("input_form"):
-    coach_notes = st.text_input("Coach Notes:", value=coach_notes)
+    coach_notes = st.text_input("Coach's Summary:", value=coach_notes)
     submit_button = st.form_submit_button(label='Save')
 
     if submit_button:
@@ -78,14 +78,14 @@ with st.form("input_form"):
         
         # Update existing data if match data exists
         if player_exists and not index.empty:
-            existing_data.loc[index, 'Coach Notes'] = coach_notes
+            existing_data.loc[index, 'Coach's Summary'] = coach_notes
             updated_df = existing_data.copy()
         else:
             # Add new data if match data does not exist
             new_data = pd.DataFrame([{
                 'Bolts Team': selected_team,
                 'Player Name': selected_player, 
-                'Coach Notes': coach_notes
+                'Coach's Summary': coach_notes
             }])
             updated_df = pd.concat([existing_data, new_data], ignore_index=True)
         
