@@ -146,8 +146,22 @@ with col1:
         with inner_columns[1]:
             st.pyplot(fig)
             st.pyplot(fig2)
-            st.write(f"Coach's Summary: {coach}")
-            st.write(f"Focus for Spring: {spring_focus}")
+            st.markdown(
+                """
+                <div style='display: block; text-align: left;'>
+                    <span style='font-family: Arial; font-size: 10pt; color: black;'>Coach's Summary: {coach}</span>
+                </div>
+                """.format(coach=coach),
+                unsafe_allow_html=True
+            )
+            st.markdown(
+                """
+                <div style='display: block; text-align: left;'>
+                    <span style='font-family: Arial; font-size: 10pt; color: black;'>Focus for Spring: {spring_focus}</span>
+                </div>
+                """.format(spring_focus=spring_focus),
+                unsafe_allow_html=True
+            )
 
 
 
