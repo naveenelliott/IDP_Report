@@ -56,7 +56,7 @@ def creatingPercentilesFB(merged_df):
     player_name = merged_df.at[0, 'Player Full Name']
     team_name = merged_df.at[0, 'Team Name']
         
-    fb_df = pd.read_csv("IDP_Plan/Thresholds/FullBackSeasonThresholds.csv")
+    fb_df = pd.read_csv("Thresholds/FullBackSeasonThresholds.csv")
     
     mean_values = fb_df.iloc[0, [5,6,7,8,9,11,15]]
     std_values = fb_df.iloc[1, [5,6,7,8,9,11,15]]
