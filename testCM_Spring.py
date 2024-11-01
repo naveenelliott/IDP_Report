@@ -59,7 +59,7 @@ def creatingPercentilesCM(merged_df):
     player_name = merged_df.at[0, 'Player Full Name']
     team_name = merged_df.at[0, 'Team Name']
         
-    cm_df = pd.read_csv("IDP_Plan/Thresholds/CenterMidfieldSeasonThresholds.csv")
+    cm_df = pd.read_csv("Thresholds/CenterMidfieldSeasonThresholds.csv")
 
     mean_values = cm_df.iloc[0, [5, 6, 7, 8, 9, 18]]
     std_values = cm_df.iloc[1, [5, 6, 7, 8, 9, 18]]
