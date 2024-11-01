@@ -94,6 +94,5 @@ def gettingPostSpringGames(file_path):
     end = end.merge(most_minutes[['Player Full Name', 'Team Name']], on='Player Full Name', how='left')
 
     #end = end[['Player Full Name', 'Team Name', 'mins played', 'Pass Completion ', 'Progr Regain ', 'Stand. Tackle Success ', 'Line Break', 'Goal']]
-    end['Line Break'] = (end['Line Break']/end['mins played']) * 90
     end['Team Category'] = end['Team Name'].apply(lambda x: 'U19' if '19' in x else 'U17' if '17' in x else 'U13' if '13' in x else 'U14' if '14' in x else 'U15' if '15' in x else 'U16')
     return end
