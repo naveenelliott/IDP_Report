@@ -22,6 +22,7 @@ from testCM_Spring import creatingPercentilesCM, creatingRawCM
 from testFB_Spring import creatingPercentilesFB
 from testWinger_Spring import creatingPercentilesWing
 from PizzaPlotPDP_Spring import createPizzaChart
+from streamlit_gsheets import GSheetsConnection
 
 player_name = st.session_state['selected_player']
 team_name = st.session_state['selected_team']
