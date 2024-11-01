@@ -74,7 +74,7 @@ with st.form("input_form"):
 
     if submit_button:
         # Ensure all fields are filled
-        if not coach_notes:
+        if not coach_notes or not focus_spring:
             st.warning('Ensure all fields are filled')
             st.stop()
         
