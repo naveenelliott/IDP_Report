@@ -6,11 +6,22 @@ from PIL import Image, ImageOps
 from GettingPSDLineupData import getting_PSD_min_data, getting_weeklyReport
 import matplotlib.pyplot as plt
 from GettingPercentOfMins import plottingMinsPlayed, plottingStarts
-from GetPlayerGrade import gettingFinalGradeForEachTeam, getPrimaryPosition, getPlayerStatistics, getStandardizedValues, getRadarChart, getRadarChartAdvanced
+from GetPlayerGrade import gettingFinalGradeForEachTeam, getPrimaryPosition, getPlayerStatistics, getStandardizedValues, getRadarChart, getRadarChartAdvanced, getPrimaryPositionAll
 from xGModel import xGModel
 import plotly.graph_objs as go
 from plottingTimeSeries import plottingStatistics
 from scipy.stats import norm
+from SpringSTATSportsPDP import gettingPlayerDataPlot
+from GettingScatterData import gettingPostSpringGames
+from MidfielderDefender import midfielder_function, defender_function
+from Attacker import attacker_function
+from testCF_Spring import creatingPercentilesAtt
+from testCB_Spring import creatingPercentilesCB
+from testCDM_Spring import creatingPercentilesDM
+from testCM_Spring import creatingPercentilesCM, creatingRawCM
+from testFB_Spring import creatingPercentilesFB
+from testWinger_Spring import creatingPercentilesWing
+from PizzaPlotPDP_Spring import createPizzaChart
 
 player_name = st.session_state['selected_player']
 team_name = st.session_state['selected_team']
@@ -460,26 +471,39 @@ fig.update_layout(
 st.plotly_chart(fig)
 
 
+
 # Path to the folder containing CSV files
-folder_path = 'PlayerData Files'
+folder_path = 'Detailed_Training_Sessions'
 
-# Find all CSV files in the folder
-csv_files = glob.glob(os.path.join(folder_path, '*.csv'))
+csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
 
-# List to hold individual DataFrames
-df_list = []
+dataframes = []
+# Filter filenames that contain both player_name and opp_name
+for f in csv_files:
+    file_path = os.path.join(folder_path, f)
+    
+    # Read the CSV file into a DataFrame
+    pd_df = pd.read_csv(file_path)
+    
+    pd_df['athlete_name'] = pd_df['athlete_name'].str.lower()
+    
+    # Append the DataFrame to the list
+    dataframes.append(pd_df)
+    
+playerdata_df = pd.concat(dataframes, ignore_index=True)
 
-# Loop through the CSV files and read them into DataFrames
-for file in csv_files:
-    df = pd.read_csv(file)
-    df_list.append(df)
+# Convert start_time from string to datetime in UTC
+playerdata_df['start_time'] = pd.to_datetime(playerdata_df['start_time'])
 
-# Concatenate all DataFrames into a single DataFrame
-pd_df = pd.concat(df_list, ignore_index=True)
-pd_df['start_time'] = pd.to_datetime(pd_df['start_time']).dt.strftime('%m/%d/%Y')
-pd_df['Total Distance'] = pd_df['total_distance_m'] * 0.001
-pd_df['Max Speed'] = pd_df['max_speed_kph'] * 0.621371
-pd_df['High Intensity Distance'] = pd_df['total_high_intensity_distance_m']
+# Set the timezone to UTC, then convert to EST
+playerdata_df['start_time'] = playerdata_df['start_time'].dt.tz_convert('America/New_York')
+
+playerdata_df['Day of Week'] = pd.to_datetime(playerdata_df['start_time']).dt.day_name()
+
+u19 = playerdata_df.loc[playerdata_df['bolts team'] == 'Boston Bolts MLS Next U19']
+
+playerdata_df.drop(columns={'session_type'}, inplace=True)
+
 
 def rearrange_team_name(team_name):
     # Define age groups and leagues
@@ -505,113 +529,152 @@ def rearrange_team_name(team_name):
     return team_name
 
 # Apply the function to the 'team_name' column
-pd_df['bolts team'] = pd_df['bolts team'].apply(rearrange_team_name)
+playerdata_df['bolts team'] = playerdata_df['bolts team'].apply(rearrange_team_name)
+
+# Getting rid of outliers
+playerdata_df = playerdata_df[playerdata_df['total_distance_m'] > 2000]
+
+distance_metrics = ['total_distance_m', 'total_high_intensity_distance_m']
+
+playerdata_df['start_time'] = pd.to_datetime(playerdata_df['start_time']).dt.strftime('%m/%d/%Y')
+
+
+days_of_week = ['Tuesday', 'Wednesday', 'Thursday']
+
+playerdata_df = playerdata_df.loc[playerdata_df['Day of Week'].isin(days_of_week)]
+
+averages = playerdata_df.groupby(['athlete_name', 'Day of Week']).agg(
+    Avg_Total_Distance=('total_distance_m', 'mean'),
+    Avg_High_Intensity_Distance=('total_high_intensity_distance_m', 'mean')
+).reset_index()
+
+final_averages_pd = averages.groupby(['athlete_name']).agg(
+    Avg_Total_Distance=('Avg_Total_Distance', 'mean'), 
+    Avg_High_Intensity_Distance=('Avg_High_Intensity_Distance', 'mean')
+).reset_index()
+
+final_averages_pd['athlete_name'] = final_averages_pd['athlete_name'].str.lower()
+
+all_primary_position = getPrimaryPositionAll()
+
+temp_all_primary_position = all_primary_position.copy()
+
+all_primary_position['Player Full Name'] = all_primary_position['Player Full Name'].str.lower()
+
+final_averages_pd = pd.merge(final_averages_pd, all_primary_position, left_on='athlete_name', right_on='Player Full Name', how='inner')
+final_averages_pd['Team Category'] = final_averages_pd['Team Name'].str.extract(r'(U\d+)')
+
+
+player_name_lower = player_name.lower()
+
+our_player_avg = final_averages_pd.loc[final_averages_pd['athlete_name'] == player_name_lower]
+
+final_averages_pd = final_averages_pd.loc[final_averages_pd['athlete_name'] != player_name_lower]
+
+fig_pd = gettingPlayerDataPlot(our_player_avg, final_averages_pd)
+
 
 col1, col2 = st.columns(2)
 
-pd_df['athlete_name'] = pd_df['athlete_name'].str.lower()
-idp_report['Player Full Name'] = idp_report['Player Full Name'].str.lower()
+with col2:
+    st.pyplot(fig_pd)
 
-merged_df = idp_report.merge(pd_df, left_on=['Player Full Name', 'Match Date'], right_on=['athlete_name', 'start_time'], how='left')
-merged_df = merged_df[['Player Full Name', 'Opposition', 'Match Date', 'Total Distance', 'High Intensity Distance', 'Max Speed']]
+file_path = 'IDP_Plan/Last_Year'
+last_season = gettingPostSpringGames(file_path)
+last_season['Year'] = '2023'
+last_season = pd.merge(last_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
+
+file_path = 'IDP_Plan/This_Year'
+this_season = gettingPostSpringGames(file_path)
+this_season['Year'] = '2024'
+this_season = pd.merge(this_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
+
+combined_seasons = pd.concat([this_season, last_season], ignore_index=True)
+
+player_season = combined_seasons.loc[combined_seasons['Player Full Name'] == player_name]
+player_season_raw = player_season.copy()
+player_season_later = player_season.loc[player_season['Year'] == '2023'].reset_index()
+player_season = player_season.loc[player_season['Year'] == '2024'].reset_index()
+player_season_later_raw = player_season_raw.loc[player_season_raw['Year'] == '2023'].reset_index()
+player_season_raw = player_season_raw.loc[player_season_raw['Year'] == '2024'].reset_index()
 
 
-fig1 = plottingStatistics(merged_df, 'Total Distance')
+age_groups = player_season.at[0, 'Team Category']
 
-fig2 = plottingStatistics(merged_df, 'High Intensity Distance')
+combined_seasons.rename(columns={'Pass Completion ': 'Pass %',
+                                 'Player Full Name': 'Player Name', 
+                                 'Stand. Tackle Success ': 'Tackle %', 
+                                 'Progr Regain ': 'Progr Regain %'}, inplace=True)
+
+our_fig = plt.figure()
+
+
+this_season = pd.merge(this_season, xg_us_copy, on='Player Full Name', how='inner')
+this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
+this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
+this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
+
+
+if primary_position == 'ATT' or primary_position == 'Wing':
+    our_fig = attacker_function(this_season, age_groups, player_name, primary_position)
+elif primary_position == 'CM' or primary_position == 'DM':
+    our_fig = midfielder_function(combined_seasons, age_groups, player_name, primary_position)
+elif primary_position == 'FB' or primary_position == 'CB': 
+    our_fig = defender_function(combined_seasons, age_groups, player_name, primary_position)
+else:
+    our_fig = plt.figure()
+
 
 with col1:
-    st.plotly_chart(fig1)
-    st.plotly_chart(fig2)
+    st.pyplot(our_fig)
 
-all_available_players = st.session_state['all_players']
+if primary_position == 'ATT':
+    overall_player = creatingPercentilesAtt(player_season)
+    if not player_season_later.empty:
+        last_season_player = creatingPercentilesAtt(player_season_later)
+        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+    overall_player['Position'] = 'ATT'
+elif primary_position == 'Wing':
+    overall_player = creatingPercentilesWing(player_season)
+    if not player_season_later.empty:
+        last_season_player = creatingPercentilesWing(player_season_later)
+        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+    overall_player['Position'] = 'Wing'
+elif primary_position == 'CB':
+    overall_player = creatingPercentilesCB(player_season)
+    if not player_season_later.empty:
+        last_season_player = creatingPercentilesCB(player_season_later)
+        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+    overall_player['Position'] = 'CB'
+elif primary_position == 'DM':
+    overall_player = creatingPercentilesDM(player_season)
+    if not player_season_later.empty:
+        last_season_player = creatingPercentilesDM(player_season_later)
+        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+    overall_player['Position'] = 'DM'
+elif primary_position == 'CM':
+    overall_player = creatingPercentilesCM(player_season)
+    overall_raw_player = creatingRawCM(player_season_raw)
+    if not player_season_later.empty:
+        last_season_raw_player = creatingRawCM(player_season_later_raw)
+        last_season_player = creatingPercentilesCM(player_season_later)
+        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+        overall_raw_player = pd.concat([overall_raw_player, last_season_raw_player], ignore_index=True)
+        overall_raw_player = overall_raw_player.T
+    overall_player['Position'] = 'CM'
+elif primary_position == 'FB':
+    overall_player = creatingPercentilesFB(player_season)
+    if not player_season_later.empty:
+        last_season_player = creatingPercentilesFB(player_season_later)
+        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+    overall_player['Position'] = 'FB'
 
-positions = []
-player_names = []
-for available_player_name in all_available_players:
-    temp_primary_position = getPrimaryPosition(available_player_name)
-    position_tag = temp_primary_position['Position Tag'].values[0]
-    if position_tag == 'LW' or position_tag == 'RW':
-        position_tag = 'Wing'
-    elif position_tag == 'LB' or position_tag == 'RB' or position_tag == 'RWB' or position_tag == 'LWB':
-        position_tag = 'FB'
-    elif position_tag == 'LCB' or position_tag == 'RCB':
-        position_tag = 'CB'
-    positions.append(position_tag)
-    temp_player_name = temp_primary_position['Player Full Name'].values[0]
-    player_names.append(temp_player_name)
-
-players_df = pd.DataFrame()
-players_df['Player Full Name'] = player_names
-players_df['Position Tag'] = positions
-
-players_df = players_df[players_df['Position Tag'] == primary_position]
-players_df = players_df[players_df['Player Full Name'] != player_name].reset_index(drop=True)
 
 
-available_players = players_df['Player Full Name']
-none_series = pd.Series(['None'])
-available_players = pd.concat([none_series, available_players], ignore_index=True)
+fig_pizza = createPizzaChart(overall_player)
 
+with col1:
+    st.write(overall_raw_player)
 
 with col2:
-    compare_player = st.selectbox('Choose a Comparison Player:', available_players, index=0)
-
-    if compare_player == 'None':
-        fig3 = getRadarChart(metric_names=metric_columns, metric_values=player_metrics)
-
-    else:
-        player_metrics_2 = getPlayerStatistics(player_full_name=compare_player, position=primary_position)
-
-        temp_player_metrics = player_metrics_2.drop(columns={'mins played'})
-        temp_player_metrics = getStandardizedValues(temp_player_metrics, team_name, primary_position)
-
-        temp_player_metrics['mins played'] = player_metrics_2['mins played']
-        player_metrics_2 = temp_player_metrics
-
-        if primary_position in xg_positions:
-
-            xg_us = xg_us_copy.loc[xg_us_copy['Player Full Name'] == compare_player].reset_index()
-
-
-            player_metrics_2['xG'] = xg_us.at[0, 'xG']
-
-
-            player_metrics_2['xG per 90'] = (player_metrics_2['xG']/player_metrics_2['mins played']) * 90
-            xg_per_90 = player_metrics_2.loc[0, 'xG per 90']
-
-
-            team_series = pd.Series(team_name)
-            age_group = team_series.str.extract(r'(U\d{2})')
-            age_group = age_group.at[0,0]
-            age_group_mapping = {
-                'U13': 'U13-U14',
-                'U14': 'U13-U14',
-                'U15': 'U15-U16',
-                'U16': 'U15-U16',
-                'U17': 'U17-U19',
-                'U19': 'U17-U19'
-            }
-
-            # Replace Age Group with the grouped values
-            age_group = age_group_mapping.get(age_group, age_group)
-
-            thresholds = pd.read_csv('xGPositionAgeGroupAvgs.csv')
-            thresholds = thresholds.loc[thresholds['Age Group'] == age_group]
-            thresholds = thresholds.loc[thresholds['Position Tag'] == primary_position].reset_index(drop=True)
-
-
-
-            mean_values = thresholds.loc[0, 'mean']
-            std_values = thresholds.loc[0, 'std']
-            
-            z_scores = calculate_zscore(xg_per_90, mean_values, std_values)
-            xg_percentile = calculate_percentile(z_scores)
-            player_metrics_2['xG per 90'] = xg_percentile
-
-            player_metrics_2.drop(columns={'xG', 'mins played'}, inplace=True)
-        else:
-            player_metrics_2.drop(columns={'mins played'}, inplace=True)
-
-        fig3 = getRadarChartAdvanced(metric_names=metric_columns, metric_values_1=player_metrics, metric_values_2=player_metrics_2)
-    st.pyplot(fig3)
+    st.pyplot(fig_pizza)
