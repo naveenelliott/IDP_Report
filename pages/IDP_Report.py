@@ -106,6 +106,13 @@ percentage_started = (player_starts / available_starts) * 100
 
 fig2 = plottingStarts(percentage_played=percentage_started, player_name=player_name)
 
+conn = st.connection('gsheets', type=GSheetsConnection)
+comp_level = conn.read(worksheet='IDP_Plan', ttl=0)
+comp_level = comp_level.loc[comp_level['Player Name'] == player_name]
+comp_level.reset_index(drop=True, inplace=True)
+coach = comp_level.at[0, "Coach's Summary"]
+spring_focus = comp_level.at[0, "Focus for Spring"]
+
 with col1:
         inner_columns = st.columns(2)
 
@@ -138,6 +145,10 @@ with col1:
         with inner_columns[1]:
             st.pyplot(fig)
             st.pyplot(fig2)
+            st.write(f"Coach's Summary: {coach}")
+            st.write(f"Focus for Spring: {spring_focus")
+
+
 
 weekly_report = getting_weeklyReport()
 weekly_report = weekly_report.loc[weekly_report['Player Full Name'] == player_name]
