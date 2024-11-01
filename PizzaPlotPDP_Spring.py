@@ -9,6 +9,9 @@ import streamlit as st
 
 def createPizzaChart(bolts):
 
+    font_path = 'Roboto-Regular.ttf'
+    font_normal = FontProperties(fname=font_path)
+
     image_path = 'BostonBoltsLogo.png'  # Replace with the actual path to your image
     image = plt.imread(image_path)
 
