@@ -59,7 +59,7 @@ def creatingPercentilesDM(merged_df):
     player_name = merged_df.at[0, 'Player Full Name']
     team_name = merged_df.at[0, 'Team Name']
     
-    dm_df = pd.read_csv("IDP_Plan/Thresholds/DefensiveMidfieldSeasonThresholds.csv")
+    dm_df = pd.read_csv("Thresholds/DefensiveMidfieldSeasonThresholds.csv")
 
     mean_values = dm_df.iloc[0, [5, 6, 7, 8, 9, 18]]
     std_values = dm_df.iloc[1, [5, 6, 7, 8, 9, 18]]
