@@ -12,6 +12,11 @@ def createPizzaChart(bolts):
     font_path = 'Roboto-Regular.ttf'
     font_normal = FontProperties(fname=font_path)
 
+    
+    font_path = 'Roboto-Bold.ttf'
+    font_bold = FontProperties(fname=font_path)
+
+
     image_path = 'BostonBoltsLogo.png'  # Replace with the actual path to your image
     image = plt.imread(image_path)
 
