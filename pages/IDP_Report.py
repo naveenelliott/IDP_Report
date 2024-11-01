@@ -146,7 +146,7 @@ with col1:
             st.pyplot(fig)
             st.pyplot(fig2)
             st.write(f"Coach's Summary: {coach}")
-            st.write(f"Focus for Spring: {spring_focus")
+            st.write(f"Focus for Spring: {spring_focus}")
 
 
 
