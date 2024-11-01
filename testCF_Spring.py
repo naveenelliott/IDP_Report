@@ -66,7 +66,7 @@ def creatingPercentilesAtt(merged_df):
     team_name = merged_df.at[0, 'Team Name']
     
     
-    cf_df = pd.read_csv("IDP_Plan/Thresholds/StrikerSeasonThresholds.csv")
+    cf_df = pd.read_csv("Thresholds/StrikerSeasonThresholds.csv")
 
     mean_values = cf_df.iloc[0, 5:9]
     std_values = cf_df.iloc[1, 5:9]
