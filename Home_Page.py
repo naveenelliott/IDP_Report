@@ -43,6 +43,7 @@ existing_data['Bolts Team'] = existing_data['Bolts Team'].fillna('').astype(str)
 existing_data['Player Name'] = existing_data['Player Name'].fillna('').astype(str)
 
 coach_notes = ''
+focus_spring = ''
 
 updated_df = pd.DataFrame()
 
