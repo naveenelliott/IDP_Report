@@ -63,11 +63,13 @@ if player_exists:
 
     if not index.empty:
         coach_notes = existing_data.loc[index, 'Coach's Summary'].values[0]
+        focus_spring = existing_data.loc[index, 'Focus for Spring'].values[0]
 
 
 # Form to update the DataFrame
 with st.form("input_form"):
     coach_notes = st.text_input("Coach's Summary:", value=coach_notes)
+    focus_spring = st.text_input('Focus for Spring:', value=focus_spring)
     submit_button = st.form_submit_button(label='Save')
 
     if submit_button:
@@ -79,13 +81,15 @@ with st.form("input_form"):
         # Update existing data if match data exists
         if player_exists and not index.empty:
             existing_data.loc[index, 'Coach's Summary'] = coach_notes
+            existing_data.loc[index, 'Focus for Spring'] = focus_spring
             updated_df = existing_data.copy()
         else:
             # Add new data if match data does not exist
             new_data = pd.DataFrame([{
                 'Bolts Team': selected_team,
                 'Player Name': selected_player, 
-                'Coach's Summary': coach_notes
+                'Coach's Summary': coach_notes,
+                'Focus for Spring': focus_spring
             }])
             updated_df = pd.concat([existing_data, new_data], ignore_index=True)
         
