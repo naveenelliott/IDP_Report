@@ -325,7 +325,7 @@ age_group_mapping = {
 # Replace Age Group with the grouped values
 age_group = age_group_mapping.get(age_group, age_group)
 
-thresholds = pd.read_csv('IDP_Plan/xGPositionAgeGroupAvgs.csv')
+thresholds = pd.read_csv('xGPositionAgeGroupAvgs.csv')
 thresholds = thresholds.loc[thresholds['Age Group'] == age_group]
 if primary_position in xg_positions:
     thresholds = thresholds.loc[thresholds['Position Tag'] == primary_position].reset_index(drop=True)
