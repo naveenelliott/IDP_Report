@@ -156,7 +156,7 @@ def creatingRawFB(merged_df):
     attacking.fillna(0, inplace=True)
 
 
-    combined_aspects = pd.concat([defending, playmaking, dribbling, passing], axis=1)
+    combined_aspects = pd.concat([defending, attacking, passing], axis=1)
     combined_aspects['Player Name'] = merged_df['Player Full Name']
     combined_aspects['Team Name'] = merged_df['Team Name']
     combined_aspects['Year'] = merged_df['Year']
