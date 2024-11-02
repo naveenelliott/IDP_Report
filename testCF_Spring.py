@@ -122,4 +122,70 @@ def creatingPercentilesAtt(merged_df):
 
     return final_pizza
 
-#def creatingRawAtt(merged_df):
+def creatingRawAtt(merged_df):
+
+    raw_columns = ['Stand. Tackle Success ', 'Line Break', 'Pass Completion ', 'Progr Regain ']
+
+    def calculate_percentile(value):
+        return norm.cdf(value) * 100
+
+        # Function to calculate z-score for each element in a column
+    def calculate_zscore(column, mean, std):
+        return (column - mean) / std
+
+
+    per90 = ['Dribble',
+        'Stand. Tackle', 'Unsucc Stand. Tackle',
+        'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter',
+        'Efforts on Goal',
+        'Shot on Target', 'Pass into Oppo Box',
+        'Forward', 'Unsucc Forward', 'Line Break',
+        'Loss of Poss', 'Success', 'Unsuccess']
+
+
+    merged_df['minutes per 90'] = merged_df['mins played']/90
+
+    for column in per90:
+        merged_df[column] = merged_df[column] / merged_df['minutes per 90']
+        
+    merged_df = merged_df.drop(columns=['minutes per 90'])
+    merged_df.fillna(0, inplace=True)
+
+    merged_df = merged_df.drop_duplicates()
+    raw_df = merged_df[raw_columns]
+
+
+    passing = merged_df[['Forward', 'Unsucc Forward', 'Success', 'Unsuccess', 'Pass Completion ']]
+    passing['Forward Total'] = passing['Forward'] + passing['Unsucc Forward']
+    passing['Forward Completion'] = (passing['Forward'] / passing['Forward Total']) * 100
+    passing['Total'] = passing['Success'] + passing['Unsuccess']
+    passing.fillna(0, inplace=True)
+    passing = passing.loc[:, ['Forward Total', 'Total', 'Pass Completion ', 'Forward Completion']]
+
+
+    dribbling = merged_df[['Dribble', 'Att 1v1', 'Loss of Poss']]
+    dribbling.fillna(0, inplace=True)
+
+    defending = merged_df[['Stand. Tackle', 'Unsucc Stand. Tackle', 'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Progr Regain ', 
+                            'Stand. Tackle Success ']]
+    defending['Stand. Tackle Total'] = defending['Stand. Tackle'] + defending['Unsucc Stand. Tackle']
+    defending['Rec Total'] = defending['Progr Rec'] + defending['Unprogr Rec']
+    defending['Inter Total'] = defending['Progr Inter'] + defending['Unprogr Inter']
+    defending.fillna(0, inplace=True)
+    defending = defending.loc[:, ['Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ']]
+
+    shooting = merged_df[['Efforts on Goal', 'Shot on Target']]
+    shooting['Efficiency '] = (shooting['Shot on Target']/(shooting['Efforts on Goal'] + shooting['Shot on Target']))*100
+    shooting.fillna(0, inplace=True)
+
+    combined_aspects = pd.concat([shooting, passing, dribbling, defending], axis=1)
+    combined_aspects['Player Name'] = merged_df['Player Full Name']
+    combined_aspects['Team Name'] = merged_df['Team Name']
+    combined_aspects['Year'] = merged_df['Year']
+
+    front_columns = ['Player Name', 'Team Name', 'Year']
+    combined_aspects = combined_aspects[front_columns + [col for col in combined_aspects.columns if col not in front_columns]]
+
+
+    return combined_aspects
+
