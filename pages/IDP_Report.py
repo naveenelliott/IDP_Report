@@ -16,11 +16,11 @@ from GettingScatterData import gettingPostSpringGames
 from MidfielderDefender import midfielder_function, defender_function
 from Attacker import attacker_function
 from testCF_Spring import creatingPercentilesAtt, creatingRawAtt
-from testCB_Spring import creatingPercentilesCB, creatingRawCB
-from testCDM_Spring import creatingPercentilesDM, creatingRawDM
+from testCB_Spring import creatingPercentilesCB, 
+from testCDM_Spring import creatingPercentilesDM, 
 from testCM_Spring import creatingPercentilesCM, creatingRawCM
 from testFB_Spring import creatingPercentilesFB, creatingRawFB
-from testWinger_Spring import creatingPercentilesWing, creatingRawWing
+from testWinger_Spring import creatingPercentilesWing, 
 from PizzaPlotPDP_Spring import createPizzaChart
 from streamlit_gsheets import GSheetsConnection
 
@@ -537,10 +537,14 @@ this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
 
 if primary_position == 'ATT':
-    overall_player = creatingPercentilesAtt(player_season)
+    overall_player = creatingPercentilesATT(player_season)
+    overall_raw_player = creatingRawATT(player_season_raw)
     if not player_season_later.empty:
-        last_season_player = creatingPercentilesAtt(player_season_later)
+        last_season_raw_player = creatingRawATT(player_season_later_raw)
+        last_season_player = creatingPercentilesATT(player_season_later)
         overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+        overall_raw_player = pd.concat([overall_raw_player, last_season_raw_player], ignore_index=True)
+        overall_raw_player = overall_raw_player.T
     overall_player['Position'] = 'ATT'
 elif primary_position == 'Wing':
     overall_player = creatingPercentilesWing(player_season)
