@@ -16,11 +16,11 @@ from GettingScatterData import gettingPostSpringGames
 from MidfielderDefender import midfielder_function, defender_function
 from Attacker import attacker_function
 from testCF_Spring import creatingPercentilesAtt, creatingRawAtt
-from testCB_Spring import creatingPercentilesCB, 
-from testCDM_Spring import creatingPercentilesDM, 
+from testCB_Spring import creatingPercentilesCB 
+from testCDM_Spring import creatingPercentilesDM 
 from testCM_Spring import creatingPercentilesCM, creatingRawCM
 from testFB_Spring import creatingPercentilesFB, creatingRawFB
-from testWinger_Spring import creatingPercentilesWing, 
+from testWinger_Spring import creatingPercentilesWing 
 from PizzaPlotPDP_Spring import createPizzaChart
 from streamlit_gsheets import GSheetsConnection
 
