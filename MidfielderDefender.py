@@ -46,7 +46,7 @@ def midfielder_function(dataframe, age_group, pname, position):
     for element in other:
         colors[element] = 'gray'
     
-    
+    dataframe['Line Break'] = (dataframe['Line Break']/dataframe['mins played']) * 90
     # Set DPI (dots per inch)
     fig = plt.figure(dpi=600)
     ax = fig.add_subplot(111)
