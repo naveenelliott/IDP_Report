@@ -19,7 +19,7 @@ from testCF_Spring import creatingPercentilesAtt
 from testCB_Spring import creatingPercentilesCB
 from testCDM_Spring import creatingPercentilesDM
 from testCM_Spring import creatingPercentilesCM, creatingRawCM
-from testFB_Spring import creatingPercentilesFB
+from testFB_Spring import creatingPercentilesFB, creatingRawFB
 from testWinger_Spring import creatingPercentilesWing
 from PizzaPlotPDP_Spring import createPizzaChart
 from streamlit_gsheets import GSheetsConnection
@@ -572,9 +572,13 @@ elif primary_position == 'CM':
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
     overall_player = creatingPercentilesFB(player_season)
+    overall_raw_player = creatingRawFB(player_season_raw)
     if not player_season_later.empty:
+        last_season_raw_player = creatingRawFB(player_season_later_raw)
         last_season_player = creatingPercentilesFB(player_season_later)
         overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+        overall_raw_player = pd.concat([overall_raw_player, last_season_raw_player], ignore_index=True)
+        overall_raw_player = overall_raw_player.T
     overall_player['Position'] = 'FB'
 
 st.write(overall_raw_player)
