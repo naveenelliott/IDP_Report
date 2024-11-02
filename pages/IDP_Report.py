@@ -696,7 +696,7 @@ with col2:
 
 fig_pizza = createPizzaChart(overall_player)
 
-with col2:
-    st.pyplot(fig_pizza)
+
+st.pyplot(fig_pizza)
 
 st.plotly_chart(fig)
