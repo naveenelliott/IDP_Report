@@ -529,20 +529,6 @@ this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
 this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
 this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
-
-if primary_position == 'ATT' or primary_position == 'Wing':
-    our_fig = attacker_function(this_season, age_groups, player_name, primary_position)
-elif primary_position == 'CM' or primary_position == 'DM':
-    our_fig = midfielder_function(combined_seasons, age_groups, player_name, primary_position)
-elif primary_position == 'FB' or primary_position == 'CB': 
-    our_fig = defender_function(combined_seasons, age_groups, player_name, primary_position)
-else:
-    our_fig = plt.figure()
-
-
-with col1:
-    st.pyplot(our_fig)
-
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
     if not player_season_later.empty:
@@ -585,6 +571,20 @@ elif primary_position == 'FB':
     overall_player['Position'] = 'FB'
 
 st.write(overall_raw_player)
+
+
+if primary_position == 'ATT' or primary_position == 'Wing':
+    our_fig = attacker_function(this_season, age_groups, player_name, primary_position)
+elif primary_position == 'CM' or primary_position == 'DM':
+    our_fig = midfielder_function(combined_seasons, age_groups, player_name, primary_position)
+elif primary_position == 'FB' or primary_position == 'CB': 
+    our_fig = defender_function(combined_seasons, age_groups, player_name, primary_position)
+else:
+    our_fig = plt.figure()
+
+
+with col1:
+    st.pyplot(our_fig)
 
 # Path to the folder containing CSV files
 folder_path = 'Detailed_Training_Sessions'
@@ -692,8 +692,6 @@ col1, col2 = st.columns(2)
 
 with col2:
     st.pyplot(fig_pd)
-
-
 
 
 
