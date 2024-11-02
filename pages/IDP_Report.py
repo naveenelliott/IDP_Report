@@ -586,6 +586,7 @@ elif primary_position == 'FB' or primary_position == 'CB':
 else:
     our_fig = plt.figure()
 
+col1, col2 = st.columns(2)
 
 with col1:
     st.pyplot(our_fig)
