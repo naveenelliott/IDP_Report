@@ -688,9 +688,6 @@ final_averages_pd = final_averages_pd.loc[final_averages_pd['athlete_name'] != p
 
 fig_pd = gettingPlayerDataPlot(our_player_avg, final_averages_pd)
 
-
-col1, col2 = st.columns(2)
-
 with col2:
     st.pyplot(fig_pd)
 
