@@ -494,9 +494,97 @@ fig.update_layout(
     font=dict(size=9)
 )
 
-st.plotly_chart(fig)
+file_path = 'Last_Year'
+last_season = gettingPostSpringGames(file_path)
+last_season['Year'] = '2023'
+last_season = pd.merge(last_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
+
+file_path = 'This_Year'
+this_season = gettingPostSpringGames(file_path)
+this_season['Year'] = '2024'
+this_season = pd.merge(this_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
+
+combined_seasons = pd.concat([this_season, last_season], ignore_index=True)
+
+player_season = combined_seasons.loc[combined_seasons['Player Full Name'] == player_name]
+player_season_raw = player_season.copy()
+player_season_later = player_season.loc[player_season['Year'] == '2023'].reset_index()
+player_season = player_season.loc[player_season['Year'] == '2024'].reset_index()
+player_season_later_raw = player_season_raw.loc[player_season_raw['Year'] == '2023'].reset_index()
+player_season_raw = player_season_raw.loc[player_season_raw['Year'] == '2024'].reset_index()
 
 
+age_groups = player_season.at[0, 'Team Category']
+
+combined_seasons.rename(columns={'Pass Completion ': 'Pass %',
+                                 'Player Full Name': 'Player Name', 
+                                 'Stand. Tackle Success ': 'Tackle %', 
+                                 'Progr Regain ': 'Progr Regain %'}, inplace=True)
+
+our_fig = plt.figure()
+
+
+this_season = pd.merge(this_season, xg_us_copy, on='Player Full Name', how='inner')
+this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
+this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
+this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
+
+
+if primary_position == 'ATT' or primary_position == 'Wing':
+    our_fig = attacker_function(this_season, age_groups, player_name, primary_position)
+elif primary_position == 'CM' or primary_position == 'DM':
+    our_fig = midfielder_function(combined_seasons, age_groups, player_name, primary_position)
+elif primary_position == 'FB' or primary_position == 'CB': 
+    our_fig = defender_function(combined_seasons, age_groups, player_name, primary_position)
+else:
+    our_fig = plt.figure()
+
+
+with col1:
+    st.pyplot(our_fig)
+
+if primary_position == 'ATT':
+    overall_player = creatingPercentilesAtt(player_season)
+    if not player_season_later.empty:
+        last_season_player = creatingPercentilesAtt(player_season_later)
+        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+    overall_player['Position'] = 'ATT'
+elif primary_position == 'Wing':
+    overall_player = creatingPercentilesWing(player_season)
+    if not player_season_later.empty:
+        last_season_player = creatingPercentilesWing(player_season_later)
+        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+    overall_player['Position'] = 'Wing'
+elif primary_position == 'CB':
+    overall_player = creatingPercentilesCB(player_season)
+    if not player_season_later.empty:
+        last_season_player = creatingPercentilesCB(player_season_later)
+        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+    overall_player['Position'] = 'CB'
+elif primary_position == 'DM':
+    overall_player = creatingPercentilesDM(player_season)
+    if not player_season_later.empty:
+        last_season_player = creatingPercentilesDM(player_season_later)
+        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+    overall_player['Position'] = 'DM'
+elif primary_position == 'CM':
+    overall_player = creatingPercentilesCM(player_season)
+    overall_raw_player = creatingRawCM(player_season_raw)
+    if not player_season_later.empty:
+        last_season_raw_player = creatingRawCM(player_season_later_raw)
+        last_season_player = creatingPercentilesCM(player_season_later)
+        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+        overall_raw_player = pd.concat([overall_raw_player, last_season_raw_player], ignore_index=True)
+        overall_raw_player = overall_raw_player.T
+    overall_player['Position'] = 'CM'
+elif primary_position == 'FB':
+    overall_player = creatingPercentilesFB(player_season)
+    if not player_season_later.empty:
+        last_season_player = creatingPercentilesFB(player_season_later)
+        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+    overall_player['Position'] = 'FB'
+
+st.write(overall_raw_player)
 
 # Path to the folder containing CSV files
 folder_path = 'Detailed_Training_Sessions'
@@ -605,102 +693,13 @@ col1, col2 = st.columns(2)
 with col2:
     st.pyplot(fig_pd)
 
-file_path = 'Last_Year'
-last_season = gettingPostSpringGames(file_path)
-last_season['Year'] = '2023'
-last_season = pd.merge(last_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
 
-file_path = 'This_Year'
-this_season = gettingPostSpringGames(file_path)
-this_season['Year'] = '2024'
-this_season = pd.merge(this_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
-
-combined_seasons = pd.concat([this_season, last_season], ignore_index=True)
-
-player_season = combined_seasons.loc[combined_seasons['Player Full Name'] == player_name]
-player_season_raw = player_season.copy()
-player_season_later = player_season.loc[player_season['Year'] == '2023'].reset_index()
-player_season = player_season.loc[player_season['Year'] == '2024'].reset_index()
-player_season_later_raw = player_season_raw.loc[player_season_raw['Year'] == '2023'].reset_index()
-player_season_raw = player_season_raw.loc[player_season_raw['Year'] == '2024'].reset_index()
-
-
-age_groups = player_season.at[0, 'Team Category']
-
-combined_seasons.rename(columns={'Pass Completion ': 'Pass %',
-                                 'Player Full Name': 'Player Name', 
-                                 'Stand. Tackle Success ': 'Tackle %', 
-                                 'Progr Regain ': 'Progr Regain %'}, inplace=True)
-
-our_fig = plt.figure()
-
-
-this_season = pd.merge(this_season, xg_us_copy, on='Player Full Name', how='inner')
-this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
-this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
-this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
-
-
-if primary_position == 'ATT' or primary_position == 'Wing':
-    our_fig = attacker_function(this_season, age_groups, player_name, primary_position)
-elif primary_position == 'CM' or primary_position == 'DM':
-    our_fig = midfielder_function(combined_seasons, age_groups, player_name, primary_position)
-elif primary_position == 'FB' or primary_position == 'CB': 
-    our_fig = defender_function(combined_seasons, age_groups, player_name, primary_position)
-else:
-    our_fig = plt.figure()
-
-
-with col1:
-    st.pyplot(our_fig)
-
-if primary_position == 'ATT':
-    overall_player = creatingPercentilesAtt(player_season)
-    if not player_season_later.empty:
-        last_season_player = creatingPercentilesAtt(player_season_later)
-        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
-    overall_player['Position'] = 'ATT'
-elif primary_position == 'Wing':
-    overall_player = creatingPercentilesWing(player_season)
-    if not player_season_later.empty:
-        last_season_player = creatingPercentilesWing(player_season_later)
-        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
-    overall_player['Position'] = 'Wing'
-elif primary_position == 'CB':
-    overall_player = creatingPercentilesCB(player_season)
-    if not player_season_later.empty:
-        last_season_player = creatingPercentilesCB(player_season_later)
-        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
-    overall_player['Position'] = 'CB'
-elif primary_position == 'DM':
-    overall_player = creatingPercentilesDM(player_season)
-    if not player_season_later.empty:
-        last_season_player = creatingPercentilesDM(player_season_later)
-        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
-    overall_player['Position'] = 'DM'
-elif primary_position == 'CM':
-    overall_player = creatingPercentilesCM(player_season)
-    overall_raw_player = creatingRawCM(player_season_raw)
-    if not player_season_later.empty:
-        last_season_raw_player = creatingRawCM(player_season_later_raw)
-        last_season_player = creatingPercentilesCM(player_season_later)
-        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
-        overall_raw_player = pd.concat([overall_raw_player, last_season_raw_player], ignore_index=True)
-        overall_raw_player = overall_raw_player.T
-    overall_player['Position'] = 'CM'
-elif primary_position == 'FB':
-    overall_player = creatingPercentilesFB(player_season)
-    if not player_season_later.empty:
-        last_season_player = creatingPercentilesFB(player_season_later)
-        overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
-    overall_player['Position'] = 'FB'
 
 
 
 fig_pizza = createPizzaChart(overall_player)
 
-with col1:
-    st.write(overall_raw_player)
-
 with col2:
     st.pyplot(fig_pizza)
+
+st.plotly_chart(fig)
