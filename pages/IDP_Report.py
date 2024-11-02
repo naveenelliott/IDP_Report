@@ -17,7 +17,7 @@ from MidfielderDefender import midfielder_function, defender_function
 from Attacker import attacker_function
 from testCF_Spring import creatingPercentilesAtt, creatingRawAtt
 from testCB_Spring import creatingPercentilesCB 
-from testCDM_Spring import creatingPercentilesDM 
+from testCDM_Spring import creatingPercentilesDM, creatingRawDM 
 from testCM_Spring import creatingPercentilesCM, creatingRawCM
 from testFB_Spring import creatingPercentilesFB, creatingRawFB
 from testWinger_Spring import creatingPercentilesWing, creatingRawWing
@@ -565,9 +565,13 @@ elif primary_position == 'CB':
     overall_player['Position'] = 'CB'
 elif primary_position == 'DM':
     overall_player = creatingPercentilesDM(player_season)
+    overall_raw_player = creatingRawDM(player_season_raw)
     if not player_season_later.empty:
+        last_season_raw_player = creatingRawDM(player_season_later_raw)
         last_season_player = creatingPercentilesDM(player_season_later)
         overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
+        overall_raw_player = pd.concat([overall_raw_player, last_season_raw_player], ignore_index=True)
+        overall_raw_player = overall_raw_player.T
     overall_player['Position'] = 'DM'
 elif primary_position == 'CM':
     overall_player = creatingPercentilesCM(player_season)
