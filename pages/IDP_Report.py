@@ -534,8 +534,7 @@ this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
 this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
 this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
-st.write(primary_position)
-st.write(player_season)
+
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
