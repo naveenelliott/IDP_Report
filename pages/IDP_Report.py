@@ -250,82 +250,84 @@ full_actions = actions.copy()
 
 xg_positions = ['CM', 'Wing', 'ATT']
 
-if primary_position in xg_positions:
 
-    # these are the ideal columns
-    cols = ['Player Full Name', 'Team', 'Match Date', 'Opposition', 'Action', 'Time', 'Video Link']
-    xg_actions = actions[cols]
+# these are the ideal columns
+cols = ['Player Full Name', 'Team', 'Match Date', 'Opposition', 'Action', 'Time', 'Video Link']
+xg_actions = actions[cols]
 
-    # these are the shots we want
-    wanted_actions = ['Att Shot Blockd', 'Blocked Shot', 'Goal', 'Goal Against', 'Header on Target', 
-                    'Header off Target', 'Opp Effort on Goal', 'Save Held', 'Save Parried', 'Shot off Target', 
-                    'Shot on Target']
-    xg_actions = xg_actions.loc[xg_actions['Action'].isin(wanted_actions)].reset_index(drop=True)
-    # renaming for the join
-    xg_actions.rename(columns={'Team': 'Bolts Team'}, inplace=True)
+# these are the shots we want
+wanted_actions = ['Att Shot Blockd', 'Blocked Shot', 'Goal', 'Goal Against', 'Header on Target', 
+                'Header off Target', 'Opp Effort on Goal', 'Save Held', 'Save Parried', 'Shot off Target', 
+                'Shot on Target']
+xg_actions = xg_actions.loc[xg_actions['Action'].isin(wanted_actions)].reset_index(drop=True)
+# renaming for the join
+xg_actions.rename(columns={'Team': 'Bolts Team'}, inplace=True)
 
-    # this is handeling duplicated PlayerStatData shots 
-    temp_df = pd.DataFrame(columns=xg_actions.columns)
-    prime_actions = ['Opp Effort on Goal', 'Shot on Target']
-    remove_indexes = []
-    for index in range(len(xg_actions) - 1):
-        if xg_actions.loc[index, 'Time'] == xg_actions.loc[index+1, 'Time']:
-            temp_df = pd.concat([temp_df, xg_actions.loc[[index]], xg_actions.loc[[index + 1]]], ignore_index=False)
-            bye1 = temp_df.loc[temp_df['Action'].isin(prime_actions)]
-            # these are the indexes we want to remove
-            remove_indexes.extend(bye1.index)
-            
-        temp_df = pd.DataFrame(columns=xg_actions.columns)     
+# this is handeling duplicated PlayerStatData shots 
+temp_df = pd.DataFrame(columns=xg_actions.columns)
+prime_actions = ['Opp Effort on Goal', 'Shot on Target']
+remove_indexes = []
+for index in range(len(xg_actions) - 1):
+    if xg_actions.loc[index, 'Time'] == xg_actions.loc[index+1, 'Time']:
+        temp_df = pd.concat([temp_df, xg_actions.loc[[index]], xg_actions.loc[[index + 1]]], ignore_index=False)
+        bye1 = temp_df.loc[temp_df['Action'].isin(prime_actions)]
+        # these are the indexes we want to remove
+        remove_indexes.extend(bye1.index)
+        
+    temp_df = pd.DataFrame(columns=xg_actions.columns)     
 
-    # this is a copy with the removed duplicated PSD shots
-    actions_new = xg_actions.copy()
-    actions_new = actions_new.drop(remove_indexes).reset_index(drop=True) 
+# this is a copy with the removed duplicated PSD shots
+actions_new = xg_actions.copy()
+actions_new = actions_new.drop(remove_indexes).reset_index(drop=True) 
 
-    fc_python['Match Date'] = pd.to_datetime(fc_python['Match Date']).dt.strftime('%m/%d/%Y')
+fc_python['Match Date'] = pd.to_datetime(fc_python['Match Date']).dt.strftime('%m/%d/%Y')
 
-    # combining into xG idp_report we want
-    combined_xg = pd.merge(fc_python, actions_new, on=['Bolts Team', 'Match Date', 'Time'], how='inner')
+# combining into xG idp_report we want
+combined_xg = pd.merge(fc_python, actions_new, on=['Bolts Team', 'Match Date', 'Time'], how='inner')
 
-    # running the model on our idp_report
-    xg = xGModel(combined_xg)
+# running the model on our idp_report
+xg = xGModel(combined_xg)
 
-    # creating a copy for later
-    xg_copy = xg.copy()
+# creating a copy for later
+xg_copy = xg.copy()
 
-    our_wanted_actions = ['Att Shot Blockd',  'Goal', 'Header on Target', 
-                    'Header off Target', 'Shot off Target', 'Shot on Target']
-    xg_us = xg_copy.loc[xg_copy['Action'].isin(our_wanted_actions)]
+our_wanted_actions = ['Att Shot Blockd',  'Goal', 'Header on Target', 
+                'Header off Target', 'Shot off Target', 'Shot on Target']
+xg_us = xg_copy.loc[xg_copy['Action'].isin(our_wanted_actions)]
 
-    xg_us = xg_us.groupby(['Player Full Name'])['xG'].sum().reset_index()
-    xg_us_copy = xg_us.copy()
+xg_us = xg_us.groupby(['Player Full Name'])['xG'].sum().reset_index()
+xg_us_copy = xg_us.copy()
 
-    xg_us = xg_us.loc[xg_us['Player Full Name'] == player_name].reset_index()
+xg_us = xg_us.loc[xg_us['Player Full Name'] == player_name].reset_index()
 
-
+if not xg_us.empty:
     player_metrics['xG'] = xg_us.at[0, 'xG']
+else:
+    player_metrics['xG'] = 0
 
 
-    player_metrics['xG per 90'] = (player_metrics['xG']/player_metrics['mins played']) * 90
-    xg_per_90 = player_metrics.loc[0, 'xG per 90']
+player_metrics['xG per 90'] = (player_metrics['xG']/player_metrics['mins played']) * 90
+xg_per_90 = player_metrics.loc[0, 'xG per 90']
 
 
-    team_series = pd.Series(team_name)
-    age_group = team_series.str.extract(r'(U\d{2})')
-    age_group = age_group.at[0,0]
-    age_group_mapping = {
-        'U13': 'U13-U14',
-        'U14': 'U13-U14',
-        'U15': 'U15-U16',
-        'U16': 'U15-U16',
-        'U17': 'U17-U19',
-        'U19': 'U17-U19'
-    }
+team_series = pd.Series(team_name)
+age_group = team_series.str.extract(r'(U\d{2})')
+age_group = age_group.at[0,0]
+age_group_mapping = {
+    'U13': 'U13-U14',
+    'U14': 'U13-U14',
+    'U15': 'U15-U16',
+    'U16': 'U15-U16',
+    'U17': 'U17-U19',
+    'U19': 'U17-U19'
+}
 
-    # Replace Age Group with the grouped values
-    age_group = age_group_mapping.get(age_group, age_group)
+# Replace Age Group with the grouped values
+age_group = age_group_mapping.get(age_group, age_group)
 
-    thresholds = pd.read_csv('xGPositionAgeGroupAvgs.csv')
-    thresholds = thresholds.loc[thresholds['Age Group'] == age_group]
+thresholds = pd.read_csv('IDP_Plan/xGPositionAgeGroupAvgs.csv')
+thresholds = thresholds.loc[thresholds['Age Group'] == age_group]
+if primary_position in xg_positions:
     thresholds = thresholds.loc[thresholds['Position Tag'] == primary_position].reset_index(drop=True)
 
 
@@ -339,14 +341,13 @@ if primary_position in xg_positions:
     # Function to calculate z-score for each element in a column
     def calculate_zscore(column, mean, std):
         return (column - mean) / std
-    
+
     z_scores = calculate_zscore(xg_per_90, mean_values, std_values)
     xg_percentile = calculate_percentile(z_scores)
     player_metrics['xG per 90'] = xg_percentile
 
     player_metrics.drop(columns={'xG', 'mins played'}, inplace=True)
-else:
-    player_metrics.drop(columns={'mins played'}, inplace=True)
+
 
 
 metric_columns = player_metrics.columns
