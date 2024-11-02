@@ -503,6 +503,7 @@ file_path = 'Last_Year'
 last_season = gettingPostSpringGames(file_path)
 last_season['Year'] = '2023'
 last_season = pd.merge(last_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
+st.write(last_season)
 
 file_path = 'This_Year'
 this_season = gettingPostSpringGames(file_path)
