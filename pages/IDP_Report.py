@@ -494,6 +494,10 @@ fig.update_layout(
     font=dict(size=9)
 )
 
+all_primary_position = getPrimaryPositionAll()
+
+temp_all_primary_position = all_primary_position.copy()
+
 file_path = 'Last_Year'
 last_season = gettingPostSpringGames(file_path)
 last_season['Year'] = '2023'
@@ -669,9 +673,6 @@ final_averages_pd = averages.groupby(['athlete_name']).agg(
 
 final_averages_pd['athlete_name'] = final_averages_pd['athlete_name'].str.lower()
 
-all_primary_position = getPrimaryPositionAll()
-
-temp_all_primary_position = all_primary_position.copy()
 
 all_primary_position['Player Full Name'] = all_primary_position['Player Full Name'].str.lower()
 
