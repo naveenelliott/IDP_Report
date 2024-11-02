@@ -20,7 +20,7 @@ from testCB_Spring import creatingPercentilesCB
 from testCDM_Spring import creatingPercentilesDM 
 from testCM_Spring import creatingPercentilesCM, creatingRawCM
 from testFB_Spring import creatingPercentilesFB, creatingRawFB
-from testWinger_Spring import creatingPercentilesWing 
+from testWinger_Spring import creatingPercentilesWing, creatingRawWing
 from PizzaPlotPDP_Spring import createPizzaChart
 from streamlit_gsheets import GSheetsConnection
 
