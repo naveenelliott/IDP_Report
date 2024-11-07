@@ -45,7 +45,7 @@ if matching_files:
 else:
     player_pic = Image.open('Player_Photos/other_person.jpg')
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 folder_path = 'Height_Weight'      
 # List all files in the folder
@@ -737,7 +737,7 @@ with col2:
 
 fig_pizza = createPizzaChart(overall_player)
 
-
-st.pyplot(fig_pizza)
+with col3:
+    st.pyplot(fig_pizza)
 
 st.plotly_chart(fig)
