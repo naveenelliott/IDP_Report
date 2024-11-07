@@ -593,7 +593,15 @@ elif primary_position == 'CM':
         defending = defending.T
         playmaking = pd.concat([playmaking, ls_playmaking], ignore_index=True)
         playmaking = playmaking.T
-    st.write(passing)
+    inn_columns = st.columns(4)
+    with inn_columns[0]:
+        st.write(passing)
+    with inn_columns[1]:
+        st.write(dribbling)
+    with inn_columns[2]:
+        st.write(defending)
+    with inn_columns[3]:
+        st.write(playmaking)
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
     overall_player = creatingPercentilesFB(player_season)
