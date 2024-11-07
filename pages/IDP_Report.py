@@ -27,6 +27,7 @@ from streamlit_gsheets import GSheetsConnection
 player_name = st.session_state['selected_player']
 team_name = st.session_state['selected_team']
 
+st.set_page_config(layout="wide")
 
 
 directory_path = 'Player_Photos'
