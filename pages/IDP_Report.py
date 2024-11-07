@@ -580,13 +580,20 @@ elif primary_position == 'DM':
     overall_player['Position'] = 'DM'
 elif primary_position == 'CM':
     overall_player = creatingPercentilesCM(player_season)
-    overall_raw_player = creatingRawCM(player_season_raw)
+    passing, dribbling, defending, playmaking = creatingRawCM(player_season_raw)
     if not player_season_later.empty:
-        last_season_raw_player = creatingRawCM(player_season_later_raw)
+        ls_passing, ls_dribbling, ls_defending, ls_playmaking = creatingRawCM(player_season_later_raw)
         last_season_player = creatingPercentilesCM(player_season_later)
         overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
-        overall_raw_player = pd.concat([overall_raw_player, last_season_raw_player], ignore_index=True)
-        overall_raw_player = overall_raw_player.T
+        passing = pd.concat([passing, ls_passing], ignore_index=True)
+        passing = passing.T
+        dribbling = pd.concat([dribbling, ls_dribbling], ignore_index=True)
+        dribbling = dribbling.T
+        defending = pd.concat([defending, ls_defending], ignore_index=True)
+        defending = defending.T
+        playmaking = pd.concat([playmaking, ls_playmaking], ignore_index=True)
+        playmaking = playmaking.T
+    st.write(passing)
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
     overall_player = creatingPercentilesFB(player_season)
@@ -599,7 +606,7 @@ elif primary_position == 'FB':
         overall_raw_player = overall_raw_player.T
     overall_player['Position'] = 'FB'
 
-st.write(overall_raw_player)
+#st.write(overall_raw_player)
 
 
 if primary_position == 'ATT' or primary_position == 'Wing':
