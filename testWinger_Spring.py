@@ -163,10 +163,15 @@ def creatingRawWing(merged_df):
     passing['Total'] = passing['Success'] + passing['Unsuccess']
     passing.fillna(0, inplace=True)
     passing = passing.loc[:, ['Forward Total', 'Forward Completion', 'Total', 'Pass Completion ']]
-
+    passing['Player Name'] = merged_df['Player Full Name']
+    passing['Year'] = merged_df['Year']
+    passing.set_index(['Player Name', 'Year'], inplace=True)
 
     dribbling = merged_df[['Dribble', 'Att 1v1', 'Loss of Poss']]
     dribbling.fillna(0, inplace=True)
+    dribbling['Player Name'] = merged_df['Player Full Name']
+    dribbling['Year'] = merged_df['Year']
+    dribbling.set_index(['Player Name', 'Year'], inplace=True)
 
     defending = merged_df[['Stand. Tackle', 'Unsucc Stand. Tackle', 'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Progr Regain ', 
                             'Stand. Tackle Success ']]
@@ -175,21 +180,21 @@ def creatingRawWing(merged_df):
     defending['Inter Total'] = defending['Progr Inter'] + defending['Unprogr Inter']
     defending.fillna(0, inplace=True)
     defending = defending.loc[:, ['Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ']]
-
+    defending['Player Name'] = merged_df['Player Full Name']
+    defending['Year'] = merged_df['Year']
+    defending.set_index(['Player Name', 'Year'], inplace=True)
+    
     playmaking = merged_df[['Line Break', 'Pass into Oppo Box']]
     playmaking.fillna(0, inplace=True)
+    playmaking['Player Name'] = merged_df['Player Full Name']
+    playmaking['Year'] = merged_df['Year']
+    playmaking.set_index(['Player Name', 'Year'], inplace=True)
 
     shooting = merged_df[['Efforts on Goal', 'Shot on Target']]
     shooting.fillna(0, inplace=True)
+    shooting['Player Name'] = merged_df['Player Full Name']
+    shooting['Year'] = merged_df['Year']
+    shooting.set_index(['Player Name', 'Year'], inplace=True)
 
-    combined_aspects = pd.concat([defending, playmaking, dribbling, passing], axis=1)
-    combined_aspects['Player Name'] = merged_df['Player Full Name']
-    combined_aspects['Team Name'] = merged_df['Team Name']
-    combined_aspects['Year'] = merged_df['Year']
-
-    front_columns = ['Player Name', 'Team Name', 'Year']
-    combined_aspects = combined_aspects[front_columns + [col for col in combined_aspects.columns if col not in front_columns]]
-
-
-    return combined_aspects
+    return passing, dribbling, defending, playmaking, shooting
 
