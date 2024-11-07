@@ -593,11 +593,8 @@ elif primary_position == 'CM':
         defending = pd.concat([defending, ls_defending], ignore_index=True)
         defending = defending.T
         playmaking = pd.concat([playmaking, ls_playmaking], ignore_index=True)
-        playmaking = playmaking.pivot_table(
-            index=['Player Name', 'Year'],
-            values=['Line Break', 'Pass into Oppo Box', 'Efforts on Goal'],
-            aggfunc='sum'
-        ).reset_index()
+        st.write(playmaking)
+        playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
         st.table(passing)
