@@ -592,7 +592,7 @@ elif primary_position == 'CM':
         defending = pd.concat([defending, ls_defending], ignore_index=True)
         defending = defending.T
         playmaking = pd.concat([playmaking, ls_playmaking], ignore_index=True)
-        playmaking = playmaking.T
+        playmaking = playmaking.T.reset_index()
     inn_columns = st.columns(4)
     with inn_columns[0]:
         st.write(passing)
