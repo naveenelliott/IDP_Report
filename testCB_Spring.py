@@ -141,6 +141,9 @@ def creatingRawCB(merged_df):
     passing['Total'] = passing['Success'] + passing['Unsuccess']
     passing.fillna(0, inplace=True)
     passing = passing.loc[:,['Forward Total', 'Forward Completion', 'Total', 'Pass Completion ']]
+    passing['Player Name'] = merged_df['Player Full Name']
+    passing['Year'] = merged_df['Year']
+    passing.set_index(['Player Name', 'Year'], inplace=True)
 
     defending = merged_df[['Stand. Tackle', 'Unsucc Stand. Tackle', 'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Progr Regain ', 
                             'Stand. Tackle Success ']]
@@ -150,18 +153,16 @@ def creatingRawCB(merged_df):
     defending.fillna(0, inplace=True)
     defending = defending.loc[:, ['Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 
                                 'Stand. Tackle Success ']]
+    defending['Player Name'] = merged_df['Player Full Name']
+    defending['Year'] = merged_df['Year']
+    defending.set_index(['Player Name', 'Year'], inplace=True)
 
     ball_progression = merged_df[['Line Break', 'Dribble', 'Att 1v1',
                             'Loss of Poss']]
     ball_progression.fillna(0, inplace=True)
-
-    combined_aspects = pd.concat([defending, ball_progression, passing], axis=1)
-    combined_aspects['Player Name'] = merged_df['Player Full Name']
-    combined_aspects['Team Name'] = merged_df['Team Name']
-    combined_aspects['Year'] = merged_df['Year']
-
-    front_columns = ['Player Name', 'Team Name', 'Year']
-    combined_aspects = combined_aspects[front_columns + [col for col in combined_aspects.columns if col not in front_columns]]
+    ball_progression['Player Name'] = merged_df['Player Full Name']
+    ball_progression['Year'] = merged_df['Year']
+    ball_progression.set_index(['Player Name', 'Year'], inplace=True)
 
 
-    return combined_aspects
+    return passing, ball_progression, defending
