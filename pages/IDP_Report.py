@@ -592,8 +592,7 @@ elif primary_position == 'CM':
         dribbling = dribbling.T
         defending = pd.concat([defending, ls_defending], ignore_index=True)
         defending = defending.T
-        playmaking = pd.concat([playmaking, ls_playmaking], ignore_index=True)
-        st.write(playmaking)
+        playmaking = pd.concat([playmaking, ls_playmaking])
         playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
