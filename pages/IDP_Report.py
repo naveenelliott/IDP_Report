@@ -541,13 +541,28 @@ this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
-    overall_raw_player = creatingRawAtt(player_season_raw)
+    passing, dribbling, defending, shooting = creatingRawAtt(player_season_raw)
     if not player_season_later.empty:
-        last_season_raw_player = creatingRawAtt(player_season_later_raw)
+        ls_passing, ls_dribbling, ls_defending, ls_shooting = creatingRawAtt(player_season_later_raw)
         last_season_player = creatingPercentilesAtt(player_season_later)
         overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
-        overall_raw_player = pd.concat([overall_raw_player, last_season_raw_player], ignore_index=True)
-        overall_raw_player = overall_raw_player.T
+        passing = pd.concat([passing, ls_passing])
+        dribbling = pd.concat([dribbling, ls_dribbling])
+        defending = pd.concat([defending, ls_defending])
+        shooting = pd.concat([shooting, ls_shooting])
+    passing = passing.T
+    dribbling = dribbling.T
+    defending = defending.T
+    shooting = shooting.T
+    inn_columns = st.columns(4)
+    with inn_columns[0]:
+        st.table(passing.style.format("{:.2f}"))
+    with inn_columns[1]:
+        st.table(dribbling.style.format("{:.2f}"))
+    with inn_columns[2]:
+        st.table(defending.style.format("{:.2f}"))
+    with inn_columns[3]:
+        st.table(shooting.style.format("{:.2f}"))
     overall_player['Position'] = 'ATT'
 elif primary_position == 'Wing':
     overall_player = creatingPercentilesWing(player_season)
