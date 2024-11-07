@@ -571,13 +571,28 @@ elif primary_position == 'CB':
     overall_player['Position'] = 'CB'
 elif primary_position == 'DM':
     overall_player = creatingPercentilesDM(player_season)
-    overall_raw_player = creatingRawDM(player_season_raw)
+    passing, dribbling, defending, playmaking = creatingRawDM(player_season_raw)
     if not player_season_later.empty:
-        last_season_raw_player = creatingRawDM(player_season_later_raw)
+        ls_passing, ls_dribbling, ls_defending, ls_playmaking = creatingRawDM(player_season_later_raw)
         last_season_player = creatingPercentilesDM(player_season_later)
         overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
-        overall_raw_player = pd.concat([overall_raw_player, last_season_raw_player], ignore_index=True)
-        overall_raw_player = overall_raw_player.T
+        passing = pd.concat([passing, ls_passing])
+        dribbling = pd.concat([dribbling, ls_dribbling])
+        defending = pd.concat([defending, ls_defending])
+        playmaking = pd.concat([playmaking, ls_playmaking])
+    passing = passing.T
+    dribbling = dribbling.T
+    defending = defending.T
+    playmaking = playmaking.T
+    inn_columns = st.columns(4)
+    with inn_columns[0]:
+        st.table(passing.style.format("{:.2f}"))
+    with inn_columns[1]:
+        st.table(dribbling.style.format("{:.2f}"))
+    with inn_columns[2]:
+        st.table(defending.style.format("{:.2f}"))
+    with inn_columns[3]:
+        st.table(playmaking.style.format("{:.2f}"))
     overall_player['Position'] = 'DM'
 elif primary_position == 'CM':
     overall_player = creatingPercentilesCM(player_season)
