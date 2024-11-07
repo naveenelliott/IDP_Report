@@ -596,7 +596,7 @@ elif primary_position == 'CM':
         playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-        st.table(passing)
+        st.table(passing.format("{:.2f}"))
     with inn_columns[1]:
         st.table(dribbling)
     with inn_columns[2]:
