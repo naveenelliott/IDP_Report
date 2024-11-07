@@ -152,14 +152,14 @@ def creatingRawCM(merged_df):
     passing.fillna(0, inplace=True)
     passing = passing.loc[:, ['Forward Total', 'Forward Completion', 'Total', 'Pass Completion ']]
     passing['Player Name'] = merged_df['Player Full Name']
-    passing['Team Name'] = merged_df['Team Name']
     passing['Year'] = merged_df['Year']
+    passing.set_index(['Player Name', 'Year'], inplace=True)
 
     dribbling = merged_df[['Dribble', 'Att 1v1', 'Loss of Poss']]
     dribbling.fillna(0, inplace=True)
     dribbling['Player Name'] = merged_df['Player Full Name']
-    dribbling['Team Name'] = merged_df['Team Name']
     dribbling['Year'] = merged_df['Year']
+    dribbling.set_index(['Player Name', 'Year'], inplace=True)
 
     defending = merged_df[['Stand. Tackle', 'Unsucc Stand. Tackle', 'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Progr Regain ', 
                             'Stand. Tackle Success ']]
@@ -169,15 +169,15 @@ def creatingRawCM(merged_df):
     defending.fillna(0, inplace=True)
     defending = defending.loc[:, ['Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ']]
     defending['Player Name'] = merged_df['Player Full Name']
-    defending['Team Name'] = merged_df['Team Name']
     defending['Year'] = merged_df['Year']
+    defending.set_index(['Player Name', 'Year'], inplace=True)
 
 
     
     playmaking = merged_df[['Line Break', 'Pass into Oppo Box', 'Efforts on Goal']]
     playmaking.fillna(0, inplace=True)
     playmaking['Player Name'] = merged_df['Player Full Name']
-    playmaking['Team Name'] = merged_df['Team Name']
     playmaking['Year'] = merged_df['Year']
+    playmaking.set_index(['Player Name', 'Year'], inplace=True)
 
     return passing, dribbling, defending, playmaking
