@@ -565,14 +565,25 @@ if primary_position == 'ATT':
         st.table(shooting.style.format("{:.2f}"))
     overall_player['Position'] = 'ATT'
 elif primary_position == 'Wing':
-    overall_player = creatingPercentilesWing(player_season)
-    overall_raw_player = creatingRawWing(player_season_raw)
+    overall_player = creatingPercentilesFB(player_season)
+    passing, attacking, defending = creatingRawFB(player_season_raw)
     if not player_season_later.empty:
-        last_season_raw_player = creatingRawWing(player_season_later_raw)
-        last_season_player = creatingPercentilesWing(player_season_later)
+        ls_passing, ls_attacking, ls_defending = creatingRawFB(player_season_later_raw)
+        last_season_player = creatingPercentilesFB(player_season_later)
         overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
-        overall_raw_player = pd.concat([overall_raw_player, last_season_raw_player], ignore_index=True)
-        overall_raw_player = overall_raw_player.T
+        passing = pd.concat([passing, ls_passing])
+        attacking = pd.concat([attacking, ls_attacking])
+        defending = pd.concat([defending, ls_defending])
+    passing = passing.T
+    attacking = attacking.T
+    defending = defending.T
+    inn_columns = st.columns(3)
+    with inn_columns[0]:
+        st.table(passing.style.format("{:.2f}"))
+    with inn_columns[1]:
+        st.table(attacking.style.format("{:.2f}"))
+    with inn_columns[2]:
+        st.table(defending.style.format("{:.2f}"))
     overall_player['Position'] = 'Wing'
 elif primary_position == 'CB':
     overall_player = creatingPercentilesCB(player_season)
@@ -647,13 +658,24 @@ elif primary_position == 'CM':
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
     overall_player = creatingPercentilesFB(player_season)
-    overall_raw_player = creatingRawFB(player_season_raw)
+    passing, attacking, defending = creatingRawFB(player_season_raw)
     if not player_season_later.empty:
-        last_season_raw_player = creatingRawFB(player_season_later_raw)
+        ls_passing, ls_attacking, ls_defending = creatingRawFB(player_season_later_raw)
         last_season_player = creatingPercentilesFB(player_season_later)
         overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
-        overall_raw_player = pd.concat([overall_raw_player, last_season_raw_player], ignore_index=True)
-        overall_raw_player = overall_raw_player.T
+        passing = pd.concat([passing, ls_passing])
+        attacking = pd.concat([attacking, ls_attacking])
+        defending = pd.concat([defending, ls_defending])
+    passing = passing.T
+    attacking = attacking.T
+    defending = defending.T
+    inn_columns = st.columns(3)
+    with inn_columns[0]:
+        st.table(passing.style.format("{:.2f}"))
+    with inn_columns[1]:
+        st.table(attacking.style.format("{:.2f}"))
+    with inn_columns[2]:
+        st.table(defending.style.format("{:.2f}"))
     overall_player['Position'] = 'FB'
 
 #st.write(overall_raw_player)
