@@ -151,7 +151,7 @@ def creatingRawCM(merged_df):
     passing['Total'] = passing['Success'] + passing['Unsuccess']
     passing.fillna(0, inplace=True)
     passing = passing.loc[:, ['Forward Total', 'Forward Completion', 'Total', 'Pass Completion ']]
-    passing = round(passing, 2)
+    passing = passing.round(2)
     passing['Player Name'] = merged_df['Player Full Name']
     passing['Year'] = merged_df['Year']
     passing.set_index(['Player Name', 'Year'], inplace=True)
