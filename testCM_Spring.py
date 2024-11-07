@@ -151,10 +151,15 @@ def creatingRawCM(merged_df):
     passing['Total'] = passing['Success'] + passing['Unsuccess']
     passing.fillna(0, inplace=True)
     passing = passing.loc[:, ['Forward Total', 'Forward Completion', 'Total', 'Pass Completion ']]
-
+    passing['Player Name'] = merged_df['Player Full Name']
+    passing['Team Name'] = merged_df['Team Name']
+    passing['Year'] = merged_df['Year']
 
     dribbling = merged_df[['Dribble', 'Att 1v1', 'Loss of Poss']]
     dribbling.fillna(0, inplace=True)
+    dribbling['Player Name'] = merged_df['Player Full Name']
+    dribbling['Team Name'] = merged_df['Team Name']
+    dribbling['Year'] = merged_df['Year']
 
     defending = merged_df[['Stand. Tackle', 'Unsucc Stand. Tackle', 'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Progr Regain ', 
                             'Stand. Tackle Success ']]
@@ -163,17 +168,16 @@ def creatingRawCM(merged_df):
     defending['Inter Total'] = defending['Progr Inter'] + defending['Unprogr Inter']
     defending.fillna(0, inplace=True)
     defending = defending.loc[:, ['Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ']]
+    defending['Player Name'] = merged_df['Player Full Name']
+    defending['Team Name'] = merged_df['Team Name']
+    defending['Year'] = merged_df['Year']
 
+
+    
     playmaking = merged_df[['Line Break', 'Pass into Oppo Box', 'Efforts on Goal']]
     playmaking.fillna(0, inplace=True)
+    playmaking['Player Name'] = merged_df['Player Full Name']
+    playmaking['Team Name'] = merged_df['Team Name']
+    playmaking['Year'] = merged_df['Year']
 
-    combined_aspects = pd.concat([defending, playmaking, dribbling, passing], axis=1)
-    combined_aspects['Player Name'] = merged_df['Player Full Name']
-    combined_aspects['Team Name'] = merged_df['Team Name']
-    combined_aspects['Year'] = merged_df['Year']
-
-    front_columns = ['Player Name', 'Team Name', 'Year']
-    combined_aspects = combined_aspects[front_columns + [col for col in combined_aspects.columns if col not in front_columns]]
-
-
-    return combined_aspects
+    return passing, dribbling, defending, playmaking
