@@ -598,11 +598,11 @@ elif primary_position == 'CM':
     with inn_columns[0]:
         st.table(passing.style.format("{:.2f}"))
     with inn_columns[1]:
-        st.table(dribbling)
+        st.table(dribbling.style.format("{:.2f}"))
     with inn_columns[2]:
-        st.table(defending)
+        st.table(defending.style.format("{:.2f}"))
     with inn_columns[3]:
-        st.table(playmaking)
+        st.table(playmaking.style.format("{:.2f}"))
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
     overall_player = creatingPercentilesFB(player_season)
