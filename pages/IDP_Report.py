@@ -45,7 +45,7 @@ if matching_files:
 else:
     player_pic = Image.open('Player_Photos/other_person.jpg')
 
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 
 folder_path = 'Height_Weight'      
 # List all files in the folder
@@ -627,7 +627,7 @@ elif primary_position == 'FB' or primary_position == 'CB':
 else:
     our_fig = plt.figure()
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     st.pyplot(our_fig)
