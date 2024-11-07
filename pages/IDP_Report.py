@@ -561,9 +561,9 @@ elif primary_position == 'Wing':
     overall_player['Position'] = 'Wing'
 elif primary_position == 'CB':
     overall_player = creatingPercentilesCB(player_season)
-    passing, ball_prog, defending = creatingRawDM(player_season_raw)
+    passing, ball_prog, defending = creatingRawCB(player_season_raw)
     if not player_season_later.empty:
-        ls_passing, ls_ball_prog, ls_defending = creatingRawDM(player_season_later_raw)
+        ls_passing, ls_ball_prog, ls_defending = creatingRawCB(player_season_later_raw)
         last_season_player = creatingPercentilesCB(player_season_later)
         overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
         passing = pd.concat([passing, ls_passing])
