@@ -547,7 +547,38 @@ this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
 this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
 this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
+# Function to calculate percentage change and apply conditional formatting
+def color_change(val, base):
+    # Calculate the percentage change
+    pct_change = ((val - base) / base) * 100
+    # Set color based on 5% threshold
+    if pct_change >= 5:
+        color = 'green'
+    elif pct_change <= -5:
+        color = 'red'
+    else:
+        color = 'white'
+    return f'background-color: {color}'
 
+# Function to apply color_change across the DataFrame
+def apply_color_change(df):
+    styled_df = df.copy()
+    
+    for metric in df.columns:
+        for player in df.index.get_level_values('Player').unique():
+            # Get data for consecutive years by player
+            player_data = df.loc[player, metric]
+            if len(player_data) < 2:
+                continue
+            
+            # Calculate percentage change from last year to this year
+            pct_change = ((player_data.iloc[0] - player_data.iloc[1]) / player_data.iloc[1]) * 100
+            
+            # Apply conditional formatting to each year's value
+            styled_df.loc[(player_name, 2024), metric] = color_change(player_data.iloc[0], pct_change)
+            styled_df.loc[(player_name, 2023), metric] = 'background-color: white'  # keep last year as white
+
+    return styled_df
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
@@ -641,7 +672,8 @@ elif primary_position == 'DM':
     playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-        st.table(passing.style.format("{:.2f}"))
+        passing = passing.style.apply(lambda x: apply_color_change(df), axis=None).format("{:.2f}")
+        st.dataframe(passing)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
     with inn_columns[2]:
