@@ -547,20 +547,32 @@ this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
 this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
 this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
-# Function to apply color_change across the DataFrame
 def apply_color_change(df):
-    current_year = df.loc[(player_name, '2024')]  # Access data for '2024'
-    previous_year = df.loc[(player_name, '2023')]  # Access data for '2023'
+    # Initialize an empty list to store style changes
+    styles = []
+    
+    # Loop through each row of the DataFrame
+    for _, row in df.iterrows():
+        player_name = row['Player Name']
+        year_2023 = row[row['Year'] == 2023]
+        year_2024 = row[row['Year'] == 2024]
+        
+        # If data for both years is available, calculate the percentage change
+        if not year_2023.empty and not year_2024.empty:
+            pct_change = ((year_2024 - year_2023) / year_2023) * 100
 
-    # Calculate the percentage change between 2023 and 2024
-    pct_change = ((current_year - previous_year) / previous_year) * 100
-
-    if pct_change >= 5:
-        return ['background-color: green']  # Increase greater than or equal to 5%
-    elif pct_change <= -5:
-        return ['background-color: red']  # Decrease less than or equal to -5%
-    else:
-        return ['']  # No significant change
+            # Apply style based on pct_change (Green for +5%, Red for -5%)
+            row_styles = [
+                'background-color: green' if pct >= 5 else 'background-color: red' if pct <= -5 else ''
+                for pct in pct_change
+            ]
+        else:
+            row_styles = [''] * len(row)
+        
+        # Append the style changes to the styles list
+        styles.append(row_styles)
+    
+    return styles
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
@@ -679,12 +691,8 @@ elif primary_position == 'CM':
     playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
+        passing = passing.style.apply(apply_color_change, df=passing, axis=1).format("{:.2f}")
         st.write(passing)
-        passing = passing.style.format("{:.2f}")
-        st.write(passing)
-        style_passing = passing.apply(apply_color_change, df=passing, axis=1)
-        st.write(passing)
-        st.dataframe(style_passing)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
     with inn_columns[2]:
