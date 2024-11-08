@@ -549,9 +549,11 @@ this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
 # Function to apply color_change across the DataFrame
 def apply_color_change(df):
+    player_name = row.name[0]  # Access player name from the multi-index
+    current_year = df.loc[(player_name, '2024')]  # Access data for '2024'
+    previous_year = df.loc[(player_name, '2023')]  # Access data for '2023'
+
     # Calculate the percentage change between 2023 and 2024
-    current_year = df.loc['2024']
-    previous_year = df.loc['2023']
     pct_change = ((current_year - previous_year) / previous_year) * 100
 
     # Create a list of styles based on the percentage change
@@ -563,7 +565,9 @@ def apply_color_change(df):
             styles.append('background-color: red')
         else:
             styles.append('')
-    return styles if row.name == '2024' else [''] * len(row)
+    
+    # Apply styles only to the '2024' row
+    return styles if row.name[1] == '2024' else [''] * len(row)
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
