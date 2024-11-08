@@ -549,17 +549,28 @@ this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
 # Function to apply color_change across the DataFrame
 def apply_color_change(df):
+    # Create an empty DataFrame to store the style information
     styled_df = pd.DataFrame('', index=df.index, columns=df.columns)
-    for i in df.index:
-        if '2023' in df.columns and '2024' in df.columns:
-            previous_value = df.loc[i, '2023']
-            current_value = df.loc[i, '2024']
-            if previous_value != 0:  # Avoid division by zero
-                pct_change = ((current_value - previous_value) / abs(previous_value)) * 100
-                if pct_change >= 5:
-                    styled_df.loc[i, '2024'] = 'background-color: green'
-                elif pct_change <= -5:
-                    styled_df.loc[i, '2024'] = 'background-color: red'
+    
+    # Iterate over each player
+    for player in df.index.get_level_values('Player').unique():
+        # Get the values for 2024 and 2023 for the player
+        try:
+            current_year = df.loc[(player, '2024')]
+            previous_year = df.loc[(player, '2023')]
+            # Calculate the percentage change
+            pct_change = ((current_year - previous_year) / previous_year) * 100
+            
+            # Apply color based on the threshold
+            for col in df.columns:
+                if pct_change[col] >= 5:
+                    styled_df.loc[(player, '2024'), col] = 'background-color: green'
+                elif pct_change[col] <= -5:
+                    styled_df.loc[(player, '2024'), col] = 'background-color: red'
+        except KeyError:
+            # Handle case where a player does not have both '2024' and '2023' rows
+            continue
+    
     return styled_df
 
 if primary_position == 'ATT':
