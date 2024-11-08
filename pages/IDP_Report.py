@@ -547,27 +547,36 @@ this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
 this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
 this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
-def apply_color_change(row):
-    # Check if the row has valid data for both years
-    if '2023' in row and '2024' in row:  # Adjust this based on your actual column names
-        year_2023_value = row['2023']  # Adjust this column name based on your dataset
-        st.write(year_2023_value)
-        year_2024_value = row['2024']  # Adjust this column name based on your dataset
-        st.write(year_2024_value)
+def apply_color_change(data):
+    def colorize(row):
+        styles = [''] * len(row)  # Initialize an empty list for styles, one per column
         
-        # Calculate the percentage change
-        if year_2023_value != 0:  # Avoid division by zero
-            pct_change = ((year_2024_value - year_2023_value) / year_2023_value) * 100
-            # Apply color styling based on pct_change
-            if pct_change >= 5:
-                return ['background-color: green']
-            elif pct_change <= -5:
-                return ['background-color: red']
-            else:
-                return ['']  # No style for neutral change
-        else:
-            return ['']  # If year_2023_value is 0, no change styling
-    return ['']  # Default case for invalid data
+        # Iterate through all columns except 'Player Name' and 'Year'
+        for column in data.columns:
+            if column not in ['Player Name', 'Year']:
+                # Get the value for the current player in 2024 and 2023 for the column
+                value_2024 = row[column][row['Year'] == 2024].values
+                st.write(value_2024)
+                value_2023 = row[column][row['Year'] == 2023].values
+                st.write(value_2023)
+                
+                # Ensure values exist for both years
+                if len(value_2024) > 0 and len(value_2023) > 0:
+                    # Calculate the percentage change
+                    pct_change = ((value_2024[0] - value_2023[0]) / value_2023[0]) * 100
+                    
+                    # Apply color based on percentage change
+                    if pct_change >= 5:
+                        styles[data.columns.get_loc(column)] = 'background-color: green'
+                    elif pct_change <= -5:
+                        styles[data.columns.get_loc(column)] = 'background-color: red'
+                    else:
+                        styles[data.columns.get_loc(column)] = ''  # No color for neutral change
+                else:
+                    styles[data.columns.get_loc(column)] = ''  # No color if no value for comparison
+        return styles
+
+    return data.apply(colorize, axis=1)
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
@@ -687,7 +696,6 @@ elif primary_position == 'CM':
     playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-        st.write(passing)
         passing = passing.style.apply(apply_color_change, axis=1)
         st.dataframe(passing)
     with inn_columns[1]:
