@@ -550,17 +550,16 @@ this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 # Function to apply color_change across the DataFrame
 def apply_color_change(df):
     styled_df = pd.DataFrame('', index=df.index, columns=df.columns)
-    for col in df.columns:
-        for i in range(1, len(df)):
-            # Calculate percentage change compared to the previous season
-            previous_value = df.iloc[i - 1][col]
-            current_value = df.iloc[i][col]
+    for i in df.index:
+        if '2023' in df.columns and '2024' in df.columns:
+            previous_value = df.loc[i, '2023']
+            current_value = df.loc[i, '2024']
             if previous_value != 0:  # Avoid division by zero
                 pct_change = ((current_value - previous_value) / abs(previous_value)) * 100
                 if pct_change >= 5:
-                    styled_df.iloc[i][col] = 'background-color: green'
+                    styled_df.loc[i, '2024'] = 'background-color: green'
                 elif pct_change <= -5:
-                    styled_df.iloc[i][col] = 'background-color: red'
+                    styled_df.loc[i, '2024'] = 'background-color: red'
     return styled_df
 
 if primary_position == 'ATT':
