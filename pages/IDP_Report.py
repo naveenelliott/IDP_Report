@@ -686,6 +686,7 @@ elif primary_position == 'CM':
     playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
+        st.write(passing)
         passing = passing.style.apply(apply_color_change, axis=1)
         st.dataframe(passing)
     with inn_columns[1]:
