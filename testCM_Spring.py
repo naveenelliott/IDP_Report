@@ -145,6 +145,7 @@ def creatingRawCM(merged_df):
     merged_df = merged_df.drop_duplicates()
     raw_df = merged_df[raw_columns]
 
+       # Passing DataFrame adjustments
     passing = merged_df[['Forward', 'Unsucc Forward', 'Success', 'Unsuccess', 'Pass Completion ']]
     passing['Forward Total'] = passing['Forward'] + passing['Unsucc Forward']
     passing['Forward Completion'] = (passing['Forward'] / passing['Forward Total']) * 100
@@ -153,16 +154,22 @@ def creatingRawCM(merged_df):
     passing = passing.loc[:, ['Forward Total', 'Forward Completion', 'Total', 'Pass Completion ']]
     passing['Player Name'] = merged_df['Player Full Name']
     passing['Year'] = merged_df['Year']
-    passing.set_index(['Player Name', 'Year'], inplace=True)
-
+    
+    # Reordering the columns so 'Player Name' is first, followed by 'Year'
+    passing = passing[['Player Name', 'Year', 'Forward Total', 'Forward Completion', 'Total', 'Pass Completion ']]
+    
+    # Dribbling DataFrame adjustments
     dribbling = merged_df[['Dribble', 'Att 1v1', 'Loss of Poss']]
     dribbling.fillna(0, inplace=True)
     dribbling['Player Name'] = merged_df['Player Full Name']
     dribbling['Year'] = merged_df['Year']
-    dribbling.set_index(['Player Name', 'Year'], inplace=True)
-
-    defending = merged_df[['Stand. Tackle', 'Unsucc Stand. Tackle', 'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Progr Regain ', 
-                            'Stand. Tackle Success ']]
+    
+    # Reordering the columns so 'Player Name' is first, followed by 'Year'
+    dribbling = dribbling[['Player Name', 'Year', 'Dribble', 'Att 1v1', 'Loss of Poss']]
+    
+    # Defending DataFrame adjustments
+    defending = merged_df[['Stand. Tackle', 'Unsucc Stand. Tackle', 'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 
+                            'Progr Regain ', 'Stand. Tackle Success ']]
     defending['Stand. Tackle Total'] = defending['Stand. Tackle'] + defending['Unsucc Stand. Tackle']
     defending['Rec Total'] = defending['Progr Rec'] + defending['Unprogr Rec']
     defending['Inter Total'] = defending['Progr Inter'] + defending['Unprogr Inter']
@@ -170,14 +177,17 @@ def creatingRawCM(merged_df):
     defending = defending.loc[:, ['Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ']]
     defending['Player Name'] = merged_df['Player Full Name']
     defending['Year'] = merged_df['Year']
-    defending.set_index(['Player Name', 'Year'], inplace=True)
-
-
     
+    # Reordering the columns so 'Player Name' is first, followed by 'Year'
+    defending = defending[['Player Name', 'Year', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ']]
+    
+    # Playmaking DataFrame adjustments
     playmaking = merged_df[['Line Break', 'Pass into Oppo Box', 'Efforts on Goal']]
     playmaking.fillna(0, inplace=True)
     playmaking['Player Name'] = merged_df['Player Full Name']
     playmaking['Year'] = merged_df['Year']
-    playmaking.set_index(['Player Name', 'Year'], inplace=True)
+    
+    # Reordering the columns so 'Player Name' is first, followed by 'Year'
+    playmaking = playmaking[['Player Name', 'Year', 'Line Break', 'Pass into Oppo Box', 'Efforts on Goal']]
 
     return passing, dribbling, defending, playmaking
