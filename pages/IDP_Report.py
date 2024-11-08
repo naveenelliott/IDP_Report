@@ -690,7 +690,7 @@ elif primary_position == 'FB':
 
 #st.write(overall_raw_player)
 
-
+st.write(primary_position)
 if primary_position == 'ATT' or primary_position == 'Wing':
     our_fig = attacker_function(this_season, age_groups, player_name, primary_position)
 elif primary_position == 'CM' or primary_position == 'DM':
