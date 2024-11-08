@@ -549,11 +549,13 @@ this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
 # Function to apply color_change across the DataFrame
 def apply_color_change(df):
+    st.write(df)
     current_year = df.loc[(player_name, '2024')]  # Access data for '2024'
     previous_year = df.loc[(player_name, '2023')]  # Access data for '2023'
 
     # Calculate the percentage change between 2023 and 2024
     pct_change = ((current_year - previous_year) / previous_year) * 100
+    st.write(pct_change)
 
     # Create a list of styles based on the percentage change
     styles = []
