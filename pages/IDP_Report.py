@@ -672,7 +672,7 @@ elif primary_position == 'DM':
     playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-        passing = passing.style.apply(lambda x: apply_color_change(df), axis=None).format("{:.2f}")
+        passing = passing.style.apply(lambda x: apply_color_change(passing), axis=None).format("{:.2f}")
         st.dataframe(passing)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
