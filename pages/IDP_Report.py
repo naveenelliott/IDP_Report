@@ -547,32 +547,25 @@ this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
 this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
 this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
-def apply_color_change(df):
-    # Initialize an empty list to store style changes
-    styles = []
-    
-    # Loop through each row of the DataFrame
-    for _, row in df.iterrows():
-        player_name = row['Player Name']
-        year_2023 = row[row['Year'] == 2023]
-        year_2024 = row[row['Year'] == 2024]
+def apply_color_change(row):
+    # Check if the row has valid data for both years
+    if '2023' in row and '2024' in row:  # Adjust this based on your actual column names
+        year_2023_value = row['2023']  # Adjust this column name based on your dataset
+        year_2024_value = row['2024']  # Adjust this column name based on your dataset
         
-        # If data for both years is available, calculate the percentage change
-        if not year_2023.empty and not year_2024.empty:
-            pct_change = ((year_2024 - year_2023) / year_2023) * 100
-
-            # Apply style based on pct_change (Green for +5%, Red for -5%)
-            row_styles = [
-                'background-color: green' if pct >= 5 else 'background-color: red' if pct <= -5 else ''
-                for pct in pct_change
-            ]
+        # Calculate the percentage change
+        if year_2023_value != 0:  # Avoid division by zero
+            pct_change = ((year_2024_value - year_2023_value) / year_2023_value) * 100
+            # Apply color styling based on pct_change
+            if pct_change >= 5:
+                return ['background-color: green']
+            elif pct_change <= -5:
+                return ['background-color: red']
+            else:
+                return ['']  # No style for neutral change
         else:
-            row_styles = [''] * len(row)
-        
-        # Append the style changes to the styles list
-        styles.append(row_styles)
-    
-    return styles
+            return ['']  # If year_2023_value is 0, no change styling
+    return ['']  # Default case for invalid data
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
