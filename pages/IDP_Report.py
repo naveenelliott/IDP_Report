@@ -553,6 +553,7 @@ def apply_color_change(val, df):
     st.write(val.name)
     if val.name not in ['Player Name', 'Year']:
         pct_change = ((df.loc[val.name, '2024'] - df.loc[val.name, '2023']) / df.loc[val.name, '2023']) * 100
+        st.write(pct_change)
         if pct_change >= 5:
             return 'background-color: green'
         elif pct_change <= -5:
