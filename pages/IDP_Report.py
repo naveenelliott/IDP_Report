@@ -182,13 +182,12 @@ elif primary_position == 'LB' or primary_position == 'RB' or primary_position ==
     primary_position = 'FB'
 elif primary_position == 'LCB' or primary_position == 'RCB':
     primary_position = 'CB'
+elif primary_position == 'AM':
+    primary_position = 'CM'
 
 player_metrics = getPlayerStatistics(player_full_name=player_name, position=primary_position)
 
 temp_player_metrics = player_metrics.drop(columns={'mins played'})
-st.write(temp_player_metrics)
-st.write(team_name)
-st.write(primary_position)
 temp_player_metrics = getStandardizedValues(temp_player_metrics, team_name, primary_position)
 
 temp_player_metrics['mins played'] = player_metrics['mins played']
