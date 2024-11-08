@@ -547,36 +547,15 @@ this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
 this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
 this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
-def apply_color_change(data):
-    def colorize(row):
-        styles = [''] * len(row)  # Initialize an empty list for styles, one per column
-        
-        # Iterate through all columns except 'Player Name' and 'Year'
-        for column in data.columns:
-            if column not in ['Player Name', 'Year']:
-                # Get the value for the current player in 2024 and 2023 for the column
-                value_2024 = row[column][row['Year'] == 2024].values
-                st.write(value_2024)
-                value_2023 = row[column][row['Year'] == 2023].values
-                st.write(value_2023)
-                
-                # Ensure values exist for both years
-                if len(value_2024) > 0 and len(value_2023) > 0:
-                    # Calculate the percentage change
-                    pct_change = ((value_2024[0] - value_2023[0]) / value_2023[0]) * 100
-                    
-                    # Apply color based on percentage change
-                    if pct_change >= 5:
-                        styles[data.columns.get_loc(column)] = 'background-color: green'
-                    elif pct_change <= -5:
-                        styles[data.columns.get_loc(column)] = 'background-color: red'
-                    else:
-                        styles[data.columns.get_loc(column)] = ''  # No color for neutral change
-                else:
-                    styles[data.columns.get_loc(column)] = ''  # No color if no value for comparison
-        return styles
-
-    return data.apply(colorize, axis=1)
+def apply_color_change(val, row):
+    # Calculate percentage change (2024 vs 2023) for each row
+    pct_change = ((row['0'] - row['1']) / row['1']) * 100
+    if pct_change >= 5:
+        return 'background-color: green'
+    elif pct_change <= -5:
+        return 'background-color: red'
+    else:
+        return ''  # No color for neutral change
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
@@ -689,7 +668,6 @@ elif primary_position == 'CM':
         dribbling = pd.concat([dribbling, ls_dribbling])
         defending = pd.concat([defending, ls_defending])
         playmaking = pd.concat([playmaking, ls_playmaking])
-    st.write(passing)
     passing = passing.T
     dribbling = dribbling.T
     defending = defending.T
@@ -697,7 +675,7 @@ elif primary_position == 'CM':
     inn_columns = st.columns(4)
     with inn_columns[0]:
         st.write(passing)
-        passing = passing.style.apply(apply_color_change, axis=1)
+        passing = passing.style.apply(lambda row: apply_color_change(row['0'], row), axis=1, subset=['0'])
         st.dataframe(passing)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
