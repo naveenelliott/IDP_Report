@@ -665,11 +665,11 @@ elif primary_position == 'CM':
         last_season_player = creatingPercentilesCM(player_season_later)
         overall_player = pd.concat([overall_player, last_season_player], ignore_index=True)
         passing = pd.concat([passing, ls_passing], ignore_index=True)
-        passing.columns = ['2024', '2023']
         dribbling = pd.concat([dribbling, ls_dribbling])
         defending = pd.concat([defending, ls_defending])
         playmaking = pd.concat([playmaking, ls_playmaking])
     passing = passing.T
+    passing.columns = ['2024', '2023']
     dribbling = dribbling.T
     defending = defending.T
     playmaking = playmaking.T
