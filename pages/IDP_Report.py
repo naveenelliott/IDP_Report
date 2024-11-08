@@ -549,20 +549,14 @@ this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
 # Function to apply color_change across the DataFrame
 def apply_color_change(df):
-    st.write(df)
     current_year = df.loc[(player_name, '2024')]  # Access data for '2024'
     previous_year = df.loc[(player_name, '2023')]  # Access data for '2023'
 
     # Calculate the percentage change between 2023 and 2024
     pct_change = ((current_year - previous_year) / previous_year) * 100
-    st.write(pct_change)
 
     # Create a list of styles based on the percentage change
-    styles = []
-    if df.name[1] == '2024':
-        return ['background-color: green' if val >= 5 else 'background-color: red' if val <= -5 else '' for val in pct_change]
-    else:
-        return [''] * len(row)
+    return ['background-color: green' if val >= 5 else 'background-color: red' if val <= -5 else '' for val in pct_change]
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
@@ -682,6 +676,7 @@ elif primary_position == 'CM':
     inn_columns = st.columns(4)
     with inn_columns[0]:
         passing = passing.style.apply(apply_color_change, axis=1).format("{:.2f}")
+        st.write(passing)
         st.dataframe(passing)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
