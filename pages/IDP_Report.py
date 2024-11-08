@@ -680,11 +680,9 @@ elif primary_position == 'CM':
     inn_columns = st.columns(4)
     with inn_columns[0]:
         passing = passing.style.format("{:.2f}")
-        st.write(passing)
         style_passing = passing.apply(apply_color_change, df=passing, axis=1)
-        st.write(style_passing)
         st.write(passing)
-        st.dataframe(passing)
+        st.dataframe(style_passing)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
     with inn_columns[2]:
