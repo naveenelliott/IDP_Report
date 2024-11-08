@@ -559,16 +559,10 @@ def apply_color_change(df):
 
     # Create a list of styles based on the percentage change
     styles = []
-    for value in pct_change:
-        if value >= 5:
-            styles.append('background-color: green')
-        elif value <= -5:
-            styles.append('background-color: red')
-        else:
-            styles.append('')
-    
-    # Apply styles only to the '2024' row
-    return styles if row.name[1] == '2024' else [''] * len(row)
+    if row.name[1] == '2024':
+        return ['background-color: green' if val >= 5 else 'background-color: red' if val <= -5 else '' for val in pct_change]
+    else:
+        return [''] * len(row)
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
