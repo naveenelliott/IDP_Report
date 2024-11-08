@@ -685,7 +685,7 @@ elif primary_position == 'CM':
     playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-        passing = passing.style.apply(apply_color_change, axis=None).format("{:.2f}")
+        passing = passing.style.apply(apply_color_change, axis=1).format("{:.2f}")
         st.dataframe(passing)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
