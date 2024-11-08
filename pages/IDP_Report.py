@@ -132,6 +132,14 @@ with col1:
             st.markdown(
                 """
                 <div style='display: block; text-align: left;'>
+                    <span style='font-family: Arial; font-size: 10pt; color: black;'>Team Name: {team_name}</span>
+                </div>
+                """.format(team_name=team_name),
+                unsafe_allow_html=True
+            )
+            st.markdown(
+                """
+                <div style='display: block; text-align: left;'>
                     <span style='font-family: Arial; font-size: 10pt; color: black;'>Height: {height} cm</span>
                 </div>
                 """.format(height=height),
