@@ -549,29 +549,21 @@ this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
 # Function to apply color_change across the DataFrame
 def apply_color_change(df):
-    # Create an empty DataFrame to store the style information
-    styled_df = pd.DataFrame('', index=df.index, columns=df.columns)
-    
-    # Iterate over each player
-    for player in df.index.get_level_values('Player').unique():
-        # Get the values for 2024 and 2023 for the player
-        try:
-            current_year = df.loc[(player, '2024')]
-            previous_year = df.loc[(player, '2023')]
-            # Calculate the percentage change
-            pct_change = ((current_year - previous_year) / previous_year) * 100
-            
-            # Apply color based on the threshold
-            for col in df.columns:
-                if pct_change[col] >= 5:
-                    styled_df.loc[(player, '2024'), col] = 'background-color: green'
-                elif pct_change[col] <= -5:
-                    styled_df.loc[(player, '2024'), col] = 'background-color: red'
-        except KeyError:
-            # Handle case where a player does not have both '2024' and '2023' rows
-            continue
-    
-    return styled_df
+    # Calculate the percentage change between 2023 and 2024
+    current_year = df.loc['2024']
+    previous_year = df.loc['2023']
+    pct_change = ((current_year - previous_year) / previous_year) * 100
+
+    # Create a list of styles based on the percentage change
+    styles = []
+    for value in pct_change:
+        if value >= 5:
+            styles.append('background-color: green')
+        elif value <= -5:
+            styles.append('background-color: red')
+        else:
+            styles.append('')
+    return styles if row.name == '2024' else [''] * len(row)
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
