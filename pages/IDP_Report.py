@@ -549,6 +549,8 @@ this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
 def apply_color_change(val, df):
     # Exclude 'Player Name' and 'Year' from color application
+    st.write(val)
+    st.write(val.name)
     if val.name not in ['Player Name', 'Year']:
         pct_change = ((df.loc[val.name, '2024'] - df.loc[val.name, '2023']) / df.loc[val.name, '2023']) * 100
         if pct_change >= 5:
