@@ -559,7 +559,7 @@ def apply_color_change(df):
 
     # Create a list of styles based on the percentage change
     styles = []
-    if row.name[1] == '2024':
+    if df.name[1] == '2024':
         return ['background-color: green' if val >= 5 else 'background-color: red' if val <= -5 else '' for val in pct_change]
     else:
         return [''] * len(row)
