@@ -551,7 +551,9 @@ def apply_color_change(row):
     # Check if the row has valid data for both years
     if '2023' in row and '2024' in row:  # Adjust this based on your actual column names
         year_2023_value = row['2023']  # Adjust this column name based on your dataset
+        st.write(year_2023_value)
         year_2024_value = row['2024']  # Adjust this column name based on your dataset
+        st.write(year_2024_value)
         
         # Calculate the percentage change
         if year_2023_value != 0:  # Avoid division by zero
