@@ -680,7 +680,7 @@ elif primary_position == 'CM':
     inn_columns = st.columns(4)
     with inn_columns[0]:
         passing = passing.style.format("{:.2f}")
-        style_passing = passing.style.apply(apply_color_change, df=passing, axis=1)
+        style_passing = passing.apply(apply_color_change, df=passing, axis=1)
         st.write(style_passing)
         st.write(passing)
         st.dataframe(passing)
