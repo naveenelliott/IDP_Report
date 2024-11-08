@@ -555,8 +555,12 @@ def apply_color_change(df):
     # Calculate the percentage change between 2023 and 2024
     pct_change = ((current_year - previous_year) / previous_year) * 100
 
-    # Create a list of styles based on the percentage change
-    return ['background-color: green' if val >= 5 else 'background-color: red' if val <= -5 else '' for val in pct_change]
+    if pct_change >= 5:
+        return ['background-color: green']  # Increase greater than or equal to 5%
+    elif pct_change <= -5:
+        return ['background-color: red']  # Decrease less than or equal to -5%
+    else:
+        return ['']  # No significant change
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
