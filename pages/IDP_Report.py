@@ -182,6 +182,8 @@ elif primary_position == 'LB' or primary_position == 'RB' or primary_position ==
     primary_position = 'FB'
 elif primary_position == 'LCB' or primary_position == 'RCB':
     primary_position = 'CB'
+elif primary_position == 'AM':
+    primary_position = 'CM'
 
 player_metrics = getPlayerStatistics(player_full_name=player_name, position=primary_position)
 
@@ -688,7 +690,7 @@ elif primary_position == 'FB':
 
 #st.write(overall_raw_player)
 
-
+st.write(primary_position)
 if primary_position == 'ATT' or primary_position == 'Wing':
     our_fig = attacker_function(this_season, age_groups, player_name, primary_position)
 elif primary_position == 'CM' or primary_position == 'DM':

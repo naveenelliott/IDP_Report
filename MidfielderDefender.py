@@ -21,6 +21,7 @@ def midfielder_function(dataframe, age_group, pname, position):
     elif position == 'FB':
         positions.append('CB')
 
+    dataframe.loc[dataframe['Position Tag'] == 'AM', 'Position Tag'] = 'CM' 
     dataframe = dataframe.loc[dataframe['Position Tag'].isin(positions)]
     
     if age_group == 'U13':

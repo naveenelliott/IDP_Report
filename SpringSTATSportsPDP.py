@@ -9,6 +9,7 @@ def gettingPlayerDataPlot(player_df, other_player_df):
 
     player_name = player_df['Player Full Name'].iloc[0]
     age_player_df = player_df['Team Category'].iloc[0]
+    player_df.loc[player_df['Position Tag'] == 'AM', 'Position Tag'] = 'CM' 
     position = player_df['Position Tag'].iloc[0]
     positions.append(position)
 
