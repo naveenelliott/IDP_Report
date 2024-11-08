@@ -549,7 +549,6 @@ this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
 # Function to apply color_change across the DataFrame
 def apply_color_change(df):
-    player_name = row.name[0]  # Access player name from the multi-index
     current_year = df.loc[(player_name, '2024')]  # Access data for '2024'
     previous_year = df.loc[(player_name, '2023')]  # Access data for '2023'
 
