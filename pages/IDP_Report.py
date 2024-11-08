@@ -680,6 +680,7 @@ elif primary_position == 'CM':
         dribbling = pd.concat([dribbling, ls_dribbling])
         defending = pd.concat([defending, ls_defending])
         playmaking = pd.concat([playmaking, ls_playmaking])
+    st.write(passing)
     passing = passing.T
     dribbling = dribbling.T
     defending = defending.T
