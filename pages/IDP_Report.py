@@ -699,17 +699,19 @@ elif primary_position == 'CM':
         defending = pd.concat([defending, ls_defending])
         playmaking = pd.concat([playmaking, ls_playmaking])
     passing = passing.T
-    passing.columns = ['2024', '2023']
     dribbling = dribbling.T
     defending = defending.T
     playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
+        new_columns = [f"{name} {year}" for name, year in zip(passing.loc['Player Name'], passing.loc['Year'])]
+        passing = passing.drop(['Player Name', 'Year']).reset_index(drop=True)
+        passing.columns = new_columns
         passing_styled = passing.style.apply(
             lambda col: [
-                apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
+                apply_color_change(value, passing.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
             ],
-            subset=['2024']
+            subset=[f'{player_name} 2024']
         )
         new_columns = [f"{name} {year}" for name, year in zip(passing.loc['Player Name'], passing.loc['Year'])]
         passing_styled = passing.drop(['Player Name', 'Year']).reset_index(drop=True)
