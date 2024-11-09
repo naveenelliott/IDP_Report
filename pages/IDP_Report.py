@@ -93,6 +93,14 @@ available_minutes = mins_df.groupby(['Match Date', 'Opposition', 'Team Name'])['
 player_mins = mins_df[mins_df['Player Full Name'] == player_name]
 player_mins = player_mins['mins played'].sum()
 
+goals_assists = getting_PSD_min_data()
+goals_assists = goals_assists.loc[goals_assists['Team Name'] == team_name & goals_assists['Player Full Name'] == goals_assists]
+goals = goals_assists['Goal']
+assists = goals_assists['Assist']
+st.write(goals)
+st.write(assists)
+
+
 
 # Calculate the percentage of available minutes played
 percentage_played = (player_mins / available_minutes) * 100
