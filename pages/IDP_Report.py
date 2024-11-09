@@ -97,8 +97,6 @@ goals_assists = getting_PSD_min_data()
 goals_assists = goals_assists.loc[(goals_assists['Team Name'] == team_name) & (goals_assists['Player Full Name'] == player_name)]
 goals = goals_assists['Goal'].sum()
 assists = goals_assists['Assist'].sum()
-st.write(goals)
-st.write(assists)
 
 
 
@@ -178,6 +176,22 @@ with col1:
                     <span style='font-family: Arial; font-size: 10pt; color: black;'>Focus for Spring: {spring_focus}</span>
                 </div>
                 """.format(spring_focus=spring_focus),
+                unsafe_allow_html=True
+            )
+            st.markdown(
+                """
+                <div style='display: block; text-align: left;'>
+                    <span style='font-family: Arial; font-size: 10pt; color: black;'>Goals: {goals}</span>
+                </div>
+                """.format(goals=goals),
+                unsafe_allow_html=True
+            )
+            st.markdown(
+                """
+                <div style='display: block; text-align: left;'>
+                    <span style='font-family: Arial; font-size: 10pt; color: black;'>Assists: {assists}</span>
+                </div>
+                """.format(assists=assists),
                 unsafe_allow_html=True
             )
 
