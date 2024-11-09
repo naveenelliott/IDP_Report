@@ -705,20 +705,15 @@ elif primary_position == 'CM':
     playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-        st.write(passing)
-        for index, row in passing.iterrows():
-            if index not in ['Player Name', 'Year']:
-                # Calculate the % change only for non-'Player Name' and non-'Year' rows
-                passing.loc[index, '% Change'] = ((row['2024'] - row['2023']) / row['2023']) * 100
-            else:
-                passing.loc[index, '% Change'] = 0
-        # Apply conditional formatting to the '% Change' column
         passing_styled = passing.style.apply(
             lambda col: [
                 apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
             ],
             subset=['2024']
         )
+        new_columns = passing_styled.loc[['Player Name', 'Year']].values
+        passing_styled = passing_styled.drop(['Player Name', 'Year']).reset_index(drop=True)
+        passing_styled.columns = new_columns
         st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
