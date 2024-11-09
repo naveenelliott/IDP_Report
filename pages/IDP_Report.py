@@ -698,9 +698,9 @@ elif primary_position == 'CM':
     with inn_columns[0]:
         st.write(passing)
         for index, row in passing.iterrows():
-        if index not in ['Player Name', 'Year']:
-            # Calculate the % change only for non-'Player Name' and non-'Year' rows
-            passing.loc[index, '% Change'] = ((row['2024'] - row['2023']) / row['2023']                          
+            if index not in ['Player Name', 'Year']:
+                # Calculate the % change only for non-'Player Name' and non-'Year' rows
+                passing.loc[index, '% Change'] = ((row['2024'] - row['2023']) / row['2023']                          
         # Apply conditional formatting to the '% Change' column
         passing_styled = passing.style.applymap(lambda x: apply_color_change(x) if x.name not in ['Player Name', 'Year'] else '', subset=passing.columns)
         st.dataframe(passing_styled, use_container_width=True)
