@@ -95,8 +95,8 @@ player_mins = player_mins['mins played'].sum()
 
 goals_assists = getting_PSD_min_data()
 goals_assists = goals_assists.loc[(goals_assists['Team Name'] == team_name) & (goals_assists['Player Full Name'] == player_name)]
-goals = goals_assists['Goal']
-assists = goals_assists['Assist']
+goals = goals_assists['Goal'].sum()
+assists = goals_assists['Assist'].sum()
 st.write(goals)
 st.write(assists)
 
