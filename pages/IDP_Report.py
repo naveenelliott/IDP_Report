@@ -570,17 +570,13 @@ this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
 this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
 def apply_color_change(val, df):
-    # Exclude 'Player Name' and 'Year' from color application
-    st.write(val)
-    st.write(val.name)
-    if val.name not in ['Player Name', 'Year']:
+    if val.name not in ['Player Name', 'Year']:  # Exclude specific rows if needed
         pct_change = ((df.loc[val.name, '2024'] - df.loc[val.name, '2023']) / df.loc[val.name, '2023']) * 100
-        st.write(pct_change)
         if pct_change >= 5:
             return 'background-color: green'
         elif pct_change <= -5:
             return 'background-color: red'
-    return ''  # No color for excluded rows
+    return ''  # No color for other cells
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
