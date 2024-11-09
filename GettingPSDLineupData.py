@@ -87,8 +87,8 @@ def getting_PSD_min_data():
             df = df.dropna(axis=1, how='all')
             df = df.iloc[1:]
             # selecting match date information, because that's what actions have
-            details = df.loc[:, ['Player Full Name', 'Team Name', 'mins played', 'Match Date', 'Opposition', 'Starts']]
-            details[['mins played', 'Starts']] = details[['mins played', 'Starts']].astype(float)
+            details = df.loc[:, ['Player Full Name', 'Team Name', 'mins played', 'Match Date', 'Opposition', 'Starts', 'Goal', 'Assist']]
+            details[['mins played', 'Starts']] = details[['mins played', 'Starts', 'Goal', 'Assist']].astype(float)
             data_frames.append(details)
         
         # Optionally, combine all DataFrames into a single DataFrame
