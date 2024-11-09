@@ -697,9 +697,12 @@ elif primary_position == 'CM':
     inn_columns = st.columns(4)
     with inn_columns[0]:
         st.write(passing)
-        passing['% Change'] = ((passing['2024'] - passing['2023']) / passing['2023']) * 100
+        for index, row in passing.iterrows():
+        if index not in ['Player Name', 'Year']:
+            # Calculate the % change only for non-'Player Name' and non-'Year' rows
+            passing.loc[index, '% Change'] = ((row['2024'] - row['2023']) / row['2023']                          
         # Apply conditional formatting to the '% Change' column
-        passing_styled = passing.style.applymap(apply_color_change, subset=['% Change'])
+        passing_styled = passing.style.applymap(lambda x: apply_color_change(x) if x.name not in ['Player Name', 'Year'] else '', subset=passing.columns)
         st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
