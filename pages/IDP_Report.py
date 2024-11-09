@@ -569,14 +569,23 @@ this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
 this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
 this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
-def apply_color_change(value):
+def apply_color_change(value, base_value, index):
     try:
-        if value >= 5:
-            return 'background-color: green'
-        elif value <= -5:
-            return 'background-color: red'
+        # Skip formatting for 'Player Name' and 'Year' rows
+        if index in ['Player Name', 'Year']:
+            return ''
+        
+        # Calculate the percent change from '2023' to '2024'
+        percent_change = ((value - base_value) / base_value) * 100 if base_value != 0 else None
+        
+        # Apply conditional coloring based on percent change
+        if percent_change is not None:
+            if percent_change >= 5:
+                return 'background-color: green'
+            elif percent_change <= -5:
+                return 'background-color: red'
     except:
-        return ''  # Return empty if value cannot be formatted
+        return ''  # No styling if value is not numeric or calculation fails
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
@@ -704,7 +713,12 @@ elif primary_position == 'CM':
             else:
                 passing.loc[index, '% Change'] = 0
         # Apply conditional formatting to the '% Change' column
-        passing_styled = passing.style.applymap(apply_color_change, subset=['% Change'])
+        passing_styled = passing.style.apply(
+            lambda col: [
+                apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
+            ],
+            subset=['2024']
+        )
         st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
