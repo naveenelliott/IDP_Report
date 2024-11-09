@@ -713,9 +713,6 @@ elif primary_position == 'CM':
             ],
             subset=[f'{player_name} 2024']
         )
-        new_columns = [f"{name} {year}" for name, year in zip(passing.loc['Player Name'], passing.loc['Year'])]
-        passing_styled = passing.drop(['Player Name', 'Year']).reset_index(drop=True)
-        passing_styled.columns = new_columns
         st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
