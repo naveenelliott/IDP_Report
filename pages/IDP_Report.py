@@ -572,6 +572,7 @@ this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 def apply_color_change(val, df):
     if val.name not in ['Player Name', 'Year']:  # Exclude specific rows if needed
         pct_change = ((df.loc[val.name, '2024'] - df.loc[val.name, '2023']) / df.loc[val.name, '2023']) * 100
+        st.write(pct_change)
         if pct_change >= 5:
             return 'background-color: green'
         elif pct_change <= -5:
@@ -697,8 +698,8 @@ elif primary_position == 'CM':
     inn_columns = st.columns(4)
     with inn_columns[0]:
         st.write(passing)
-        passing = passing.style.apply(apply_color_change, df=passing, axis=1)
-        st.write(passing)
+        passing_styled = passing.style.apply(apply_color_change, df=passing, axis=1)
+        st.write(passing_styled)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
     with inn_columns[2]:
