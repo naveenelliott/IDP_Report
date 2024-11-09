@@ -569,15 +569,14 @@ this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
 this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
 this_season.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
 
-def apply_color_change(val, df):
-    if val.name not in ['Player Name', 'Year']:  # Exclude specific rows if needed
-        pct_change = ((df.loc[val.name, '2024'] - df.loc[val.name, '2023']) / df.loc[val.name, '2023']) * 100
-        st.write(pct_change)
-        if pct_change >= 5:
+def apply_color_change(value):
+    try:
+        if value >= 5:
             return 'background-color: green'
-        elif pct_change <= -5:
+        elif value <= -5:
             return 'background-color: red'
-    return ''  # No color for other cells
+    except:
+        return ''  # Return empty if value cannot be formatted
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
@@ -698,8 +697,10 @@ elif primary_position == 'CM':
     inn_columns = st.columns(4)
     with inn_columns[0]:
         st.write(passing)
-        passing_styled = passing.style.apply(apply_color_change, df=passing, axis=1)
-        st.write(passing_styled)
+        passing['% Change'] = ((passing['2024'] - passing['2023']) / passing['2023']) * 100
+        # Apply conditional formatting to the '% Change' column
+        passing_styled = passing.style.applymap(apply_color_change, subset=['% Change'])
+        st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
         st.table(dribbling.style.format("{:.2f}"))
     with inn_columns[2]:
