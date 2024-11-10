@@ -604,9 +604,27 @@ if primary_position == 'ATT':
     shooting = shooting.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-        st.table(passing.style.format("{:.2f}"))
+        new_columns = [f"{name} {year}" for name, year in zip(passing.loc['Player Name'], passing.loc['Year'])]
+        passing = passing.drop(['Player Name', 'Year']).reset_index()
+        passing.columns = ['Metric'] + new_columns
+        passing_styled = passing.style.apply(
+            lambda col: [
+                apply_color_change(value, passing.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+            ],
+            subset=[f'{player_name} 2024']
+        ).format(precision=2)
+        st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
-        st.table(dribbling.style.format("{:.2f}"))
+        new_columns = [f"{name} {year}" for name, year in zip(dribbling.loc['Player Name'], dribbling.loc['Year'])]
+        dribbling = dribbling.drop(['Player Name', 'Year']).reset_index()
+        dribbling.columns = ['Metric'] + new_columns
+        dribbling_styled = dribbling.style.apply(
+            lambda col: [
+                apply_color_change(value, dribbling.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+            ],
+            subset=[f'{player_name} 2024']
+        ).format(precision=2)
+        st.dataframe(dribbling_styled, use_container_width=True)
     with inn_columns[2]:
         st.table(defending.style.format("{:.2f}"))
     with inn_columns[3]:
