@@ -705,8 +705,7 @@ elif primary_position == 'CM':
     inn_columns = st.columns(4)
     with inn_columns[0]:
         new_columns = [f"{name} {year}" for name, year in zip(passing.loc['Player Name'], passing.loc['Year'])]
-        passing = passing.drop(['Player Name', 'Year']).reset_index(drop=True)
-        st.write(passing)
+        passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
         passing_styled = passing.style.apply(
             lambda col: [
