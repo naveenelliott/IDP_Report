@@ -113,7 +113,6 @@ def creatingRawCB(merged_df):
     def calculate_percentile(value):
         return norm.cdf(value) * 100
 
-        # Function to calculate z-score for each element in a column
     def calculate_zscore(column, mean, std):
         return (column - mean) / std
 
@@ -124,45 +123,38 @@ def creatingRawCB(merged_df):
         'Shot on Target', 'Forward', 'Unsucc Forward', 'Line Break',
         'Loss of Poss', 'Success', 'Unsuccess']
 
-    merged_df['minutes per 90'] = merged_df['mins played']/90
+    merged_df['minutes per 90'] = merged_df['mins played'] / 90
 
     for column in per90:
         merged_df[column] = merged_df[column] / merged_df['minutes per 90']
         
     merged_df = merged_df.drop(columns=['minutes per 90'])
     merged_df.fillna(0, inplace=True)
-
     merged_df = merged_df.drop_duplicates()
     raw_df = merged_df[raw_columns]
 
-    passing = merged_df[['Forward', 'Unsucc Forward', 'Success', 'Unsuccess', 'Pass Completion ']]
+    # Rename 'Player Full Name' to 'Player Name'
+    merged_df.rename(columns={'Player Full Name': 'Player Name'}, inplace=True)
+
+    # Passing DataFrame
+    passing = merged_df[['Player Name', 'Year', 'Forward', 'Unsucc Forward', 'Success', 'Unsuccess', 'Pass Completion ']]
     passing['Forward Total'] = passing['Forward'] + passing['Unsucc Forward']
     passing['Forward Completion'] = (passing['Forward'] / passing['Forward Total']) * 100
     passing['Total'] = passing['Success'] + passing['Unsuccess']
     passing.fillna(0, inplace=True)
-    passing = passing.loc[:,['Forward Total', 'Forward Completion', 'Total', 'Pass Completion ']]
-    passing['Player Name'] = merged_df['Player Full Name']
-    passing['Year'] = merged_df['Year']
-    passing.set_index(['Player Name', 'Year'], inplace=True)
+    passing = passing[['Player Name', 'Year', 'Forward Total', 'Forward Completion', 'Total', 'Pass Completion ']]
 
-    defending = merged_df[['Stand. Tackle', 'Unsucc Stand. Tackle', 'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Progr Regain ', 
-                            'Stand. Tackle Success ']]
+    # Defending DataFrame
+    defending = merged_df[['Player Name', 'Year', 'Stand. Tackle', 'Unsucc Stand. Tackle', 'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Progr Regain ', 'Stand. Tackle Success ']]
     defending['Stand. Tackle Total'] = defending['Stand. Tackle'] + defending['Unsucc Stand. Tackle']
     defending['Rec Total'] = defending['Progr Rec'] + defending['Unprogr Rec']
     defending['Inter Total'] = defending['Progr Inter'] + defending['Unprogr Inter']
     defending.fillna(0, inplace=True)
-    defending = defending.loc[:, ['Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 
-                                'Stand. Tackle Success ']]
-    defending['Player Name'] = merged_df['Player Full Name']
-    defending['Year'] = merged_df['Year']
-    defending.set_index(['Player Name', 'Year'], inplace=True)
+    defending = defending[['Player Name', 'Year', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ']]
 
-    ball_progression = merged_df[['Line Break', 'Dribble', 'Att 1v1',
-                            'Loss of Poss']]
+    # Ball Progression DataFrame
+    ball_progression = merged_df[['Player Name', 'Year', 'Line Break', 'Dribble', 'Att 1v1', 'Loss of Poss']]
     ball_progression.fillna(0, inplace=True)
-    ball_progression['Player Name'] = merged_df['Player Full Name']
-    ball_progression['Year'] = merged_df['Year']
-    ball_progression.set_index(['Player Name', 'Year'], inplace=True)
-
 
     return passing, ball_progression, defending
+
