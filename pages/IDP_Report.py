@@ -712,7 +712,7 @@ elif primary_position == 'CM':
                 apply_color_change(value, passing.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
             ],
             subset=[f'{player_name} 2024']
-        ).format(precision=2)
+        )\
         st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
         new_columns = [f"{name} {year}" for name, year in zip(dribbling.loc['Player Name'], dribbling.loc['Year'])]
