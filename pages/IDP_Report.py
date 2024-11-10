@@ -724,7 +724,7 @@ elif primary_position == 'CM':
             ],
             subset=[f'{player_name} 2024']
         )
-        st.table(dribbling.style.format("{:.2f}"))
+        st.dataframe(dribbling_styled, use_container_width=True)
     with inn_columns[2]:
         st.table(defending.style.format("{:.2f}"))
     with inn_columns[3]:
