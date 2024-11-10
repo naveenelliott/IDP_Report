@@ -715,6 +715,15 @@ elif primary_position == 'CM':
         )
         st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
+        new_columns = [f"{name} {year}" for name, year in zip(dribbling.loc['Player Name'], dribbling.loc['Year'])]
+        dribbling = dribbling.drop(['Player Name', 'Year']).reset_index(drop=True)
+        dribbling.columns = new_columns
+        dribbling_styled = dribbling.style.apply(
+            lambda col: [
+                apply_color_change(value, dribbling.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+            ],
+            subset=[f'{player_name} 2024']
+        )
         st.table(dribbling.style.format("{:.2f}"))
     with inn_columns[2]:
         st.table(defending.style.format("{:.2f}"))
