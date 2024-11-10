@@ -723,7 +723,7 @@ elif primary_position == 'CM':
                 apply_color_change(value, dribbling.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
             ],
             subset=[f'{player_name} 2024']
-        )
+        ).format(precision=2)
         st.dataframe(dribbling_styled, use_container_width=True)
     with inn_columns[2]:
         new_columns = [f"{name} {year}" for name, year in zip(defending.loc['Player Name'], defending.loc['Year'])]
@@ -734,7 +734,7 @@ elif primary_position == 'CM':
                 apply_color_change(value, defending.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
             ],
             subset=[f'{player_name} 2024']
-        )
+        ).format(precision=2)
         st.dataframe(defending_styled, use_container_width=True)
     with inn_columns[3]:
         new_columns = [f"{name} {year}" for name, year in zip(playmaking.loc['Player Name'], playmaking.loc['Year'])]
@@ -745,7 +745,7 @@ elif primary_position == 'CM':
                 apply_color_change(value, playmaking.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
             ],
             subset=[f'{player_name} 2024']
-        )
+        ).format(precision=2)
         st.dataframe(playmaking_styled, use_container_width=True)
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
