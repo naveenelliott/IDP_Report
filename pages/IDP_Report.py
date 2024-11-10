@@ -581,9 +581,9 @@ def apply_color_change(value, base_value, index):
         # Apply conditional coloring based on percent change
         if percent_change is not None:
             if percent_change >= 5:
-                return 'background-color: green'
+                return 'background-color: #b3ffb3'
             elif percent_change <= -5:
-                return 'background-color: red'
+                return 'background-color: #ffcccc'
     except:
         return ''  # No styling if value is not numeric or calculation fails
 
