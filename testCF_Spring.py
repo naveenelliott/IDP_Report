@@ -129,10 +129,8 @@ def creatingRawAtt(merged_df):
     def calculate_percentile(value):
         return norm.cdf(value) * 100
 
-        # Function to calculate z-score for each element in a column
     def calculate_zscore(column, mean, std):
         return (column - mean) / std
-
 
     per90 = ['Dribble',
         'Stand. Tackle', 'Unsucc Stand. Tackle',
@@ -142,53 +140,42 @@ def creatingRawAtt(merged_df):
         'Forward', 'Unsucc Forward', 'Line Break',
         'Loss of Poss', 'Success', 'Unsuccess']
 
-
-    merged_df['minutes per 90'] = merged_df['mins played']/90
+    merged_df['minutes per 90'] = merged_df['mins played'] / 90
 
     for column in per90:
         merged_df[column] = merged_df[column] / merged_df['minutes per 90']
-        
+
     merged_df = merged_df.drop(columns=['minutes per 90'])
     merged_df.fillna(0, inplace=True)
-
     merged_df = merged_df.drop_duplicates()
     raw_df = merged_df[raw_columns]
 
-
-    passing = merged_df[['Forward', 'Unsucc Forward', 'Success', 'Unsuccess', 'Pass Completion ']]
+    # Passing DataFrame
+    passing = merged_df[['Player Full Name', 'Year', 'Forward', 'Unsucc Forward', 'Success', 'Unsuccess', 'Pass Completion ']]
     passing['Forward Total'] = passing['Forward'] + passing['Unsucc Forward']
     passing['Forward Completion'] = (passing['Forward'] / passing['Forward Total']) * 100
     passing['Total'] = passing['Success'] + passing['Unsuccess']
     passing.fillna(0, inplace=True)
-    passing = passing.loc[:, ['Forward Total', 'Total', 'Pass Completion ', 'Forward Completion']]
-    passing['Player Name'] = merged_df['Player Full Name']
-    passing['Year'] = merged_df['Year']
-    passing.set_index(['Player Name', 'Year'], inplace=True)
-    
+    passing = passing[['Player Full Name', 'Year', 'Forward Total', 'Total', 'Pass Completion ', 'Forward Completion']]
 
-    dribbling = merged_df[['Dribble', 'Att 1v1', 'Loss of Poss']]
+    # Dribbling DataFrame
+    dribbling = merged_df[['Player Full Name', 'Year', 'Dribble', 'Att 1v1', 'Loss of Poss']]
     dribbling.fillna(0, inplace=True)
-    dribbling['Player Name'] = merged_df['Player Full Name']
-    dribbling['Year'] = merged_df['Year']
-    dribbling.set_index(['Player Name', 'Year'], inplace=True)
 
-    defending = merged_df[['Stand. Tackle', 'Unsucc Stand. Tackle', 'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Progr Regain ', 
-                            'Stand. Tackle Success ']]
+    # Defending DataFrame
+    defending = merged_df[['Player Full Name', 'Year', 'Stand. Tackle', 'Unsucc Stand. Tackle', 'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Progr Regain ', 'Stand. Tackle Success ']]
     defending['Stand. Tackle Total'] = defending['Stand. Tackle'] + defending['Unsucc Stand. Tackle']
     defending['Rec Total'] = defending['Progr Rec'] + defending['Unprogr Rec']
     defending['Inter Total'] = defending['Progr Inter'] + defending['Unprogr Inter']
     defending.fillna(0, inplace=True)
-    defending = defending.loc[:, ['Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ']]
-    defending['Player Name'] = merged_df['Player Full Name']
-    defending['Year'] = merged_df['Year']
-    defending.set_index(['Player Name', 'Year'], inplace=True)
-    
-    shooting = merged_df[['Efforts on Goal', 'Shot on Target']]
-    shooting['Efficiency '] = (shooting['Shot on Target']/(shooting['Efforts on Goal'] + shooting['Shot on Target']))*100
+    defending = defending[['Player Full Name', 'Year', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ']]
+
+    # Shooting DataFrame
+    shooting = merged_df[['Player Full Name', 'Year', 'Efforts on Goal', 'Shot on Target']]
+    shooting['Efficiency '] = (shooting['Shot on Target'] / (shooting['Efforts on Goal'] + shooting['Shot on Target'])) * 100
     shooting.fillna(0, inplace=True)
-    shooting['Player Name'] = merged_df['Player Full Name']
-    shooting['Year'] = merged_df['Year']
-    shooting.set_index(['Player Name', 'Year'], inplace=True)
-    
+    shooting = shooting[['Player Full Name', 'Year', 'Efforts on Goal', 'Shot on Target', 'Efficiency ']]
+
     return passing, dribbling, defending, shooting
+
 
