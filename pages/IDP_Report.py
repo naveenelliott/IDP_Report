@@ -862,11 +862,38 @@ elif primary_position == 'FB':
     defending = defending.T
     inn_columns = st.columns(3)
     with inn_columns[0]:
-        st.table(passing.style.format("{:.2f}"))
+        new_columns = [f"{name} {year}" for name, year in zip(passing.loc['Player Name'], passing.loc['Year'])]
+        passing = passing.drop(['Player Name', 'Year'])
+        passing.columns = new_columns
+        passing_styled = passing.style.apply(
+            lambda col: [
+                apply_color_change(value, passing.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+            ],
+            subset=[f'{player_name} 2024']
+        ).format(precision=2)
+        st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
-        st.table(attacking.style.format("{:.2f}"))
+        new_columns = [f"{name} {year}" for name, year in zip(attacking.loc['Player Name'], attacking.loc['Year'])]
+        attacking = attacking.drop(['Player Name', 'Year'])
+        attacking.columns = new_columns
+        attacking_styled = attacking.style.apply(
+            lambda col: [
+                apply_color_change(value, attacking.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+            ],
+            subset=[f'{player_name} 2024']
+        ).format(precision=2)
+        st.dataframe(attacking_styled, use_container_width=True)
     with inn_columns[2]:
-        st.table(defending.style.format("{:.2f}"))
+        new_columns = [f"{name} {year}" for name, year in zip(defending.loc['Player Name'], defending.loc['Year'])]
+        defending = defending.drop(['Player Name', 'Year'])
+        defending.columns = new_columns
+        defending_styled = defending.style.apply(
+            lambda col: [
+                apply_color_change(value, defending.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+            ],
+            subset=[f'{player_name} 2024']
+        ).format(precision=2)
+        st.dataframe(defending_styled, use_container_width=True)
     overall_player['Position'] = 'FB'
 
 
