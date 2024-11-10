@@ -859,7 +859,7 @@ elif primary_position == 'CM':
                 subset=[f'{player_name} 2024']
             ).format(precision=2)
         else:
-            passing_styled = passing.format(precision=2)
+            passing_styled = passing.round(2)
         st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
         new_columns = [f"{name} {year}" for name, year in zip(dribbling.loc['Player Name'], dribbling.loc['Year'])]
