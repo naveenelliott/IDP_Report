@@ -851,23 +851,26 @@ elif primary_position == 'CM':
         new_columns = [f"{name} {year}" for name, year in zip(passing.loc['Player Name'], passing.loc['Year'])]
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
-        passing_styled = passing.style.apply(
-            lambda col: [
-                apply_color_change(value, passing.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
-            ],
-            subset=[f'{player_name} 2024']
-        ).format(precision=2)
+        if passing.shape[1] >= 2:
+            passing_styled = passing.style.apply(
+                lambda col: [
+                    apply_color_change(value, passing.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+                ],
+                subset=[f'{player_name} 2024']
+            ).format(precision=2)
+        else:
+            passing_styled = passing.format(precision=2)
         st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
-        new_columns = [f"{name} {year}" for name, year in zip(dribbling.loc['Player Name'], dribbling.loc['Year'])]
-        dribbling = dribbling.drop(['Player Name', 'Year'])
-        dribbling.columns = new_columns
-        dribbling_styled = dribbling.style.apply(
-            lambda col: [
-                apply_color_change(value, dribbling.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
-            ],
-            subset=[f'{player_name} 2024']
-        ).format(precision=2)
+            new_columns = [f"{name} {year}" for name, year in zip(dribbling.loc['Player Name'], dribbling.loc['Year'])]
+            dribbling = dribbling.drop(['Player Name', 'Year'])
+            dribbling.columns = new_columns
+            dribbling_styled = dribbling.style.apply(
+                lambda col: [
+                    apply_color_change(value, dribbling.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+                ],
+                subset=[f'{player_name} 2024']
+            ).format(precision=2)
         st.dataframe(dribbling_styled, use_container_width=True)
     with inn_columns[2]:
         new_columns = [f"{name} {year}" for name, year in zip(defending.loc['Player Name'], defending.loc['Year'])]
