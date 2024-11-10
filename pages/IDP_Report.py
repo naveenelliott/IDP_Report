@@ -717,7 +717,7 @@ elif primary_position == 'CM':
     with inn_columns[1]:
         new_columns = [f"{name} {year}" for name, year in zip(dribbling.loc['Player Name'], dribbling.loc['Year'])]
         dribbling = dribbling.drop(['Player Name', 'Year']).reset_index()
-        dribbling.columns = new_columns
+        dribbling.columns = ['Metric'] + new_columns
         dribbling_styled = dribbling.style.apply(
             lambda col: [
                 apply_color_change(value, dribbling.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
@@ -728,7 +728,7 @@ elif primary_position == 'CM':
     with inn_columns[2]:
         new_columns = [f"{name} {year}" for name, year in zip(defending.loc['Player Name'], defending.loc['Year'])]
         defending = defending.drop(['Player Name', 'Year']).reset_index()
-        defending.columns = new_columns
+        defending.columns = ['Metric'] + new_columns
         defending_styled = defending.style.apply(
             lambda col: [
                 apply_color_change(value, defending.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
@@ -739,7 +739,7 @@ elif primary_position == 'CM':
     with inn_columns[3]:
         new_columns = [f"{name} {year}" for name, year in zip(playmaking.loc['Player Name'], playmaking.loc['Year'])]
         playmaking = playmaking.drop(['Player Name', 'Year']).reset_index()
-        playmaking.columns = new_columns
+        playmaking.columns = ['Metric'] + new_columns
         playmaking_styled = playmaking.style.apply(
             lambda col: [
                 apply_color_change(value, playmaking.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
