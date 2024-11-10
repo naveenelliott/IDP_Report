@@ -737,7 +737,7 @@ elif primary_position == 'CM':
         )
         st.dataframe(defending_styled, use_container_width=True)
     with inn_columns[3]:
-        new_columns = [f"{name} {year}" for name, year in zip(playmaking.loc['Player Name'], defending.loc['Year'])]
+        new_columns = [f"{name} {year}" for name, year in zip(playmaking.loc['Player Name'], playmaking.loc['Year'])]
         playmaking = playmaking.drop(['Player Name', 'Year']).reset_index(drop=True)
         playmaking.columns = new_columns
         playmaking_styled = playmaking.style.apply(
