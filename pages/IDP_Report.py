@@ -737,7 +737,16 @@ elif primary_position == 'CM':
         )
         st.dataframe(defending_styled, use_container_width=True)
     with inn_columns[3]:
-        st.table(playmaking.style.format("{:.2f}"))
+        new_columns = [f"{name} {year}" for name, year in zip(playmaking.loc['Player Name'], defending.loc['Year'])]
+        playmaking = playmaking.drop(['Player Name', 'Year']).reset_index(drop=True)
+        playmaking.columns = new_columns
+        playmaking_styled = playmaking.style.apply(
+            lambda col: [
+                apply_color_change(value, playmaking.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+            ],
+            subset=[f'{player_name} 2024']
+        )
+        st.dataframe(playmaking_styled, use_container_width=True)
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
     overall_player = creatingPercentilesFB(player_season)
