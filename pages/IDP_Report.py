@@ -705,7 +705,7 @@ elif primary_position == 'CM':
     inn_columns = st.columns(4)
     with inn_columns[0]:
         new_columns = [f"{name} {year}" for name, year in zip(passing.loc['Player Name'], passing.loc['Year'])]
-        passing = passing.drop(['Player Name', 'Year'])
+        passing = passing.drop(['Player Name', 'Year']).reset_index()
         passing.columns = new_columns
         passing_styled = passing.style.apply(
             lambda col: [
@@ -716,7 +716,7 @@ elif primary_position == 'CM':
         st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
         new_columns = [f"{name} {year}" for name, year in zip(dribbling.loc['Player Name'], dribbling.loc['Year'])]
-        dribbling = dribbling.drop(['Player Name', 'Year']).reset_index(drop=True)
+        dribbling = dribbling.drop(['Player Name', 'Year']).reset_index()
         dribbling.columns = new_columns
         dribbling_styled = dribbling.style.apply(
             lambda col: [
@@ -727,7 +727,7 @@ elif primary_position == 'CM':
         st.dataframe(dribbling_styled, use_container_width=True)
     with inn_columns[2]:
         new_columns = [f"{name} {year}" for name, year in zip(defending.loc['Player Name'], defending.loc['Year'])]
-        defending = defending.drop(['Player Name', 'Year']).reset_index(drop=True)
+        defending = defending.drop(['Player Name', 'Year']).reset_index()
         defending.columns = new_columns
         defending_styled = defending.style.apply(
             lambda col: [
@@ -738,7 +738,7 @@ elif primary_position == 'CM':
         st.dataframe(defending_styled, use_container_width=True)
     with inn_columns[3]:
         new_columns = [f"{name} {year}" for name, year in zip(playmaking.loc['Player Name'], playmaking.loc['Year'])]
-        playmaking = playmaking.drop(['Player Name', 'Year']).reset_index(drop=True)
+        playmaking = playmaking.drop(['Player Name', 'Year']).reset_index()
         playmaking.columns = new_columns
         playmaking_styled = playmaking.style.apply(
             lambda col: [
