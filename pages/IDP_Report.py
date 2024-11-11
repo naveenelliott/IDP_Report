@@ -866,34 +866,46 @@ elif primary_position == 'CM':
         new_columns = [f"{name} {year}" for name, year in zip(dribbling.loc['Player Name'], dribbling.loc['Year'])]
         dribbling = dribbling.drop(['Player Name', 'Year'])
         dribbling.columns = new_columns
-        dribbling_styled = dribbling.style.apply(
-            lambda col: [
-                apply_color_change(value, dribbling.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
-            ],
-            subset=[f'{player_name} 2024']
-        ).format(precision=2)
+        if dribbling.shape[1] >= 2:
+            dribbling_styled = dribbling.style.apply(
+                lambda col: [
+                    apply_color_change(value, dribbling.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+                ],
+                subset=[f'{player_name} 2024']
+            ).format(precision=2)
+        else: 
+            dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
+            dribbling_styled = dribbling.round(2)
         st.dataframe(dribbling_styled, use_container_width=True)
     with inn_columns[2]:
         new_columns = [f"{name} {year}" for name, year in zip(defending.loc['Player Name'], defending.loc['Year'])]
         defending = defending.drop(['Player Name', 'Year'])
         defending.columns = new_columns
-        defending_styled = defending.style.apply(
-            lambda col: [
-                apply_color_change(value, defending.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
-            ],
-            subset=[f'{player_name} 2024']
-        ).format(precision=2)
+        if defending.shape[1] >= 2:
+            defending_styled = defending.style.apply(
+                lambda col: [
+                    apply_color_change(value, defending.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+                ],
+                subset=[f'{player_name} 2024']
+            ).format(precision=2)
+        else:
+            defending = defending.apply(pd.to_numeric, errors='coerce')
+            defending_styled = defending.round(2)
         st.dataframe(defending_styled, use_container_width=True)
     with inn_columns[3]:
         new_columns = [f"{name} {year}" for name, year in zip(playmaking.loc['Player Name'], playmaking.loc['Year'])]
         playmaking = playmaking.drop(['Player Name', 'Year'])
         playmaking.columns = new_columns
-        playmaking_styled = playmaking.style.apply(
-            lambda col: [
-                apply_color_change(value, playmaking.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
-            ],
-            subset=[f'{player_name} 2024']
-        ).format(precision=2)
+        if playmaking.shape[1] >= 2:
+            playmaking_styled = playmaking.style.apply(
+                lambda col: [
+                    apply_color_change(value, playmaking.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+                ],
+                subset=[f'{player_name} 2024']
+            ).format(precision=2)
+        else:
+            playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
+            playmaking_styled = playmaking.round(2)
         st.dataframe(playmaking_styled, use_container_width=True)
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
