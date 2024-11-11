@@ -859,6 +859,7 @@ elif primary_position == 'CM':
                 subset=[f'{player_name} 2024']
             ).format(precision=2)
         else:
+            passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.round(2)
         st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
