@@ -208,8 +208,15 @@ def getting_WeeklyReportRank():
         'Shot on Target', 'Pass into Oppo Box',
         'Forward', 'Unsucc Forward', 'Line Break',
         'Loss of Poss', 'Success', 'Unsuccess']
+    
+    float_columns = ['Goal', 'Dribble',
+        'Stand. Tackle', 'Unsucc Stand. Tackle', 'Tackle',
+        'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Att 1v1', 'Efforts on Goal',
+        'Shot on Target', 'Pass into Oppo Box',
+        'Forward', 'Unsucc Forward', 'Line Break',
+        'Loss of Poss', 'Success', 'Unsuccess', 'mins played', 'Pass Completion ', 'Stand. Tackle Success ', 'Progr Regain ', 'Stand. Tackle Success ']
 
-    end[per90 + ['mins played']] = end[per90 + ['mins played']].astype(float)
+    end[per90] = end[per90].astype(float)
 
 
     end['minutes per 90'] = end['mins played']/90
