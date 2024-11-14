@@ -244,6 +244,6 @@ def getting_WeeklyReportRank():
     for metric in weird_metrics_to_rank:
         end[metric] = end.groupby("Team Name")[metric].rank(ascending=True)
     
-    end = end[['Player Full Name', 'Team Name'] + float_columns]
+    end = end[['Player Full Name', 'Team Name'] + metrics_to_rank + weird_metrics_to_rank]
 
     return end
