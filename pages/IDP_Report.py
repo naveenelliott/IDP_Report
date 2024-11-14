@@ -3,7 +3,7 @@ import os
 import glob
 import streamlit as st
 from PIL import Image, ImageOps
-from GettingPSDLineupData import getting_PSD_min_data, getting_weeklyReport
+from GettingPSDLineupData import getting_PSD_min_data, getting_weeklyReport, getting_weeklyReportRank
 import matplotlib.pyplot as plt
 from GettingPercentOfMins import plottingMinsPlayed, plottingStarts
 from GetPlayerGrade import gettingFinalGradeForEachTeam, getPrimaryPosition, getPlayerStatistics, getStandardizedValues, getRadarChart, getRadarChartAdvanced, getPrimaryPositionAll
@@ -29,6 +29,9 @@ team_name = st.session_state['selected_team']
 
 st.set_page_config(layout="wide")
 
+wr_rank = getting_WeeklyReportRank()
+wr_rank = wr_rank.loc[wr_rank['Team' == team_name]]
+st.write(wr_rank)
 
 directory_path = 'Player_Photos'
     
