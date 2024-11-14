@@ -156,3 +156,85 @@ def getting_weeklyReport():
 
 
     return end
+
+def getting_WeeklyReportRank():
+    def read_all_csvs_from_folder(folder_path):
+        # List all files in the folder
+        files = os.listdir(folder_path)
+        
+        # Filter the list to include only CSV files
+        csv_files = [file for file in files if file.endswith('.csv')]
+        
+        # Read each CSV file and store it in a list of DataFrames
+        data_frames = []
+        for file in csv_files:
+            file_path = os.path.join(folder_path, file)
+            df = pd.read_csv(file_path)
+            # formatting the files
+            df.columns = df.iloc[3]
+            df = df.iloc[4:]
+            df = df.reset_index(drop=True)
+            # this is getting us the player data
+            start_index = df.index[df["Period Name"] == "Running By Player"][0]
+
+            # Find the index where "period name" is equal to "running by position player"
+            end_index = df.index[df["Period Name"] == "Running By Position Player"][0]
+
+            df = df.iloc[start_index:end_index]
+
+            # Reset the index (optional if you want a clean integer index)
+            df = df.reset_index(drop=True)
+            remove_first = ['Period Name', 'Squad Number', 'Match Name', 'As At Date', 'Round Name']
+            df = df.drop(columns=remove_first, errors='ignore')
+            df = df.dropna(axis=1, how='all')
+            df = df.iloc[1:]
+            data_frames.append(df)
+        
+        # Optionally, combine all DataFrames into a single DataFrame
+        combined_df = pd.concat(data_frames, ignore_index=True)
+        
+        return combined_df
+
+    # Example usage
+    # THIS COULD NEED CHANGED WITH 18 NEW TEAMS
+    folder_path = 'This_Year/'  # Replace with your folder path
+    end = read_all_csvs_from_folder(folder_path)
+        
+    end = end.drop_duplicates()
+
+    per90 = ['Goal', 'Dribble',
+        'Stand. Tackle', 'Unsucc Stand. Tackle', 'Tackle',
+        'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Att 1v1', 'Efforts on Goal',
+        'Shot on Target', 'Pass into Oppo Box',
+        'Forward', 'Unsucc Forward', 'Line Break',
+        'Loss of Poss', 'Success', 'Unsuccess']
+
+
+    end['minutes per 90'] = end['mins played']/90
+
+    for column in per90:
+        end[column] = end[column] / end['minutes per 90']
+        
+    end = end.drop(columns=['minutes per 90'])
+    passing['Forward Total'] = passing['Forward'] + passing['Unsucc Forward']
+    passing['Forward Completion'] = (passing['Forward'] / passing['Forward Total']) * 100
+    passing['Total'] = passing['Success'] + passing['Unsuccess']
+    defending['Stand. Tackle Total'] = defending['Stand. Tackle'] + defending['Unsucc Stand. Tackle']
+    defending['Rec Total'] = defending['Progr Rec'] + defending['Unprogr Rec']
+    defending['Inter Total'] = defending['Progr Inter'] + defending['Unprogr Inter']
+
+    metrics_to_rank = ['Forward Total' 'Forward Completion', 'Total', 'Pass Completion ', 'Dribble', 
+                      'Att 1v1', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ',
+                      'Stand. Tackle Success ', 'Line Break', 'Pass into Oppo Box', 'Efforts on Goal']  # Replace with actual metric column names
+    weird_metrics_to_rank = ['Loss of Poss']
+
+    # Rank each metric within each team and create separate rank columns
+    for metric in metrics_to_rank:
+        end[metric + ' Rank'] = end.groupby("Team Name")[metric].rank(acending=False)
+    for metric in weird_metrics_to_rank:
+        end[metric + ' Rank'] = end.groupby("Team Name")[metric].rank(ascending=True)
+    
+
+
+    st.write(end)
+    return end
