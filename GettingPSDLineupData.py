@@ -214,7 +214,7 @@ def getting_WeeklyReportRank():
         'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Att 1v1', 'Efforts on Goal',
         'Shot on Target', 'Pass into Oppo Box',
         'Forward', 'Unsucc Forward', 'Line Break',
-        'Loss of Poss', 'Success', 'Unsuccess', 'mins played', 'Pass Completion ', 'Stand. Tackle Success ', 'Progr Regain ', 'Stand. Tackle Success ']
+        'Loss of Poss', 'Success', 'Unsuccess', 'mins played', 'Pass Completion ', 'Stand. Tackle Success ', 'Progr Regain ']
 
     end[float_columns] = end[float_columns].astype(float)
 
@@ -232,7 +232,7 @@ def getting_WeeklyReportRank():
     end['Rec Total'] = end['Progr Rec'] + end['Unprogr Rec']
     end['Inter Total'] = end['Progr Inter'] + end['Unprogr Inter']
 
-    metrics_to_rank = ['Forward Total' 'Forward Completion', 'Total', 'Pass Completion ', 'Dribble', 
+    metrics_to_rank = ['Forward Total', 'Forward Completion', 'Total', 'Pass Completion ', 'Dribble', 
                       'Att 1v1', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ',
                       'Stand. Tackle Success ', 'Line Break', 'Pass into Oppo Box', 'Efforts on Goal']  # Replace with actual metric column names
     weird_metrics_to_rank = ['Loss of Poss']
@@ -246,5 +246,4 @@ def getting_WeeklyReportRank():
     
 
 
-    st.write(end)
     return end
