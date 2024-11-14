@@ -218,12 +218,12 @@ def getting_WeeklyReportRank():
         end[column] = end[column] / end['minutes per 90']
         
     end = end.drop(columns=['minutes per 90'])
-    passing['Forward Total'] = passing['Forward'] + passing['Unsucc Forward']
-    passing['Forward Completion'] = (passing['Forward'] / passing['Forward Total']) * 100
-    passing['Total'] = passing['Success'] + passing['Unsuccess']
-    defending['Stand. Tackle Total'] = defending['Stand. Tackle'] + defending['Unsucc Stand. Tackle']
-    defending['Rec Total'] = defending['Progr Rec'] + defending['Unprogr Rec']
-    defending['Inter Total'] = defending['Progr Inter'] + defending['Unprogr Inter']
+    end['Forward Total'] = end['Forward'] + end['Unsucc Forward']
+    end['Forward Completion'] = (end['Forward'] / end['Forward Total']) * 100
+    end['Total'] = end['Success'] + end['Unsuccess']
+    end['Stand. Tackle Total'] = end['Stand. Tackle'] + end['Unsucc Stand. Tackle']
+    end['Rec Total'] = end['Progr Rec'] + end['Unprogr Rec']
+    end['Inter Total'] = end['Progr Inter'] + end['Unprogr Inter']
 
     metrics_to_rank = ['Forward Total' 'Forward Completion', 'Total', 'Pass Completion ', 'Dribble', 
                       'Att 1v1', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ',
