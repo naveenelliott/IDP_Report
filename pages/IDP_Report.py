@@ -3,7 +3,7 @@ import os
 import glob
 import streamlit as st
 from PIL import Image, ImageOps
-from GettingPSDLineupData import getting_PSD_min_data, getting_weeklyReport, getting_weeklyReportRank
+from GettingPSDLineupData import getting_PSD_min_data, getting_weeklyReport, getting_WeeklyReportRank
 import matplotlib.pyplot as plt
 from GettingPercentOfMins import plottingMinsPlayed, plottingStarts
 from GetPlayerGrade import gettingFinalGradeForEachTeam, getPrimaryPosition, getPlayerStatistics, getStandardizedValues, getRadarChart, getRadarChartAdvanced, getPrimaryPositionAll
