@@ -209,6 +209,8 @@ def getting_WeeklyReportRank():
         'Forward', 'Unsucc Forward', 'Line Break',
         'Loss of Poss', 'Success', 'Unsuccess']
 
+    end[per90 + ['mins played']] = end[per90 + ['mins played']].astype(float)
+
 
     end['minutes per 90'] = end['mins played']/90
 
