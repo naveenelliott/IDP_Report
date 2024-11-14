@@ -237,7 +237,7 @@ def getting_WeeklyReportRank():
                       'Stand. Tackle Success ', 'Line Break', 'Pass into Oppo Box', 'Efforts on Goal']  # Replace with actual metric column names
     weird_metrics_to_rank = ['Loss of Poss']
 
-    st.write(end)
+
     # Rank each metric within each team and create separate rank columns
     for metric in metrics_to_rank:
         end[metric + ' Rank'] = end.groupby("Team Name")[metric].rank(ascending=False)
