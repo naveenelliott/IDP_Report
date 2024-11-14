@@ -232,7 +232,7 @@ def getting_WeeklyReportRank():
 
     # Rank each metric within each team and create separate rank columns
     for metric in metrics_to_rank:
-        end[metric + ' Rank'] = end.groupby("Team Name")[metric].rank(acending=False)
+        end[metric + ' Rank'] = end.groupby("Team Name")[metric].rank(ascending=False)
     for metric in weird_metrics_to_rank:
         end[metric + ' Rank'] = end.groupby("Team Name")[metric].rank(ascending=True)
     
