@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
 from scipy.stats import norm
+import streamlit as st
 
 def creatingPercentilesCM(merged_df):
-
+    st.write(merged_df)
     raw_columns = ['Stand. Tackle Success ', 'Line Break', 'Pass Completion ', 'Progr Regain ']
 
     def calculate_percentile(value):
