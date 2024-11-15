@@ -67,7 +67,7 @@ def creatingPercentilesCM(merged_df):
 
     if age_group in u13_u14:
         cm_df = pd.read_csv("Thresholds/CenterMidfieldThresholds1314.csv")
-    if age_group in u15_16:
+    if age_group in u15_u16:
         cm_df = pd.read_csv("Thresholds/CenterMidfieldThresholds1516.csv")
     if age_group in u17_u19:
         cm_df = pd.read_csv("Thresholds/CenterMidfieldThresholds1719.csv")
