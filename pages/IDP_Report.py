@@ -930,9 +930,9 @@ elif primary_position == 'CM':
         if passing.shape[1] >= 2:
             passing_styled = passing.style.apply(
                 lambda col: [
-                    apply_color_change(value, passing.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+                    apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
-                subset=[f'{player_name} 2024']
+                subset=['2024']
             ).format(precision=2)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
