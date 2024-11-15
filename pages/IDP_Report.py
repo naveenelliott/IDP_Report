@@ -99,8 +99,9 @@ player_mins = player_mins['mins played'].sum()
 goals_assists = getting_PSD_min_data()
 goals_assists = goals_assists.loc[(goals_assists['Team Name'] == team_name) & (goals_assists['Player Full Name'] == player_name)]
 goals = goals_assists['Goal'].sum()
+goals = int(goals)
 assists = goals_assists['Assist'].sum()
-
+assists = int(assists)
 
 
 # Calculate the percentage of available minutes played
@@ -124,6 +125,9 @@ comp_level = comp_level.loc[comp_level['Player Name'] == player_name]
 comp_level.reset_index(drop=True, inplace=True)
 coach = comp_level.at[0, "Coach's Summary"]
 spring_focus = comp_level.at[0, "Focus for Spring"]
+
+primary_position = getPrimaryPosition(player_name)
+primary_position = primary_position['Position Tag'].values[0]
 
 with col1:
         inner_columns = st.columns(2)
@@ -197,6 +201,14 @@ with col1:
                 """.format(assists=assists),
                 unsafe_allow_html=True
             )
+            st.markdown(
+                """
+                <div style='display: block; text-align: left;'>
+                    <span style='font-family: Arial; font-size: 10pt; color: black;'>Primary Position: {primary_position}</span>
+                </div>
+                """.format(primary_position=primary_position),
+                unsafe_allow_html=True
+            )
 
 
 
@@ -205,9 +217,6 @@ weekly_report = weekly_report.loc[weekly_report['Player Full Name'] == player_na
 weekly_report['mins played'] = weekly_report['mins played'].astype(float)
 weekly_report = weekly_report.loc[weekly_report['mins played'].idxmax()].to_frame()
 weekly_report = pd.DataFrame(weekly_report)
-
-primary_position = getPrimaryPosition(player_name)
-primary_position = primary_position['Position Tag'].values[0]
 
 if primary_position == 'LW' or primary_position == 'RW':
     primary_position = 'Wing'
