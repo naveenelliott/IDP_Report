@@ -924,7 +924,7 @@ elif primary_position == 'CM':
     playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-        new_columns = [f"{name} {year}" for name, year in zip(passing.loc['Player Name'], passing.loc['Year'])]
+        new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
         if passing.shape[1] >= 2:
