@@ -975,9 +975,9 @@ elif primary_position == 'CM':
         if playmaking.shape[1] >= 2:
             playmaking_styled = playmaking.style.apply(
                 lambda col: [
-                    apply_color_change(value, playmaking.at[idx, f'{player_name} 2023'], idx) for idx, value in col.items()
+                    apply_color_change(value, playmaking.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
-                subset=[f'{player_name} 2024']
+                subset=['2024']
             ).format(precision=2)
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
