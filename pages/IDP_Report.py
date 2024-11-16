@@ -601,14 +601,6 @@ def apply_color_change(value, base_value, index):
     except:
         return ''  # No styling if value is not numeric or calculation fails
 
-def style_dataframe(df):
-    styled = df.set_table_styles(
-        [{
-            'selector': 'th.row_heading',  # Targets the row index
-            'props': [('color', 'lightblue')]
-        }]
-    )
-    return styled
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
@@ -1023,7 +1015,6 @@ elif primary_position == 'FB':
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.round(2)
-        passing_styled = style_dataframe(passing_styled)
         st.write(passing_styled.to_html(), unsafe_allow_html=True)
         #st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
@@ -1040,7 +1031,8 @@ elif primary_position == 'FB':
         else:
             attacking = attacking.apply(pd.to_numeric, errors='coerce')
             attacking_styled = attacking.round(2)
-        st.dataframe(attacking_styled, use_container_width=True)
+        st.write(attacking_styled.to_html(), unsafe_allow_html=True)
+        #st.dataframe(attacking_styled, use_container_width=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
@@ -1055,7 +1047,8 @@ elif primary_position == 'FB':
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
             defending_styled = defending.round(2)
-        st.dataframe(defending_styled, use_container_width=True)
+        st.write(defending_styled.to_html(), unsafe_allow_html=True)
+        #st.dataframe(defending_styled, use_container_width=True)
     overall_player['Position'] = 'FB'
 
 
