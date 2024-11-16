@@ -945,7 +945,7 @@ elif primary_position == 'CM':
             ).format(precision=2)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.round(2)
+            passing_styled = passing.style.format(precision=2)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
