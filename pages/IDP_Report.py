@@ -1024,7 +1024,8 @@ elif primary_position == 'FB':
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.round(2)
         passing_styled = style_dataframe(passing_styled)
-        st.dataframe(passing_styled, use_container_width=True)
+        st.write(passing_styled.to_html(), unsafe_allow_html=True)
+        #st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
         new_columns = list(attacking.loc['Year'])
         attacking = attacking.drop(['Player Name', 'Year'])
