@@ -602,16 +602,7 @@ def apply_color_change(value, base_value, index):
         return ''  # No styling if value is not numeric or calculation fails
 
 def style_dataframe(df):
-    base_values = df[base_column]
-
-    # Apply styling to the data cells
-    styled = df.style.applymap(
-        lambda value: apply_color_change(value, base_values[df.index], df.index),
-        subset=[comparison_column]
-    )
-
-    # Style the index to be black
-    styled = styled.set_properties(**{'color': 'black'}, subset=pd.IndexSlice[df.index, :])
+    styled = df.set_properties(**{'color': 'black'}, subset=pd.IndexSlice[df.index, :])
     return styled
 
 if primary_position == 'ATT':
