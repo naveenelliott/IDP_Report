@@ -605,7 +605,7 @@ def style_dataframe(df):
     styled = df.set_table_styles(
         [{
             'selector': 'th.row_heading',  # Targets the row index
-            'props': [('color', 'black')]
+            'props': [('color', 'lightblue')]
         }]
     )
     return styled
