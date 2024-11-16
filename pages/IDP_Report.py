@@ -1031,7 +1031,7 @@ elif primary_position == 'FB':
         else:
             attacking = attacking.apply(pd.to_numeric, errors='coerce')
             attacking_styled = attacking.round(2)
-        st.write(attacking_styled.to_html(), unsafe_allow_html=True)
+        st.write(attacking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(attacking_styled, use_container_width=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
@@ -1047,7 +1047,7 @@ elif primary_position == 'FB':
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
             defending_styled = defending.round(2)
-        st.write(defending_styled.to_html(), unsafe_allow_html=True)
+        st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(defending_styled, use_container_width=True)
     overall_player['Position'] = 'FB'
 
