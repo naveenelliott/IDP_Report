@@ -102,7 +102,7 @@ def midfielder_function(dataframe, age_group, pname, position):
                 update_color = 'orange'
                 plt.scatter(primary_player['Pass %'], primary_player['Line Break'], color=update_color, label=pname, s=70)
             update_pname = pname + ' This Season'
-            later_pname = pname + ' Last Seaosn'
+            later_pname = pname + ' Last Season'
             plt.scatter(compare_player['Pass %'], compare_player['Line Break'], color='pink', label=later_pname, s=70)
             custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor=update_color, markersize=10, label=update_pname),
                                  Line2D([0], [0], marker='o', color='w', markerfacecolor='pink', markersize=10, label=later_pname)]
@@ -225,7 +225,7 @@ def defender_function(dataframe, age_group, pname, position):
                 update_color = 'orange'
                 plt.scatter(player_row['Progr Regain %'], player_row['Tackle %'], color=update_color, label=pname, s=70)
             update_pname = pname + ' This Season'
-            later_pname = pname + ' Last Seaosn'
+            later_pname = pname + ' Last Season'
             plt.scatter(compare_player['Progr Regain %'], compare_player['Tackle %'], color='pink', label=later_pname, s=70)
             custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor=update_color, markersize=10, label=update_pname),
                                  Line2D([0], [0], marker='o', color='w', markerfacecolor='pink', markersize=10, label=later_pname)]
