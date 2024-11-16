@@ -632,7 +632,7 @@ if primary_position == 'ATT':
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.round(2)
-        st.dataframe(passing_styled, use_container_width=True)
+        st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
@@ -647,7 +647,7 @@ if primary_position == 'ATT':
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
             dribbling_styled = dribbling.round(2)
-        st.dataframe(dribbling_styled, use_container_width=True)
+        st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
@@ -662,7 +662,7 @@ if primary_position == 'ATT':
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
             defending_styled = defending.round(2)
-        st.dataframe(defending_styled, use_container_width=True)
+        st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         new_columns = list(shooting.loc['Year'])
         shooting = shooting.drop(['Player Name', 'Year'])
@@ -677,7 +677,7 @@ if primary_position == 'ATT':
         else:
             shooting = shooting.apply(pd.to_numeric, errors='coerce')
             shooting_styled = shooting.round(2)
-        st.dataframe(shooting_styled, use_container_width=True)
+        st.write(shooting_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'ATT'
 elif primary_position == 'Wing':
     overall_player = creatingPercentilesWing(player_season)
@@ -711,7 +711,7 @@ elif primary_position == 'Wing':
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.round(2)
-        st.dataframe(passing_styled, use_container_width=True)
+        st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
@@ -726,7 +726,7 @@ elif primary_position == 'Wing':
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
             dribbling_styled = dribbling.round(2)
-        st.dataframe(dribbling_styled, use_container_width=True)
+        st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
@@ -741,7 +741,7 @@ elif primary_position == 'Wing':
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
             defending_styled = defending.round(2)
-        st.dataframe(defending_styled, use_container_width=True)
+        st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         new_columns = list(playmaking.loc['Year'])
         playmaking = playmaking.drop(['Player Name', 'Year'])
@@ -756,7 +756,7 @@ elif primary_position == 'Wing':
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
             playmaking_styled = playmaking.round(2)
-        st.dataframe(playmaking_styled, use_container_width=True)
+        st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[4]:
         new_columns = list(shooting.loc['Year'])
         shooting = shooting.drop(['Player Name', 'Year'])
@@ -771,7 +771,7 @@ elif primary_position == 'Wing':
         else:
             shooting = shooting.apply(pd.to_numeric, errors='coerce')
             shooting_styled = shooting.round(2)
-        st.dataframe(shooting_styled, use_container_width=True)
+        st.write(shooting_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'Wing'
 elif primary_position == 'CB':
     overall_player = creatingPercentilesCB(player_season)
@@ -801,7 +801,7 @@ elif primary_position == 'CB':
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.round(2)
-        st.dataframe(passing_styled, use_container_width=True)
+        st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(ball_prog.loc['Year'])
         ball_prog = ball_prog.drop(['Player Name', 'Year'])
@@ -816,7 +816,7 @@ elif primary_position == 'CB':
         else:
             ball_prog = ball_prog.apply(pd.to_numeric, errors='coerce')
             ball_prog_styled = ball_prog.round(2)
-        st.dataframe(ball_prog_styled, use_container_width=True)
+        st.write(ball_prog_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
@@ -831,7 +831,7 @@ elif primary_position == 'CB':
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
             defending_styled = defending.round(2)
-        st.dataframe(defending_styled, use_container_width=True)
+        st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'CB'
 elif primary_position == 'DM':
     overall_player = creatingPercentilesDM(player_season)
@@ -863,7 +863,7 @@ elif primary_position == 'DM':
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.round(2)
-        st.dataframe(passing_styled, use_container_width=True)
+        st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
@@ -878,7 +878,7 @@ elif primary_position == 'DM':
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
             dribbling_styled = dribbling.round(2)
-        st.dataframe(dribbling_styled, use_container_width=True)
+        st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
@@ -893,7 +893,7 @@ elif primary_position == 'DM':
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
             defending_styled = defending.round(2)
-        st.dataframe(defending_styled, use_container_width=True)
+        st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         new_columns = list(playmaking.loc['Year'])
         playmaking = playmaking.drop(['Player Name', 'Year'])
@@ -908,7 +908,7 @@ elif primary_position == 'DM':
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
             playmaking_styled = playmaking.round(2)
-        st.dataframe(playmaking_styled, use_container_width=True)
+        st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'DM'
 elif primary_position == 'CM':
     overall_player = creatingPercentilesCM(player_season)
@@ -940,7 +940,7 @@ elif primary_position == 'CM':
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.round(2)
-        st.dataframe(passing_styled, use_container_width=True)
+        st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
@@ -955,7 +955,7 @@ elif primary_position == 'CM':
         else: 
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
             dribbling_styled = dribbling.round(2)
-        st.dataframe(dribbling_styled, use_container_width=True)
+        st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
@@ -970,7 +970,7 @@ elif primary_position == 'CM':
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
             defending_styled = defending.round(2)
-        st.dataframe(defending_styled, use_container_width=True)
+        st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         nnew_columns = list(playmaking.loc['Year'])
         playmaking = playmaking.drop(['Player Name', 'Year'])
@@ -985,7 +985,7 @@ elif primary_position == 'CM':
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
             playmaking_styled = playmaking.round(2)
-        st.dataframe(playmaking_styled, use_container_width=True)
+        st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
     overall_player = creatingPercentilesFB(player_season)
