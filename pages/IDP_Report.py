@@ -602,7 +602,12 @@ def apply_color_change(value, base_value, index):
         return ''  # No styling if value is not numeric or calculation fails
 
 def style_dataframe(df):
-    styled = df.set_properties(**{'color': 'black'}, subset=pd.IndexSlice[df.index, :])
+    styled = df.set_table_styles(
+        [{
+            'selector': 'th.row_heading',  # Targets the row index
+            'props': [('color', 'black')]
+        }]
+    )
     return styled
 
 if primary_position == 'ATT':
