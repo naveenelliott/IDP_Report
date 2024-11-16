@@ -1015,7 +1015,7 @@ elif primary_position == 'FB':
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.round(2)
-        st.write(passing_styled.to_html(), unsafe_allow_html=True)
+        st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
         new_columns = list(attacking.loc['Year'])
