@@ -646,7 +646,7 @@ if primary_position == 'ATT':
     with inn_columns[0]:
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
-        new_columns = ['Passing'] + new_columns
+        new_columns = ['Passing'] + list(passing.columns)
         passing.columns = new_columns
         if passing.shape[1] >= 2:
             passing = pd.concat([passing, wr_rank], axis=1)
