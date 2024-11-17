@@ -644,7 +644,7 @@ if primary_position == 'ATT':
     shooting = shooting.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-        new_columns = list(passing.loc['Year'])
+        new_columns = ['Passing'] + list(passing.loc['Year'])  # Add "Passing" as the first column header
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
         if passing.shape[1] >= 2:
