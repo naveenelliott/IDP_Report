@@ -942,6 +942,15 @@ elif primary_position == 'CB':
     defending = defending.T
     inn_columns = st.columns(3)
     with inn_columns[0]:
+        # Add a styled, title for the "Passing" table
+        st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            PASSING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
