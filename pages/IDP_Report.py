@@ -610,6 +610,9 @@ def apply_color_change(value, base_value, index):
     except:
         return ''  # No styling if value is not numeric or calculation fails
 
+current_columns = ['Forward Total', 'Pass Completion ', 'Total', 'Forward Completion', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ', 'Efforts on Goal']
+
+new_names = ['Forward Passes', 'Pass %', 'Total Passes', 'Forward Pass %', 'Total Tackles', 'Total Recoveries', 'Total Interceptions', 'Regain %', 'Tackle %', 'Shots']
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
@@ -1006,6 +1009,8 @@ elif primary_position == 'CM':
         if passing.shape[1] >= 2:
             passing = pd.concat([passing, wr_rank], axis=1)
             passing = passing.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing.index}
+            passing = passing.rename(index=rename_mapping)
             passing_styled = passing.style.apply(
                 lambda col: [
                     apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
