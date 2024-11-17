@@ -31,7 +31,8 @@ st.set_page_config(layout="wide")
 
 wr_rank = getting_WeeklyReportRank()
 wr_rank = wr_rank.loc[wr_rank['Team Name'] == team_name]
-#st.write(wr_rank)
+wr_rank = wr_rank.loc[wr_rank['Player Full Name'] == player_name]
+st.write(wr_rank)
 
 directory_path = 'Player_Photos'
     
