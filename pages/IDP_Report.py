@@ -27,38 +27,22 @@ from streamlit_gsheets import GSheetsConnection
 player_name = st.session_state['selected_player']
 team_name = st.session_state['selected_team']
 
+# Set Streamlit page configuration
 st.set_page_config(layout="wide")
 
 # Add the logo
 logo_path = 'BostonBoltsLogo.png'
 
-# Align the logo to the top-right corner with adjustments for position and size
+# Align the logo to the top-right corner with adjustments
 header_container = st.container()
 with header_container:
-    col1, col2 = st.columns([8, 2])  # Adjust column widths to control logo placement
+    col1, col2 = st.columns([8, 2])  # Adjust column widths to control placement
     with col1:
         st.write("")  # Placeholder for alignment
     with col2:
-        # Add the logo with CSS for padding to adjust its position
-        st.markdown(
-            f"""
-            <style>
-            .logo-container {{
-                display: flex;
-                justify-content: flex-end;  /* Align to the right */
-                padding-top: 20px;         /* Move logo slightly lower */
-            }}
-            .logo {{
-                width: 250px;              /* Make the logo bigger */
-            }}
-            </style>
-            <div class="logo-container">
-                <img src="{logo_path}" class="logo">
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
+        # Add the logo, make it bigger, and shift it down slightly with extra spacing
+        st.write("")  # Add some spacing above
+        st.image(logo_path, use_column_width=False, width=250)  # Increase the size
 
 wr_rank = getting_WeeklyReportRank()
 wr_rank = wr_rank.loc[wr_rank['Team Name'] == team_name]
