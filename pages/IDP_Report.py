@@ -639,7 +639,6 @@ if primary_position == 'ATT':
         defending = pd.concat([defending, ls_defending])
         shooting = pd.concat([shooting, ls_shooting])
     passing = passing.T
-    passing.columns = ['Passing'] + list(passing.columns[1:])
     dribbling = dribbling.T
     defending = defending.T
     shooting = shooting.T
