@@ -812,6 +812,14 @@ elif primary_position == 'Wing':
     shooting = shooting.T
     inn_columns = st.columns(5)
     with inn_columns[0]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            PASSING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
@@ -835,6 +843,14 @@ elif primary_position == 'Wing':
             passing_styled = passing_styled.rename(index=rename_mapping)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DRIBBLING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
         dribbling.columns = new_columns
@@ -858,6 +874,14 @@ elif primary_position == 'Wing':
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DEFENDING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
         defending.columns = new_columns
@@ -881,6 +905,14 @@ elif primary_position == 'Wing':
             defending_styled = defending_styled.rename(index=rename_mapping)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            PLAYMAKING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(playmaking.loc['Year'])
         playmaking = playmaking.drop(['Player Name', 'Year'])
         playmaking.columns = new_columns
@@ -904,6 +936,14 @@ elif primary_position == 'Wing':
             playmaking_styled = playmaking_styled.rename(index=rename_mapping)
         st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[4]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            SHOOTING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(shooting.loc['Year'])
         shooting = shooting.drop(['Player Name', 'Year'])
         shooting.columns = new_columns
@@ -942,6 +982,14 @@ elif primary_position == 'CB':
     defending = defending.T
     inn_columns = st.columns(3)
     with inn_columns[0]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            PASSING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
@@ -965,6 +1013,14 @@ elif primary_position == 'CB':
             passing = passing.rename(index=rename_mapping)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            BALL PROGRESSION
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(ball_prog.loc['Year'])
         ball_prog = ball_prog.drop(['Player Name', 'Year'])
         ball_prog.columns = new_columns
@@ -988,6 +1044,14 @@ elif primary_position == 'CB':
             ball_prog_styled = ball_prog_styled.rename(index=rename_mapping)
         st.write(ball_prog_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DEFENDING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
         defending.columns = new_columns
@@ -1028,6 +1092,14 @@ elif primary_position == 'DM':
     playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            PASSING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
@@ -1051,6 +1123,14 @@ elif primary_position == 'DM':
             passing_styled = passing_styled.rename(index=rename_mapping)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DRIBBLING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
         dribbling.columns = new_columns
@@ -1074,6 +1154,14 @@ elif primary_position == 'DM':
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DEFENDING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
         defending.columns = new_columns
@@ -1097,6 +1185,14 @@ elif primary_position == 'DM':
             defending_styled = defending_styled.rename(index=rename_mapping)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            PLAYMAKING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(playmaking.loc['Year'])
         playmaking = playmaking.drop(['Player Name', 'Year'])
         playmaking.columns = new_columns
@@ -1137,6 +1233,14 @@ elif primary_position == 'CM':
     playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            PASSING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
@@ -1160,6 +1264,14 @@ elif primary_position == 'CM':
             passing_styled = passing_styled.rename(index=rename_mapping)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DRIBBLING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
         dribbling.columns = new_columns
@@ -1183,6 +1295,14 @@ elif primary_position == 'CM':
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DEFENDING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
         defending.columns = new_columns
@@ -1206,7 +1326,15 @@ elif primary_position == 'CM':
             defending_styled = defending_styled.rename(index=rename_mapping)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
-        nnew_columns = list(playmaking.loc['Year'])
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            PLAYMAKING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
+        new_columns = list(playmaking.loc['Year'])
         playmaking = playmaking.drop(['Player Name', 'Year'])
         playmaking.columns = new_columns
         if playmaking.shape[1] >= 2:
@@ -1244,6 +1372,14 @@ elif primary_position == 'FB':
     defending = defending.T
     inn_columns = st.columns(3)
     with inn_columns[0]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            PASSING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
@@ -1268,6 +1404,14 @@ elif primary_position == 'FB':
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            ATTACKING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(attacking.loc['Year'])
         attacking = attacking.drop(['Player Name', 'Year'])
         attacking.columns = new_columns
@@ -1292,6 +1436,14 @@ elif primary_position == 'FB':
         st.write(attacking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(attacking_styled, use_container_width=True)
     with inn_columns[2]:
+         st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DEFENDING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
         defending.columns = new_columns
