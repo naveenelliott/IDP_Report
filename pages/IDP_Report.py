@@ -44,6 +44,9 @@ with header_container:
         st.write("")  # First line of spacing
         st.write("")  # Second line of spacing
         st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
         st.image(logo_path, use_column_width=False, width=250)  # Increase size for better visibility
 
 wr_rank = getting_WeeklyReportRank()
