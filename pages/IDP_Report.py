@@ -949,7 +949,7 @@ elif primary_position == 'CM':
             ).format(precision=2)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing = pd.concat([passing, wr_rank])
+            passing = pd.concat([passing, wr_rank], axis=1)
             passing_styled = passing.style.format(precision=2)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
