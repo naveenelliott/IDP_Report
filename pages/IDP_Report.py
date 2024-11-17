@@ -674,11 +674,12 @@ if primary_position == 'ATT':
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
             passing_styled = passing_styled.rename(index=rename_mapping)
-            st.write(
+        st.markdown(
             passing_styled.to_html(
-            table_attributes='style="width:95%; margin: 10px auto; border-collapse: collapse;"'
+            table_attributes='style="width:95%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
             ),
-            unsafe_allow_html=True)   
+            unsafe_allow_html=True
+            )   
     with inn_columns[1]:
             # Add a styled, title for the "Dribbling" table
         st.markdown(
