@@ -30,7 +30,7 @@ team_name = st.session_state['selected_team']
 st.set_page_config(layout="wide")
 
 # Add the logo
-logo_path = 'logo.png'
+logo_path = 'BostonBoltsLogo.png'
 
 # Align the logo to the top-right corner
 header_container = st.container()
@@ -39,7 +39,7 @@ with header_container:
     with col1:
         st.write("")  # Placeholder for aligning
     with col2:
-        st.image(logo_path, use_column_width=True)
+        st.image(logo_path, use_column_width=False, width=200)
 
 wr_rank = getting_WeeklyReportRank()
 wr_rank = wr_rank.loc[wr_rank['Team Name'] == team_name]
