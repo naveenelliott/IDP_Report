@@ -644,7 +644,6 @@ if primary_position == 'ATT':
     shooting = shooting.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-         with inn_columns[0]:
     # Wrap the title and table in a single container with central alignment
         st.markdown(
         f"""
