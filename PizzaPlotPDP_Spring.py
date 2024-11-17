@@ -177,32 +177,6 @@ def createPizzaChart(bolts):
                     )
                 fig.set_dpi(600)
                 
-                fig.text(
-                    0.23, 0.9425, "Defending          Passing           Dribbling         Shooting", size=14,
-                    fontproperties=font_bold, color="#000000"
-                    )
-
-                # add rectangles
-                fig.patches.extend([
-                    plt.Rectangle(
-                        (0.2, 0.94), 0.025, 0.021, fill=True, color="#d9d9d9",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    plt.Rectangle(
-                        (0.37, 0.94), 0.025, 0.021, fill=True, color="#6bb2e2",
-                        transform=fig.transFigure, figure=fig
-                        ),    
-                    plt.Rectangle(
-                        (0.525, 0.94), 0.025, 0.021, fill=True, color="#263a6a",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    plt.Rectangle(
-                        (0.69, 0.94), 0.025, 0.021, fill=True, color="black",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    ])
-
-                
                 player_name = grouped['Player Name']
                 fig.set_facecolor('white')
                 plt.gca().set_facecolor('white')
@@ -296,32 +270,6 @@ def createPizzaChart(bolts):
                             )                                  # values to be used when adding parameter-values
                     )   
                 fig.set_dpi(600)
-                
-                fig.text(
-                    0.23, 0.9425, "Defending          Passing          Dribbling          Shooting", size=14,
-                    fontproperties=font_bold, color="#000000"
-                    )
-
-            # add rectangles
-                fig.patches.extend([
-                    plt.Rectangle(
-                        (0.2, 0.94), 0.025, 0.021, fill=True, color="#d9d9d9",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    plt.Rectangle(
-                        (0.38, 0.94), 0.025, 0.021, fill=True, color="#6bb2e2",
-                        transform=fig.transFigure, figure=fig
-                        ),    
-                    plt.Rectangle(
-                        (0.53, 0.94), 0.025, 0.021, fill=True, color="#263a6a",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    plt.Rectangle(
-                        (0.695, 0.94), 0.025, 0.021, fill=True, color="black",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    ])
-
             
                 fig.set_facecolor('white')
                 plt.gca().set_facecolor('white')
@@ -382,31 +330,6 @@ def createPizzaChart(bolts):
                             )                                # values to be used when adding parameter-values
                     )
                 fig.set_dpi(600)
-                
-                fig.text(
-                    0.23, 0.9425, "Defending          Passing          Dribbling          Shooting", size=14,
-                    fontproperties=font_bold, color="#000000"
-                    )
-
-                # add rectangles
-                fig.patches.extend([
-                    plt.Rectangle(
-                        (0.2, 0.94), 0.025, 0.021, fill=True, color="#d9d9d9",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    plt.Rectangle(
-                        (0.38, 0.94), 0.025, 0.021, fill=True, color="#6bb2e2",
-                        transform=fig.transFigure, figure=fig
-                        ),    
-                    plt.Rectangle(
-                        (0.53, 0.94), 0.025, 0.021, fill=True, color="#263a6a",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    plt.Rectangle(
-                        (0.695, 0.94), 0.025, 0.021, fill=True, color="black",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    ])
                 
         elif group['Position'].iloc[0] == 'CM':
             player_named = group['Player Name'].iloc[0]
@@ -500,31 +423,6 @@ def createPizzaChart(bolts):
                     )
                 fig.set_dpi(600)
                 
-                fig.text(
-                    0.23, 0.9425, " Dribbling           Defending          Passing          Playmaking", size=14,
-                    fontproperties=font_bold, color="#000000"
-                    )
-
-                # add rectangles
-                fig.patches.extend([
-                    plt.Rectangle(
-                        (0.2, 0.94), 0.025, 0.021, fill=True, color="#d9d9d9",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    plt.Rectangle(
-                        (0.37, 0.94), 0.025, 0.021, fill=True, color="#6bb2e2",
-                        transform=fig.transFigure, figure=fig
-                        ),    
-                    plt.Rectangle(
-                        (0.55, 0.94), 0.025, 0.021, fill=True, color="#263a6a",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    plt.Rectangle(
-                        (0.70, 0.94), 0.025, 0.021, fill=True, color="black",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    ])
-
             else:
                 cm_columns = ['Dribble Percentile', 'Loss of Poss Percentile', 'Stand. Tackle Total Percentile', 'Rec Total Percentile', 'Progr Regain Percentile',
                     'Total Passes Percentile', 'Pass Completion Percentile', 'Forward Total Percentile', 'Forward Completion Percentile',
@@ -582,31 +480,6 @@ def createPizzaChart(bolts):
                             )                                # values to be used when adding parameter-values
                     )
                 fig.set_dpi(600)
-                
-                fig.text(
-                    0.23, 0.9425, " Dribbling           Defending          Passing          Playmaking", size=14,
-                    fontproperties=font_bold, color="#000000"
-                    )
-
-                # add rectangles
-                fig.patches.extend([
-                    plt.Rectangle(
-                        (0.2, 0.94), 0.025, 0.021, fill=True, color="#d9d9d9",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    plt.Rectangle(
-                        (0.37, 0.94), 0.025, 0.021, fill=True, color="#6bb2e2",
-                        transform=fig.transFigure, figure=fig
-                        ),    
-                    plt.Rectangle(
-                        (0.55, 0.94), 0.025, 0.021, fill=True, color="#263a6a",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    plt.Rectangle(
-                        (0.70, 0.94), 0.025, 0.021, fill=True, color="black",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    ])
             
         elif group['Position'].iloc[0] == 'DM':
             player_named = group['Player Name'].iloc[0]
@@ -698,27 +571,7 @@ def createPizzaChart(bolts):
                             )                                   # values to be used when adding parameter-values
                     )
                 fig.set_dpi(600)
-                    
-                fig.text(
-                        0.285, 0.9425, "Passing             Defending            Playmaking", size=14,
-                        fontproperties=font_bold, color="#000000"
-                        )
-                    
-                    # add rectangles
-                fig.patches.extend([
-                        plt.Rectangle(
-                            (0.25, 0.94), 0.025, 0.021, fill=True, color="#d9d9d9",
-                            transform=fig.transFigure, figure=fig
-                            ),
-                        plt.Rectangle(
-                            (0.415, 0.94), 0.025, 0.021, fill=True, color="#6bb2e2",
-                            transform=fig.transFigure, figure=fig
-                            ),    
-                        plt.Rectangle(
-                            (0.6, 0.94), 0.025, 0.021, fill=True, color="black",
-                            transform=fig.transFigure, figure=fig
-                            )
-                        ])
+        
             else:
                 cdm_columns = ['Total Passes Percentile', 'Forward Total Percentile', 'Pass Completion Percentile', 'Forward Completion Percentile',
                                 'Stand. Tackle Total Percentile', 'Rec Total Percentile', 'Progr Regain Percentile', 'Stand. Tackle Success Percentile',
@@ -777,26 +630,6 @@ def createPizzaChart(bolts):
                         )
                 fig.set_dpi(600)
                     
-                fig.text(
-                        0.285, 0.9425, "Passing             Defending            Playmaking", size=14,
-                        fontproperties=font_bold, color="#000000"
-                        )
-                    
-                    # add rectangles
-                fig.patches.extend([
-                        plt.Rectangle(
-                            (0.25, 0.94), 0.025, 0.021, fill=True, color="#d9d9d9",
-                            transform=fig.transFigure, figure=fig
-                            ),
-                        plt.Rectangle(
-                            (0.415, 0.94), 0.025, 0.021, fill=True, color="#6bb2e2",
-                            transform=fig.transFigure, figure=fig
-                            ),    
-                        plt.Rectangle(
-                            (0.6, 0.94), 0.025, 0.021, fill=True, color="black",
-                            transform=fig.transFigure, figure=fig
-                            )
-                        ])
         elif group['Position'].iloc[0] == 'CB':
             player_named = group['Player Name'].iloc[0]
             if (len(group['Position']) > 1) and (group['Position'] == 'CB').all():
@@ -888,27 +721,6 @@ def createPizzaChart(bolts):
                     )
                 fig.set_dpi(600)
                     
-                fig.text(
-                        0.285, 0.9425, "Defending         Passing                Playmaking", size=14,
-                        fontproperties=font_bold, color="#000000"
-                        )
-                    
-                    # add rectangles
-                fig.patches.extend([
-                        plt.Rectangle(
-                            (0.25, 0.94), 0.025, 0.021, fill=True, color="#d9d9d9",
-                            transform=fig.transFigure, figure=fig
-                            ),
-                        plt.Rectangle(
-                            (0.415, 0.94), 0.025, 0.021, fill=True, color="#6bb2e2",
-                            transform=fig.transFigure, figure=fig
-                            ),    
-                        plt.Rectangle(
-                            (0.6, 0.94), 0.025, 0.021, fill=True, color="black",
-                            transform=fig.transFigure, figure=fig
-                            )
-                        ])
-                
             else:
                 cb_columns = ['Rec Total Percentile', 'Progr Regain Percentile', 'Stand. Tackle Success',
                                 'Forward Total Percentile', 'Passing Total Percentile', 'Pass Completion Percentile', 'Forward Completion Percentile', 'Line Break Percentile',
@@ -967,28 +779,6 @@ def createPizzaChart(bolts):
                                 )                                # values to be used when adding parameter-values
                         )
                 fig.set_dpi(600)
-                    
-                fig.text(
-                        0.28, 0.9425, "Defending           Passing           Attacking", size=14,
-                        fontproperties=font_bold, color="#000000"
-                        )
-                    
-                    # add rectangles
-                fig.patches.extend([
-                        plt.Rectangle(
-                            (0.245, 0.94), 0.025, 0.021, fill=True, color="#d9d9d9",
-                            transform=fig.transFigure, figure=fig
-                            ),
-                        plt.Rectangle(
-                            (0.425, 0.94), 0.025, 0.021, fill=True, color="#6bb2e2",
-                            transform=fig.transFigure, figure=fig
-                            ),    
-                        plt.Rectangle(
-                            (0.58, 0.94), 0.025, 0.021, fill=True, color="black",
-                            transform=fig.transFigure, figure=fig
-                            )
-                    ])
-                
 
         elif group['Position'].iloc[0] == 'FB':
             player_named = group['Player Name'].iloc[0]
@@ -1081,27 +871,6 @@ def createPizzaChart(bolts):
                             )                                   # values to be used when adding parameter-values
                     )
                 fig.set_dpi(600)
-                    
-                fig.text(
-                        0.29, 0.9425, "Defending            Passing           Attacking", size=14,
-                        fontproperties=font_bold, color="#000000"
-                    )
-                    
-                    # add rectangles
-                fig.patches.extend([
-                    plt.Rectangle(
-                            (0.255, 0.94), 0.025, 0.021, fill=True, color="#d9d9d9",
-                            transform=fig.transFigure, figure=fig
-                            ),
-                    plt.Rectangle(
-                            (0.435, 0.94), 0.025, 0.021, fill=True, color="#6bb2e2",
-                            transform=fig.transFigure, figure=fig
-                            ),    
-                        plt.Rectangle(
-                            (0.6, 0.94), 0.025, 0.021, fill=True, color="black",
-                            transform=fig.transFigure, figure=fig
-                            )
-                    ])
                 
             else:
                 fb_columns = ['Stand. Tackle Total Percentile', 'Rec Total Percentile', 'Progr Regain Percentile', 'Stand. Tackle Success Percentile',
@@ -1159,26 +928,5 @@ def createPizzaChart(bolts):
                             )                                # values to be used when adding parameter-values
                         )
                 fig.set_dpi(600)
-                    
-                fig.text(
-                        0.29, 0.9425, "Defending            Passing           Attacking", size=14,
-                        fontproperties=font_bold, color="#000000"
-                    )
-                    
-                    # add rectangles
-                fig.patches.extend([
-                    plt.Rectangle(
-                            (0.255, 0.94), 0.025, 0.021, fill=True, color="#d9d9d9",
-                            transform=fig.transFigure, figure=fig
-                            ),
-                    plt.Rectangle(
-                            (0.435, 0.94), 0.025, 0.021, fill=True, color="#6bb2e2",
-                            transform=fig.transFigure, figure=fig
-                            ),    
-                        plt.Rectangle(
-                            (0.6, 0.94), 0.025, 0.021, fill=True, color="black",
-                            transform=fig.transFigure, figure=fig
-                            )
-                    ])
                 
     return fig
