@@ -169,7 +169,7 @@ def creatingRawAtt(merged_df):
     passing['Forward Completion'] = (passing['Forward'] / passing['Forward Total']) * 100
     passing['Total'] = passing['Success'] + passing['Unsuccess']
     passing.fillna(0, inplace=True)
-    passing = passing[['Player Name', 'Year', 'Forward Total', 'Total', 'Pass Completion ', 'Forward Completion']]
+    passing = passing[['Player Name', 'Year', 'Passing', 'Forward Total', 'Total', 'Pass Completion ', 'Forward Completion']]
 
     # Dribbling DataFrame
     dribbling = merged_df[['Player Name', 'Year', 'Dribble', 'Att 1v1', 'Loss of Poss']]
