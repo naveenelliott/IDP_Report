@@ -945,7 +945,7 @@ elif primary_position == 'CB':
         # Add a styled, title for the "Passing" table
         st.markdown(
         """
-        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+        <h3 style='text-align: center; color: #6bb2e2; font-family: Arial;'>
             PASSING
         </h3>
         """,
@@ -974,6 +974,15 @@ elif primary_position == 'CB':
             passing = passing.rename(index=rename_mapping)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
+        # Add a styled, title for the "Ball Progression" table
+        st.markdown(
+        """
+        <h3 style='text-align: center; color: #6bb2e2; font-family: Arial;'>
+            BALL PROGRESSION
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(ball_prog.loc['Year'])
         ball_prog = ball_prog.drop(['Player Name', 'Year'])
         ball_prog.columns = new_columns
@@ -997,6 +1006,15 @@ elif primary_position == 'CB':
             ball_prog_styled = ball_prog_styled.rename(index=rename_mapping)
         st.write(ball_prog_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
+        # Add a styled, title for the "defending" table
+        st.markdown(
+        """
+        <h3 style='text-align: center; color: #6bb2e2; font-family: Arial;'>
+            DEFENDING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
         defending.columns = new_columns
