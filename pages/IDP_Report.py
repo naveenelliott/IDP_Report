@@ -1116,6 +1116,8 @@ elif primary_position == 'FB':
         if passing.shape[1] >= 2:
             passing = pd.concat([passing, wr_rank], axis=1)
             passing = passing.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing.index}
+            passing = passing.rename(index=rename_mapping)
             passing_styled = passing.style.apply(
                 lambda col: [
                     apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
@@ -1127,6 +1129,8 @@ elif primary_position == 'FB':
             passing_styled = passing.style.format(precision=2)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
+            passing_styled = passing_styled.rename(index=rename_mapping)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
@@ -1136,6 +1140,8 @@ elif primary_position == 'FB':
         if attacking.shape[1] >= 2:
             attacking = pd.concat([attacking, wr_rank], axis=1)
             attacking = attacking.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in attacking.index}
+            attacking = attacking.rename(index=rename_mapping)
             attacking_styled = attacking.style.apply(
                 lambda col: [
                     apply_color_change(value, attacking.at[idx, '2023'], idx) for idx, value in col.items()
@@ -1147,6 +1153,8 @@ elif primary_position == 'FB':
             attacking_styled = attacking.style.format(precision=2)
             attacking_styled = pd.concat([attacking_styled, wr_rank], axis=1)
             attacking_styled = attacking_styled.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in attacking_styled.index}
+            attacking_styled = attacking_styled.rename(index=rename_mapping)
         st.write(attacking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(attacking_styled, use_container_width=True)
     with inn_columns[2]:
@@ -1156,6 +1164,8 @@ elif primary_position == 'FB':
         if defending.shape[1] >= 2:
             defending = pd.concat([defending, wr_rank], axis=1)
             defending = defending.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending.index}
+            defending = defending.rename(index=rename_mapping)
             defending_styled = defending.style.apply(
                 lambda col: [
                     apply_color_change(value, defending.at[idx, '2023'], idx) for idx, value in col.items()
@@ -1167,6 +1177,8 @@ elif primary_position == 'FB':
             defending_styled = defending.style.format(precision=2)
             defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
+            defending_styled = defending_styled.rename(index=rename_mapping)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(defending_styled, use_container_width=True)
     overall_player['Position'] = 'FB'
