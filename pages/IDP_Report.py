@@ -642,17 +642,16 @@ if primary_position == 'ATT':
     dribbling = dribbling.T
     defending = defending.T
     shooting = shooting.T
-
-    # First row of tables (Passing and Dribbling)
-    row1_columns = st.columns(2)
-    with row1_columns[0]:
+    inn_columns = st.columns(4)
+    with inn_columns[0]:
+    # Add a styled, title for the "Passing" table
         st.markdown(
-            """
-            <h3 style='text-align: center; color: #6bb2e2; font-family: Arial;'>
-                PASSING
-            </h3>
-            """,
-            unsafe_allow_html=True
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            PASSING
+        </h3>
+        """,
+        unsafe_allow_html=True
         )
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
@@ -671,21 +670,25 @@ if primary_position == 'ATT':
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.style.format(precision=2)
+            passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
+            passing_styled = passing_styled.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
+            passing_styled = passing_styled.rename(index=rename_mapping)
         st.markdown(
             passing_styled.to_html(
-                table_attributes='style="width:95%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
+            table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
             ),
             unsafe_allow_html=True
-        )
-
-    with row1_columns[1]:
+            )   
+    with inn_columns[1]:
+            # Add a styled, title for the "Dribbling" table
         st.markdown(
-            """
-            <h3 style='text-align: center; color: #6bb2e2; font-family: Arial;'>
-                DRIBBLING
-            </h3>
-            """,
-            unsafe_allow_html=True
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DRIBBLING
+        </h3>
+        """,
+        unsafe_allow_html=True
         )
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
@@ -704,23 +707,25 @@ if primary_position == 'ATT':
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
             dribbling_styled = dribbling.style.format(precision=2)
+            dribbling_styled = pd.concat([dribbling_styled, wr_rank], axis=1)
+            dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
+            dribbling_styled = dribbling_styled.rename(index=rename_mapping)
         st.markdown(
-            dribbling_styled.to_html(
-                table_attributes='style="width:95%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
-            ),
-            unsafe_allow_html=True
+        dribbling_styled.to_html(
+        table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
+        ),
+        unsafe_allow_html=True
         )
-
-    # Second row of tables (Defending and Shooting)
-    row2_columns = st.columns(2)
-    with row2_columns[0]:
+    with inn_columns[2]:
+        # Add a styled, title for the "Defending" table
         st.markdown(
-            """
-            <h3 style='text-align: center; color: #6bb2e2; font-family: Arial;'>
-                DEFENDING
-            </h3>
-            """,
-            unsafe_allow_html=True
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DEFENDING
+        </h3>
+        """,
+        unsafe_allow_html=True
         )
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
@@ -739,21 +744,25 @@ if primary_position == 'ATT':
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
             defending_styled = defending.style.format(precision=2)
+            defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
+            defending_styled = defending_styled.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
+            defending_styled = defending_styled.rename(index=rename_mapping)
         st.markdown(
-            defending_styled.to_html(
-                table_attributes='style="width:95%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
-            ),
-            unsafe_allow_html=True
+        defending_styled.to_html(
+        table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
+        ),
+        unsafe_allow_html=True
         )
-
-    with row2_columns[1]:
+    with inn_columns[3]:
+        # Add a styled, title for the "Shooting" table
         st.markdown(
-            """
-            <h3 style='text-align: center; color: #6bb2e2; font-family: Arial;'>
-                SHOOTING
-            </h3>
-            """,
-            unsafe_allow_html=True
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            SHOOTING
+        </h3>
+        """,
+        unsafe_allow_html=True
         )
         new_columns = list(shooting.loc['Year'])
         shooting = shooting.drop(['Player Name', 'Year'])
@@ -772,13 +781,16 @@ if primary_position == 'ATT':
         else:
             shooting = shooting.apply(pd.to_numeric, errors='coerce')
             shooting_styled = shooting.style.format(precision=2)
+            shooting_styled = pd.concat([shooting_styled, wr_rank], axis=1)
+            shooting_styled = shooting_styled.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in shooting_styled.index}
+            shooting_styled = shooting_styled.rename(index=rename_mapping)
         st.markdown(
-            shooting_styled.to_html(
-                table_attributes='style="width:95%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
-            ),
-            unsafe_allow_html=True
+        shooting_styled.to_html(
+        table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
+        ),
+        unsafe_allow_html=True
         )
-
     overall_player['Position'] = 'ATT'
     
 elif primary_position == 'Wing':
