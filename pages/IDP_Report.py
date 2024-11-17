@@ -642,8 +642,17 @@ if primary_position == 'ATT':
     dribbling = dribbling.T
     defending = defending.T
     shooting = shooting.T
-    inn_columns = st.columns(4)
+    inn_columns = st.columns(4, gap="small")
     with inn_columns[0]:
+    # Add a styled, title for the "Passing" table
+        st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            PASSING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
@@ -665,8 +674,22 @@ if primary_position == 'ATT':
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
             passing_styled = passing_styled.rename(index=rename_mapping)
-        st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
+        st.markdown(
+            passing_styled.to_html(
+            table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
+            ),
+            unsafe_allow_html=True
+            )   
     with inn_columns[1]:
+            # Add a styled, title for the "Dribbling" table
+        st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DRIBBLING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
         dribbling.columns = new_columns
@@ -688,8 +711,22 @@ if primary_position == 'ATT':
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
-        st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
+        st.markdown(
+        dribbling_styled.to_html(
+        table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
+        ),
+        unsafe_allow_html=True
+        )
     with inn_columns[2]:
+        # Add a styled, title for the "Defending" table
+        st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DEFENDING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
         defending.columns = new_columns
@@ -711,8 +748,22 @@ if primary_position == 'ATT':
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
             defending_styled = defending_styled.rename(index=rename_mapping)
-        st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
+        st.markdown(
+        defending_styled.to_html(
+        table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
+        ),
+        unsafe_allow_html=True
+        )
     with inn_columns[3]:
+        # Add a styled, title for the "Shooting" table
+        st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            SHOOTING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(shooting.loc['Year'])
         shooting = shooting.drop(['Player Name', 'Year'])
         shooting.columns = new_columns
@@ -734,7 +785,12 @@ if primary_position == 'ATT':
             shooting_styled = shooting_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in shooting_styled.index}
             shooting_styled = shooting_styled.rename(index=rename_mapping)
-        st.write(shooting_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
+        st.markdown(
+        shooting_styled.to_html(
+        table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
+        ),
+        unsafe_allow_html=True
+        )
     overall_player['Position'] = 'ATT'
     
 elif primary_position == 'Wing':
