@@ -713,7 +713,7 @@ if primary_position == 'ATT':
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
         st.markdown(
         dribbling_styled.to_html(
-        table_attributes='style="width:95%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
+        table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
         ),
         unsafe_allow_html=True
         )
@@ -748,7 +748,12 @@ if primary_position == 'ATT':
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
             defending_styled = defending_styled.rename(index=rename_mapping)
-        st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
+        st.markdown(
+        defending_styled.to_html(
+        table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
+        ),
+        unsafe_allow_html=True
+        )
     with inn_columns[3]:
         # Add a styled, title for the "Shooting" table
         st.markdown(
