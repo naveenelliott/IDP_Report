@@ -58,8 +58,19 @@ def creatingPercentilesDM(merged_df):
                                         'Tackle %', 'Player Name', 'Team Name', 'Minutes'])
     player_name = merged_df.at[0, 'Player Full Name']
     team_name = merged_df.at[0, 'Team Name']
-    
-    dm_df = pd.read_csv("Thresholds/DefensiveMidfieldSeasonThresholds.csv")
+    # DENIS
+    age_group = merged_df.at[0, 'Team Category']
+
+    u13_u14 = ['U13', 'U14']
+    u15_u16 = ['U15', 'U16']
+    u17_u19 = ['U17', 'U19']
+
+    if age_group in u13_u14:
+        dm_df = pd.read_csv("UpdateThresholds_IDP/DefensiveMidfieldThresholds1314.csv")
+    if age_group in u15_u16:
+        dm_df = pd.read_csv("UpdateThresholds_IDP/DefensiveMidfieldThresholds1516.csv")
+    if age_group in u17_u19:
+        dm_df = pd.read_csv("UpdateThresholds_IDP/DefensiveMidfieldThresholds1719.csv")
 
     mean_values = dm_df.iloc[0, [5, 6, 7, 8, 9, 18]]
     std_values = dm_df.iloc[1, [5, 6, 7, 8, 9, 18]]
