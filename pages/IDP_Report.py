@@ -645,14 +645,14 @@ if primary_position == 'ATT':
     inn_columns = st.columns(4)
     with inn_columns[0]:
     # Add a styled, centered title for the "Passing" table
-    st.markdown(
+        st.markdown(
         """
         <h3 style='text-align: center; color: #6bb2e2; font-family: Arial;'>
             PASSING
         </h3>
         """,
         unsafe_allow_html=True
-    )
+        )
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
