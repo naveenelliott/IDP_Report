@@ -676,7 +676,7 @@ if primary_position == 'ATT':
             passing_styled = passing_styled.rename(index=rename_mapping)
         st.markdown(
             passing_styled.to_html(
-            table_attributes='style="width:95%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
+            table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
             ),
             unsafe_allow_html=True
             )   
