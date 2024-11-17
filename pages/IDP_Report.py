@@ -678,8 +678,8 @@ if primary_position == 'ATT':
             passing_styled.to_html(
             table_attributes='style="width:95%; margin: 10px auto; border-collapse: collapse;"'
             ),
-            unsafe_allow_html=True
-    )   with inn_columns[1]:
+            unsafe_allow_html=True)   
+    with inn_columns[1]:
             # Add a styled, title for the "Dribbling" table
         st.markdown(
         """
