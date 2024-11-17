@@ -29,6 +29,18 @@ team_name = st.session_state['selected_team']
 
 st.set_page_config(layout="wide")
 
+# Add the logo
+logo_path = 'logo.png'
+
+# Align the logo to the top-right corner
+header_container = st.container()
+with header_container:
+    col1, col2 = st.columns([9, 1])  # Adjust column widths to control logo placement
+    with col1:
+        st.write("")  # Placeholder for aligning
+    with col2:
+        st.image(logo_path, use_column_width=True)
+
 wr_rank = getting_WeeklyReportRank()
 wr_rank = wr_rank.loc[wr_rank['Team Name'] == team_name]
 wr_rank = wr_rank.loc[wr_rank['Player Full Name'] == player_name].reset_index(drop=True)
