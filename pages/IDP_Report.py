@@ -818,7 +818,7 @@ elif primary_position == 'Wing':
             PASSING
         </h3>
         """,
-        unsafe_allow_html=True
+            unsafe_allow_html=True
         )
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
@@ -849,7 +849,7 @@ elif primary_position == 'Wing':
             DRIBBLING
         </h3>
         """,
-        unsafe_allow_html=True
+            unsafe_allow_html=True
         )
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
