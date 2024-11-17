@@ -711,7 +711,12 @@ if primary_position == 'ATT':
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
-        st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
+        st.markdown(
+        dribbling_styled.to_html(
+        table_attributes='style="width:95%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
+        ),
+        unsafe_allow_html=True
+        )
     with inn_columns[2]:
         # Add a styled, title for the "Defending" table
         st.markdown(
