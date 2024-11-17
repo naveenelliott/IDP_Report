@@ -55,8 +55,19 @@ def creatingPercentilesFB(merged_df):
                                         'Tackle %', 'Player Name', 'Team Name', 'Minutes'])
     player_name = merged_df.at[0, 'Player Full Name']
     team_name = merged_df.at[0, 'Team Name']
-        
-    fb_df = pd.read_csv("Thresholds/FullBackSeasonThresholds.csv")
+    # DENIS
+    age_group = merged_df.at[0, 'Team Category']
+
+    u13_u14 = ['U13', 'U14']
+    u15_u16 = ['U15', 'U16']
+    u17_u19 = ['U17', 'U19']
+
+    if age_group in u13_u14:
+        fb_df = pd.read_csv("UpdateThresholds_IDP/FullBackThresholds1314.csv")
+    if age_group in u15_u16:
+        fb_df = pd.read_csv("UpdateThresholds_IDP/FullBackThresholds1516.csv")
+    if age_group in u17_u19:
+        fb_df = pd.read_csv("UpdateThresholds_IDP/FullBackThresholds1719.csv")
     
     mean_values = fb_df.iloc[0, [5,6,7,8,9,11,15]]
     std_values = fb_df.iloc[1, [5,6,7,8,9,11,15]]
