@@ -30,27 +30,10 @@ team_name = st.session_state['selected_team']
 # Set Streamlit page configuration
 st.set_page_config(layout="wide")
 
-# Add the logo
+# Add the logo and player picture side by side in columns
 logo_path = 'BostonBoltsLogo.png'
-
-# Align the logo to the top-right corner with adjustments
-header_container = st.container()
-with header_container:
-    col1, col2 = st.columns([7, 3])  # Make the left column wider to push the logo left
-    with col1:
-        st.write("")  # Placeholder for alignment
-    with col2:
-        st.image(logo_path, use_column_width=False, width=250)  # Increase size for better visibility
-
-wr_rank = getting_WeeklyReportRank()
-wr_rank = wr_rank.loc[wr_rank['Team Name'] == team_name]
-wr_rank = wr_rank.loc[wr_rank['Player Full Name'] == player_name].reset_index(drop=True)
-del wr_rank['Player Full Name'], wr_rank['Team Name']
-wr_rank = wr_rank.T
-wr_rank.columns = ['Rank']
-
 directory_path = 'Player_Photos'
-    
+
 # Search for files that match the variable name
 matching_files = glob.glob(os.path.join(directory_path, f"{player_name}.*")) + \
                  glob.glob(os.path.join(directory_path, f"{player_name} .*"))
@@ -58,13 +41,29 @@ matching_files = glob.glob(os.path.join(directory_path, f"{player_name}.*")) + \
 # Check if a matching file is found
 if matching_files:
     image_file = matching_files[0]
-    
     # Open the image
     player_pic = Image.open(image_file)
 else:
     player_pic = Image.open('Player_Photos/other_person.jpg')
 
-col1, col2 = st.columns(2)
+# Align the logo and player picture
+header_container = st.container()
+with header_container:
+    col1, col2 = st.columns([3, 1])  # Adjust the column widths to align the picture and logo
+    with col1:
+        # Add the player picture
+        st.image(player_pic, caption=f"Player Name: {player_name}", use_column_width=True)
+    with col2:
+        # Add the logo
+        st.image(logo_path, use_column_width=False, width=250)  # Set the logo size
+
+# Rest of your code
+wr_rank = getting_WeeklyReportRank()
+wr_rank = wr_rank.loc[wr_rank['Team Name'] == team_name]
+wr_rank = wr_rank.loc[wr_rank['Player Full Name'] == player_name].reset_index(drop=True)
+del wr_rank['Player Full Name'], wr_rank['Team Name']
+wr_rank = wr_rank.T
+wr_rank.columns = ['Rank']
 
 folder_path = 'Height_Weight'      
 # List all files in the folder
