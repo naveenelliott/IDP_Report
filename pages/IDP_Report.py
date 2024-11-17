@@ -35,7 +35,6 @@ wr_rank = wr_rank.loc[wr_rank['Player Full Name'] == player_name].reset_index(dr
 del wr_rank['Player Full Name'], wr_rank['Team Name']
 wr_rank = wr_rank.T
 wr_rank.columns = ['Rank']
-st.write(wr_rank)
 
 directory_path = 'Player_Photos'
     
@@ -950,6 +949,7 @@ elif primary_position == 'CM':
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing = pd.concat([passing, wr_rank], axis=1)
+            passing = passing.dropna(how='all', subset=['2024'])
             passing_styled = passing.style.format(precision=2)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
