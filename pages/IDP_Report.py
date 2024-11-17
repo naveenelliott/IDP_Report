@@ -36,13 +36,13 @@ logo_path = 'BostonBoltsLogo.png'
 # Align the logo to the top-right corner with adjustments
 header_container = st.container()
 with header_container:
-    col1, col2 = st.columns([8, 2])  # Adjust column widths to control placement
+    col1, col2 = st.columns([7, 3])  # Make the left column wider to push the logo left
     with col1:
         st.write("")  # Placeholder for alignment
     with col2:
-        # Add the logo, make it bigger, and shift it down slightly with extra spacing
-        st.write("")  # Add some spacing above
-        st.image(logo_path, use_column_width=False, width=250)  # Increase the size
+        # Add some spacing above to move the logo lower
+        st.write("\n\n")  # Add blank lines to shift the logo lower
+        st.image(logo_path, use_column_width=False, width=300)  # Increase size for better visibility
 
 wr_rank = getting_WeeklyReportRank()
 wr_rank = wr_rank.loc[wr_rank['Team Name'] == team_name]
