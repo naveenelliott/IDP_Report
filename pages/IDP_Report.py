@@ -936,28 +936,23 @@ elif primary_position == 'CM':
     playmaking = playmaking.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-        # Adjusting columns
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
-    
-        # Check number of columns and apply appropriate styling
         if passing.shape[1] >= 2:
+            passing = pd.concat([passing, wr_rank], axis=1)
+            passing = passing.dropna(how='all', subset=['2024'])
             passing_styled = passing.style.apply(
                 lambda col: [
                     apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
             ).format(precision=2)
-        else:
+        else: 
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.style.format(precision=2)
-    
-        # Convert back to DataFrame for concatenation
-        passing_df = passing_styled.data if hasattr(passing_styled, 'data') else passing
-        combined = pd.concat([passing_df, wr_rank], axis=1)
-        combined = combined.dropna(how='all', subset=['2024'])
-        passing_styled = combined.style.format(precision=2)
+            passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
+            passing_styled = passing_styled.dropna(how='all', subset=['2024'])
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
