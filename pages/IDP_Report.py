@@ -1022,6 +1022,8 @@ elif primary_position == 'CM':
             passing_styled = passing.style.format(precision=2)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
+            passing_styled = passing_styled.rename(index=rename_mapping)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
@@ -1030,6 +1032,8 @@ elif primary_position == 'CM':
         if dribbling.shape[1] >= 2:
             dribbling = pd.concat([dribbling, wr_rank], axis=1)
             dribbling = dribbling.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling.index}
+            dribbling = dribbling.rename(index=rename_mapping)
             dribbling_styled = dribbling.style.apply(
                 lambda col: [
                     apply_color_change(value, dribbling.at[idx, '2023'], idx) for idx, value in col.items()
@@ -1041,6 +1045,8 @@ elif primary_position == 'CM':
             dribbling_styled = dribbling.style.format(precision=2)
             dribbling_styled = pd.concat([dribbling_styled, wr_rank], axis=1)
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
+            dribbling_styled = dribbling_styled.rename(index=rename_mapping)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
@@ -1049,6 +1055,8 @@ elif primary_position == 'CM':
         if defending.shape[1] >= 2:
             defending = pd.concat([defending, wr_rank], axis=1)
             defending = defending.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending.index}
+            defending = defending.rename(index=rename_mapping)
             defending_styled = defending.style.apply(
                 lambda col: [
                     apply_color_change(value, defending.at[idx, '2023'], idx) for idx, value in col.items()
@@ -1060,6 +1068,8 @@ elif primary_position == 'CM':
             defending_styled = defending.style.format(precision=2)
             defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
+            defending_styled = defending_styled.rename(index=rename_mapping)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         nnew_columns = list(playmaking.loc['Year'])
@@ -1068,6 +1078,8 @@ elif primary_position == 'CM':
         if playmaking.shape[1] >= 2:
             playmaking = pd.concat([playmaking, wr_rank], axis=1)
             playmaking = playmaking.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in playmaking.index}
+            playmaking = playmaking.rename(index=rename_mapping)
             playmaking_styled = playmaking.style.apply(
                 lambda col: [
                     apply_color_change(value, playmaking.at[idx, '2023'], idx) for idx, value in col.items()
@@ -1079,6 +1091,8 @@ elif primary_position == 'CM':
             playmaking_styled = playmaking.style.format(precision=2)
             playmaking_styled = pd.concat([playmaking_styled, wr_rank], axis=1)
             playmaking_styled = playmaking_styled.dropna(how='all', subset=['2024'])
+            rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in playmaking_styled.index}
+            playmaking_styled = playmaking_styled.rename(index=rename_mapping)
         st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
