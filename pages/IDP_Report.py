@@ -1095,8 +1095,8 @@ elif primary_position == 'FB':
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
         if passing.shape[1] >= 2:
-            passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
-            passing_styled = passing_styled.dropna(how='all', subset=['2024'])
+            passing = pd.concat([passing, wr_rank], axis=1)
+            passing = passing.dropna(how='all', subset=['2024'])
             passing_styled = passing.style.apply(
                 lambda col: [
                     apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
