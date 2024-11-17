@@ -249,7 +249,7 @@ def createPizzaChart(bolts):
                 # color for the slices and text
                 slice_colors = [] 
                 text_colors =  ["#000000"] * 2 + ["#000000"] * 4 + ["#F2F2F2"] * 3 + ['#F2F2F2'] * 2
-                slice_colors_bck = ['#d9d9d9'] * 2 + ["#6bb2e2"] * 4 + ["#263a6a"] * 3 + ['black'] * 2 
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices 
                 text_colors_bck =  []
                 compare_colors_bck = []
             
@@ -368,7 +368,7 @@ def createPizzaChart(bolts):
                 values = [int(group[col]) for col in wing_columns]
 
                 # color for the slices and text
-                slice_colors = ['#d9d9d9'] * 2 + ["#6bb2e2"] * 4 + ["#263a6a"] * 3 + ['black'] * 2 
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices 
                 text_colors =  ["#000000"] * 2 + ["#000000"] * 4 + ["#F2F2F2"] * 3 + ['#F2F2F2'] * 2
             
                 # instantiate PyPizza class
@@ -449,7 +449,7 @@ def createPizzaChart(bolts):
                 other_vals = [int(row_2023[col]) for col in cm_columns]
 
                 # color for the slices and text
-                slice_colors_bck = ['#d9d9d9'] * 2 + ["#6bb2e2"] * 3 + ["#263a6a"] * 4 + ['black'] * 3 
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices 
                 text_colors =  ["#000000"] * 2 + ["#000000"] * 3 + ["#F2F2F2"] * 4 + ['#F2F2F2'] * 3
                 slice_colors = []
                 text_colors_bck =  []
@@ -568,7 +568,7 @@ def createPizzaChart(bolts):
                 values = [int(group[col]) for col in cm_columns]
 
                 # color for the slices and text
-                slice_colors = ['#d9d9d9'] * 2 + ["#6bb2e2"] * 3 + ["#263a6a"] * 4 + ['black'] * 3 
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
                 text_colors =  ["#000000"] * 2 + ["#000000"] * 3 + ["#F2F2F2"] * 4 + ['#F2F2F2'] * 3
             
                 # instantiate PyPizza class
@@ -649,7 +649,7 @@ def createPizzaChart(bolts):
                 other_vals = [int(row_2023[col]) for col in cdm_columns]
 
                 # color for the slices and text
-                slice_colors_bck = ['#d9d9d9'] * 4 + ["#6bb2e2"] * 4 + ['black'] * 3
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
                 text_colors =  ["#000000"] * 4 + ["#000000"] * 4 + ['#F2F2F2'] * 3
                 slice_colors = []
                 text_colors_bck =  []
@@ -762,7 +762,7 @@ def createPizzaChart(bolts):
                 values = [int(group[col]) for col in cdm_columns]
 
                 # color for the slices and text
-                slice_colors = ['#d9d9d9'] * 4 + ["#6bb2e2"] * 4 + ['black'] * 3
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
                 text_colors =  ["#000000"] * 4 + ["#000000"] * 4 + ['#F2F2F2'] * 3
 
                     # instantiate PyPizza class
@@ -838,7 +838,7 @@ def createPizzaChart(bolts):
                 other_vals = [int(row_2023[col]) for col in cb_columns]
 
                 # color for the slices and text
-                slice_colors_bck = ['#d9d9d9'] * 3 + ["#6bb2e2"] * 4 + ["black"] * 2
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
                 text_colors =  ["#000000"] * 3 + ["#000000"] * 4 + ["#F2F2F2"] * 2
                 slice_colors = []
                 text_colors_bck =  []
@@ -953,7 +953,7 @@ def createPizzaChart(bolts):
                 values = [int(group[col]) for col in cb_columns]
 
                 # color for the slices and text
-                slice_colors = ['#d9d9d9'] * 3 + ["#6bb2e2"] * 4 + ["black"] * 2
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
                 text_colors =  ["#000000"] * 3 + ["#000000"] * 4 + ["#F2F2F2"] * 2
 
                     # instantiate PyPizza class
@@ -1032,7 +1032,7 @@ def createPizzaChart(bolts):
 
 
                 # color for the slices and text
-                slice_colors_bck = ['#d9d9d9'] * 4 + ["#6bb2e2"] * 4 + ['black'] * 4 
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices 
                 text_colors =  ["#000000"] * 4 + ["#000000"] * 4 + ['#F2F2F2'] * 4
                 slice_colors = []
                 text_colors_bck =  []
@@ -1146,7 +1146,7 @@ def createPizzaChart(bolts):
                 values = [int(group[col]) for col in fb_columns]
 
                 # color for the slices and text
-                slice_colors = ['#d9d9d9'] * 4 + ["#6bb2e2"] * 4 + ['black'] * 4 
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices 
                 text_colors =  ["#000000"] * 4 + ["#000000"] * 4 + ['#F2F2F2'] * 4
 
                     # instantiate PyPizza class
