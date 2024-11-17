@@ -627,23 +627,6 @@ current_names = ['Forward Total', 'Pass Completion ', 'Total', 'Forward Completi
 
 new_names = ['Forward Passes', 'Pass %', 'Total Passes', 'Forward Pass %', 'Total Tackles', 'Total Recoveries', 'Total Interceptions', 'Regain %', 'Tackle %', 'Shots', 'Passes into 18']
 
-def add_table_title(styled_df, title):
-    # Add title row to the styled DataFrame HTML
-    styled_html = styled_df.to_html(table_attributes='style="width:100%"', justify='left')
-    styled_html = styled_html.replace(
-        '<thead>',
-        f'''
-        <thead>
-            <tr style="text-align: center; font-weight: bold;">
-                <th>{title}</th>
-                <th>2024</th>
-                <th>2023</th>
-                <th>Rank</th>
-            </tr>
-        '''
-    )
-    return styled_html
-
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
     passing, dribbling, defending, shooting = creatingRawAtt(player_season_raw)
@@ -660,13 +643,11 @@ if primary_position == 'ATT':
     defending = defending.T
     shooting = shooting.T
     inn_columns = st.columns(4)
-
-    # Passing Table
     with inn_columns[0]:
         new_columns = list(passing.loc['Year'])
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
-        if passing.shape[1] >= 3:  # Includes 2024, 2023, and Rank columns
+        if passing.shape[1] >= 2:
             passing = pd.concat([passing, wr_rank], axis=1)
             passing = passing.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing.index}
@@ -684,14 +665,12 @@ if primary_position == 'ATT':
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
             passing_styled = passing_styled.rename(index=rename_mapping)
-        st.write(add_table_title(passing_styled, "Passing"), unsafe_allow_html=True)
-
-    # Dribbling Table
+        st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
         dribbling.columns = new_columns
-        if dribbling.shape[1] >= 3:
+        if dribbling.shape[1] >= 2:
             dribbling = pd.concat([dribbling, wr_rank], axis=1)
             dribbling = dribbling.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling.index}
@@ -709,14 +688,12 @@ if primary_position == 'ATT':
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
-        st.write(add_table_title(dribbling_styled, "Dribbling"), unsafe_allow_html=True)
-
-    # Defending Table
+        st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
         defending.columns = new_columns
-        if defending.shape[1] >= 3:
+        if defending.shape[1] >= 2:
             defending = pd.concat([defending, wr_rank], axis=1)
             defending = defending.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending.index}
@@ -734,14 +711,12 @@ if primary_position == 'ATT':
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
             defending_styled = defending_styled.rename(index=rename_mapping)
-        st.write(add_table_title(defending_styled, "Defending"), unsafe_allow_html=True)
-
-    # Shooting Table
+        st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         new_columns = list(shooting.loc['Year'])
         shooting = shooting.drop(['Player Name', 'Year'])
         shooting.columns = new_columns
-        if shooting.shape[1] >= 3:
+        if shooting.shape[1] >= 2:
             shooting = pd.concat([shooting, wr_rank], axis=1)
             shooting = shooting.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in shooting.index}
@@ -759,10 +734,9 @@ if primary_position == 'ATT':
             shooting_styled = shooting_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in shooting_styled.index}
             shooting_styled = shooting_styled.rename(index=rename_mapping)
-        st.write(add_table_title(shooting_styled, "Shooting"), unsafe_allow_html=True)
-
+        st.write(shooting_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'ATT'
-
+    
 elif primary_position == 'Wing':
     overall_player = creatingPercentilesWing(player_season)
     passing, dribbling, defending, playmaking, shooting = creatingRawWing(player_season_raw)
