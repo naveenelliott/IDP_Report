@@ -647,7 +647,7 @@ if primary_position == 'ATT':
           # Add a title for the "Passing" table
         st.markdown(
         """
-        <h3 style='text-align: left; color: #6bb2e2; font-family: Arial;'>
+        <h3 style='text-align: center; color: #6bb2e2; font-family: Arial;'>
             PASSING
         </h3>
         """,
