@@ -632,6 +632,8 @@ if primary_position == 'ATT':
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
         if passing.shape[1] >= 2:
+            passing = pd.concat([passing, wr_rank], axis=1)
+            passing = passing.dropna(how='all', subset=['2024'])
             passing_styled = passing.style.apply(
                 lambda col: [
                     apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
@@ -641,12 +643,16 @@ if primary_position == 'ATT':
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.style.format(precision=2)
+            passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
+            passing_styled = passing_styled.dropna(how='all', subset=['2024'])
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
         dribbling.columns = new_columns
         if dribbling.shape[1] >= 2:
+            dribbling = pd.concat([dribbling, wr_rank], axis=1)
+            dribbling = dribbling.dropna(how='all', subset=['2024'])
             dribbling_styled = dribbling.style.apply(
                 lambda col: [
                     apply_color_change(value, dribbling.at[idx, '2023'], idx) for idx, value in col.items()
@@ -656,12 +662,16 @@ if primary_position == 'ATT':
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
             dribbling_styled = dribbling.style.format(precision=2)
+            dribbling_styled = pd.concat([dribbling_styled, wr_rank], axis=1)
+            dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
         defending.columns = new_columns
         if defending.shape[1] >= 2:
+            defending = pd.concat([defending, wr_rank], axis=1)
+            defending = defending.dropna(how='all', subset=['2024'])
             defending_styled = defending.style.apply(
                 lambda col: [
                     apply_color_change(value, defending.at[idx, '2023'], idx) for idx, value in col.items()
@@ -671,12 +681,16 @@ if primary_position == 'ATT':
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
             defending_styled = defending.style.format(precision=2)
+            defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
+            defending_styled = defending_styled.dropna(how='all', subset=['2024'])
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         new_columns = list(shooting.loc['Year'])
         shooting = shooting.drop(['Player Name', 'Year'])
         shooting.columns = new_columns
         if shooting.shape[1] >= 2:
+            shooting = pd.concat([shooting, wr_rank], axis=1)
+            shooting = shooting.dropna(how='all', subset=['2024'])
             shooting_styled = shooting.style.apply(
                 lambda col: [
                     apply_color_change(value, shooting.at[idx, '2023'], idx) for idx, value in col.items()
@@ -686,6 +700,8 @@ if primary_position == 'ATT':
         else:
             shooting = shooting.apply(pd.to_numeric, errors='coerce')
             shooting_styled = shooting.style.format(precision=2)
+            shooting_styled = pd.concat([shooting_styled, wr_rank], axis=1)
+            shooting_styled = shooting_styled.dropna(how='all', subset=['2024'])
         st.write(shooting_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'ATT'
 elif primary_position == 'Wing':
@@ -711,6 +727,8 @@ elif primary_position == 'Wing':
         passing = passing.drop(['Player Name', 'Year'])
         passing.columns = new_columns
         if passing.shape[1] >= 2:
+            passing = pd.concat([passing, wr_rank], axis=1)
+            passing = passing.dropna(how='all', subset=['2024'])
             passing_styled = passing.style.apply(
                 lambda col: [
                     apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
@@ -720,12 +738,16 @@ elif primary_position == 'Wing':
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.style.format(precision=2)
+            passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
+            passing_styled = passing_styled.dropna(how='all', subset=['2024'])
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
         dribbling.columns = new_columns
         if dribbling.shape[1] >= 2:
+            dribbling = pd.concat([dribbling, wr_rank], axis=1)
+            dribbling = dribbling.dropna(how='all', subset=['2024'])
             dribbling_styled = dribbling.style.apply(
                 lambda col: [
                     apply_color_change(value, dribbling.at[idx, '2023'], idx) for idx, value in col.items()
@@ -735,12 +757,16 @@ elif primary_position == 'Wing':
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
             dribbling_styled = dribbling.style.format(precision=2)
+            dribbling_styled = pd.concat([dribbling_styled, wr_rank], axis=1)
+            dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
         defending.columns = new_columns
         if defending.shape[1] >= 2:
+            defending = pd.concat([defending, wr_rank], axis=1)
+            defending = defending.dropna(how='all', subset=['2024'])
             defending_styled = defending.style.apply(
                 lambda col: [
                     apply_color_change(value, defending.at[idx, '2023'], idx) for idx, value in col.items()
@@ -750,12 +776,16 @@ elif primary_position == 'Wing':
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
             defending_styled = defending.style.format(precision=2)
+            defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
+            defending_styled = defending_styled.dropna(how='all', subset=['2024'])
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         new_columns = list(playmaking.loc['Year'])
         playmaking = playmaking.drop(['Player Name', 'Year'])
         playmaking.columns = new_columns
         if playmaking.shape[1] >= 2:
+            playmaking = pd.concat([playmaking, wr_rank], axis=1)
+            playmaking = playmaking.dropna(how='all', subset=['2024'])
             playmaking_styled = playmaking.style.apply(
                 lambda col: [
                     apply_color_change(value, playmaking.at[idx, '2023'], idx) for idx, value in col.items()
@@ -765,12 +795,16 @@ elif primary_position == 'Wing':
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
             playmaking_styled = playmaking.style.format(precision=2)
+            playmaking_styled = pd.concat([playmaking_styled, wr_rank], axis=1)
+            playmaking_styled = playmaking_styled.dropna(how='all', subset=['2024'])
         st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[4]:
         new_columns = list(shooting.loc['Year'])
         shooting = shooting.drop(['Player Name', 'Year'])
         shooting.columns = new_columns
         if shooting.shape[1] >= 2:
+            shooting = pd.concat([shooting, wr_rank], axis=1)
+            shooting = shooting.dropna(how='all', subset=['2024'])
             shooting_styled = shooting.style.apply(
                 lambda col: [
                     apply_color_change(value, shooting.at[idx, '2023'], idx) for idx, value in col.items()
@@ -780,6 +814,8 @@ elif primary_position == 'Wing':
         else:
             shooting = shooting.apply(pd.to_numeric, errors='coerce')
             shooting_styled = shooting.style.format(precision=2)
+            shooting_styled = pd.concat([shooting_styled, wr_rank], axis=1)
+            shooting_styled = shooting_styled.dropna(how='all', subset=['2024'])
         st.write(shooting_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'Wing'
 elif primary_position == 'CB':
