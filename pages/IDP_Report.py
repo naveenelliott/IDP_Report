@@ -786,7 +786,7 @@ if primary_position == 'ATT':
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in shooting_styled.index}
             shooting_styled = shooting_styled.rename(index=rename_mapping)
         st.markdown(
-        defending_styled.to_html(
+        shooting_styled.to_html(
         table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
         ),
         unsafe_allow_html=True
