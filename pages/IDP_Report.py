@@ -637,7 +637,7 @@ if primary_position == 'ATT':
             ).format(precision=2)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.round(2)
+            passing_styled = passing.style.format(precision=2)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
@@ -652,7 +652,7 @@ if primary_position == 'ATT':
             ).format(precision=2)
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
-            dribbling_styled = dribbling.round(2)
+            dribbling_styled = dribbling.style.format(precision=2)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
@@ -667,7 +667,7 @@ if primary_position == 'ATT':
             ).format(precision=2)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.round(2)
+            defending_styled = defending.style.format(precision=2)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         new_columns = list(shooting.loc['Year'])
@@ -682,7 +682,7 @@ if primary_position == 'ATT':
             ).format(precision=2)
         else:
             shooting = shooting.apply(pd.to_numeric, errors='coerce')
-            shooting_styled = shooting.round(2)
+            shooting_styled = shooting.style.format(precision=2)
         st.write(shooting_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'ATT'
 elif primary_position == 'Wing':
@@ -716,7 +716,7 @@ elif primary_position == 'Wing':
             ).format(precision=2)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.round(2)
+            passing_styled = passing.style.format(precision=2)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
@@ -731,7 +731,7 @@ elif primary_position == 'Wing':
             ).format(precision=2)
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
-            dribbling_styled = dribbling.round(2)
+            dribbling_styled = dribbling.style.format(precision=2)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
@@ -746,7 +746,7 @@ elif primary_position == 'Wing':
             ).format(precision=2)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.round(2)
+            defending_styled = defending.style.format(precision=2)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         new_columns = list(playmaking.loc['Year'])
@@ -761,7 +761,7 @@ elif primary_position == 'Wing':
             ).format(precision=2)
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
-            playmaking_styled = playmaking.round(2)
+            playmaking_styled = playmaking.style.format(precision=2)
         st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[4]:
         new_columns = list(shooting.loc['Year'])
@@ -776,7 +776,7 @@ elif primary_position == 'Wing':
             ).format(precision=2)
         else:
             shooting = shooting.apply(pd.to_numeric, errors='coerce')
-            shooting_styled = shooting.round(2)
+            shooting_styled = shooting.style.format(precision=2)
         st.write(shooting_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'Wing'
 elif primary_position == 'CB':
@@ -806,7 +806,7 @@ elif primary_position == 'CB':
             ).format(precision=2)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.round(2)
+            passing_styled = passing.style.format(precision=2)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(ball_prog.loc['Year'])
@@ -821,7 +821,7 @@ elif primary_position == 'CB':
             ).format(precision=2)
         else:
             ball_prog = ball_prog.apply(pd.to_numeric, errors='coerce')
-            ball_prog_styled = ball_prog.round(2)
+            ball_prog_styled = ball_prog.style.format(precision=2)
         st.write(ball_prog_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
@@ -836,7 +836,7 @@ elif primary_position == 'CB':
             ).format(precision=2)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.round(2)
+            defending_styled = defending.style.format(precision=2)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'CB'
 elif primary_position == 'DM':
@@ -868,7 +868,7 @@ elif primary_position == 'DM':
             ).format(precision=2)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.round(2)
+            passing_styled = passing.style.format(precision=2)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
@@ -883,7 +883,7 @@ elif primary_position == 'DM':
             ).format(precision=2)
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
-            dribbling_styled = dribbling.round(2)
+            dribbling_styled = dribbling.style.format(precision=2)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
@@ -898,7 +898,7 @@ elif primary_position == 'DM':
             ).format(precision=2)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.round(2)
+            defending_styled = defending.style.format(precision=2)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         new_columns = list(playmaking.loc['Year'])
@@ -913,7 +913,7 @@ elif primary_position == 'DM':
             ).format(precision=2)
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
-            playmaking_styled = playmaking.round(2)
+            playmaking_styled = playmaking.style.format(precision=2)
         st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'DM'
 elif primary_position == 'CM':
@@ -960,7 +960,7 @@ elif primary_position == 'CM':
             ).format(precision=2)
         else: 
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
-            dribbling_styled = dribbling.round(2)
+            dribbling_styled = dribbling.style.format(precision=2)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
@@ -975,7 +975,7 @@ elif primary_position == 'CM':
             ).format(precision=2)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.round(2)
+            defending_styled = defending.style.format(precision=2)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         nnew_columns = list(playmaking.loc['Year'])
@@ -990,7 +990,7 @@ elif primary_position == 'CM':
             ).format(precision=2)
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
-            playmaking_styled = playmaking.round(2)
+            playmaking_styled = playmaking.style.format(precision=2)
         st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
@@ -1020,7 +1020,7 @@ elif primary_position == 'FB':
             ).format(precision=2)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.round(2)
+            passing_styled = passing.style.format(precision=2)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
@@ -1036,7 +1036,7 @@ elif primary_position == 'FB':
             ).format(precision=2)
         else:
             attacking = attacking.apply(pd.to_numeric, errors='coerce')
-            attacking_styled = attacking.round(2)
+            attacking_styled = attacking.style.format(precision=2)
         st.write(attacking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(attacking_styled, use_container_width=True)
     with inn_columns[2]:
@@ -1052,7 +1052,7 @@ elif primary_position == 'FB':
             ).format(precision=2)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.round(2)
+            defending_styled = defending.style.format(precision=2)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(defending_styled, use_container_width=True)
     overall_player['Position'] = 'FB'
