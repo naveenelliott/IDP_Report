@@ -41,8 +41,10 @@ with header_container:
         st.write("")  # Placeholder for alignment
     with col2:
         # Add some spacing above to move the logo lower
-        st.write("\n\n")  # Add blank lines to shift the logo lower
-        st.image(logo_path, use_column_width=False, width=300)  # Increase size for better visibility
+        st.write("")  # First line of spacing
+        st.write("")  # Second line of spacing
+        st.write("")
+        st.image(logo_path, use_column_width=False, width=250)  # Increase size for better visibility
 
 wr_rank = getting_WeeklyReportRank()
 wr_rank = wr_rank.loc[wr_rank['Team Name'] == team_name]
