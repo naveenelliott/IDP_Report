@@ -644,9 +644,9 @@ if primary_position == 'ATT':
     shooting = shooting.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-        new_columns = ['Passing'] + list(passing.loc['Year'])  # Prepend "Passing" to headers
-        passing = passing.drop(['Player Name', 'Year'])  # Drop irrelevant rows/columns
-        passing.columns = new_columns[:passing.shape[1]]  # Ensure length matches
+        new_columns = list(passing.loc['Year'])
+        passing = passing.drop(['Player Name', 'Year'])
+        passing.columns = new_columns
         if passing.shape[1] >= 2:
             passing = pd.concat([passing, wr_rank], axis=1)
             passing = passing.dropna(how='all', subset=['2024'])
