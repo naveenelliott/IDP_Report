@@ -40,7 +40,7 @@ def createPizzaChart(bolts):
 
                 # color for the slices and text
                 slice_colors = []
-                slice_colors_bck = ['#d9d9d9'] * 2 + ["#6bb2e2"] * 2 + ["#263a6a"] * 2 + ['black'] * 3 
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
                 text_colors =  ["#000000"] * 2 + ["#000000"] * 2 + ["#F2F2F2"] * 2 + ['#F2F2F2'] * 3
                 text_colors_bck =  []
                 compare_colors_bck = []
