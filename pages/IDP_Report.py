@@ -35,7 +35,7 @@ logo_path = 'BostonBoltsLogo.png'
 # Align the logo to the top-right corner
 header_container = st.container()
 with header_container:
-    col1, col2 = st.columns([9, 1])  # Adjust column widths to control logo placement
+    col1, col2 = st.columns([8, 2])  # Adjust column widths to control logo placement
     with col1:
         st.write("")  # Placeholder for aligning
     with col2:
