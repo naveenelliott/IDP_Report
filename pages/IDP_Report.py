@@ -948,9 +948,9 @@ elif primary_position == 'CM':
             ).format(precision=2)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing = pd.concat([passing, wr_rank], axis=1)
-            passing = passing.dropna(how='all', subset=['2024'])
             passing_styled = passing.style.format(precision=2)
+        passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
+        passing_styled = passing_styled.dropna(how='all', subset=['2024'])
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         new_columns = list(dribbling.loc['Year'])
@@ -965,9 +965,9 @@ elif primary_position == 'CM':
             ).format(precision=2)
         else: 
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
-            dribbling = pd.concat([dribbling, wr_rank], axis=1)
-            dribbling = dribbling.dropna(how='all', subset=['2024'])
             dribbling_styled = dribbling.style.format(precision=2)
+        dribbling_styled = pd.concat([dribbling_styled, wr_rank], axis=1)
+        dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         new_columns = list(defending.loc['Year'])
@@ -982,9 +982,9 @@ elif primary_position == 'CM':
             ).format(precision=2)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending = pd.concat([defending, wr_rank], axis=1)
-            defending = defending.dropna(how='all', subset=['2024'])
             defending_styled = defending.style.format(precision=2)
+        defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
+        defending_styled = defending_styled.dropna(how='all', subset=['2024'])
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         nnew_columns = list(playmaking.loc['Year'])
@@ -999,9 +999,9 @@ elif primary_position == 'CM':
             ).format(precision=2)
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
-            playmaking = pd.concat([playmaking, wr_rank], axis=1)
-            playmaking = playmaking.dropna(how='all', subset=['2024'])
             playmaking_styled = playmaking.style.format(precision=2)
+        playmaking_styled = pd.concat([playmaking_styled, wr_rank], axis=1)
+        playmaking_styled = playmaking_styled.dropna(how='all', subset=['2024'])
         st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
