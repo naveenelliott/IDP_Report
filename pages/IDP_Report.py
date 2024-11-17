@@ -610,7 +610,7 @@ def apply_color_change(value, base_value, index):
     except:
         return ''  # No styling if value is not numeric or calculation fails
 
-current_columns = ['Forward Total', 'Pass Completion ', 'Total', 'Forward Completion', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ', 'Efforts on Goal']
+current_names = ['Forward Total', 'Pass Completion ', 'Total', 'Forward Completion', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ', 'Efforts on Goal']
 
 new_names = ['Forward Passes', 'Pass %', 'Total Passes', 'Forward Pass %', 'Total Tackles', 'Total Recoveries', 'Total Interceptions', 'Regain %', 'Tackle %', 'Shots']
 
