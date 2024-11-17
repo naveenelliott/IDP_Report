@@ -644,7 +644,7 @@ if primary_position == 'ATT':
     shooting = shooting.T
     inn_columns = st.columns(4)
     with inn_columns[0]:
-    # Add a styled, centered title for the "Passing" table
+    # Add a styled, title for the "Passing" table
         st.markdown(
         """
         <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
@@ -676,6 +676,15 @@ if primary_position == 'ATT':
             passing_styled = passing_styled.rename(index=rename_mapping)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
+        # Add a styled, title for the "Dribbling" table
+        st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DRIBBLING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(dribbling.loc['Year'])
         dribbling = dribbling.drop(['Player Name', 'Year'])
         dribbling.columns = new_columns
@@ -699,6 +708,15 @@ if primary_position == 'ATT':
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
+        # Add a styled, title for the "Defending" table
+        st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            DEFENDING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(defending.loc['Year'])
         defending = defending.drop(['Player Name', 'Year'])
         defending.columns = new_columns
@@ -722,6 +740,15 @@ if primary_position == 'ATT':
             defending_styled = defending_styled.rename(index=rename_mapping)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
+        # Add a styled, title for the "Shooting" table
+        st.markdown(
+        """
+        <h3 style='text-align: right; color: #6bb2e2; font-family: Arial;'>
+            SHOOTING
+        </h3>
+        """,
+        unsafe_allow_html=True
+        )
         new_columns = list(shooting.loc['Year'])
         shooting = shooting.drop(['Player Name', 'Year'])
         shooting.columns = new_columns
