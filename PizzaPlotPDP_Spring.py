@@ -114,33 +114,7 @@ def createPizzaChart(bolts):
                             )                                  # values to be used when adding parameter-values
                 )
                 fig.set_dpi(600)
-            
-                fig.text(
-                0.23, 0.9425, "Defending          Passing           Dribbling         Shooting", size=14,
-                fontproperties=font_bold, color="#000000"
-                )
-
-                # add rectangles
-                fig.patches.extend([
-                    plt.Rectangle(
-                        (0.2, 0.94), 0.025, 0.021, fill=True, color="#d9d9d9",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    plt.Rectangle(
-                        (0.37, 0.94), 0.025, 0.021, fill=True, color="#6bb2e2",
-                        transform=fig.transFigure, figure=fig
-                        ),    
-                    plt.Rectangle(
-                        (0.525, 0.94), 0.025, 0.021, fill=True, color="#263a6a",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    plt.Rectangle(
-                        (0.69, 0.94), 0.025, 0.021, fill=True, color="black",
-                        transform=fig.transFigure, figure=fig
-                        ),
-                    ])
-
-            
+                
                 player_name = group['Player Name'].iloc[0]
                 fig.set_facecolor('white')
                 plt.gca().set_facecolor('white')
