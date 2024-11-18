@@ -142,7 +142,7 @@ col1, col2 = st.columns([7, 3])  # Adjust widths as needed (e.g., 7:3 ratio)
 # First Column: Player Picture and Stats
 with col1:
     # Inner columns for Picture and Stats/Info
-    picture_col, info_col = st.columns([2, 5])  # Adjust inner widths as needed
+    picture_col, info_col = st.columns([4, 3])  # Adjust inner widths as needed
 
     # Player Picture in the first inner column
     with picture_col:
