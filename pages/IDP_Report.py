@@ -139,6 +139,8 @@ primary_position = primary_position['Position Tag'].values[0]
 # Create two columns: One for Player Info and Picture, One for the Logo
 col1, col2 = st.columns([6, 4])  # Adjust widths as needed (e.g., 7:3 ratio)
 
+st.markdown(f"<h2 style='text-align: left;'>{player_name} Individual Player Report</h2>", unsafe_allow_html=True)
+
 # First Column: Player Picture and Stats
 with col1:
     # Inner columns for Picture and Stats/Info
@@ -149,15 +151,7 @@ with col1:
         # Player Picture
         st.image(player_pic, use_column_width=True)
 
-        # Player Info under the Picture
-        st.markdown(
-            """
-            <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 12pt; color: black;'>Player Name: {gk_name}</span>
-            </div>
-            """.format(gk_name=player_name),
-            unsafe_allow_html=True
-        )
+
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
