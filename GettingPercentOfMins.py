@@ -7,7 +7,7 @@ def plottingMinsPlayed(player_name, percentage_played):
     fig, ax = plt.subplots(figsize=(8, 2))
     plt.barh([player_name], [percentage_played], color='lightblue')
 
-    plt.title(f'Percent of Mins Played', fontsize=40)
+    plt.title(f'% of Mins Played', fontsize=40)
 
     plt.xlim(0, 100)
 
