@@ -11,7 +11,8 @@ def plottingMinsPlayed(player_name, percentage_played):
 
     # Add text label consistently outside the bar
     for index, value in enumerate([percentage_played]):
-        ax.text(102, index, f'{value:.2f}%', va='center', fontsize=15)  # Fixed position outside
+        # Use formatted string to ensure fixed alignment
+        ax.text(105, index, f'{value:>6.2f}%', va='center', fontsize=15)  # Consistent alignment outside the bar
 
     # Hide unnecessary axes ticks
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
@@ -32,7 +33,8 @@ def plottingStarts(player_name, percentage_played):
 
     # Add text label consistently outside the bar
     for index, value in enumerate([percentage_played]):
-        ax.text(102, index, f'{value:.2f}%', va='center', fontsize=15)  # Fixed position outside
+        # Use formatted string to ensure fixed alignment
+        ax.text(105, index, f'{value:>6.2f}%', va='center', fontsize=15)  # Consistent alignment outside the bar
 
     # Hide unnecessary axes ticks
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
