@@ -7,13 +7,14 @@ def plottingMinsPlayed(player_name, percentage_played):
     fig, ax = plt.subplots(figsize=(8, 2))
     plt.barh([player_name], [percentage_played], color='lightblue')
 
-    plt.title(f'% of Mins Played', fontsize=40)
+    plt.title('% of Mins Played', fontsize=40)
 
     plt.xlim(0, 100)
 
-    # Show the percentage value on the bar
+    # Define a fixed position for the text, regardless of percentage value
+    fixed_position = 105  # This places all text consistently to the right of the chart area
     for index, value in enumerate([percentage_played]):
-        plt.text(value + 1, index, f'{value:.2f}%', va='center', fontsize=40)
+        plt.text(fixed_position, index, f'{value:.2f}%', va='center', fontsize=40)  # Consistent position
 
     ax.xaxis.set_ticks([])
     ax.yaxis.set_ticks([])
@@ -31,9 +32,10 @@ def plottingStarts(player_name, percentage_played):
 
     plt.xlim(0, 100)
 
-    # Show the percentage value on the bar
+    # Define a fixed position for the text, regardless of percentage value
+    fixed_position = 105  # This places all text consistently to the right of the chart area
     for index, value in enumerate([percentage_played]):
-        plt.text(value + 1, index, f'{value:.2f}%', va='center', fontsize=40)
+        plt.text(fixed_position, index, f'{value:.2f}%', va='center', fontsize=40)  # Consistent position
 
     ax.xaxis.set_ticks([])
     ax.yaxis.set_ticks([])
