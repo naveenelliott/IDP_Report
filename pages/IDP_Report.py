@@ -674,8 +674,8 @@ if primary_position == 'ATT':
         html_table = passing_styled.to_html(table_attributes='style="width:100%"')
         print(html_table)
         customized_table = html_table.replace(
-            '<td>',  # Find the first <td> in the HTML
-            '<td style="color: #6bb2e2;">Passing</td>', 1  # Replace it with styled content
+            '<th>',  # Find the first <td> in the HTML
+            '<th style="color: #6bb2e2;">Passing</th>', 1  # Replace it with styled content
         )
         st.write(customized_table, unsafe_allow_html=True)   
     with inn_columns[1]:
