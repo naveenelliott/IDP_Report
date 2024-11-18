@@ -673,8 +673,8 @@ if primary_position == 'ATT':
             passing_styled = passing_styled.rename(index=rename_mapping)
         html_table = passing_styled.to_html(table_attributes='style="width:100%"')
         customized_table = html_table.replace(
-            '<thead>',
-            '<thead><tr><th style="text-align: left; color: #0000FF;">Passing</th></tr>'
+            '<td>',  # Find the first <td> in the HTML
+            '<td style="color: #6bb2e2;">Passing</td>', 1  # Replace it with styled content
         )
         st.write(customized_table, unsafe_allow_html=True)   
     with inn_columns[1]:
