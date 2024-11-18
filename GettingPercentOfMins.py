@@ -1,43 +1,42 @@
-import pandas as pd
-import streamlit as st
 import matplotlib.pyplot as plt
 
 def plottingMinsPlayed(player_name, percentage_played):
-    # Create a horizontal bar chart with consistent settings
+    # Create a horizontal bar chart with fixed bar height
     fig, ax = plt.subplots(figsize=(10, 2))  # Consistent figure size
-    plt.barh([player_name], [percentage_played], color='lightblue')
+    ax.barh([player_name], [percentage_played], color='lightblue', height=0.4)  # Fixed bar height
 
-    plt.title('% of Mins Played', fontsize=40)  # Consistent font size
-    plt.xlim(0, 100)  # Same x-axis range for consistency
+    # Add title
+    ax.set_title('% of Mins Played', fontsize=20)  # Consistent title font size
+    ax.set_xlim(0, 100)  # Fixed x-axis range for consistent scaling
 
-    # Place the text consistently outside the bar
-    fixed_position = 105  # Fixed offset outside the chart area
+    # Add text label consistently outside the bar
     for index, value in enumerate([percentage_played]):
-        plt.text(fixed_position, index, f'{value:.2f}%', va='center', fontsize=30)  # Consistent text size
+        ax.text(102, index, f'{value:.2f}%', va='center', fontsize=15)  # Fixed position outside
 
+    # Hide unnecessary axes ticks
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
     ax.yaxis.set_ticks([])  # Hide y-axis ticks
 
-    plt.tight_layout()
-
+    plt.tight_layout()  # Optimize layout
     return fig
 
+
 def plottingStarts(player_name, percentage_played):
-    # Create a horizontal bar chart with consistent settings
+    # Create a horizontal bar chart with fixed bar height
     fig, ax = plt.subplots(figsize=(10, 2))  # Consistent figure size
-    plt.barh([player_name], [percentage_played], color='lightblue')
+    ax.barh([player_name], [percentage_played], color='lightblue', height=0.4)  # Fixed bar height
 
-    plt.title('% of Starts', fontsize=40)  # Consistent font size
-    plt.xlim(0, 100)  # Same x-axis range for consistency
+    # Add title
+    ax.set_title('% of Starts', fontsize=20)  # Consistent title font size
+    ax.set_xlim(0, 100)  # Fixed x-axis range for consistent scaling
 
-    # Place the text consistently outside the bar
-    fixed_position = 105  # Fixed offset outside the chart area
+    # Add text label consistently outside the bar
     for index, value in enumerate([percentage_played]):
-        plt.text(fixed_position, index, f'{value:.2f}%', va='center', fontsize=30)  # Consistent text size
+        ax.text(102, index, f'{value:.2f}%', va='center', fontsize=15)  # Fixed position outside
 
+    # Hide unnecessary axes ticks
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
     ax.yaxis.set_ticks([])  # Hide y-axis ticks
 
-    plt.tight_layout()
-
+    plt.tight_layout()  # Optimize layout
     return fig
