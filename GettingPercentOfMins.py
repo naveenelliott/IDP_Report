@@ -10,7 +10,7 @@ def plottingMinsPlayed(player_name, percentage_played):
 
     # Add text label outside the bar at the same horizontal position
     ax.text(
-        102,  # Fixed position outside the bar
+        105,  # Fixed position outside the bar
         0,  # Vertical alignment (same for all bars)
         f'{percentage_played:.2f}%',  # Display the percentage
         va='center',  # Centered text vertically
@@ -40,7 +40,7 @@ def plottingStarts(player_name, percentage_played):
 
     # Add text label outside the bar at the same horizontal position
     ax.text(
-        102,  # Fixed position outside the bar
+        105,  # Fixed position outside the bar
         0,  # Vertical alignment (same for all bars)
         f'{percentage_played:.2f}%',  # Display the percentage
         va='center',  # Centered text vertically
