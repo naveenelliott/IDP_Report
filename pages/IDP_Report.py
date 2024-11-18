@@ -671,10 +671,10 @@ if primary_position == 'ATT':
                     apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.style.format(precision=2)
+            passing_styled = passing.style.format(precision=1)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
@@ -703,10 +703,10 @@ if primary_position == 'ATT':
                     apply_color_change(value, dribbling.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
-            dribbling_styled = dribbling.style.format(precision=2)
+            dribbling_styled = dribbling.style.format(precision=1)
             dribbling_styled = pd.concat([dribbling_styled, wr_rank], axis=1)
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
@@ -735,10 +735,10 @@ if primary_position == 'ATT':
                     apply_color_change(value, defending.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.style.format(precision=2)
+            defending_styled = defending.style.format(precision=1)
             defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
@@ -767,10 +767,10 @@ if primary_position == 'ATT':
                     apply_color_change(value, shooting.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             shooting = shooting.apply(pd.to_numeric, errors='coerce')
-            shooting_styled = shooting.style.format(precision=2)
+            shooting_styled = shooting.style.format(precision=1)
             shooting_styled = pd.concat([shooting_styled, wr_rank], axis=1)
             shooting_styled = shooting_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in shooting_styled.index}
@@ -819,10 +819,10 @@ elif primary_position == 'Wing':
                     apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.style.format(precision=2)
+            passing_styled = passing.style.format(precision=1)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
@@ -850,10 +850,10 @@ elif primary_position == 'Wing':
                     apply_color_change(value, dribbling.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
-            dribbling_styled = dribbling.style.format(precision=2)
+            dribbling_styled = dribbling.style.format(precision=1)
             dribbling_styled = pd.concat([dribbling_styled, wr_rank], axis=1)
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
@@ -881,10 +881,10 @@ elif primary_position == 'Wing':
                     apply_color_change(value, defending.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.style.format(precision=2)
+            defending_styled = defending.style.format(precision=1)
             defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
@@ -912,10 +912,10 @@ elif primary_position == 'Wing':
                     apply_color_change(value, playmaking.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
-            playmaking_styled = playmaking.style.format(precision=2)
+            playmaking_styled = playmaking.style.format(precision=1)
             playmaking_styled = pd.concat([playmaking_styled, wr_rank], axis=1)
             playmaking_styled = playmaking_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in playmaking_styled.index}
@@ -943,10 +943,10 @@ elif primary_position == 'Wing':
                     apply_color_change(value, shooting.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             shooting = shooting.apply(pd.to_numeric, errors='coerce')
-            shooting_styled = shooting.style.format(precision=2)
+            shooting_styled = shooting.style.format(precision=1)
             shooting_styled = pd.concat([shooting_styled, wr_rank], axis=1)
             shooting_styled = shooting_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in shooting_styled.index}
@@ -990,10 +990,10 @@ elif primary_position == 'CB':
                     apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.style.format(precision=2)
+            passing_styled = passing.style.format(precision=1)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing.index}
@@ -1022,10 +1022,10 @@ elif primary_position == 'CB':
                     apply_color_change(value, ball_prog.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             ball_prog = ball_prog.apply(pd.to_numeric, errors='coerce')
-            ball_prog_styled = ball_prog.style.format(precision=2)
+            ball_prog_styled = ball_prog.style.format(precision=1)
             ball_prog_styled = pd.concat([ball_prog_styled, wr_rank], axis=1)
             ball_prog_styled = ball_prog_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in ball_prog_styled.index}
@@ -1054,10 +1054,10 @@ elif primary_position == 'CB':
                     apply_color_change(value, defending.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.style.format(precision=2)
+            defending_styled = defending.style.format(precision=1)
             defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
@@ -1102,10 +1102,10 @@ elif primary_position == 'DM':
                     apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.style.format(precision=2)
+            passing_styled = passing.style.format(precision=1)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
@@ -1133,10 +1133,10 @@ elif primary_position == 'DM':
                     apply_color_change(value, dribbling.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
-            dribbling_styled = dribbling.style.format(precision=2)
+            dribbling_styled = dribbling.style.format(precision=1)
             dribbling_styled = pd.concat([dribbling_styled, wr_rank], axis=1)
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
@@ -1164,10 +1164,10 @@ elif primary_position == 'DM':
                     apply_color_change(value, defending.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.style.format(precision=2)
+            defending_styled = defending.style.format(precision=1)
             defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
@@ -1195,10 +1195,10 @@ elif primary_position == 'DM':
                     apply_color_change(value, playmaking.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
-            playmaking_styled = playmaking.style.format(precision=2)
+            playmaking_styled = playmaking.style.format(precision=1)
             playmaking_styled = pd.concat([playmaking_styled, wr_rank], axis=1)
             playmaking_styled = playmaking_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in playmaking_styled.index}
@@ -1243,10 +1243,10 @@ elif primary_position == 'CM':
                     apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else: 
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.style.format(precision=2)
+            passing_styled = passing.style.format(precision=1)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
@@ -1274,10 +1274,10 @@ elif primary_position == 'CM':
                     apply_color_change(value, dribbling.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else: 
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
-            dribbling_styled = dribbling.style.format(precision=2)
+            dribbling_styled = dribbling.style.format(precision=1)
             dribbling_styled = pd.concat([dribbling_styled, wr_rank], axis=1)
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
@@ -1305,10 +1305,10 @@ elif primary_position == 'CM':
                     apply_color_change(value, defending.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.style.format(precision=2)
+            defending_styled = defending.style.format(precision=1)
             defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
@@ -1336,10 +1336,10 @@ elif primary_position == 'CM':
                     apply_color_change(value, playmaking.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
-            playmaking_styled = playmaking.style.format(precision=2)
+            playmaking_styled = playmaking.style.format(precision=1)
             playmaking_styled = pd.concat([playmaking_styled, wr_rank], axis=1)
             playmaking_styled = playmaking_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in playmaking_styled.index}
@@ -1382,10 +1382,10 @@ elif primary_position == 'FB':
                     apply_color_change(value, passing.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.style.format(precision=2)
+            passing_styled = passing.style.format(precision=1)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
@@ -1414,10 +1414,10 @@ elif primary_position == 'FB':
                     apply_color_change(value, attacking.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             attacking = attacking.apply(pd.to_numeric, errors='coerce')
-            attacking_styled = attacking.style.format(precision=2)
+            attacking_styled = attacking.style.format(precision=1)
             attacking_styled = pd.concat([attacking_styled, wr_rank], axis=1)
             attacking_styled = attacking_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in attacking_styled.index}
@@ -1446,10 +1446,10 @@ elif primary_position == 'FB':
                     apply_color_change(value, defending.at[idx, '2023'], idx) for idx, value in col.items()
                 ],
                 subset=['2024']
-            ).format(precision=2)
+            ).format(precision=1)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.style.format(precision=2)
+            defending_styled = defending.style.format(precision=1)
             defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
