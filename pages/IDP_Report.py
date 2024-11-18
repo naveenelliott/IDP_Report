@@ -136,7 +136,7 @@ spring_focus = comp_level.at[0, "Focus for Spring"]
 primary_position = getPrimaryPosition(player_name)
 primary_position = primary_position['Position Tag'].values[0]
 
-st.markdown(f"<h2 style='text-align: left;'>{player_name} Individual Player Report</h2>", unsafe_allow_html=True)
+st.markdown(f"<h1 style='text-align: left;'>{player_name} Individual Player Report</h1>", unsafe_allow_html=True)
 
 # Create two columns: One for Player Info and Picture, One for the Logo
 col1, col2 = st.columns([6, 4])  # Adjust widths as needed (e.g., 7:3 ratio)
