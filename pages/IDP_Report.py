@@ -182,27 +182,6 @@ with col1:
             """.format(weight=weight),
             unsafe_allow_html=True
         )
-
-    # Player Stats in the second inner column
-    with info_col:
-        st.pyplot(fig)
-        st.pyplot(fig2)
-        st.markdown(
-            """
-            <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'>Coach's Summary: {coach}</span>
-            </div>
-            """.format(coach=coach),
-            unsafe_allow_html=True
-        )
-        st.markdown(
-            """
-            <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'>Focus for Spring: {spring_focus}</span>
-            </div>
-            """.format(spring_focus=spring_focus),
-            unsafe_allow_html=True
-        )
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
@@ -225,6 +204,27 @@ with col1:
                 <span style='font-family: Arial; font-size: 10pt; color: black;'>Primary Position: {primary_position}</span>
             </div>
             """.format(primary_position=primary_position),
+            unsafe_allow_html=True
+        )
+
+    # Player Stats in the second inner column
+    with info_col:
+        st.pyplot(fig)
+        st.pyplot(fig2)
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'>Coach's Summary: {coach}</span>
+            </div>
+            """.format(coach=coach),
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'>Focus for Spring: {spring_focus}</span>
+            </div>
+            """.format(spring_focus=spring_focus),
             unsafe_allow_html=True
         )
 
