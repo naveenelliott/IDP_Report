@@ -7,13 +7,13 @@ def plottingMinsPlayed(player_name, percentage_played):
     fig, ax = plt.subplots(figsize=(10, 2))  # Consistent figure size
     plt.barh([player_name], [percentage_played], color='lightblue')
 
-    plt.title('% of Mins Played', fontsize=30)  # Consistent font size
+    plt.title('% of Mins Played', fontsize=40)  # Consistent font size
     plt.xlim(0, 100)  # Same x-axis range for consistency
 
     # Place the text consistently outside the bar
     fixed_position = 105  # Fixed offset outside the chart area
     for index, value in enumerate([percentage_played]):
-        plt.text(fixed_position, index, f'{value:.2f}%', va='center', fontsize=25)  # Consistent text size
+        plt.text(fixed_position, index, f'{value:.2f}%', va='center', fontsize=30)  # Consistent text size
 
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
     ax.yaxis.set_ticks([])  # Hide y-axis ticks
@@ -27,13 +27,13 @@ def plottingStarts(player_name, percentage_played):
     fig, ax = plt.subplots(figsize=(10, 2))  # Consistent figure size
     plt.barh([player_name], [percentage_played], color='lightblue')
 
-    plt.title('% of Starts', fontsize=30)  # Consistent font size
+    plt.title('% of Starts', fontsize=40)  # Consistent font size
     plt.xlim(0, 100)  # Same x-axis range for consistency
 
     # Place the text consistently outside the bar
     fixed_position = 105  # Fixed offset outside the chart area
     for index, value in enumerate([percentage_played]):
-        plt.text(fixed_position, index, f'{value:.2f}%', va='center', fontsize=25)  # Consistent text size
+        plt.text(fixed_position, index, f'{value:.2f}%', va='center', fontsize=30)  # Consistent text size
 
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
     ax.yaxis.set_ticks([])  # Hide y-axis ticks
