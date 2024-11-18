@@ -33,15 +33,6 @@ st.set_page_config(layout="wide")
 # Add the logo
 logo_path = 'BostonBoltsLogo.png'
 
-# Align the logo to the top-right corner with adjustments
-header_container = st.container()
-with header_container:
-    col1, col2 = st.columns([7, 3])  # Make the left column wider to push the logo left
-    with col1:
-        st.write("")  # Placeholder for alignment
-    with col2:
-        st.image(logo_path, use_column_width=False, width=250)  # Increase size for better visibility
-
 wr_rank = getting_WeeklyReportRank()
 wr_rank = wr_rank.loc[wr_rank['Team Name'] == team_name]
 wr_rank = wr_rank.loc[wr_rank['Player Full Name'] == player_name].reset_index(drop=True)
@@ -225,8 +216,10 @@ with col1:
                 """.format(primary_position=primary_position),
                 unsafe_allow_html=True
             )
-
-
+            # Bolts Logo
+    with inner_columns[2]:
+        logo_path = 'BostonBoltsLogo.png'  # Adjust this to your logo path
+        st.image(logo_path, use_column_width=True)
 
 weekly_report = getting_weeklyReport()
 weekly_report = weekly_report.loc[weekly_report['Player Full Name'] == player_name]
