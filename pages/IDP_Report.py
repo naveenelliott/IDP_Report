@@ -219,7 +219,7 @@ with col1:
             # Bolts Logo
         with inner_columns[2]:
         logo_path = 'BostonBoltsLogo.png'  # Adjust this to your logo path
-        st.image(logo_path, use_column_width=True)
+            st.image(logo_path, use_column_width=True)
 
 weekly_report = getting_weeklyReport()
 weekly_report = weekly_report.loc[weekly_report['Player Full Name'] == player_name]
