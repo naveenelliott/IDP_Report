@@ -144,16 +144,16 @@ with col1:
     # Inner columns for Picture and Stats/Info
     picture_col, info_col = st.columns([3.5, 2.5])  # Adjust inner widths as needed
 
-    # Player Picture in the first inner column
+    # Player Picture and Info under it in the first inner column
     with picture_col:
+        # Player Picture
         st.image(player_pic, use_column_width=True)
 
-    # Player Stats and Info in the second inner column
-    with info_col:
+        # Player Info under the Picture
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'>Player Name: {gk_name}</span>
+                <span style='font-family: Arial; font-size: 12pt; color: black;'>Player Name: {gk_name}</span>
             </div>
             """.format(gk_name=player_name),
             unsafe_allow_html=True
@@ -182,6 +182,9 @@ with col1:
             """.format(weight=weight),
             unsafe_allow_html=True
         )
+
+    # Player Stats in the second inner column
+    with info_col:
         st.pyplot(fig)
         st.pyplot(fig2)
         st.markdown(
