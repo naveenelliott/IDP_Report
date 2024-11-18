@@ -8,19 +8,19 @@ def plottingMinsPlayed(player_name, percentage_played):
     # Set fixed x-axis range to ensure consistent bar scaling
     ax.set_xlim(0, 100)
 
-    # Add text label consistently outside the bar, dynamically positioned
-    for index, value in enumerate([percentage_played]):
-        ax.text(
-            value + 2 if value < 98 else value - 2,  # Adjust position based on value
-            index, 
-            f'{value:.2f}%', 
-            va='center', 
-            fontsize=20, 
-            color='black'
-        )
+    # Add text label outside the bar at the same horizontal position
+    ax.text(
+        102,  # Fixed position outside the bar
+        0,  # Vertical alignment (same for all bars)
+        f'{percentage_played:.2f}%',  # Display the percentage
+        va='center',  # Centered text vertically
+        ha='left',  # Align text to the left
+        fontsize=12,
+        color='black'
+    )
 
     # Add title
-    ax.set_title('% of Mins Played', fontsize=25)
+    ax.set_title('% of Minutes Played', fontsize=16)
 
     # Hide unnecessary axes
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
@@ -38,19 +38,19 @@ def plottingStarts(player_name, percentage_played):
     # Set fixed x-axis range to ensure consistent bar scaling
     ax.set_xlim(0, 100)
 
-    # Add text label consistently outside the bar, dynamically positioned
-    for index, value in enumerate([percentage_played]):
-        ax.text(
-            value + 2 if value < 98 else value - 2,  # Adjust position based on value
-            index, 
-            f'{value:.2f}%', 
-            va='center', 
-            fontsize=20, 
-            color='black'
-        )
+    # Add text label outside the bar at the same horizontal position
+    ax.text(
+        102,  # Fixed position outside the bar
+        0,  # Vertical alignment (same for all bars)
+        f'{percentage_played:.2f}%',  # Display the percentage
+        va='center',  # Centered text vertically
+        ha='left',  # Align text to the left
+        fontsize=12,
+        color='black'
+    )
 
     # Add title
-    ax.set_title('% of Starts', fontsize=25)
+    ax.set_title('% of Starts', fontsize=16)
 
     # Hide unnecessary axes
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
