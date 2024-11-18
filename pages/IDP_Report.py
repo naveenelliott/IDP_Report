@@ -136,94 +136,100 @@ spring_focus = comp_level.at[0, "Focus for Spring"]
 primary_position = getPrimaryPosition(player_name)
 primary_position = primary_position['Position Tag'].values[0]
 
-# Create three columns: Player Picture, Player Info, Bolts Logo
-col1, col2, col3 = st.columns([2, 6, 2])  # Adjust column widths as needed
+# Create two columns: One for Player Info and Picture, One for the Logo
+col1, col2 = st.columns([7, 3])  # Adjust widths as needed (e.g., 7:3 ratio)
 
-# Player Picture Column
+# First Column: Player Picture and Stats
 with col1:
-    st.image(player_pic, use_column_width=True)
+    # Inner columns for Picture and Stats/Info
+    picture_col, info_col = st.columns([2, 5])  # Adjust inner widths as needed
 
-# Player Info Column
+    # Player Picture in the first inner column
+    with picture_col:
+        st.image(player_pic, use_column_width=True)
+
+    # Player Stats and Info in the second inner column
+    with info_col:
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'>Player Name: {gk_name}</span>
+            </div>
+            """.format(gk_name=player_name),
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'>Team Name: {team_name}</span>
+            </div>
+            """.format(team_name=team_name),
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'>Height: {height} cm</span>
+            </div>
+            """.format(height=height),
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'>Weight: {weight} lbs</span>
+            </div>
+            """.format(weight=weight),
+            unsafe_allow_html=True
+        )
+        st.pyplot(fig)
+        st.pyplot(fig2)
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'>Coach's Summary: {coach}</span>
+            </div>
+            """.format(coach=coach),
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'>Focus for Spring: {spring_focus}</span>
+            </div>
+            """.format(spring_focus=spring_focus),
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'>Goals: {goals}</span>
+            </div>
+            """.format(goals=goals),
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'>Assists: {assists}</span>
+            </div>
+            """.format(assists=assists),
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'>Primary Position: {primary_position}</span>
+            </div>
+            """.format(primary_position=primary_position),
+            unsafe_allow_html=True
+        )
+
+# Second Column: Logo
 with col2:
-    st.markdown(
-        """
-        <div style='display: block; text-align: left;'>
-            <span style='font-family: Arial; font-size: 10pt; color: black;'>Player Name: {gk_name}</span>
-        </div>
-        """.format(gk_name=player_name),
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        """
-        <div style='display: block; text-align: left;'>
-            <span style='font-family: Arial; font-size: 10pt; color: black;'>Team Name: {team_name}</span>
-        </div>
-        """.format(team_name=team_name),
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        """
-        <div style='display: block; text-align: left;'>
-            <span style='font-family: Arial; font-size: 10pt; color: black;'>Height: {height} cm</span>
-        </div>
-        """.format(height=height),
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        """
-        <div style='display: block; text-align: left;'>
-            <span style='font-family: Arial; font-size: 10pt; color: black;'>Weight: {weight} lbs</span>
-        </div>
-        """.format(weight=weight),
-        unsafe_allow_html=True
-    )
-    st.pyplot(fig)
-    st.pyplot(fig2)
-    st.markdown(
-        """
-        <div style='display: block; text-align: left;'>
-            <span style='font-family: Arial; font-size: 10pt; color: black;'>Coach's Summary: {coach}</span>
-        </div>
-        """.format(coach=coach),
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        """
-        <div style='display: block; text-align: left;'>
-            <span style='font-family: Arial; font-size: 10pt; color: black;'>Focus for Spring: {spring_focus}</span>
-        </div>
-        """.format(spring_focus=spring_focus),
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        """
-        <div style='display: block; text-align: left;'>
-            <span style='font-family: Arial; font-size: 10pt; color: black;'>Goals: {goals}</span>
-        </div>
-        """.format(goals=goals),
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        """
-        <div style='display: block; text-align: left;'>
-            <span style='font-family: Arial; font-size: 10pt; color: black;'>Assists: {assists}</span>
-        </div>
-        """.format(assists=assists),
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        """
-        <div style='display: block; text-align: left;'>
-            <span style='font-family: Arial; font-size: 10pt; color: black;'>Primary Position: {primary_position}</span>
-        </div>
-        """.format(primary_position=primary_position),
-        unsafe_allow_html=True
-    )
-
-# Bolts Logo Column
-with col3:
-    logo_path = 'BostonBoltsLogo.png'  # Adjust this to your logo path
+    logo_path = 'BostonBoltsLogo.png'  # Path to the logo
     st.image(logo_path, use_column_width=True)
+
 
 weekly_report = getting_weeklyReport()
 weekly_report = weekly_report.loc[weekly_report['Player Full Name'] == player_name]
