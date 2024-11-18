@@ -217,7 +217,7 @@ with col1:
                 unsafe_allow_html=True
             )
             # Bolts Logo
-    with inner_columns[2]:
+        with inner_columns[2]:
         logo_path = 'BostonBoltsLogo.png'  # Adjust this to your logo path
         st.image(logo_path, use_column_width=True)
 
