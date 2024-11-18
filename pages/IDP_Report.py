@@ -137,7 +137,7 @@ primary_position = getPrimaryPosition(player_name)
 primary_position = primary_position['Position Tag'].values[0]
 
 with col1:
-        inner_columns = st.columns(2)
+        inner_columns = st.columns(3)
 
         with inner_columns[0]:
             st.image(player_pic)
