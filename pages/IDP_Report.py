@@ -674,12 +674,7 @@ if primary_position == 'ATT':
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
             passing_styled = passing_styled.rename(index=rename_mapping)
-        st.markdown(
-            passing_styled.to_html(
-            table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
-            ),
-            unsafe_allow_html=True
-            )   
+        st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)   
     with inn_columns[1]:
             # Add a styled, title for the "Dribbling" table
         st.markdown(
@@ -711,12 +706,7 @@ if primary_position == 'ATT':
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
-        st.markdown(
-        dribbling_styled.to_html(
-        table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
-        ),
-        unsafe_allow_html=True
-        )
+        st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         # Add a styled, title for the "Defending" table
         st.markdown(
@@ -785,12 +775,7 @@ if primary_position == 'ATT':
             shooting_styled = shooting_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in shooting_styled.index}
             shooting_styled = shooting_styled.rename(index=rename_mapping)
-        st.markdown(
-        shooting_styled.to_html(
-        table_attributes='style="width:80%; margin: 10px auto; border-collapse: collapse; border: 1px solid #ddd;"'
-        ),
-        unsafe_allow_html=True
-        )
+        st.write(shooting_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'ATT'
     
 elif primary_position == 'Wing':
