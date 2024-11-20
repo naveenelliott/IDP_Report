@@ -103,7 +103,16 @@ def createPizzaChart(bolts):
                                 edgecolor="#000000", facecolor="cornflowerblue",
                                 boxstyle="round,pad=0.2", lw=1
                                 )
-                            )
+                            ),
+                        kwargs_compare_values=dict(
+                            color="#000000", fontsize=13,
+                            fontproperties=font_normal, zorder=3,
+                            bbox=dict(
+                                edgecolor="#000000", facecolor="cornflowerblue",
+                                boxstyle="round,pad=0.2", lw=1
+                                )
+                            )                                  # values to be used when adding parameter-values
+                    
                 )
                 fig.set_dpi(600)
                 
