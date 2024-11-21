@@ -78,15 +78,20 @@ def createPizzaChart(bolts):
 
                 # plot pizza
                 fig, ax = baker.make_pizza(
-                    other_vals,       
-                    compare_values=values,                    # list of values
+                    other_vals,     
+                    compare_values=values,                     # list of values
                         figsize=(8, 8.5),                # adjust figsize according to your need
-                        color_blank_space=slice_colors_bck,        # use same color to fill blank space
-                        slice_colors=slice_colors,
-                        blank_alpha=0.4, 
+                        color_blank_space="same",        # use same color to fill blank space
+                        slice_colors=slice_colors,       # color for individual slices
+                        value_colors=text_colors,        # color for the value-text
+                        value_bck_colors=slice_colors,   # color for the blank spaces
+                        blank_alpha=0.4,                 # alpha for blank-space colors
+                        compare_colors = slice_colors,
+                        compare_value_colors = compare_val_colors,
+                        compare_value_bck_colors = compare_colors_bck,
                         kwargs_slices=dict(
-                            edgecolor=compare_colors, zorder=2, linewidth=1
-                        ),                               # values to be used when plotting slices
+                            edgecolor="#F2F2F2", zorder=2, linewidth=1
+                            ),                               # values to be used when plotting slices
                         kwargs_params=dict(
                             color="#000000", fontsize=13,
                             fontproperties=font_normal, va="center"
@@ -107,11 +112,9 @@ def createPizzaChart(bolts):
                                 boxstyle="round,pad=0.2", lw=1
                                 )
                             )                                  # values to be used when adding parameter-values
-                    
-                )
+                    )   
                 fig.set_dpi(600)
-                
-                player_name = group['Player Name'].iloc[0]
+            
                 fig.set_facecolor('white')
                 plt.gca().set_facecolor('white')
             else:
