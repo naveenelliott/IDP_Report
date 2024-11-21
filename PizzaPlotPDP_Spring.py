@@ -92,6 +92,9 @@ def createPizzaChart(bolts):
                         kwargs_slices=dict(
                             edgecolor="#F2F2F2", zorder=2, linewidth=1
                             ),                               # values to be used when plotting slices
+                        kwargs_compare_slices=dict(
+                            edgecolor=compare_colors, zorder=2, linewidth=2
+                            ), 
                         kwargs_params=dict(
                             color="#000000", fontsize=13,
                             fontproperties=font_normal, va="center"
@@ -109,9 +112,10 @@ def createPizzaChart(bolts):
                             fontproperties=font_normal, zorder=3,
                             bbox=dict(
                                 edgecolor="#000000", facecolor="cornflowerblue",
-                                boxstyle="round,pad=0.2", lw=2
+                                boxstyle="round,pad=0.2", lw=1
                                 )
-                            )                                  # values to be used when adding parameter-values
+                            )
+                    # values to be used when adding parameter-values
                     )   
                 fig.set_dpi(600)
             
