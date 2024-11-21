@@ -38,6 +38,8 @@ def createPizzaChart(bolts):
                 values = [int(row_2024[col]) for col in cf_columns]
                 other_vals = [int(row_2023[col]) for col in cf_columns]
 
+                params_offset = [True] * len(params)
+                
                 # color for the slices and text
                 slice_colors = []
                 slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
@@ -116,7 +118,10 @@ def createPizzaChart(bolts):
                                 )
                             )
                     # values to be used when adding parameter-values
-                    )   
+                    )
+
+                baker.adjust_texts(params_offset, offset=-0.2, adj_comp_values=True)
+                
                 fig.set_dpi(600)
             
                 fig.set_facecolor('white')
