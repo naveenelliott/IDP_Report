@@ -92,7 +92,7 @@ def createPizzaChart(bolts):
                         kwargs_slices=dict(
                             edgecolor="#F2F2F2", zorder=2, linewidth=1
                             ),                               # values to be used when plotting slices
-                        kwargs_compare==dict(
+                        kwargs_compare=dict(
                             edgecolor=compare_colors, zorder=2, linewidth=2
                             ), 
                         kwargs_params=dict(
