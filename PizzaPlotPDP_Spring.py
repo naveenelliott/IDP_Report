@@ -85,12 +85,11 @@ def createPizzaChart(bolts):
                         slice_colors=slice_colors,       # color for individual slices
                         value_colors=text_colors,        # color for the value-text
                         value_bck_colors=slice_colors_bck,   # color for the blank spaces
-                        compare_colors = compare_colors,
                         compare_value_colors =compare_val_colors, 
                         compare_value_bck_colors = compare_colors_bck, # alpha for blank-space colors
                         blank_alpha=0.4, 
                         kwargs_slices=dict(
-                            edgecolor="#F2F2F2", zorder=2, linewidth=1
+                            edgecolor=compare_colors, zorder=2, linewidth=1
                         ),                               # values to be used when plotting slices
                         kwargs_params=dict(
                             color="#000000", fontsize=13,
