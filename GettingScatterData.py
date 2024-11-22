@@ -14,6 +14,7 @@ def gettingPostSpringGames(file_path):
         
         # Filter the list to include only CSV files
         csv_files = [file for file in files if file.endswith('.csv')]
+        st.write(csv_files)
         
         # Read each CSV file and store it in a list of DataFrames
         data_frames = []
