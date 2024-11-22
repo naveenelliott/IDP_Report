@@ -110,7 +110,7 @@ def createPizzaChart(bolts):
                                 )
                             ),
                         kwargs_compare_values=dict(
-                            color=compare_colors, fontsize=13,
+                            color='#000000', fontsize=13,
                             fontproperties=font_normal, zorder=3,
                             bbox=dict(
                                 edgecolor="#000000", facecolor="cornflowerblue",
