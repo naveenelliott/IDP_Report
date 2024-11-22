@@ -283,7 +283,7 @@ def getPrimaryPositionAll():
 
     # Example usage
     # THIS COULD NEED CHANGED WITH 18 NEW TEAMS
-    folder_path = 'WeeklyReport PSD/'  # Replace with your folder path
+    folder_path = 'This_Year/'  # Replace with your folder path
     end = read_all_csvs_from_folder(folder_path)
         
     end = end.drop_duplicates()
