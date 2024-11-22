@@ -566,13 +566,13 @@ last_season = gettingPostSpringGames(file_path)
 last_season['Year'] = '2023'
 last_season.loc[last_season['Player Full Name'] == 'Kaio Morias', 'Player Full Name'] = 'Kaio Morais'
 last_season = pd.merge(last_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
-st.write(last_season)
+
 
 file_path = 'This_Year'
 this_season = gettingPostSpringGames(file_path)
 this_season['Year'] = '2024'
 this_season = pd.merge(this_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
-st.write(this_season)
+
 
 combined_seasons = pd.concat([this_season, last_season], ignore_index=True)
 
