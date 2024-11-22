@@ -1244,8 +1244,10 @@ elif primary_position == 'CM':
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             st.write(passing_styled)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
+            st.write(passing_styled)
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
             passing_styled = passing_styled.rename(index=rename_mapping)
+            st.write(passing_styled)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         st.markdown(
