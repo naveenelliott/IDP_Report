@@ -202,13 +202,15 @@ def createPizzaChart(bolts):
                 values = [int(row_2024[col]) for col in wing_columns]
                 other_vals = [int(row_2023[col]) for col in wing_columns]
 
+                params_offset = [True] * len(params)
+                
                 # color for the slices and text
-                slice_colors = [] 
-                text_colors =  ["#000000"] * 2 + ["#000000"] * 4 + ["#F2F2F2"] * 3 + ['#F2F2F2'] * 2
-                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices 
+                slice_colors = []
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
+                text_colors =  ["#F2F2F2"] * len(params)
                 text_colors_bck =  []
                 compare_colors_bck = []
-            
+                
                 compare_val_colors = len(values)*['#F2F2F2']
             
                 compare_colors = []
@@ -228,7 +230,7 @@ def createPizzaChart(bolts):
                         slice_colors.append(color)
                         text_colors_bck.append('green')
                         compare_colors_bck.append('green')
-        
+            
                 # instantiate PyPizza class
                 baker = PyPizza(
                     params=params,                  # list of parameters
@@ -250,12 +252,15 @@ def createPizzaChart(bolts):
                         value_colors=text_colors,        # color for the value-text
                         value_bck_colors=slice_colors,   # color for the blank spaces
                         blank_alpha=0.4,                 # alpha for blank-space colors
-                        compare_colors = compare_colors,
+                        compare_colors = slice_colors,
                         compare_value_colors = compare_val_colors,
                         compare_value_bck_colors = compare_colors_bck,
                         kwargs_slices=dict(
                             edgecolor="#F2F2F2", zorder=2, linewidth=1
                             ),                               # values to be used when plotting slices
+                        kwargs_compare=dict(
+                            edgecolor='#F2F2F2', zorder=3, linewidth=2
+                            ), 
                         kwargs_params=dict(
                             color="#000000", fontsize=13,
                             fontproperties=font_normal, va="center"
@@ -269,14 +274,18 @@ def createPizzaChart(bolts):
                                 )
                             ),
                         kwargs_compare_values=dict(
-                            color="#000000", fontsize=13,
+                            color='#F2F2F2', fontsize=13,
                             fontproperties=font_normal, zorder=3,
                             bbox=dict(
                                 edgecolor="#000000", facecolor="cornflowerblue",
                                 boxstyle="round,pad=0.2", lw=1
                                 )
-                            )                                  # values to be used when adding parameter-values
-                    )   
+                            )
+                    # values to be used when adding parameter-values
+                    )
+
+                baker.adjust_texts(params_offset, offset=-0.2, adj_comp_values=True)
+                
                 fig.set_dpi(600)
             
                 fig.set_facecolor('white')
@@ -353,10 +362,12 @@ def createPizzaChart(bolts):
                 values = [int(row_2024[col]) for col in cm_columns]
                 other_vals = [int(row_2023[col]) for col in cm_columns]
 
+                params_offset = [True] * len(params)
+                
                 # color for the slices and text
-                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices 
-                text_colors =  ["#000000"] * 2 + ["#000000"] * 3 + ["#F2F2F2"] * 4 + ['#F2F2F2'] * 3
                 slice_colors = []
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
+                text_colors =  ["#F2F2F2"] * len(params)
                 text_colors_bck =  []
                 compare_colors_bck = []
                 
@@ -379,8 +390,7 @@ def createPizzaChart(bolts):
                         slice_colors.append(color)
                         text_colors_bck.append('green')
                         compare_colors_bck.append('green')
-                
-                
+            
                 # instantiate PyPizza class
                 baker = PyPizza(
                     params=params,                  # list of parameters
@@ -402,12 +412,15 @@ def createPizzaChart(bolts):
                         value_colors=text_colors,        # color for the value-text
                         value_bck_colors=slice_colors,   # color for the blank spaces
                         blank_alpha=0.4,                 # alpha for blank-space colors
-                        compare_colors = compare_colors,
+                        compare_colors = slice_colors,
                         compare_value_colors = compare_val_colors,
                         compare_value_bck_colors = compare_colors_bck,
                         kwargs_slices=dict(
                             edgecolor="#F2F2F2", zorder=2, linewidth=1
-                        ),                               # values to be used when plotting slices
+                            ),                               # values to be used when plotting slices
+                        kwargs_compare=dict(
+                            edgecolor='#F2F2F2', zorder=3, linewidth=2
+                            ), 
                         kwargs_params=dict(
                             color="#000000", fontsize=13,
                             fontproperties=font_normal, va="center"
@@ -421,15 +434,22 @@ def createPizzaChart(bolts):
                                 )
                             ),
                         kwargs_compare_values=dict(
-                            color="#000000", fontsize=13,
+                            color='#F2F2F2', fontsize=13,
                             fontproperties=font_normal, zorder=3,
                             bbox=dict(
                                 edgecolor="#000000", facecolor="cornflowerblue",
                                 boxstyle="round,pad=0.2", lw=1
                                 )
-                            )                                   # values to be used when adding parameter-values
+                            )
+                    # values to be used when adding parameter-values
                     )
+
+                baker.adjust_texts(params_offset, offset=-0.2, adj_comp_values=True)
+                
                 fig.set_dpi(600)
+            
+                fig.set_facecolor('white')
+                plt.gca().set_facecolor('white')
                 
             else:
                 cm_columns = ['Dribble Percentile', 'Loss of Poss Percentile', 'Stand. Tackle Total Percentile', 'Rec Total Percentile', 'Progr Regain Percentile',
@@ -503,10 +523,12 @@ def createPizzaChart(bolts):
                 values = [int(row_2024[col]) for col in cdm_columns]
                 other_vals = [int(row_2023[col]) for col in cdm_columns]
 
+                params_offset = [True] * len(params)
+                
                 # color for the slices and text
-                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
-                text_colors =  ["#000000"] * 4 + ["#000000"] * 4 + ['#F2F2F2'] * 3
                 slice_colors = []
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
+                text_colors =  ["#F2F2F2"] * len(params)
                 text_colors_bck =  []
                 compare_colors_bck = []
                 
@@ -529,19 +551,19 @@ def createPizzaChart(bolts):
                         slice_colors.append(color)
                         text_colors_bck.append('green')
                         compare_colors_bck.append('green')
-
-                    # instantiate PyPizza class
+            
+                # instantiate PyPizza class
                 baker = PyPizza(
-                        params=params,                  # list of parameters
-                        background_color="white",     # background color
-                        straight_line_color="#EBEBE9",  # color for straight lines
-                        straight_line_lw=1,             # linewidth for straight lines
-                        last_circle_lw=0,               # linewidth of last circle
-                        other_circle_lw=0,              # linewidth for other circles
-                        inner_circle_size=9         # size of inner circle
-                        )
+                    params=params,                  # list of parameters
+                    background_color="white",     # background color
+                    straight_line_color="#EBEBE9",  # color for straight lines
+                    straight_line_lw=1,             # linewidth for straight lines
+                    last_circle_lw=0,               # linewidth of last circle
+                    other_circle_lw=0,              # linewidth for other circles
+                    inner_circle_size=9         # size of inner circle
+                    )
 
-                    # plot pizza
+                # plot pizza
                 fig, ax = baker.make_pizza(
                     other_vals,     
                     compare_values=values,                     # list of values
@@ -551,12 +573,15 @@ def createPizzaChart(bolts):
                         value_colors=text_colors,        # color for the value-text
                         value_bck_colors=slice_colors,   # color for the blank spaces
                         blank_alpha=0.4,                 # alpha for blank-space colors
-                        compare_colors = compare_colors,
+                        compare_colors = slice_colors,
                         compare_value_colors = compare_val_colors,
                         compare_value_bck_colors = compare_colors_bck,
                         kwargs_slices=dict(
                             edgecolor="#F2F2F2", zorder=2, linewidth=1
-                        ),                               # values to be used when plotting slices
+                            ),                               # values to be used when plotting slices
+                        kwargs_compare=dict(
+                            edgecolor='#F2F2F2', zorder=3, linewidth=2
+                            ), 
                         kwargs_params=dict(
                             color="#000000", fontsize=13,
                             fontproperties=font_normal, va="center"
@@ -570,15 +595,22 @@ def createPizzaChart(bolts):
                                 )
                             ),
                         kwargs_compare_values=dict(
-                            color="#000000", fontsize=13,
+                            color='#F2F2F2', fontsize=13,
                             fontproperties=font_normal, zorder=3,
                             bbox=dict(
                                 edgecolor="#000000", facecolor="cornflowerblue",
                                 boxstyle="round,pad=0.2", lw=1
                                 )
-                            )                                   # values to be used when adding parameter-values
+                            )
+                    # values to be used when adding parameter-values
                     )
+
+                baker.adjust_texts(params_offset, offset=-0.2, adj_comp_values=True)
+                
                 fig.set_dpi(600)
+            
+                fig.set_facecolor('white')
+                plt.gca().set_facecolor('white')
         
             else:
                 cdm_columns = ['Total Passes Percentile', 'Forward Total Percentile', 'Pass Completion Percentile', 'Forward Completion Percentile',
@@ -652,10 +684,12 @@ def createPizzaChart(bolts):
                 values = [int(row_2024[col]) for col in cb_columns]
                 other_vals = [int(row_2023[col]) for col in cb_columns]
 
+                params_offset = [True] * len(params)
+                
                 # color for the slices and text
-                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
-                text_colors =  ["#000000"] * 3 + ["#000000"] * 4 + ["#F2F2F2"] * 2
                 slice_colors = []
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
+                text_colors =  ["#F2F2F2"] * len(params)
                 text_colors_bck =  []
                 compare_colors_bck = []
                 
@@ -678,19 +712,19 @@ def createPizzaChart(bolts):
                         slice_colors.append(color)
                         text_colors_bck.append('green')
                         compare_colors_bck.append('green')
-
-                    # instantiate PyPizza class
+            
+                # instantiate PyPizza class
                 baker = PyPizza(
-                        params=params,                  # list of parameters
-                        background_color="white",     # background color
-                        straight_line_color="#EBEBE9",  # color for straight lines
-                        straight_line_lw=1,             # linewidth for straight lines
-                        last_circle_lw=0,               # linewidth of last circle
-                        other_circle_lw=0,              # linewidth for other circles
-                        inner_circle_size=9         # size of inner circle
-                        )
+                    params=params,                  # list of parameters
+                    background_color="white",     # background color
+                    straight_line_color="#EBEBE9",  # color for straight lines
+                    straight_line_lw=1,             # linewidth for straight lines
+                    last_circle_lw=0,               # linewidth of last circle
+                    other_circle_lw=0,              # linewidth for other circles
+                    inner_circle_size=9         # size of inner circle
+                    )
 
-                    # plot pizza
+                # plot pizza
                 fig, ax = baker.make_pizza(
                     other_vals,     
                     compare_values=values,                     # list of values
@@ -700,12 +734,15 @@ def createPizzaChart(bolts):
                         value_colors=text_colors,        # color for the value-text
                         value_bck_colors=slice_colors,   # color for the blank spaces
                         blank_alpha=0.4,                 # alpha for blank-space colors
-                        compare_colors = compare_colors,
+                        compare_colors = slice_colors,
                         compare_value_colors = compare_val_colors,
                         compare_value_bck_colors = compare_colors_bck,
                         kwargs_slices=dict(
                             edgecolor="#F2F2F2", zorder=2, linewidth=1
-                        ),                               # values to be used when plotting slices
+                            ),                               # values to be used when plotting slices
+                        kwargs_compare=dict(
+                            edgecolor='#F2F2F2', zorder=3, linewidth=2
+                            ), 
                         kwargs_params=dict(
                             color="#000000", fontsize=13,
                             fontproperties=font_normal, va="center"
@@ -719,15 +756,22 @@ def createPizzaChart(bolts):
                                 )
                             ),
                         kwargs_compare_values=dict(
-                            color="#000000", fontsize=13,
+                            color='#F2F2F2', fontsize=13,
                             fontproperties=font_normal, zorder=3,
                             bbox=dict(
                                 edgecolor="#000000", facecolor="cornflowerblue",
                                 boxstyle="round,pad=0.2", lw=1
                                 )
-                            )                                   # values to be used when adding parameter-values
+                            )
+                    # values to be used when adding parameter-values
                     )
+
+                baker.adjust_texts(params_offset, offset=-0.2, adj_comp_values=True)
+                
                 fig.set_dpi(600)
+            
+                fig.set_facecolor('white')
+                plt.gca().set_facecolor('white')
                     
             else:
                 cb_columns = ['Rec Total Percentile', 'Progr Regain Percentile', 'Stand. Tackle Success',
@@ -803,10 +847,12 @@ def createPizzaChart(bolts):
                 other_vals = [int(row_2023[col]) for col in fb_columns]
 
 
+                params_offset = [True] * len(params)
+                
                 # color for the slices and text
-                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices 
-                text_colors =  ["#000000"] * 4 + ["#000000"] * 4 + ['#F2F2F2'] * 4
                 slice_colors = []
+                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
+                text_colors =  ["#F2F2F2"] * len(params)
                 text_colors_bck =  []
                 compare_colors_bck = []
                 
@@ -829,19 +875,19 @@ def createPizzaChart(bolts):
                         slice_colors.append(color)
                         text_colors_bck.append('green')
                         compare_colors_bck.append('green')
-
-                    # instantiate PyPizza class
+            
+                # instantiate PyPizza class
                 baker = PyPizza(
-                        params=params,                  # list of parameters
-                        background_color="white",     # background color
-                        straight_line_color="#EBEBE9",  # color for straight lines
-                        straight_line_lw=1,             # linewidth for straight lines
-                        last_circle_lw=0,               # linewidth of last circle
-                        other_circle_lw=0,              # linewidth for other circles
-                        inner_circle_size=9         # size of inner circle
+                    params=params,                  # list of parameters
+                    background_color="white",     # background color
+                    straight_line_color="#EBEBE9",  # color for straight lines
+                    straight_line_lw=1,             # linewidth for straight lines
+                    last_circle_lw=0,               # linewidth of last circle
+                    other_circle_lw=0,              # linewidth for other circles
+                    inner_circle_size=9         # size of inner circle
                     )
 
-                    # plot pizza
+                # plot pizza
                 fig, ax = baker.make_pizza(
                     other_vals,     
                     compare_values=values,                     # list of values
@@ -851,12 +897,15 @@ def createPizzaChart(bolts):
                         value_colors=text_colors,        # color for the value-text
                         value_bck_colors=slice_colors,   # color for the blank spaces
                         blank_alpha=0.4,                 # alpha for blank-space colors
-                        compare_colors = compare_colors,
+                        compare_colors = slice_colors,
                         compare_value_colors = compare_val_colors,
                         compare_value_bck_colors = compare_colors_bck,
                         kwargs_slices=dict(
                             edgecolor="#F2F2F2", zorder=2, linewidth=1
-                        ),                               # values to be used when plotting slices
+                            ),                               # values to be used when plotting slices
+                        kwargs_compare=dict(
+                            edgecolor='#F2F2F2', zorder=3, linewidth=2
+                            ), 
                         kwargs_params=dict(
                             color="#000000", fontsize=13,
                             fontproperties=font_normal, va="center"
@@ -870,15 +919,22 @@ def createPizzaChart(bolts):
                                 )
                             ),
                         kwargs_compare_values=dict(
-                            color="#000000", fontsize=13,
+                            color='#F2F2F2', fontsize=13,
                             fontproperties=font_normal, zorder=3,
                             bbox=dict(
                                 edgecolor="#000000", facecolor="cornflowerblue",
                                 boxstyle="round,pad=0.2", lw=1
                                 )
-                            )                                   # values to be used when adding parameter-values
+                            )
+                    # values to be used when adding parameter-values
                     )
+
+                baker.adjust_texts(params_offset, offset=-0.2, adj_comp_values=True)
+                
                 fig.set_dpi(600)
+            
+                fig.set_facecolor('white')
+                plt.gca().set_facecolor('white')
                 
             else:
                 fb_columns = ['Stand. Tackle Total Percentile', 'Rec Total Percentile', 'Progr Regain Percentile', 'Stand. Tackle Success Percentile',
