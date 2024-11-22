@@ -34,6 +34,7 @@ st.set_page_config(layout="wide")
 logo_path = 'BostonBoltsLogo.png'
 
 wr_rank = getting_WeeklyReportRank()
+wr_rank = wr_rank.loc[wr_rank['Team Name'] == team_name].reset_index(drop=True)
 wr_rank = wr_rank.loc[wr_rank['Player Full Name'] == player_name].reset_index(drop=True)
 del wr_rank['Player Full Name'], wr_rank['Team Name']
 wr_rank = wr_rank.T
