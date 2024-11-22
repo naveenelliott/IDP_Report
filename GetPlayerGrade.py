@@ -293,9 +293,6 @@ def getPrimaryPositionAll():
     # Sort by Player Full Name and Match Date in descending order
     end = end.sort_values(by=['Player Full Name', 'As At Date'], ascending=[True, False])
 
-    as_at_date = end['As At Date'].max()
-
-    end = end.loc[end['As At Date'] == as_at_date]
     # Group by 'Player Full Name', 'Position Tag', and 'Team Name' to get the sum of 'mins played'
     end_grouped = end.groupby(['Player Full Name', 'Position Tag', 'Team Name'])['mins played'].sum().reset_index()
 
