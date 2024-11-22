@@ -1242,6 +1242,7 @@ elif primary_position == 'CM':
             passing = passing.apply(pd.to_numeric, errors='coerce')
             passing_styled = passing.round(1)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
+            st.write(passing_styled)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
             passing_styled = passing_styled.rename(index=rename_mapping)
