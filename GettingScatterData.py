@@ -42,9 +42,7 @@ def gettingPostSpringGames(file_path):
     
         # Optionally, combine all DataFrames into a single DataFrame
         combined_df = pd.concat(data_frames, ignore_index=True)
-        st.write(combined_df)
         combined_df = combined_df.loc[:, combined_df.columns.notna()]
-        st.write(combined_df)
         non_int = ['Player Full Name', 'Team Name', 'Position Tag']
         for col in combined_df.columns:
                 if col not in non_int:
