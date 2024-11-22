@@ -673,6 +673,7 @@ if primary_position == 'ATT':
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
             passing_styled = passing_styled.rename(index=rename_mapping)
+            passing_styled = passing_styled.style.format(precision=1)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)   
     with inn_columns[1]:
             # Add a styled, title for the "Dribbling" table
@@ -705,6 +706,7 @@ if primary_position == 'ATT':
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
+            dribbling_styled = dribbling_styled.style.format(precision=1)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         # Add a styled, title for the "Defending" table
@@ -737,6 +739,7 @@ if primary_position == 'ATT':
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
             defending_styled = defending_styled.rename(index=rename_mapping)
+            defending_styled = defending_styled.style.format(precision=1)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         # Add a styled, title for the "Shooting" table
@@ -769,9 +772,9 @@ if primary_position == 'ATT':
             shooting_styled = shooting_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in shooting_styled.index}
             shooting_styled = shooting_styled.rename(index=rename_mapping)
+            shooting_styled = shooting_styled.style.format(precision=1)
         st.write(shooting_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'ATT'
-    
 elif primary_position == 'Wing':
     overall_player = creatingPercentilesWing(player_season)
     passing, dribbling, defending, playmaking, shooting = creatingRawWing(player_season_raw)
@@ -821,6 +824,7 @@ elif primary_position == 'Wing':
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
             passing_styled = passing_styled.rename(index=rename_mapping)
+            passing_styled = passing_styled.style.format(precision=1)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         st.markdown(
@@ -852,6 +856,7 @@ elif primary_position == 'Wing':
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
+            dribbling_styled = dribbling_styled.style.format(precision=1)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         st.markdown(
@@ -883,6 +888,7 @@ elif primary_position == 'Wing':
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
             defending_styled = defending_styled.rename(index=rename_mapping)
+            defending_styled = defending_styled.style.format(precision=1)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         st.markdown(
@@ -914,6 +920,7 @@ elif primary_position == 'Wing':
             playmaking_styled = playmaking_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in playmaking_styled.index}
             playmaking_styled = playmaking_styled.rename(index=rename_mapping)
+            playmaking_styled = playmaking_styled.style.format(precision=1)
         st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[4]:
         st.markdown(
@@ -945,6 +952,7 @@ elif primary_position == 'Wing':
             shooting_styled = shooting_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in shooting_styled.index}
             shooting_styled = shooting_styled.rename(index=rename_mapping)
+            shooting_styled = shooting_styled.style.format(precision=1)
         st.write(shooting_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'Wing'
 elif primary_position == 'CB':
