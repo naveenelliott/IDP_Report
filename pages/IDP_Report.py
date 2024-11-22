@@ -1000,6 +1000,7 @@ elif primary_position == 'CB':
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing.index}
             passing = passing.rename(index=rename_mapping)
+            passing_styled = passing_styled.style.format(precision=1)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         # Add a styled, title for the "Ball Progression" table
@@ -1032,6 +1033,7 @@ elif primary_position == 'CB':
             ball_prog_styled = ball_prog_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in ball_prog_styled.index}
             ball_prog_styled = ball_prog_styled.rename(index=rename_mapping)
+            ball_prog_styled = ball_prog_styled.style.format(precision=1)
         st.write(ball_prog_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         # Add a styled, title for the "defending" table
@@ -1064,6 +1066,7 @@ elif primary_position == 'CB':
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
             defending_styled = defending_styled.rename(index=rename_mapping)
+            defending_styled = defending_styled.style.format(precision=1)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'CB'
 elif primary_position == 'DM':
@@ -1112,6 +1115,7 @@ elif primary_position == 'DM':
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
             passing_styled = passing_styled.rename(index=rename_mapping)
+            passing_styled = passing_styled.style.format(precision=1)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[1]:
         st.markdown(
@@ -1143,6 +1147,7 @@ elif primary_position == 'DM':
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
+            dribbling_styled = dribbling_styled.style.format(precision=1)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         st.markdown(
@@ -1174,6 +1179,7 @@ elif primary_position == 'DM':
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
             defending_styled = defending_styled.rename(index=rename_mapping)
+            defending_styled = defending_styled.style.format(precision=1)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         st.markdown(
@@ -1205,6 +1211,7 @@ elif primary_position == 'DM':
             playmaking_styled = playmaking_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in playmaking_styled.index}
             playmaking_styled = playmaking_styled.rename(index=rename_mapping)
+            playmaking_styled = playmaking_styled.style.format(precision=1)
         st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'DM'
 elif primary_position == 'CM':
@@ -1285,6 +1292,7 @@ elif primary_position == 'CM':
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
             dribbling_styled = dribbling_styled.rename(index=rename_mapping)
+            dribbling_styled = dribbling_styled.style.format(precision=1)
         st.write(dribbling_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[2]:
         st.markdown(
@@ -1316,6 +1324,7 @@ elif primary_position == 'CM':
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
             defending_styled = defending_styled.rename(index=rename_mapping)
+            defending_styled = defending_styled.style.format(precision=1)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     with inn_columns[3]:
         st.markdown(
@@ -1347,6 +1356,7 @@ elif primary_position == 'CM':
             playmaking_styled = playmaking_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in playmaking_styled.index}
             playmaking_styled = playmaking_styled.rename(index=rename_mapping)
+            playmaking_styled = playmaking_styled.style.format(precision=1)
         st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
@@ -1393,6 +1403,7 @@ elif primary_position == 'FB':
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
             passing_styled = passing_styled.rename(index=rename_mapping)
+            passing_styled = passing_styled.style.format(precision=1)
         st.write(passing_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(passing_styled, use_container_width=True)
     with inn_columns[1]:
@@ -1425,6 +1436,7 @@ elif primary_position == 'FB':
             attacking_styled = attacking_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in attacking_styled.index}
             attacking_styled = attacking_styled.rename(index=rename_mapping)
+            attacking_styled = attacking_styled.style.format(precision=1)
         st.write(attacking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(attacking_styled, use_container_width=True)
     with inn_columns[2]:
@@ -1457,6 +1469,7 @@ elif primary_position == 'FB':
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
             defending_styled = defending_styled.rename(index=rename_mapping)
+            defending_styled = defending_styled.style.format(precision=1)
         st.write(defending_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
         #st.dataframe(defending_styled, use_container_width=True)
     overall_player['Position'] = 'FB'
