@@ -23,21 +23,21 @@ def createPizzaChart(bolts):
 
     grouped = bolts.groupby('Player Name')
 
-        for player_name, group in grouped:
-        if group['Position'].iloc[0] == 'ATT':
-        player_named = group['Player Name'].iloc[0]
-        cf_columns = ['Stand. Tackle Total Percentile', 'Rec Total Percentile', 'Total Passes Percentile', 'Pass Completion Percentile', 
+            for player_name, group in grouped:
+            if group['Position'].iloc[0] == 'ATT':
+            player_named = group['Player Name'].iloc[0]
+            cf_columns = ['Stand. Tackle Total Percentile', 'Rec Total Percentile', 'Total Passes Percentile', 'Pass Completion Percentile', 
                       'Att 1v1 Percentile', 'Loss of Poss Percentile', 'Efforts on Goal Percentile', 'Shot on Target Percentile',
                       'Efficiency Percentile']
-        cf_columns_wout = [col.replace(' Percentile', '') for col in cf_columns]
-        group = group.fillna(0)
-        params = list(cf_columns_wout)
+            cf_columns_wout = [col.replace(' Percentile', '') for col in cf_columns]
+            group = group.fillna(0)
+            params = list(cf_columns_wout)
 
         # Filter data by year
         row_2024 = group[group['Date'] == '2024']
         row_2023 = group[group['Date'] == '2023']
 
-        if not row_2023.empty:  # Case when data exists for both 2024 and 2023
+            if not row_2023.empty:  # Case when data exists for both 2024 and 2023
             values = [int(row_2024[col]) for col in cf_columns]
             other_vals = [int(row_2023[col]) for col in cf_columns]
 
@@ -51,7 +51,7 @@ def createPizzaChart(bolts):
             compare_val_colors = len(values) * ['#F2F2F2']
             compare_colors = []
 
-            for spring_val, dec_val, color in zip(values, other_vals, slice_colors_bck):
+                for spring_val, dec_val, color in zip(values, other_vals, slice_colors_bck):
                 if dec_val > spring_val:
                     compare_colors.append('red')
                     slice_colors.append(color)
