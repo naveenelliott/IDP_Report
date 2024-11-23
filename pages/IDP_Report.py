@@ -223,16 +223,25 @@ with col1:
             unsafe_allow_html=True
         )
 
-# Second Column: Logo
+#Add Bolts logo
 with col2:
     logo_path = 'BostonBoltsLogo.png'  # Path to the logo
-    
+
     # Resize the logo using Pillow
     logo_image = Image.open(logo_path)
-    resized_logo = logo_image.resize((150, 150))  # Adjust width and height as needed
+    resized_logo = logo_image.resize((250, 250))  # Adjust dimensions for a larger logo
 
-    # Display the resized logo
-    st.image(resized_logo)
+    # Display the resized logo and center it using HTML/CSS
+    st.markdown(
+        """
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <img src="data:image/png;base64,{}" style="width:auto; height:auto; max-width: 100%;"/>
+        </div>
+        """.format(
+            st._to_base64(resized_logo)
+        ),
+        unsafe_allow_html=True,
+    )
 
 weekly_report = getting_weeklyReport()
 weekly_report = weekly_report.loc[weekly_report['Player Full Name'] == player_name]
