@@ -18,7 +18,7 @@ def createPizzaChart(bolts):
     grouped = bolts.groupby('Player Name')
 
     # Iterate over each player group
-    for player_name, group in grouped:
+        for player_name, group in grouped:
         position = group['Position'].iloc[0]
 
         # Define parameters for each position
