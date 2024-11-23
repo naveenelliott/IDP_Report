@@ -24,7 +24,7 @@ def createPizzaChart(bolts):
     grouped = bolts.groupby('Player Name')
 
     for player_name, group in grouped:
-    if group['Position'].iloc[0] == 'ATT':
+        if group['Position'].iloc[0] == 'ATT':
         player_named = group['Player Name'].iloc[0]
         cf_columns = ['Stand. Tackle Total Percentile', 'Rec Total Percentile', 'Total Passes Percentile', 'Pass Completion Percentile', 
                       'Att 1v1 Percentile', 'Loss of Poss Percentile', 'Efforts on Goal Percentile', 'Shot on Target Percentile',
@@ -163,7 +163,6 @@ def createPizzaChart(bolts):
         fig.set_dpi(600)
         fig.set_facecolor('white')
         plt.gca().set_facecolor('white')
-
         elif group['Position'].iloc[0] == 'Wing':
             player_named = group['Player Name'].iloc[0]
             if (len(group['Position']) > 1) and (group['Position'] == 'Wing').all():
