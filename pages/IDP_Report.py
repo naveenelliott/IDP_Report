@@ -223,23 +223,17 @@ with col1:
             unsafe_allow_html=True
         )
 
-#Add Bolts logo
+# Second Column: Logo
 with col2:
     logo_path = 'BostonBoltsLogo.png'  # Path to the logo
-
-    # Resize the logo using Pillow
-    logo_image = Image.open(logo_path)
-    resized_logo = logo_image.resize((250, 250))  # Adjust dimensions for a larger logo
-
-    # Display the resized logo and center it using HTML/CSS
+    
+    # Adjust the width of the logo as needed
     st.markdown(
-        """
+        f"""
         <div style="display: flex; justify-content: center; align-items: center;">
-            <img src="data:image/png;base64,{}" style="width:auto; height:auto; max-width: 100%;"/>
+            <img src="{logo_path}" style="width: 250px; height: auto;">
         </div>
-        """.format(
-            st._to_base64(resized_logo)
-        ),
+        """,
         unsafe_allow_html=True,
     )
 
