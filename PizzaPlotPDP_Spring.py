@@ -57,94 +57,69 @@ def createPizzaChart(bolts):
         params = [col.replace(' Percentile', '') for col in columns]
         group = group.fillna(0)
 
-        # Check for 2024 and 2023 data
-        row_2024 = group[group['Date'] == '2024']
-        row_2023 = group[group['Date'] == '2023']
+        # Extract data for 2024 and 2023
+            row_2024 = group[group['Date'] == '2024']
+            row_2023 = group[group['Date'] == '2023']
+            values = [int(row_2024[col].values[0]) for col in cf_columns] if not row_2024.empty else []
+            other_vals = [int(row_2023[col].values[0]) for col in cf_columns] if not row_2023.empty else []
 
-        if not row_2024.empty:  # Ensure 2024 data exists
-            values = [int(row_2024[col].iloc[0]) for col in columns]
-
-            if not row_2023.empty:  # If 2023 data also exists, compare
-                other_vals = [int(row_2023[col].iloc[0]) for col in columns]
-
-                # Define slice colors
-                slice_colors = ["#6bb2e2"] * len(params)  # Keep slices the same color
-
-                # Define box colors based on comparison
+            # Determine if comparison is possible
+            if values and other_vals:
+                # Comparison setup
                 box_colors = []
                 for spring_val, dec_val in zip(values, other_vals):
                     if dec_val > spring_val:
-                        box_colors.append('red')
+                        box_colors.append('red')  # Improvement
                     elif dec_val == spring_val:
-                        box_colors.append('orange')
+                        box_colors.append('orange')  # No change
                     else:
-                        box_colors.append('green')
+                        box_colors.append('green')  # Decline
+            else:
+                box_colors = ['cornflowerblue'] * len(params)  # Default color for single-year data
 
-                # Create comparison pizza chart
-                baker = PyPizza(
-                    params=params,
-                    background_color="white",
-                    straight_line_color="#EBEBE9",
-                    straight_line_lw=1,
-                    last_circle_lw=0,
-                    other_circle_lw=0,
-                    inner_circle_size=9
-                )
-                fig, ax = baker.make_pizza(
-                    other_vals,
-                    compare_values=values,
-                    figsize=(8, 8.5),
-                    color_blank_space="same",
-                    slice_colors=slice_colors,
-                    kwargs_slices=dict(edgecolor="#F2F2F2", zorder=2, linewidth=1),
-                    kwargs_compare=dict(edgecolor="#F2F2F2", zorder=3, linewidth=2),
-                    kwargs_params=dict(color="#000000", fontsize=13, fontproperties=font_normal, va="center"),
-                    kwargs_values=dict(
-                        color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
-                        bbox=dict(
-                            edgecolor="#000000", facecolor=box_colors,  # Box colors reflect trend
-                            boxstyle="round,pad=0.3", lw=1
-                        )
-                    ),
-                    kwargs_compare_values=dict(
-                        color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
-                        bbox=dict(
-                            edgecolor="#000000", facecolor=box_colors,  # Box colors reflect trend
-                            boxstyle="round,pad=0.3", lw=1
-                        )
+            # Instantiate PyPizza
+            baker = PyPizza(
+                params=params,
+                background_color="white",
+                straight_line_color="#EBEBE9",
+                straight_line_lw=1,
+                last_circle_lw=0,
+                other_circle_lw=0,
+                inner_circle_size=9
+            )
+
+            # Plot pizza chart
+            fig, ax = baker.make_pizza(
+                other_vals if other_vals else values,  # Use `other_vals` for comparison, else `values`
+                compare_values=values if other_vals else None,
+                figsize=(8, 8.5),
+                color_blank_space="same",
+                slice_colors=["#6bb2e2"] * len(params),  # Keep slices light blue
+                kwargs_slices=dict(edgecolor="#F2F2F2", zorder=2, linewidth=1),
+                kwargs_compare=dict(edgecolor="#F2F2F2", zorder=3, linewidth=2),
+                kwargs_params=dict(color="#000000", fontsize=13, fontproperties=font_normal, va="center"),
+                kwargs_values=dict(
+                    color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
+                    bbox=dict(
+                        edgecolor="#000000", facecolor=box_colors,  # Assign box color dynamically
+                        boxstyle="round,pad=0.3", lw=1
+                    )
+                ),
+                kwargs_compare_values=dict(
+                    color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
+                    bbox=dict(
+                        edgecolor="#000000", facecolor=box_colors,  # Assign box color dynamically
+                        boxstyle="round,pad=0.3", lw=1
                     )
                 )
+            )
 
-            else:  # If only 2024 data exists
-                slice_colors = ["#6bb2e2"] * len(params)
+            # Add logo to the plot
+            ax_image = add_image(
+                logo, fig, left=0.445, bottom=0.92, width=0.1, height=0.1  # Adjust placement as needed
+            )
 
-                # Create single-year pizza chart
-                baker = PyPizza(
-                    params=params,
-                    background_color="white",
-                    straight_line_color="#EBEBE9",
-                    straight_line_lw=1,
-                    last_circle_lw=0,
-                    other_circle_lw=0,
-                    inner_circle_size=9
-                )
-                fig, ax = baker.make_pizza(
-                    values,
-                    figsize=(8, 8.5),
-                    color_blank_space="same",
-                    slice_colors=slice_colors,
-                    kwargs_slices=dict(edgecolor="#F2F2F2", zorder=2, linewidth=1),
-                    kwargs_params=dict(color="#000000", fontsize=13, fontproperties=font_normal, va="center"),
-                    kwargs_values=dict(
-                        color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
-                        bbox=dict(
-                            edgecolor="#000000", facecolor="cornflowerblue",  # Single-year box is blue
-                            boxstyle="round,pad=0.3", lw=1
-                        )
-                    )
-                )
-
-            # Save or display the figure
+            # Adjust figure settings
             fig.set_dpi(600)
             fig.set_facecolor('white')
             plt.gca().set_facecolor('white')
