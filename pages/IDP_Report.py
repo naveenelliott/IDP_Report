@@ -225,17 +225,9 @@ with col1:
 
 # Second Column: Logo
 with col2:
-    logo_path = 'BostonBoltsLogo.png'  # Path to the logo
-
-    # Display the logo and center it using Streamlit's built-in functionality
-    st.markdown(
-        """
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <img src="{}" style="width: 250px; height: auto;">
-        </div>
-        """.format(logo_path),
-        unsafe_allow_html=True,
-    )
+    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
+    st.image(logo_path, width=250, use_column_width=False)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 weekly_report = getting_weeklyReport()
 weekly_report = weekly_report.loc[weekly_report['Player Full Name'] == player_name]
