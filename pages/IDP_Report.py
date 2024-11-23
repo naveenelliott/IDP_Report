@@ -226,8 +226,13 @@ with col1:
 # Second Column: Logo
 with col2:
     logo_path = 'BostonBoltsLogo.png'  # Path to the logo
-    st.image(logo_path, use_column_width=True)
+    
+    # Resize the logo using Pillow
+    logo_image = Image.open(logo_path)
+    resized_logo = logo_image.resize((150, 150))  # Adjust width and height as needed
 
+    # Display the resized logo
+    st.image(resized_logo)
 
 weekly_report = getting_weeklyReport()
 weekly_report = weekly_report.loc[weekly_report['Player Full Name'] == player_name]
