@@ -222,7 +222,7 @@ with info_col:
 # Second Column: Logo
 with col2:
     st.markdown("<div style='text-align: right;'>", unsafe_allow_html=True)
-    st.image(logo_path, width=250, use_column_width=False)
+    st.image(logo_path, width=215, use_column_width=False)
     st.markdown("</div>", unsafe_allow_html=True)
 
 weekly_report = getting_weeklyReport()
