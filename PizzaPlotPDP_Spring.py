@@ -23,7 +23,7 @@ def createPizzaChart(bolts):
 
     grouped = bolts.groupby('Player Name')
 
-   for player_name, group in grouped:
+for player_name, group in grouped:
         if group['Position'].iloc[0] == 'ATT':
             player_named = group['Player Name'].iloc[0]
             if (len(group['Position']) > 1) and (group['Position'] == 'ATT').all():
