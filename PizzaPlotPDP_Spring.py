@@ -833,164 +833,180 @@ def createPizzaChart(bolts):
                 fig.set_dpi(600)
 
         elif group['Position'].iloc[0] == 'FB':
-            player_named = group['Player Name'].iloc[0]
-            if (len(group['Position']) > 1) and (group['Position'] == 'FB').all():
-                fb_columns = ['Stand. Tackle Total Percentile', 'Rec Total Percentile', 'Progr Regain Percentile', 'Stand. Tackle Success Percentile',
-                                'Forward Total Percentile', 'Total Passes Percentile', 'Pass Completion Percentile', 'Forward Completion Percentile', 
-                                'Dribble Percentile', 'Loss of Poss Percentile', 'Line Break Percentile', 'Pass into Oppo Box Percentile']
-                fb_columns_wout = [col.replace(' Percentile', '') for col in fb_columns]
-                group = group.fillna(0)
-                params = list(fb_columns_wout)
-                row_2024 = group[group['Date'] == '2024']
-                row_2023 = group[group['Date'] == '2023']
-                values = [int(row_2024[col]) for col in fb_columns]
-                other_vals = [int(row_2023[col]) for col in fb_columns]
+    player_named = group['Player Name'].iloc[0]
+    if (len(group['Position']) > 1) and (group['Position'] == 'FB').all():
+        fb_columns = ['Stand. Tackle Total Percentile', 'Rec Total Percentile', 'Progr Regain Percentile', 
+                      'Stand. Tackle Success Percentile', 'Forward Total Percentile', 'Total Passes Percentile', 
+                      'Pass Completion Percentile', 'Forward Completion Percentile', 'Dribble Percentile', 
+                      'Loss of Poss Percentile', 'Line Break Percentile', 'Pass into Oppo Box Percentile']
+        fb_columns_wout = [col.replace(' Percentile', '') for col in fb_columns]
+        group = group.fillna(0)
+        params = list(fb_columns_wout)
 
+        row_2024 = group[group['Date'] == '2024']
+        row_2023 = group[group['Date'] == '2023']
 
-                params_offset = [True] * len(params)
-                
-                # color for the slices and text
-                slice_colors = []
-                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
-                text_colors =  ["#F2F2F2"] * len(params)
-                text_colors_bck =  []
-                compare_colors_bck = []
-                
-                compare_val_colors = len(values)*['#F2F2F2']
-            
-                compare_colors = []
-                for spring_val, dec_val, color in zip(values, other_vals, slice_colors_bck):
-                    if dec_val > spring_val:
-                        compare_colors.append('red')
-                        slice_colors.append(color)
-                        text_colors_bck.append('red')
-                        compare_colors_bck.append('red')
-                    elif dec_val == spring_val:
-                        compare_colors.append('orange')
-                        slice_colors.append(color)
-                        text_colors_bck.append('orange')
-                        compare_colors_bck.append('orange')
-                    elif dec_val < spring_val:
-                        compare_colors.append('green')
-                        slice_colors.append(color)
-                        text_colors_bck.append('green')
-                        compare_colors_bck.append('green')
-            
-                # instantiate PyPizza class
-                baker = PyPizza(
-                    params=params,                  # list of parameters
-                    background_color="white",     # background color
-                    straight_line_color="#EBEBE9",  # color for straight lines
-                    straight_line_lw=1,             # linewidth for straight lines
-                    last_circle_lw=0,               # linewidth of last circle
-                    other_circle_lw=0,              # linewidth for other circles
-                    inner_circle_size=9         # size of inner circle
+        if not row_2024.empty and row_2023.empty:
+            # Only 2024 data exists
+            values = [int(row_2024[col]) for col in fb_columns]
+
+            # Generate pizza chart without comparison
+            baker = PyPizza(
+                params=params,  # list of parameters
+                background_color="white",
+                straight_line_color="#EBEBE9",
+                straight_line_lw=1,
+                last_circle_lw=0,
+                other_circle_lw=0,
+                inner_circle_size=9,
+            )
+
+            fig, ax = baker.make_pizza(
+                values,  # list of values
+                figsize=(8, 8.5),
+                color_blank_space="same",
+                slice_colors=["#6bb2e2"] * len(params),
+                value_colors=["#000000"] * len(params),
+                blank_alpha=0.4,
+                kwargs_slices=dict(edgecolor="#F2F2F2", zorder=2, linewidth=1),
+                kwargs_params=dict(color="#000000", fontsize=13, fontproperties=font_normal, va="center"),
+                kwargs_values=dict(
+                    color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
+                    bbox=dict(edgecolor="#000000", facecolor="cornflowerblue", boxstyle="round,pad=0.2", lw=1),
+                ),
+            )
+
+            baker.adjust_texts([True] * len(params), offset=-0.2)
+            fig.set_dpi(600)
+            fig.set_facecolor("white")
+
+        elif not row_2023.empty:
+            # Both 2024 and 2023 data exist, proceed with comparison
+            values = [int(row_2024[col]) for col in fb_columns]
+            other_vals = [int(row_2023[col]) for col in fb_columns]
+
+            params_offset = [True] * len(params)
+
+            slice_colors = []
+            slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices
+            text_colors = ["#F2F2F2"] * len(params)
+            text_colors_bck = []
+            compare_colors_bck = []
+            compare_val_colors = len(values) * ['#F2F2F2']
+
+            compare_colors = []
+            for spring_val, dec_val, color in zip(values, other_vals, slice_colors_bck):
+                if dec_val > spring_val:
+                    compare_colors.append('red')
+                    slice_colors.append(color)
+                    text_colors_bck.append('red')
+                    compare_colors_bck.append('red')
+                elif dec_val == spring_val:
+                    compare_colors.append('orange')
+                    slice_colors.append(color)
+                    text_colors_bck.append('orange')
+                    compare_colors_bck.append('orange')
+                elif dec_val < spring_val:
+                    compare_colors.append('green')
+                    slice_colors.append(color)
+                    text_colors_bck.append('green')
+                    compare_colors_bck.append('green')
+
+            # Instantiate PyPizza class
+            baker = PyPizza(
+                params=params,  # list of parameters
+                background_color="white",  # background color
+                straight_line_color="#EBEBE9",  # color for straight lines
+                straight_line_lw=1,  # linewidth for straight lines
+                last_circle_lw=0,  # linewidth of last circle
+                other_circle_lw=0,  # linewidth for other circles
+                inner_circle_size=9,  # size of inner circle
+            )
+
+            # Plot pizza
+            fig, ax = baker.make_pizza(
+                other_vals,
+                compare_values=values,  # list of values
+                figsize=(8, 8.5),  # adjust figsize according to your need
+                color_blank_space="same",  # use same color to fill blank space
+                slice_colors=slice_colors,  # color for individual slices
+                value_colors=text_colors,  # color for the value-text
+                value_bck_colors=slice_colors,  # color for the blank spaces
+                blank_alpha=0.4,  # alpha for blank-space colors
+                compare_colors=slice_colors,
+                compare_value_colors=compare_val_colors,
+                compare_value_bck_colors=compare_colors_bck,
+                kwargs_slices=dict(
+                    edgecolor="#F2F2F2", zorder=2, linewidth=1
+                ),  # values to be used when plotting slices
+                kwargs_compare=dict(
+                    edgecolor='#F2F2F2', zorder=3, linewidth=2
+                ),
+                kwargs_params=dict(
+                    color="#000000", fontsize=13, fontproperties=font_normal, va="center"
+                ),
+                kwargs_values=dict(
+                    color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
+                    bbox=dict(
+                        edgecolor="#000000", facecolor="cornflowerblue",
+                        boxstyle="round,pad=0.2", lw=1
                     )
-
-                # plot pizza
-                fig, ax = baker.make_pizza(
-                    other_vals,     
-                    compare_values=values,                     # list of values
-                        figsize=(8, 8.5),                # adjust figsize according to your need
-                        color_blank_space="same",        # use same color to fill blank space
-                        slice_colors=slice_colors,       # color for individual slices
-                        value_colors=text_colors,        # color for the value-text
-                        value_bck_colors=slice_colors,   # color for the blank spaces
-                        blank_alpha=0.4,                 # alpha for blank-space colors
-                        compare_colors = slice_colors,
-                        compare_value_colors = compare_val_colors,
-                        compare_value_bck_colors = compare_colors_bck,
-                        kwargs_slices=dict(
-                            edgecolor="#F2F2F2", zorder=2, linewidth=1
-                            ),                               # values to be used when plotting slices
-                        kwargs_compare=dict(
-                            edgecolor='#F2F2F2', zorder=3, linewidth=2
-                            ), 
-                        kwargs_params=dict(
-                            color="#000000", fontsize=13,
-                            fontproperties=font_normal, va="center"
-                            ),                               # values to be used when adding parameter
-                        kwargs_values=dict(
-                            color="#000000", fontsize=13,
-                            fontproperties=font_normal, zorder=3,
-                            bbox=dict(
-                                edgecolor="#000000", facecolor="cornflowerblue",
-                                boxstyle="round,pad=0.2", lw=1
-                                )
-                            ),
-                        kwargs_compare_values=dict(
-                            color='#F2F2F2', fontsize=13,
-                            fontproperties=font_normal, zorder=3,
-                            bbox=dict(
-                                edgecolor="#000000", facecolor="cornflowerblue",
-                                boxstyle="round,pad=0.2", lw=1
-                                )
-                            )
-                    # values to be used when adding parameter-values
+                ),
+                kwargs_compare_values=dict(
+                    color='#F2F2F2', fontsize=13, fontproperties=font_normal, zorder=3,
+                    bbox=dict(
+                        edgecolor="#000000", facecolor="cornflowerblue",
+                        boxstyle="round,pad=0.2", lw=1
                     )
+                ),
+            )
 
-                baker.adjust_texts(params_offset, offset=-0.2, adj_comp_values=True)
-                
-                fig.set_dpi(600)
-            
-                fig.set_facecolor('white')
-                plt.gca().set_facecolor('white')
-                
-            else:
-                fb_columns = ['Stand. Tackle Total Percentile', 'Rec Total Percentile', 'Progr Regain Percentile', 'Stand. Tackle Success Percentile',
-                                'Forward Total Percentile', 'Total Passes Percentile', 'Pass Completion Percentile', 'Forward Completion Percentile', 
-                                'Dribble Percentile', 'Loss of Poss Percentile', 'Line Break Percentile', 'Pass into Oppo Box Percentile']
-                fb_columns_wout = [col.replace(' Percentile', '') for col in fb_columns]
-                for index, row in group.iterrows():
-                    if row['Date'] == '2024':
-                        group = row
-                        found_2024 = True
-                        break
-                if not found_2024:
-                    group = group.head(1)
-                group = group.fillna(0)
-                params = list(fb_columns_wout)
-                values = [int(group[col]) for col in fb_columns]
+            baker.adjust_texts(params_offset, offset=-0.2, adj_comp_values=True)
+            fig.set_dpi(600)
+            fig.set_facecolor('white')
 
-                # color for the slices and text
-                slice_colors_bck = ["#6bb2e2"] * len(params)  # Use light blue for all slices 
-                text_colors =  ["#000000"] * 4 + ["#000000"] * 4 + ['#F2F2F2'] * 4
+    else:
+        fb_columns = ['Stand. Tackle Total Percentile', 'Rec Total Percentile', 'Progr Regain Percentile', 
+                      'Stand. Tackle Success Percentile', 'Forward Total Percentile', 'Total Passes Percentile', 
+                      'Pass Completion Percentile', 'Forward Completion Percentile', 'Dribble Percentile', 
+                      'Loss of Poss Percentile', 'Line Break Percentile', 'Pass into Oppo Box Percentile']
+        fb_columns_wout = [col.replace(' Percentile', '') for col in fb_columns]
+        for index, row in group.iterrows():
+            if row['Date'] == '2024':
+                group = row
+                found_2024 = True
+                break
+        if not found_2024:
+            group = group.head(1)
+        group = group.fillna(0)
+        params = list(fb_columns_wout)
+        values = [int(group[col]) for col in fb_columns]
 
-                    # instantiate PyPizza class
-                baker = PyPizza(
-                        params=params,                  # list of parameters
-                        background_color="white",     # background color
-                        straight_line_color="#EBEBE9",  # color for straight lines
-                        straight_line_lw=1,             # linewidth for straight lines
-                        last_circle_lw=0,               # linewidth of last circle
-                        other_circle_lw=0,              # linewidth for other circles
-                        inner_circle_size=9         # size of inner circle
-                    )
+        # Instantiate PyPizza class
+        baker = PyPizza(
+            params=params,  # list of parameters
+            background_color="white",  # background color
+            straight_line_color="#EBEBE9",  # color for straight lines
+            straight_line_lw=1,  # linewidth for straight lines
+            last_circle_lw=0,  # linewidth of last circle
+            other_circle_lw=0,  # linewidth for other circles
+            inner_circle_size=9,  # size of inner circle
+        )
 
-                    # plot pizza
-                fig, ax = baker.make_pizza(values,                          # list of values
-                            figsize=(8, 8.5),                # adjust figsize according to your need
-                            color_blank_space="same",        # use same color to fill blank space
-                            slice_colors=slice_colors,       # color for individual slices
-                            value_colors=text_colors,        # color for the value-text
-                            value_bck_colors=slice_colors,   # color for the blank spaces
-                            blank_alpha=0.4,                 # alpha for blank-space colors
-                            kwargs_slices=dict(
-                                edgecolor="#F2F2F2", zorder=2, linewidth=1
-                            ),                               # values to be used when plotting slices
-                            kwargs_params=dict(
-                                color="#000000", fontsize=13,
-                                fontproperties=font_normal, va="center"
-                                ),                               # values to be used when adding parameter
-                            kwargs_values=dict(
-                                color="#000000", fontsize=13,
-                                fontproperties=font_normal, zorder=3,
-                                bbox=dict(
-                                    edgecolor="#000000", facecolor="cornflowerblue",
-                                    boxstyle="round,pad=0.2", lw=1
-                                    )
-                            )                                # values to be used when adding parameter-values
-                        )
-                fig.set_dpi(600)
-                
-    return fig
+        # Plot pizza
+        fig, ax = baker.make_pizza(
+            values,  # list of values
+            figsize=(8, 8.5),  # adjust figsize according to your need
+            color_blank_space="same",  # use same color to fill blank space
+            slice_colors=["#6bb2e2"] * len(params),
+            value_colors=["#000000"] * len(params),
+            blank_alpha=0.4,
+            kwargs_slices=dict(edgecolor="#F2F2F2", zorder=2, linewidth=1),
+            kwargs_params=dict(color="#000000", fontsize=13, fontproperties=font_normal, va="center"),
+            kwargs_values=dict(
+                color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
+                bbox=dict(edgecolor="#000000", facecolor="cornflowerblue", boxstyle="round,pad=0.2", lw=1),
+            ),
+        )
+
+        fig.set_dpi(600)
