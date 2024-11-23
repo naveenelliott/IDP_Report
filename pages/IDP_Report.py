@@ -226,14 +226,14 @@ with col1:
 # Second Column: Logo
 with col2:
     logo_path = 'BostonBoltsLogo.png'  # Path to the logo
-    
-    # Adjust the width of the logo as needed
+
+    # Display the logo and center it using Streamlit's built-in functionality
     st.markdown(
-        f"""
+        """
         <div style="display: flex; justify-content: center; align-items: center;">
-            <img src="{logo_path}" style="width: 250px; height: auto;">
+            <img src="{}" style="width: 250px; height: auto;">
         </div>
-        """,
+        """.format(logo_path),
         unsafe_allow_html=True,
     )
 
