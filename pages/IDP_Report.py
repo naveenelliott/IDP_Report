@@ -219,12 +219,17 @@ with info_col:
         unsafe_allow_html=True
     )
     
-# Second Column: Logo
+# Second Column: Bolts Logo
 with col2:
-    st.markdown("<div style='text-align: right;'>", unsafe_allow_html=True)
-    st.image(logo_path, width=215, use_column_width=False)
-    st.markdown("</div>", unsafe_allow_html=True)
-
+    st.markdown(
+        f"""
+        <div style="display: flex; justify-content: flex-end; padding-right: 20px;">
+            <img src="{logo_path}" style="width: 215px; height: auto;">
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    
 weekly_report = getting_weeklyReport()
 weekly_report = weekly_report.loc[weekly_report['Player Full Name'] == player_name]
 weekly_report['mins played'] = weekly_report['mins played'].astype(float)
