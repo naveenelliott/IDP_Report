@@ -7,12 +7,6 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from matplotlib.font_manager import FontProperties
 import streamlit as st
 
-from PIL import Image
-from mplsoccer import PyPizza
-import matplotlib.pyplot as plt
-from matplotlib.font_manager import FontProperties
-import pandas as pd
-
 def createPizzaChart(bolts):
     # Load fonts
     font_path = 'Roboto-Regular.ttf'
@@ -73,16 +67,18 @@ def createPizzaChart(bolts):
             if not row_2023.empty:  # If 2023 data also exists, compare
                 other_vals = [int(row_2023[col].iloc[0]) for col in columns]
 
-                # Define slice and comparison colors
-                slice_colors = ["#6bb2e2"] * len(params)
-                compare_colors = []
+                # Define slice colors
+                slice_colors = ["#6bb2e2"] * len(params)  # Keep slices the same color
+
+                # Define box colors based on comparison
+                box_colors = []
                 for spring_val, dec_val in zip(values, other_vals):
                     if dec_val > spring_val:
-                        compare_colors.append('red')
+                        box_colors.append('red')
                     elif dec_val == spring_val:
-                        compare_colors.append('orange')
+                        box_colors.append('orange')
                     else:
-                        compare_colors.append('green')
+                        box_colors.append('green')
 
                 # Create comparison pizza chart
                 baker = PyPizza(
@@ -100,21 +96,20 @@ def createPizzaChart(bolts):
                     figsize=(8, 8.5),
                     color_blank_space="same",
                     slice_colors=slice_colors,
-                    compare_colors=compare_colors,
                     kwargs_slices=dict(edgecolor="#F2F2F2", zorder=2, linewidth=1),
                     kwargs_compare=dict(edgecolor="#F2F2F2", zorder=3, linewidth=2),
                     kwargs_params=dict(color="#000000", fontsize=13, fontproperties=font_normal, va="center"),
                     kwargs_values=dict(
                         color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
                         bbox=dict(
-                            edgecolor="#000000", facecolor="cornflowerblue",
+                            edgecolor="#000000", facecolor=box_colors,  # Box colors reflect trend
                             boxstyle="round,pad=0.3", lw=1
                         )
                     ),
                     kwargs_compare_values=dict(
                         color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
                         bbox=dict(
-                            edgecolor="#000000", facecolor="cornflowerblue",
+                            edgecolor="#000000", facecolor=box_colors,  # Box colors reflect trend
                             boxstyle="round,pad=0.3", lw=1
                         )
                     )
@@ -143,7 +138,7 @@ def createPizzaChart(bolts):
                     kwargs_values=dict(
                         color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
                         bbox=dict(
-                            edgecolor="#000000", facecolor="cornflowerblue",
+                            edgecolor="#000000", facecolor="cornflowerblue",  # Single-year box is blue
                             boxstyle="round,pad=0.3", lw=1
                         )
                     )
