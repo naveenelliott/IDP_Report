@@ -164,7 +164,7 @@ with col1:
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'>Height: {height} cm</span>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Height:</b> {height} cm</span>
             </div>
             """.format(height=height),
             unsafe_allow_html=True
@@ -172,7 +172,7 @@ with col1:
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'>Weight: {weight} lbs</span>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Weight:</b> {weight} lbs</span>
             </div>
             """.format(weight=weight),
             unsafe_allow_html=True
@@ -180,7 +180,7 @@ with col1:
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'>Goals: {goals}</span>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Goals:</b> {goals}</span>
             </div>
             """.format(goals=goals),
             unsafe_allow_html=True
@@ -188,7 +188,7 @@ with col1:
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'>Assists: {assists}</span>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Assists:</b> {assists}</span>
             </div>
             """.format(assists=assists),
             unsafe_allow_html=True
@@ -196,7 +196,7 @@ with col1:
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'>Primary Position: {primary_position}</span>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Primary Position:</b> {primary_position}</span>
             </div>
             """.format(primary_position=primary_position),
             unsafe_allow_html=True
@@ -209,7 +209,7 @@ with col1:
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'>Coach's Summary: {coach}</span>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Coach's Summary:</b> {coach}</span>
             </div>
             """.format(coach=coach),
             unsafe_allow_html=True
@@ -217,7 +217,7 @@ with col1:
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'>Focus for Spring: {spring_focus}</span>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Focus for Spring:</b> {spring_focus}</span>
             </div>
             """.format(spring_focus=spring_focus),
             unsafe_allow_html=True
