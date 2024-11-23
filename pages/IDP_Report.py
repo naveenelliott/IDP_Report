@@ -222,13 +222,13 @@ with info_col:
 # Second Column: Bolts Logo
 with col2:
     st.markdown(
-        f"""
-        <div style="display: flex; justify-content: flex-end; padding-right: 20px;">
-            <img src="{logo_path}" style="width: 215px; height: auto;">
-        </div>
+        """
+        <div style="text-align: right; padding-right: 20px;">
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
+    st.image(logo_path, width=215, use_column_width=False)
+    st.markdown("</div>", unsafe_allow_html=True)
     
 weekly_report = getting_weeklyReport()
 weekly_report = weekly_report.loc[weekly_report['Player Full Name'] == player_name]
