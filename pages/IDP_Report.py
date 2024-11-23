@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import glob
+import base64
 import streamlit as st
 from PIL import Image, ImageOps
 from GettingPSDLineupData import getting_PSD_min_data, getting_weeklyReport, getting_WeeklyReportRank
@@ -219,12 +220,18 @@ with info_col:
         unsafe_allow_html=True
     )
     
-# Second Column: Bolts Logo
+# Function to encode image as Base64
+def encode_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
+logo_base64 = encode_image(logo_path)
+
 with col2:
     st.markdown(
         f"""
-        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-            <img src="{logo_path}" style="width: 215px; height: auto;">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <img src="data:image/png;base64,{logo_base64}" style="width: 215px; height: auto;">
         </div>
         """,
         unsafe_allow_html=True
