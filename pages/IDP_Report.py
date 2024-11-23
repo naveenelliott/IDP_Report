@@ -225,7 +225,7 @@ with col1:
 
 # Second Column: Logo
 with col2:
-    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
+    st.markdown("<div style='text-align: right;'>", unsafe_allow_html=True)
     st.image(logo_path, width=250, use_column_width=False)
     st.markdown("</div>", unsafe_allow_html=True)
 
