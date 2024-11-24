@@ -155,7 +155,7 @@ def createPizzaChart(bolts):
                 )
 
             # Adjust for overlapping text
-            baker.adjust_texts(params_offset=[True] * len(params), offset=-0.3, adj_comp_values=True)
+            baker.adjust_texts(params_offset=[True] * len(params), offset=-0.15, adj_comp_values=True)
 
             fig.set_dpi(600)
             fig.set_facecolor('white')
