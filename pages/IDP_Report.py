@@ -22,7 +22,7 @@ from testCDM_Spring import creatingPercentilesDM, creatingRawDM
 from testCM_Spring import creatingPercentilesCM, creatingRawCM
 from testFB_Spring import creatingPercentilesFB, creatingRawFB
 from testWinger_Spring import creatingPercentilesWing, creatingRawWing
-from PizzaPlotPDP_Spring import createPizzaChart
+from PizzaPlotPDP_Spring import createPizzaChart, createNewPizzaChart
 from streamlit_gsheets import GSheetsConnection
 
 def meters_to_kilometers(meters):
@@ -1640,7 +1640,7 @@ with col2:
 
 
 
-fig_pizza = createPizzaChart(overall_player)
+fig_pizza = createNewPizzaChart(overall_player)
 
 with col3:
     st.pyplot(fig_pizza)
