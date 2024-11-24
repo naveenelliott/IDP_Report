@@ -218,10 +218,10 @@ if idp_playdata.empty:
 else:
     # Handle maximum total distance
     max_total_dist = idp_playdata['total_distance_m'].max()
-    max_total_dist_km = meters_to_kilometers(max_total_dist)
+    max_total_dist = meters_to_kilometers(max_total_dist)
     # Handle maximum speed
     max_speed = idp_playdata['max_speed_kph'].max()
-    max_speed_mph = kmph_to_mph(max_speed)
+    max_speed = kmph_to_mph(max_speed)
 
 
 # First Column: Player Picture and Stats
