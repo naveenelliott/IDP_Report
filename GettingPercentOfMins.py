@@ -20,7 +20,7 @@ def plottingMinsPlayed(player_name, percentage_played):
     )
 
     # Add title
-    ax.set_title('% of Mins Played', fontsize=45)
+    ax.set_title('% of Available Mins Played', fontsize=45)
 
     # Hide unnecessary axes
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
@@ -50,7 +50,7 @@ def plottingStarts(player_name, percentage_played):
     )
 
     # Add title
-    ax.set_title('% of Starts', fontsize=45)
+    ax.set_title('% of Available Starts', fontsize=45)
 
     # Hide unnecessary axes
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
