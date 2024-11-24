@@ -89,30 +89,10 @@ height_weight = height_weight.loc[height_weight['Athlete Name'] == player_name].
 height = height_weight['Height (cm)'][0]
 weight = height_weight['Weight (lbs)'][0]
 
-mins_df = getting_PSD_min_data()
-mins_df = mins_df.loc[mins_df['Team Name'] == team_name]
+mins_df = getting_available_played(team_name, player_name)
 
-starts_df = mins_df.copy()
+available_minutes = mins_df.groupby['Max Minutes'].sum()
 
-test_df = getting_available_played(team_name, player_name)
-st.write(test_df)
-
-# Define a function to assign Max Minutes based on team_name
-def assign_max_minutes(team_name):
-    if 'U13' in team_name:
-        return 70
-    elif 'U14' in team_name or 'U15' in team_name:
-        return 80
-    elif 'U16' in team_name or 'U17' in team_name or 'U19' in team_name:
-        return 90
-
-# Step 1: Apply the function to the idp_report
-mins_df['Max Minutes'] = mins_df['Team Name'].apply(assign_max_minutes)
-
-available_minutes = mins_df.groupby(['Match Date', 'Opposition', 'Team Name'])['Max Minutes'].first().sum()
-
-
-player_mins = mins_df[mins_df['Player Full Name'] == player_name]
 player_mins = player_mins['mins played'].sum()
 
 goals_assists = getting_PSD_min_data()
@@ -128,11 +108,10 @@ percentage_played = (player_mins / available_minutes) * 100
 
 fig = plottingMinsPlayed(percentage_played=percentage_played, player_name=player_name)
 
-first_start_df = starts_df[starts_df['Starts'] == 1]
-available_starts = first_start_df.groupby(['Match Date', 'Opposition', 'Team Name'])['Starts'].first().sum()
+first_start_df = mins_df[mins_df['Starts'] == 1]
+available_starts = len(mins_df)
 
-player_starts = starts_df[starts_df['Player Full Name'] == player_name]
-player_starts = player_starts.groupby(['Match Date', 'Opposition', 'Team Name'])['Starts'].first().sum()
+player_starts = len(first_start_df)
 
 percentage_started = (player_starts / available_starts) * 100
 
