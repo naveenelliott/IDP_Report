@@ -142,6 +142,67 @@ st.markdown(f"<h1 style='text-align: left;'>{player_name} Individual Player Repo
 # Create two columns: One for Player Info and Picture, One for the Logo
 col1, col2 = st.columns([6, 4])  # Adjust widths as needed (e.g., 7:3 ratio)
 
+# Path to the folder containing CSV files
+folder_path = 'Detailed_Training_Sessions'
+
+csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
+
+dataframes = []
+# Filter filenames that contain both player_name and opp_name
+for f in csv_files:
+    file_path = os.path.join(folder_path, f)
+    
+    # Read the CSV file into a DataFrame
+    pd_df = pd.read_csv(file_path)
+    
+    pd_df['athlete_name'] = pd_df['athlete_name'].str.lower()
+    
+    # Append the DataFrame to the list
+    dataframes.append(pd_df)
+    
+playerdata_df = pd.concat(dataframes, ignore_index=True)
+
+# Convert start_time from string to datetime in UTC
+playerdata_df['start_time'] = pd.to_datetime(playerdata_df['start_time'])
+
+# Set the timezone to UTC, then convert to EST
+playerdata_df['start_time'] = playerdata_df['start_time'].dt.tz_convert('America/New_York')
+
+playerdata_df['Day of Week'] = pd.to_datetime(playerdata_df['start_time']).dt.day_name()
+
+playerdata_df.drop(columns={'session_type'}, inplace=True)
+
+player_name_lower = player_name.lower()
+
+
+def rearrange_team_name(team_name):
+    # Define age groups and leagues
+    age_groups = ['U15', 'U16', 'U17', 'U19', 'U13', 'U14']
+    leagues = ['MLS Next', 'NAL Boston', 'NAL South Shore']
+    
+    # Find age group in the team name
+    for age in age_groups:
+        if age in team_name:
+            # Find the league part
+            league_part = next((league for league in leagues if league in team_name), '')
+            if league_part == 'NAL Boston':
+                league_part = 'NALB'
+            
+            # Extract the rest of the team name
+            rest_of_name = team_name.replace(age, '').replace('NAL Boston', '').replace(league_part, '').strip()
+            
+            
+            # Construct the new team name
+            return f"{rest_of_name} {age} {league_part}"
+    
+    # Return the original team name if no age group is found
+    return team_name
+
+# Apply the function to the 'team_name' column
+playerdata_df['bolts team'] = playerdata_df['bolts team'].apply(rearrange_team_name)
+
+idp_playdata = playerdata_df.loc[playerdata_df['athlete_name'] == player_name_lower]
+st.write(idp_playdata)
 
 # First Column: Player Picture and Stats
 with col1:
@@ -1501,64 +1562,6 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.pyplot(our_fig)
 
-# Path to the folder containing CSV files
-folder_path = 'Detailed_Training_Sessions'
-
-csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
-
-dataframes = []
-# Filter filenames that contain both player_name and opp_name
-for f in csv_files:
-    file_path = os.path.join(folder_path, f)
-    
-    # Read the CSV file into a DataFrame
-    pd_df = pd.read_csv(file_path)
-    
-    pd_df['athlete_name'] = pd_df['athlete_name'].str.lower()
-    
-    # Append the DataFrame to the list
-    dataframes.append(pd_df)
-    
-playerdata_df = pd.concat(dataframes, ignore_index=True)
-
-# Convert start_time from string to datetime in UTC
-playerdata_df['start_time'] = pd.to_datetime(playerdata_df['start_time'])
-
-# Set the timezone to UTC, then convert to EST
-playerdata_df['start_time'] = playerdata_df['start_time'].dt.tz_convert('America/New_York')
-
-playerdata_df['Day of Week'] = pd.to_datetime(playerdata_df['start_time']).dt.day_name()
-
-u19 = playerdata_df.loc[playerdata_df['bolts team'] == 'Boston Bolts MLS Next U19']
-
-playerdata_df.drop(columns={'session_type'}, inplace=True)
-
-
-def rearrange_team_name(team_name):
-    # Define age groups and leagues
-    age_groups = ['U15', 'U16', 'U17', 'U19', 'U13', 'U14']
-    leagues = ['MLS Next', 'NAL Boston', 'NAL South Shore']
-    
-    # Find age group in the team name
-    for age in age_groups:
-        if age in team_name:
-            # Find the league part
-            league_part = next((league for league in leagues if league in team_name), '')
-            if league_part == 'NAL Boston':
-                league_part = 'NALB'
-            
-            # Extract the rest of the team name
-            rest_of_name = team_name.replace(age, '').replace('NAL Boston', '').replace(league_part, '').strip()
-            
-            
-            # Construct the new team name
-            return f"{rest_of_name} {age} {league_part}"
-    
-    # Return the original team name if no age group is found
-    return team_name
-
-# Apply the function to the 'team_name' column
-playerdata_df['bolts team'] = playerdata_df['bolts team'].apply(rearrange_team_name)
 
 # Getting rid of outliers
 playerdata_df = playerdata_df[playerdata_df['total_distance_m'] > 2000]
@@ -1589,9 +1592,6 @@ all_primary_position['Player Full Name'] = all_primary_position['Player Full Nam
 
 final_averages_pd = pd.merge(final_averages_pd, all_primary_position, left_on='athlete_name', right_on='Player Full Name', how='inner')
 final_averages_pd['Team Category'] = final_averages_pd['Team Name'].str.extract(r'(U\d+)')
-
-
-player_name_lower = player_name.lower()
 
 our_player_avg = final_averages_pd.loc[final_averages_pd['athlete_name'] == player_name_lower]
 
