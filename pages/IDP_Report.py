@@ -93,13 +93,12 @@ mins_df = getting_available_played(team_name, player_name)
 
 available_minutes = mins_df['Max Minutes'].sum()
 
-player_mins = player_mins['mins played'].sum()
+player_mins = mins_df['mins played'].sum()
 
-goals_assists = getting_PSD_min_data()
-goals_assists = goals_assists.loc[(goals_assists['Team Name'] == team_name) & (goals_assists['Player Full Name'] == player_name)]
-goals = goals_assists['Goal'].sum()
+
+goals = mins_df['Goal'].sum()
 goals = int(goals)
-assists = goals_assists['Assist'].sum()
+assists = mins_df['Assist'].sum()
 assists = int(assists)
 
 
