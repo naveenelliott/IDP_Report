@@ -94,7 +94,8 @@ mins_df = mins_df.loc[mins_df['Team Name'] == team_name]
 
 starts_df = mins_df.copy()
 
-
+test_df = getting_available_played(team_name, player_name)
+st.write(test_df)
 
 # Define a function to assign Max Minutes based on team_name
 def assign_max_minutes(team_name):
