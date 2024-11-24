@@ -55,7 +55,7 @@ def getting_available_played(teamName, playerName):
             df = df.dropna(axis=1, how='all')
             df = df.iloc[1:]
 
-            temp_match_date = pd.to_datetime(end['Match Date'][1])
+            temp_match_date = pd.to_datetime(df['Match Date'][1])
 
             date_wanted = pd.Timestamp('2024-08-01')
             
