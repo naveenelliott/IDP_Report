@@ -2,8 +2,6 @@ from PIL import Image
 from mplsoccer import PyPizza, add_image, FontManager
 import matplotlib.pyplot as plt
 import pandas as pd
-from scipy.stats import norm
-from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from matplotlib.font_manager import FontProperties
 import streamlit as st
 
@@ -78,20 +76,27 @@ def createPizzaChart(bolts):
             if not row_2023.empty:  # If both 2024 and 2023 data exist
                 other_vals = [int(row_2023[col].iloc[0]) for col in position_columns_list]
 
-                # Colors for comparison
-                slice_colors = []
-                slice_colors_bck = ["#6bb2e2"] * len(params)  # Light blue for slices
+                # Define colors for slices and text
+                slice_colors = ["#6bb2e2"] * len(params)  # Light blue for all slices
+                text_colors = ["#F2F2F2"] * len(params)
                 compare_colors = []
+                compare_colors_bck = []
+                text_colors_bck = []
+
+                # Compare values and assign colors
                 for spring_val, dec_val in zip(values, other_vals):
                     if dec_val > spring_val:
-                        compare_colors.append('red')
-                        slice_colors.append("#6bb2e2")
+                        compare_colors.append("red")
+                        text_colors_bck.append("red")
+                        compare_colors_bck.append("red")
                     elif dec_val == spring_val:
-                        compare_colors.append('orange')
-                        slice_colors.append("#6bb2e2")
+                        compare_colors.append("orange")
+                        text_colors_bck.append("orange")
+                        compare_colors_bck.append("orange")
                     else:
-                        compare_colors.append('green')
-                        slice_colors.append("#6bb2e2")
+                        compare_colors.append("green")
+                        text_colors_bck.append("green")
+                        compare_colors_bck.append("green")
 
                 # Instantiate PyPizza for comparison
                 baker = PyPizza(
@@ -112,16 +117,25 @@ def createPizzaChart(bolts):
                     color_blank_space="same",
                     slice_colors=slice_colors,
                     compare_colors=compare_colors,
+                    value_bck_colors=slice_colors,
+                    compare_value_colors=text_colors,
+                    compare_value_bck_colors=compare_colors_bck,
+                    blank_alpha=0.4,
                     kwargs_slices=dict(edgecolor="#F2F2F2", zorder=2, linewidth=1),
                     kwargs_compare=dict(edgecolor="#F2F2F2", zorder=3, linewidth=2),
                     kwargs_params=dict(color="#000000", fontsize=13, fontproperties=font_normal, va="center"),
-                    kwargs_values=dict(color="#000000", fontsize=13, fontproperties=font_normal),
-                    kwargs_compare_values=dict(color="#000000", fontsize=13, fontproperties=font_normal)
+                    kwargs_values=dict(
+                        color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
+                        bbox=dict(edgecolor="#000000", facecolor="cornflowerblue", boxstyle="round,pad=0.2", lw=1)
+                    ),
+                    kwargs_compare_values=dict(
+                        color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
+                        bbox=dict(edgecolor="#000000", facecolor="cornflowerblue", boxstyle="round,pad=0.2", lw=1)
+                    )
                 )
-
             else:  # If only 2024 data exists
-                slice_colors = ["#6bb2e2"] * len(params)  # Default color
-                value_colors = ["#000000"] * len(params)  # Default text color
+                slice_colors = ["#6bb2e2"] * len(params)  # Light blue slices
+                text_colors = ["#000000"] * len(params)  # Black text
 
                 # Instantiate PyPizza for single-year data
                 baker = PyPizza(
@@ -140,10 +154,14 @@ def createPizzaChart(bolts):
                     figsize=(8, 8.5),
                     color_blank_space="same",
                     slice_colors=slice_colors,
-                    value_colors=value_colors,
+                    value_colors=text_colors,
+                    value_bck_colors=slice_colors,
                     kwargs_slices=dict(edgecolor="#F2F2F2", zorder=2, linewidth=1),
                     kwargs_params=dict(color="#000000", fontsize=13, fontproperties=font_normal, va="center"),
-                    kwargs_values=dict(color="#000000", fontsize=13, fontproperties=font_normal)
+                    kwargs_values=dict(
+                        color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
+                        bbox=dict(edgecolor="#000000", facecolor="cornflowerblue", boxstyle="round,pad=0.2", lw=1)
+                    )
                 )
 
             fig.set_dpi(600)
