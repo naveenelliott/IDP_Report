@@ -59,7 +59,7 @@ def getting_available_played(teamName, playerName):
 
             date_wanted = pd.Timestamp('2024-08-01')
             
-            if temp_match_date >= date_wanted
+            if temp_match_date >= date_wanted:
                 # selecting match date information, because that's what actions have
                 details = df.loc[:, ['Player Full Name', 'Team Name', 'mins played', 'Match Date', 'Opposition', 'Starts', 'Goal', 'Assist']]
                 details[['mins played', 'Starts', 'Goal', 'Assist']] = details[['mins played', 'Starts', 'Goal', 'Assist']].astype(float)
