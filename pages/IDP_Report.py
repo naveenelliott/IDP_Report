@@ -25,6 +25,14 @@ from testWinger_Spring import creatingPercentilesWing, creatingRawWing
 from PizzaPlotPDP_Spring import createPizzaChart
 from streamlit_gsheets import GSheetsConnection
 
+def meters_to_kilometers(meters):
+    km = meters / 1000
+    km = round(km, 2)
+    return km
+
+def kmph_to_mph(kmph):
+    return kmph * 0.621371
+
 player_name = st.session_state['selected_player']
 team_name = st.session_state['selected_team']
 
@@ -202,11 +210,11 @@ def rearrange_team_name(team_name):
 playerdata_df['bolts team'] = playerdata_df['bolts team'].apply(rearrange_team_name)
 
 idp_playdata = playerdata_df.loc[playerdata_df['athlete_name'] == player_name_lower]
-st.write(idp_playdata)
 max_total_dist = idp_playdata['total_distance_m'].max()
-st.write(max_total_dist)
+max_total_dist = meters_to_kilometers(max_total_dist)
 max_speed = idp_playdata['max_speed_kph'].max()
-st.write(max_speed)
+max_speed = kmph_to_mph(max_speed)
+
 
 # First Column: Player Picture and Stats
 with col1:
@@ -255,6 +263,22 @@ with col1:
                 <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Assists:</b> {assists}</span>
             </div>
             """.format(assists=assists),
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Max Total Distance:</b> {max_total_dist}</span>
+            </div>
+            """.format(max_total_dist=max_total_dist),
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            """
+            <div style='display: block; text-align: left;'>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Max Speed:</b> {max_speed}</span>
+            </div>
+            """.format(max_speed=max_speed),
             unsafe_allow_html=True
         )
         st.markdown(
