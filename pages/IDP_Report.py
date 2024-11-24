@@ -212,10 +212,16 @@ def rearrange_team_name(team_name):
 playerdata_df['bolts team'] = playerdata_df['bolts team'].apply(rearrange_team_name)
 
 idp_playdata = playerdata_df.loc[playerdata_df['athlete_name'] == player_name_lower]
-max_total_dist = idp_playdata['total_distance_m'].max()
-max_total_dist = meters_to_kilometers(max_total_dist)
-max_speed = idp_playdata['max_speed_kph'].max()
-max_speed = kmph_to_mph(max_speed)
+if idp_playdata.empty:
+    max_total_dist_km = 0  # Default value when no data
+    max_speed_mph = 0      # Default value when no data
+else:
+    # Handle maximum total distance
+    max_total_dist = idp_playdata['total_distance_m'].max()
+    max_total_dist_km = meters_to_kilometers(max_total_dist)
+    # Handle maximum speed
+    max_speed = idp_playdata['max_speed_kph'].max()
+    max_speed_mph = kmph_to_mph(max_speed)
 
 
 # First Column: Player Picture and Stats
