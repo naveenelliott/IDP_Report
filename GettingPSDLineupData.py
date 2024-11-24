@@ -5,22 +5,22 @@ import streamlit as st
 def getting_available_played(teamName, playerName):
     
     if teamName == 'Boston Bolts U13 MLS Next':
-        folder_path = 'Team_Thresholds/BoltsThirteenGames'
+        folder_path = 'Team_Thresholds/BoltsThirteenGames/'
         maxMins = 70
     elif teamName == 'Boston Bolts U14 MLS Next':
-        folder_path = 'Team_Thresholds/BoltsFourteenGames'
+        folder_path = 'Team_Thresholds/BoltsFourteenGames/'
         maxMins = 80
     elif teamName == 'Boston Bolts U15 MLS Next':
-        folder_path = 'Team_Thresholds/BoltsFifteenGames'
+        folder_path = 'Team_Thresholds/BoltsFifteenGames/'
         maxMins = 80
     elif teamName == 'Boston Bolts U16 MLS Next':
-        folder_path = 'Team_Thresholds/BoltsSixteenGames'
+        folder_path = 'Team_Thresholds/BoltsSixteenGames/'
         maxMins = 90
     elif teamName == 'Boston Bolts U17 MLS Next':
-        folder_path = 'Team_Thresholds/BoltsSeventeenGames'
+        folder_path = 'Team_Thresholds/BoltsSeventeenGames/'
         maxMins = 90
     elif teamName == 'Boston Bolts U19 MLS Next':
-        folder_path = 'Team_Thresholds/BoltsNineteenGames'
+        folder_path = 'Team_Thresholds/BoltsNineteenGames/'
         maxMins = 90
     
     
