@@ -31,7 +31,9 @@ def meters_to_kilometers(meters):
     return km
 
 def kmph_to_mph(kmph):
-    return kmph * 0.621371
+    kmph = kmph * 0.621371
+    kmph = round(kmph, 2)
+    return kmph
 
 player_name = st.session_state['selected_player']
 team_name = st.session_state['selected_team']
