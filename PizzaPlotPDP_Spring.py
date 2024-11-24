@@ -7,13 +7,6 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from matplotlib.font_manager import FontProperties
 import streamlit as st
 
-from PIL import Image
-from mplsoccer import PyPizza, add_image, FontManager
-import matplotlib.pyplot as plt
-import pandas as pd
-from matplotlib.font_manager import FontProperties
-import streamlit as st
-
 def createPizzaChart(bolts):
     # Load fonts
     font_path = 'Roboto-Regular.ttf'
@@ -65,17 +58,11 @@ def createPizzaChart(bolts):
         ]
     }
 
-    # Iterate over grouped players
     for player_name, group in grouped:
-        # Check for consistent position data
-        if len(group['Position'].unique()) > 1:
-            continue  # Skip players with mixed positions
-
         position = group['Position'].iloc[0]
         if position not in position_columns:
             continue  # Skip unknown positions
 
-        player_named = group['Player Name'].iloc[0]
         position_columns_list = position_columns[position]
         position_columns_wout = [col.replace(' Percentile', '') for col in position_columns_list]
         group = group.fillna(0)
