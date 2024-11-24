@@ -77,26 +77,15 @@ def createPizzaChart(bolts):
                 other_vals = [int(row_2023[col].iloc[0]) for col in position_columns_list]
 
                 # Define colors for slices and text
-                slice_colors = ["#6bb2e2"] * len(params)  # Light blue for all slices
-                text_colors = ["#F2F2F2"] * len(params)
-                compare_colors = []
-                compare_colors_bck = []
-                text_colors_bck = []
-
-                # Compare values and assign colors
+                slice_colors = ["#6bb2e2"] * len(params)  # Slices always light blue
+                compare_colors = []  # Box colors for number values
                 for spring_val, dec_val in zip(values, other_vals):
                     if dec_val > spring_val:
-                        compare_colors.append("red")
-                        text_colors_bck.append("red")
-                        compare_colors_bck.append("red")
+                        compare_colors.append("red")  # Worse performance
                     elif dec_val == spring_val:
-                        compare_colors.append("orange")
-                        text_colors_bck.append("orange")
-                        compare_colors_bck.append("orange")
+                        compare_colors.append("orange")  # No change
                     else:
-                        compare_colors.append("green")
-                        text_colors_bck.append("green")
-                        compare_colors_bck.append("green")
+                        compare_colors.append("green")  # Better performance
 
                 # Instantiate PyPizza for comparison
                 baker = PyPizza(
@@ -115,11 +104,11 @@ def createPizzaChart(bolts):
                     compare_values=values,
                     figsize=(8, 8.5),
                     color_blank_space="same",
-                    slice_colors=slice_colors,
-                    compare_colors=compare_colors,
-                    value_bck_colors=slice_colors,
-                    compare_value_colors=text_colors,
-                    compare_value_bck_colors=compare_colors_bck,
+                    slice_colors=slice_colors,  # Slices stay light blue
+                    value_bck_colors=slice_colors,  # Slice background stays light blue
+                    compare_colors=slice_colors,  # Slices themselves stay light blue
+                    compare_value_colors=["#000000"] * len(params),  # Black text
+                    compare_value_bck_colors=compare_colors,  # Box colors change based on performance
                     blank_alpha=0.4,
                     kwargs_slices=dict(edgecolor="#F2F2F2", zorder=2, linewidth=1),
                     kwargs_compare=dict(edgecolor="#F2F2F2", zorder=3, linewidth=2),
@@ -130,7 +119,7 @@ def createPizzaChart(bolts):
                     ),
                     kwargs_compare_values=dict(
                         color="#000000", fontsize=13, fontproperties=font_normal, zorder=3,
-                        bbox=dict(edgecolor="#000000", facecolor="cornflowerblue", boxstyle="round,pad=0.2", lw=1)
+                        bbox=dict(edgecolor="#000000", boxstyle="round,pad=0.2", lw=1)
                     )
                 )
             else:  # If only 2024 data exists
@@ -153,9 +142,9 @@ def createPizzaChart(bolts):
                     values,
                     figsize=(8, 8.5),
                     color_blank_space="same",
-                    slice_colors=slice_colors,
-                    value_colors=text_colors,
-                    value_bck_colors=slice_colors,
+                    slice_colors=slice_colors,  # Slices remain light blue
+                    value_colors=text_colors,  # Black text for values
+                    value_bck_colors=slice_colors,  # Slice backgrounds remain light blue
                     kwargs_slices=dict(edgecolor="#F2F2F2", zorder=2, linewidth=1),
                     kwargs_params=dict(color="#000000", fontsize=13, fontproperties=font_normal, va="center"),
                     kwargs_values=dict(
