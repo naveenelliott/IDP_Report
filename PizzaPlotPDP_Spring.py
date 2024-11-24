@@ -1,4 +1,3 @@
-Pizza Plot full script
 from PIL import Image
 from mplsoccer import PyPizza, add_image, FontManager
 import matplotlib.pyplot as plt
