@@ -91,7 +91,7 @@ weight = height_weight['Weight (lbs)'][0]
 
 mins_df = getting_available_played(team_name, player_name)
 
-available_minutes = mins_df.groupby['Max Minutes'].sum()
+available_minutes = mins_df['Max Minutes'].sum()
 
 player_mins = player_mins['mins played'].sum()
 
