@@ -270,7 +270,7 @@ with col1:
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Max Total Distance:</b> {max_total_dist}</span>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Max Total Distance:</b> {max_total_dist} km</span>
             </div>
             """.format(max_total_dist=max_total_dist),
             unsafe_allow_html=True
@@ -278,7 +278,7 @@ with col1:
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Max Speed:</b> {max_speed}</span>
+                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Max Speed:</b> {max_speed} mph</span>
             </div>
             """.format(max_speed=max_speed),
             unsafe_allow_html=True
