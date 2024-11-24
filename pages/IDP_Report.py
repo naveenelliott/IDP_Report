@@ -153,32 +153,18 @@ with col1:
         # Player Picture
         st.image(player_pic, use_column_width=True)
 
+        next_column_1, next_column_2 = st.columns(2)
 
-        st.markdown(
-            """
-            <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Team Name:</b> {team_name}</span>
-            </div>
-            """.format(team_name=team_name),
-            unsafe_allow_html=True
-        )
-        st.markdown(
-            """
-            <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Height:</b> {height} cm</span>
-            </div>
-            """.format(height=height),
-            unsafe_allow_html=True
-        )
-        st.markdown(
-            """
-            <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Weight:</b> {weight} lbs</span>
-            </div>
-            """.format(weight=weight),
-            unsafe_allow_html=True
-        )
-        st.markdown(
+        with next_column_1:
+            st.markdown(
+                """
+                <div style='display: block; text-align: left;'>
+                    <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Team Name:</b> {team_name}</span>
+                </div>
+                """.format(team_name=team_name),
+                unsafe_allow_html=True
+            )
+            st.markdown(
             """
             <div style='display: block; text-align: left;'>
                 <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Goals:</b> {goals}</span>
@@ -186,22 +172,40 @@ with col1:
             """.format(goals=goals),
             unsafe_allow_html=True
         )
-        st.markdown(
-            """
-            <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Assists:</b> {assists}</span>
-            </div>
-            """.format(assists=assists),
-            unsafe_allow_html=True
-        )
-        st.markdown(
-            """
-            <div style='display: block; text-align: left;'>
-                <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Primary Position:</b> {primary_position}</span>
-            </div>
-            """.format(primary_position=primary_position),
-            unsafe_allow_html=True
-        )
+            st.markdown(
+                """
+                <div style='display: block; text-align: left;'>
+                    <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Assists:</b> {assists}</span>
+                </div>
+                """.format(assists=assists),
+                unsafe_allow_html=True
+            )
+            st.markdown(
+                """
+                <div style='display: block; text-align: left;'>
+                    <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Primary Position:</b> {primary_position}</span>
+                </div>
+                """.format(primary_position=primary_position),
+                unsafe_allow_html=True
+            )
+        with next_column_2:
+            st.markdown(
+                """
+                <div style='display: block; text-align: left;'>
+                    <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Height:</b> {height} cm</span>
+                </div>
+                """.format(height=height),
+                unsafe_allow_html=True
+            )
+            st.markdown(
+                """
+                <div style='display: block; text-align: left;'>
+                    <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Weight:</b> {weight} lbs</span>
+                </div>
+                """.format(weight=weight),
+                unsafe_allow_html=True
+            )
+        
 
    # Player Stats in the second inner column
 with info_col:
