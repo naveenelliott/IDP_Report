@@ -153,7 +153,7 @@ with col1:
         # Player Picture
         st.image(player_pic, use_column_width=True)
 
-        next_column_1, next_column_2 = st.columns([1,1])
+        next_column_1, next_column_2 = st.columns(2)
 
         with next_column_1:
             st.markdown(
@@ -171,7 +171,7 @@ with col1:
             </div>
             """.format(goals=goals),
             unsafe_allow_html=True
-        )
+            )
             st.markdown(
                 """
                 <div style='display: block; text-align: left;'>
