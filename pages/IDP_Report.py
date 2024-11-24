@@ -153,7 +153,7 @@ with col1:
         # Player Picture
         st.image(player_pic, use_column_width=True)
 
-        next_column_1, next_column_2 = st.columns(2)
+        next_column_1, next_column_2 = st.columns([1,1])
 
         with next_column_1:
             st.markdown(
