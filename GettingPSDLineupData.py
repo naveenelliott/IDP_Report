@@ -54,12 +54,17 @@ def getting_available_played(teamName, playerName):
             df = df.drop(columns=remove_first, errors='ignore')
             df = df.dropna(axis=1, how='all')
             df = df.iloc[1:]
-            st.write(df)
-            # selecting match date information, because that's what actions have
-            details = df.loc[:, ['Player Full Name', 'Team Name', 'mins played', 'Match Date', 'Opposition', 'Starts', 'Goal', 'Assist']]
-            details[['mins played', 'Starts', 'Goal', 'Assist']] = details[['mins played', 'Starts', 'Goal', 'Assist']].astype(float)
-            details['Max Minutes'] = maxMins
-            data_frames.append(details)
+
+            temp_match_date = pd.to_datetime(end['Match Date'][1])
+
+            date_wanted = pd.Timestamp('2024-08-01')
+            
+            if temp_match_date >= date_wanted
+                # selecting match date information, because that's what actions have
+                details = df.loc[:, ['Player Full Name', 'Team Name', 'mins played', 'Match Date', 'Opposition', 'Starts', 'Goal', 'Assist']]
+                details[['mins played', 'Starts', 'Goal', 'Assist']] = details[['mins played', 'Starts', 'Goal', 'Assist']].astype(float)
+                details['Max Minutes'] = maxMins
+                data_frames.append(details)
         
         # Optionally, combine all DataFrames into a single DataFrame
         combined_df = pd.concat(data_frames, ignore_index=True)
