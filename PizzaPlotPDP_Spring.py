@@ -54,31 +54,31 @@ def createNewPizzaChart(bolts):
         ],
         'Wing': [
             'Total Tackles Percentile', 'Total Recoveries Percentile', 'Total Passes Percentile',
-            'Pass % Percentile', 'Passes into 18 Percentile', 'Forward Completion Percentile',
+            'Pass % Percentile', 'Passes into 18 Percentile', 'Forward Pass % Percentile',
             'Dribble Percentile', 'Att 1v1 Percentile', 'Loss of Poss Percentile',
             'Shots Percentile', 'Shot on Target Percentile'
         ],
         'CM': [
             'Dribble Percentile', 'Loss of Poss Percentile', 'Total Tackles Percentile',
             'Total Recoveries Percentile', 'Regain % Percentile', 'Total Passes Percentile',
-            'Pass % Percentile', 'Forward Passes Percentile', 'Forward Completion Percentile',
+            'Pass % Percentile', 'Forward Passes Percentile', 'Forward Pass % Percentile',
             'Line Break Percentile', 'Passes into 18 Percentile', 'Shots Percentile'
         ],
         'DM': [
             'Total Passes Percentile', 'Forward Passes Percentile', 'Pass % Percentile',
-            'Forward Completion Percentile', 'Total Tackles Percentile', 'Total Recoveries Percentile',
+            'Forward Pass % Percentile', 'Total Tackles Percentile', 'Total Recoveries Percentile',
             'Regain % Percentile', 'Tackle % Percentile', 'Dribble Percentile',
             'Loss of Poss Percentile', 'Line Break Percentile'
         ],
         'CB': [
             'Total Recoveries Percentile', 'Regain % Percentile', 'Tackle % Percentile',
             'Forward Passes Percentile', 'Passing Total Percentile', 'Pass % Percentile',
-            'Forward Completion Percentile', 'Line Break Percentile', 'Loss of Poss Percentile'
+            'Forward Pass % Percentile', 'Line Break Percentile', 'Loss of Poss Percentile'
         ],
         'FB': [
             'Total Tackles Percentile', 'Total Recoveries Percentile', 'Regain % Percentile',
             'Tackle % Percentile', 'Forward Passes Percentile', 'Total Passes Percentile',
-            'Pass % Percentile', 'Forward Completion Percentile', 'Dribble Percentile',
+            'Pass % Percentile', 'Forward Pass % Percentile', 'Dribble Percentile',
             'Loss of Poss Percentile', 'Line Break Percentile', 'Passes into 18 Percentile'
         ]
     }
