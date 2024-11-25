@@ -1617,7 +1617,6 @@ fig_pd = gettingPlayerDataPlot(our_player_avg, final_averages_pd)
 with col2:
     st.pyplot(fig_pd)
 
-st.write(overall_player)
 
 fig_pizza = createNewPizzaChart(overall_player)
 
