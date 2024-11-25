@@ -40,6 +40,8 @@ def createNewPizzaChart(bolts):
 
     bolts.rename(columns=name_mapping, inplace=True)
 
+    st.write(bolts)
+
     grouped = bolts.groupby('Player Name')
 
     # Define columns for each position
