@@ -6,7 +6,6 @@ from scipy.stats import norm
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from matplotlib.font_manager import FontProperties
 import streamlit as st
-
 from PIL import Image
 from mplsoccer import PyPizza, add_image, FontManager
 import matplotlib.pyplot as plt
@@ -38,7 +37,9 @@ def createNewPizzaChart(bolts):
         'Pass into Oppo Box Percentile': 'Passes into 18 Percentile'
     }
 
-    bolts.rename(columns=name_mapping, inplace=True)
+    name_mapping_filtered = {col: name_mapping[col] for col in bolts.columns if col in name_mapping}
+
+    bolts.rename(columns=name_mapping_filtered, inplace=True)
 
     st.write(bolts)
 
