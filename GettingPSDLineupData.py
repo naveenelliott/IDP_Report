@@ -285,8 +285,6 @@ def getting_WeeklyReportRank():
         
     end = end.drop_duplicates()
 
-    st.write(end.columns)
-
     per90 = ['Goal', 'Dribble',
         'Stand. Tackle', 'Unsucc Stand. Tackle', 'Tackle',
         'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Att 1v1', 'Efforts on Goal',
@@ -303,8 +301,8 @@ def getting_WeeklyReportRank():
 
     columns_to_convert = [col for col in float_columns if col in end.columns]
 
-    # Convert only the present columns to float
-    end[columns_to_convert] = end[columns_to_convert].astype(float)
+    for col in columns_to_convert:
+        end[col] = pd.to_numeric(end[col], errors='coerce')
 
     end['minutes per 90'] = end['mins played']/90
 
