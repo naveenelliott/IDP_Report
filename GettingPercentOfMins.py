@@ -4,7 +4,7 @@ def format_percentage(value):
     """Format a float value with consistent length: 100 as 100.0, others as two decimal places."""
     if value == 100:
         return '100.0%'  # Special case for 100
-    return f'{value:.2f}%'  # Two decimal places for other numbers
+    return f'{value:.2f}'  # Two decimal places for other numbers
 
 def plottingMinsPlayed(player_name, percentage_played):
     # Create a horizontal bar chart
