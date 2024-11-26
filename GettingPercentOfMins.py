@@ -21,7 +21,7 @@ def plottingMinsPlayed(player_name, percentage_played):
         format_percentage(percentage_played),  # Display formatted percentage
         va='center',  # Centered text vertically
         ha='left',  # Align text to the left
-        fontsize=20,
+        fontsize=30,
         color='black'
     )
 
@@ -51,7 +51,7 @@ def plottingStarts(player_name, percentage_played):
         format_percentage(percentage_played),  # Display formatted percentage
         va='center',  # Centered text vertically
         ha='left',  # Align text to the left
-        fontsize=20,
+        fontsize=30,
         color='black'
     )
 
