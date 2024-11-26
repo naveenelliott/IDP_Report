@@ -285,7 +285,7 @@ def getting_WeeklyReportRank():
         
     end = end.drop_duplicates()
 
-    st.write(end)
+    st.write(end.columns)
 
     per90 = ['Goal', 'Dribble',
         'Stand. Tackle', 'Unsucc Stand. Tackle', 'Tackle',
