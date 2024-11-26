@@ -290,13 +290,13 @@ def getting_WeeklyReportRank():
         'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Att 1v1', 'Efforts on Goal',
         'Shot on Target', 'Pass into Oppo Box',
         'Forward', 'Unsucc Forward', 'Line Break',
-        'Loss of Poss', 'Success', 'Unsuccess']
+        'Loss of Poss', 'Success', 'Unsuccess', 'Shot on Target']
     
     float_columns = ['Goal', 'Dribble',
         'Stand. Tackle', 'Unsucc Stand. Tackle', 'Tackle',
         'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter', 'Att 1v1', 'Efforts on Goal',
-        'Shot on Target', 'Pass into Oppo Box',
-        'Forward', 'Unsucc Forward', 'Line Break',
+        'Shot on Target', 'Pass into Oppo Box', 'Efficiency ',
+        'Forward', 'Unsucc Forward', 'Line Break', 'Shot on Target',
         'Loss of Poss', 'Success', 'Unsuccess', 'mins played', 'Pass Completion ', 'Stand. Tackle Success ', 'Progr Regain ']
 
     end[float_columns] = end[float_columns].astype(float)
@@ -315,7 +315,7 @@ def getting_WeeklyReportRank():
     end['Rec Total'] = end['Progr Rec'] + end['Unprogr Rec']
     end['Inter Total'] = end['Progr Inter'] + end['Unprogr Inter']
 
-    metrics_to_rank = ['Forward Total', 'Forward Completion', 'Total', 'Pass Completion ', 'Dribble', 
+    metrics_to_rank = ['Forward Total', 'Forward Completion', 'Total', 'Pass Completion ', 'Dribble', 'Shot on Target', 'Efficiency ',
                       'Att 1v1', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ',
                       'Stand. Tackle Success ', 'Line Break', 'Pass into Oppo Box', 'Efforts on Goal']  # Replace with actual metric column names
     weird_metrics_to_rank = ['Loss of Poss']
