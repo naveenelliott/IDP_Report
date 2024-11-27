@@ -1083,7 +1083,7 @@ elif primary_position == 'CB':
             ).format(precision=1)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.style.format(precision=1)
+            passing_styled = passing.round(1)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing.index}
@@ -1116,7 +1116,7 @@ elif primary_position == 'CB':
             ).format(precision=1)
         else:
             ball_prog = ball_prog.apply(pd.to_numeric, errors='coerce')
-            ball_prog_styled = ball_prog.style.format(precision=1)
+            ball_prog_styled = ball_prog.round(1)
             ball_prog_styled = pd.concat([ball_prog_styled, wr_rank], axis=1)
             ball_prog_styled = ball_prog_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in ball_prog_styled.index}
@@ -1149,7 +1149,7 @@ elif primary_position == 'CB':
             ).format(precision=1)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.style.format(precision=1)
+            defending_styled = defending.round(1)
             defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
