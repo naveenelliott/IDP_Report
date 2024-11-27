@@ -18,6 +18,7 @@ def CDMFunction(dataframe):
     details.reset_index(drop=True, inplace=True)
 
     selected = dataframe.loc[:, ~dataframe.columns.duplicated()]
+    st.write(selected)
     selected_p90 = selected.loc[:, number_columns].astype(float)
 
     per90 = ['Yellow Card', 'Red Card', 'Goal', 'Assist', 'Dribble',
