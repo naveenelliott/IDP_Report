@@ -18,8 +18,13 @@ def CDMFunction(dataframe):
     details.reset_index(drop=True, inplace=True)
 
     selected = dataframe.loc[:, ~dataframe.columns.duplicated()]
-    st.write(selected)
-    selected_p90 = selected.loc[:, number_columns].astype(float)
+
+    columns_to_convert = [col for col in float_columns if col in selected.columns]
+
+    for col in columns_to_convert:
+        selected[col] = pd.to_numeric(selected[col], errors='coerce')
+
+    selected_p90 = selected.copy()
 
     per90 = ['Yellow Card', 'Red Card', 'Goal', 'Assist', 'Dribble',
            'Stand. Tackle', 'Unsucc Stand. Tackle', 'Tackle', 'Def Aerial', 'Unsucc Def Aerial',
