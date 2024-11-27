@@ -24,7 +24,7 @@ def CDMFunction(dataframe):
     for col in columns_to_convert:
         selected[col] = pd.to_numeric(selected[col], errors='coerce')
 
-    selected_p90 = selected.copy()
+    selected_p90 = selected[columns_to_convert]
 
     per90 = ['Yellow Card', 'Red Card', 'Goal', 'Assist', 'Dribble',
            'Stand. Tackle', 'Unsucc Stand. Tackle', 'Tackle', 'Def Aerial', 'Unsucc Def Aerial',
