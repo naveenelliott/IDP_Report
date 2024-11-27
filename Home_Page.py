@@ -15,7 +15,7 @@ end_df = getting_PSD_data()
 
 end_df = end_df[~end_df['Team Name'].str.contains('NAL', case=False, na=False)].reset_index()
 
-gks = ['Dylan Jacobson', 'Liam Muller', 'Jack Susi']
+gks = ['Dylan Jacobson', 'Liam Muller', 'Jack Susi', 'Drew Cosby', 'Drew Crosby', 'Milo Ketnouvong']
 
 end_df = end_df.loc[~end_df['Player Full Name'].isin(gks)].reset_index()
 
