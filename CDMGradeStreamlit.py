@@ -19,7 +19,7 @@ def CDMFunction(dataframe):
 
     selected = dataframe.loc[:, ~dataframe.columns.duplicated()]
 
-    columns_to_convert = [col for col in float_columns if col in selected.columns]
+    columns_to_convert = [col for col in number_columns if col in selected.columns]
 
     for col in columns_to_convert:
         selected[col] = pd.to_numeric(selected[col], errors='coerce')
