@@ -15,7 +15,12 @@ end_df = getting_PSD_data()
 
 end_df = end_df[~end_df['Team Name'].str.contains('NAL', case=False, na=False)].reset_index()
 
+gks = ['Dylan Jacobson', 'Liam Muller', 'Jack Susi']
+
+end_df = end_df.loc[~end_df['Player Full Name'].isin(gks)].reset_index()
+
 teams = sorted(list(end_df['Team Name'].unique()))
+
 
 selected_team = st.session_state.get('selected_team', teams[0])
 if selected_team not in teams:
