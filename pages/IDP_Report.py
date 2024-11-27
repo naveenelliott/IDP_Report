@@ -1199,6 +1199,7 @@ elif primary_position == 'DM':
             ).format(precision=1)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
+            st.write(passing)
             passing_styled = passing.style.format(precision=1)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
