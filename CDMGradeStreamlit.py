@@ -105,9 +105,7 @@ def CDMFunction(dataframe):
             player_location.append(index)
 
     final = pd.DataFrame()
-    st.write(selected_p90)
     selected_p90 = pd.concat([details, selected_p90], axis=1)
-    st.write(details)
     readding = []
 
     for i in player_location:
