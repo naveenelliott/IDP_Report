@@ -13,6 +13,8 @@ st.markdown("Select the team and bolts player to see their performance this seas
 
 end_df = getting_PSD_data()
 
+end_df = end_df[~end_df['Team Name'].str.contains('NAL', case=False, na=False)].reset_index()
+
 teams = sorted(list(end_df['Team Name'].unique()))
 
 selected_team = st.session_state.get('selected_team', teams[0])
