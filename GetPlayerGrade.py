@@ -87,7 +87,6 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
             final_grade_df = pd.concat([final_grade_df, end_att], ignore_index=True)
         elif (row['Position Tag'] == 'DM'):
             temp_df = player_data.loc[[index]]
-            st.write(temp_df)
             end_att = CDMFunction(temp_df)
             final_grade_df = pd.concat([final_grade_df, end_att], ignore_index=True)
         elif (row['Position Tag'] == 'RCB') or (row['Position Tag'] == 'LCB') or (row['Position Tag'] == 'CB'):
