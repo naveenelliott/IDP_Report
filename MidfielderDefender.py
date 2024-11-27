@@ -231,7 +231,7 @@ def defender_function(dataframe, age_group, pname, position):
                                  Line2D([0], [0], marker='o', color='w', markerfacecolor='pink', markersize=10, label=later_pname)]
         else:
             update_pname = pname + ' This Season'
-            plt.scatter(player_row['Progr Regain %'], player_row['Line Breaks'], color='orange', label=pname, s=70)
+            plt.scatter(player_row['Progr Regain %'], player_row['Line Break'], color='orange', label=pname, s=70)
             custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor='orange', markersize=10, label=update_pname)]
         plt.xlabel('Progressive Regain %', size = 11.5)
         plt.ylabel('Tackle %', size = 11.5)
