@@ -106,6 +106,7 @@ def CDMFunction(dataframe):
 
     final = pd.DataFrame()
     selected_p90 = pd.concat([details, selected_p90], axis=1)
+    st.write(selected_p90)
     readding = []
 
     for i in player_location:
@@ -121,7 +122,6 @@ def CDMFunction(dataframe):
         elif ('U17' in team_name) or ('U19' in team_name):
             dm_df = pd.read_csv("Thresholds/DefensiveMidfieldThresholds1719.csv")
 
-        st.write(dm_df)
 
         mean_values = dm_df.iloc[0, 1]
         std_values = dm_df.iloc[1, 1]
