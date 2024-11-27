@@ -18,7 +18,13 @@ def WingerFunction(dataframe):
     #details = selected.loc[:, ['Player Full Name', 'Team Name', 'As At Date', 'Position Tag']]
     details.reset_index(drop=True, inplace=True)
     selected = dataframe.loc[:, ~dataframe.columns.duplicated()]
-    selected_p90 = selected.loc[:, number_columns].astype(float)
+
+    columns_to_convert = [col for col in number_columns if col in selected.columns]
+
+    for col in columns_to_convert:
+        selected[col] = pd.to_numeric(selected[col], errors='coerce')
+
+    selected_p90 = selected[columns_to_convert]
 
     per90 = ['Yellow Card', 'Red Card', 'Goal', 'Assist', 'Dribble',
            'Stand. Tackle', 'Unsucc Stand. Tackle',
