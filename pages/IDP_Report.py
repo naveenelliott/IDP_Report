@@ -1486,7 +1486,7 @@ elif primary_position == 'FB':
             ).format(precision=1)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.style.format(precision=1)
+            passing_styled = passing.round(1)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
@@ -1519,7 +1519,7 @@ elif primary_position == 'FB':
             ).format(precision=1)
         else:
             attacking = attacking.apply(pd.to_numeric, errors='coerce')
-            attacking_styled = attacking.style.format(precision=1)
+            attacking_styled = attacking.round(1)
             attacking_styled = pd.concat([attacking_styled, wr_rank], axis=1)
             attacking_styled = attacking_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in attacking_styled.index}
@@ -1552,7 +1552,7 @@ elif primary_position == 'FB':
             ).format(precision=1)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.style.format(precision=1)
+            defending_styled = defending.round(1)
             defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
