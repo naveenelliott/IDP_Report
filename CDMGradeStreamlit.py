@@ -121,6 +121,8 @@ def CDMFunction(dataframe):
         elif ('U17' in team_name) or ('U19' in team_name):
             dm_df = pd.read_csv("Thresholds/DefensiveMidfieldThresholds1719.csv")
 
+        st.write(dm_df)
+
         mean_values = dm_df.iloc[0, 1]
         std_values = dm_df.iloc[1, 1]
         # Calculate the z-score for each data point
