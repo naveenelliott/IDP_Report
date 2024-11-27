@@ -48,7 +48,7 @@ wr_rank = getting_WeeklyReportRank()
 wr_rank = wr_rank.loc[wr_rank['Team Name'] == team_name].reset_index(drop=True)
 wr_rank = wr_rank.loc[wr_rank['Player Full Name'] == player_name].reset_index(drop=True)
 del wr_rank['Player Full Name'], wr_rank['Team Name']
-wr_rank = wr_rank.T.reset_index(drop=True)
+wr_rank = wr_rank.T
 wr_rank.columns = ['Rank']
 st.write(wr_rank)
 
@@ -1201,7 +1201,7 @@ elif primary_position == 'DM':
             passing = passing.apply(pd.to_numeric, errors='coerce')
             st.write(passing)
             passing_styled = passing.style.format(precision=1)
-            passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
+            passing_styled = pd.concat([passing_styled, wr_rank], axis=1, ignore_index=True)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
             passing_styled = passing_styled.rename(index=rename_mapping)
