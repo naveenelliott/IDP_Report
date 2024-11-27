@@ -756,7 +756,7 @@ if primary_position == 'ATT':
             ).format(precision=1)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.style.format(precision=1)
+            passing_styled = passing.round(1)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
@@ -789,7 +789,7 @@ if primary_position == 'ATT':
             ).format(precision=1)
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
-            dribbling_styled = dribbling.style.format(precision=1)
+            dribbling_styled = dribbling.round(1)
             dribbling_styled = pd.concat([dribbling_styled, wr_rank], axis=1)
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
@@ -822,7 +822,7 @@ if primary_position == 'ATT':
             ).format(precision=1)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.style.format(precision=1)
+            defending_styled = defending.round(1)
             defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
@@ -855,7 +855,7 @@ if primary_position == 'ATT':
             ).format(precision=1)
         else:
             shooting = shooting.apply(pd.to_numeric, errors='coerce')
-            shooting_styled = shooting.style.format(precision=1)
+            shooting_styled = shooting.round(1)
             shooting_styled = pd.concat([shooting_styled, wr_rank], axis=1)
             shooting_styled = shooting_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in shooting_styled.index}
@@ -907,7 +907,7 @@ elif primary_position == 'Wing':
             ).format(precision=1)
         else:
             passing = passing.apply(pd.to_numeric, errors='coerce')
-            passing_styled = passing.style.format(precision=1)
+            passing_styled = passing.round(1)
             passing_styled = pd.concat([passing_styled, wr_rank], axis=1)
             passing_styled = passing_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in passing_styled.index}
@@ -939,7 +939,7 @@ elif primary_position == 'Wing':
             ).format(precision=1)
         else:
             dribbling = dribbling.apply(pd.to_numeric, errors='coerce')
-            dribbling_styled = dribbling.style.format(precision=1)
+            dribbling_styled = dribbling.round(1)
             dribbling_styled = pd.concat([dribbling_styled, wr_rank], axis=1)
             dribbling_styled = dribbling_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in dribbling_styled.index}
@@ -971,7 +971,7 @@ elif primary_position == 'Wing':
             ).format(precision=1)
         else:
             defending = defending.apply(pd.to_numeric, errors='coerce')
-            defending_styled = defending.style.format(precision=1)
+            defending_styled = defending.round(1)
             defending_styled = pd.concat([defending_styled, wr_rank], axis=1)
             defending_styled = defending_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in defending_styled.index}
@@ -1003,7 +1003,7 @@ elif primary_position == 'Wing':
             ).format(precision=1)
         else:
             playmaking = playmaking.apply(pd.to_numeric, errors='coerce')
-            playmaking_styled = playmaking.style.format(precision=1)
+            playmaking_styled = playmaking.round(1)
             playmaking_styled = pd.concat([playmaking_styled, wr_rank], axis=1)
             playmaking_styled = playmaking_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in playmaking_styled.index}
@@ -1035,7 +1035,7 @@ elif primary_position == 'Wing':
             ).format(precision=1)
         else:
             shooting = shooting.apply(pd.to_numeric, errors='coerce')
-            shooting_styled = shooting.style.format(precision=1)
+            shooting_styled = shooting.round(1)
             shooting_styled = pd.concat([shooting_styled, wr_rank], axis=1)
             shooting_styled = shooting_styled.dropna(how='all', subset=['2024'])
             rename_mapping = {current: new for current, new in zip(current_names, new_names) if current in shooting_styled.index}
