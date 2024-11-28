@@ -41,7 +41,6 @@ def createNewPizzaChart(bolts):
 
     bolts.rename(columns=name_mapping_filtered, inplace=True)
 
-    st.write(bolts)
 
     grouped = bolts.groupby('Player Name')
 
