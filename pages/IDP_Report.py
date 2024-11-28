@@ -191,10 +191,9 @@ def rearrange_team_name(team_name):
 playerdata_df['bolts team'] = playerdata_df['bolts team'].apply(rearrange_team_name)
 
 idp_playdata = playerdata_df.loc[playerdata_df['athlete_name'] == player_name_lower]
-st.write(idp_playdata)
-if idp_playdata.empty():
-    max_total_dist_km = 0  # Default value when no data
-    max_speed_mph = 0      # Default value when no data
+if idp_playdata.empty:
+    max_total_dist = 0  # Default value when no data
+    max_speed = 0      # Default value when no data
 else:
     # Handle maximum total distance
     max_total_dist = idp_playdata['total_distance_m'].max()
