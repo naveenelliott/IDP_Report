@@ -71,7 +71,7 @@ def createNewPizzaChart(bolts):
         ],
         'CB': [
             'Total Recoveries Percentile', 'Regain % Percentile', 'Tackle % Percentile',
-            'Forward Passes Percentile', 'Passing Total Percentile', 'Pass % Percentile',
+            'Forward Passes Percentile', 'Total Passes Percentile', 'Pass % Percentile',
             'Forward Pass % Percentile', 'Line Break Percentile', 'Loss of Poss Percentile'
         ],
         'FB': [
