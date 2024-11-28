@@ -7,7 +7,7 @@ def gettingPlayerDataPlot(player_df, other_player_df):
 
     positions = []
 
-    if player_df.empty():
+    if player_df.empty:
         fig = plt.figure(dpi=600)
         ax = fig.add_subplot(111)
         plt.scatter([], [])
