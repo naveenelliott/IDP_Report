@@ -99,7 +99,7 @@ def creatingPercentilesCB(merged_df):
     final_pizza.loc[0, 'Line Breaks'] = float(raw_df['Line Break'][0])
     final_pizza.loc[0, 'Rec Total Percentile'] = float(player_defending['Rec Total'])
     final_pizza.loc[0, 'Progr Regain Percentile'] = float(player_defending['Progr Regain '])
-    final_pizza.loc[0, 'Stand. Tackle Success'] = float(player_defending['Stand. Tackle Success '])
+    final_pizza.loc[0, 'Stand. Tackle Success Percentile'] = float(player_defending['Stand. Tackle Success '])
     final_pizza.loc[0, 'Forward Total Percentile'] = float(player_passing['Forward Total'])
     final_pizza.loc[0, 'Passing Total Percentile'] = float(player_passing['Total'])
     final_pizza.loc[0, 'Pass Completion Percentile'] = float(player_passing['Pass Completion '])
