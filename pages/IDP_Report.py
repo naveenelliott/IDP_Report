@@ -245,7 +245,7 @@ forty_test_match = forty_test_df.loc[forty_test_df['Name'] == player_name_lower]
 if not forty_test_match.empty:
     forty_test_time = forty_test_match['Final Time'].values[0]
     if pd.notna(forty_test_time) and forty_test_time.upper() != "N/A":
-        forty_test_time = f"{forty_test_time}"
+        forty_test_time = f"{forty_test_time} sec"
     else:
         forty_test_time = "N/A"
 else:
