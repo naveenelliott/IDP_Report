@@ -12,12 +12,12 @@ def create_horizontal_bar_chart(title, percentage_played):
     
     # Add a full-length transparent bar to serve as the outline
     ax.barh(
-        0, 100, color='white', edgecolor='black', height=0.5, linewidth=2  # Full 100% bar with black border
+        0, 100, color='none', edgecolor='black', height=0.5, linewidth=2  # Full 100% bar with solid black border
     )
     
     # Add the actual percentage bar
     ax.barh(
-        0, percentage_played, color='lightblue', height=0.5, edgecolor='black', linewidth=0  # Blue bar without extra borders
+        0, percentage_played, color='lightblue', height=0.5, edgecolor='black', linewidth=0  # Blue bar inside the outline
     )
 
     # Set fixed x-axis range to ensure consistent bar scaling
