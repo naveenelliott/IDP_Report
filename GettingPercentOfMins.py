@@ -29,12 +29,12 @@ def create_horizontal_bar_chart(title, percentage_played):
         format_percentage(percentage_played),  # Display formatted percentage
         va='center',  # Centered text vertically
         ha='left',  # Align text to the left
-        fontsize=20,
+        fontsize=30,
         color='black'
     )
 
     # Add title
-    ax.set_title(title, fontsize=20, pad=10)
+    ax.set_title(title, fontsize=40, pad=10)
 
     # Remove x-axis ticks and numbers
     ax.set_xticks([])
