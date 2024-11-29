@@ -9,7 +9,7 @@ def format_percentage(value):
 def plottingMinsPlayed(player_name, percentage_played):
     # Create a horizontal bar chart
     fig, ax = plt.subplots(figsize=(10, 2))  # Consistent figure size
-    ax.barh([player_name], [percentage_played], color='lightblue', height=0.5)  # Fixed bar height
+    ax.barh([0], [percentage_played], color='lightblue', height=0.5)  # Fixed bar height
 
     # Set fixed x-axis range to ensure consistent bar scaling
     ax.set_xlim(0, 100)
@@ -28,9 +28,13 @@ def plottingMinsPlayed(player_name, percentage_played):
     # Add title
     ax.set_title('% of Available Mins Played', fontsize=45)
 
+    # Set y-ticks and labels with fixed positions
+    ax.set_yticks([0])
+    ax.set_yticklabels([player_name], fontsize=20)
+
     # Hide unnecessary axes
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
-    ax.yaxis.set_ticks([])  # Hide y-axis ticks
+    ax.yaxis.set_ticks_position('none')  # Prevent extra padding caused by tick positions
 
     plt.tight_layout()
     return fig
@@ -39,7 +43,7 @@ def plottingMinsPlayed(player_name, percentage_played):
 def plottingStarts(player_name, percentage_played):
     # Create a horizontal bar chart
     fig, ax = plt.subplots(figsize=(10, 2))  # Consistent figure size
-    ax.barh([player_name], [percentage_played], color='lightblue', height=0.5)  # Fixed bar height
+    ax.barh([0], [percentage_played], color='lightblue', height=0.5)  # Fixed bar height
 
     # Set fixed x-axis range to ensure consistent bar scaling
     ax.set_xlim(0, 100)
@@ -58,9 +62,13 @@ def plottingStarts(player_name, percentage_played):
     # Add title
     ax.set_title('% of Available Starts', fontsize=45)
 
+    # Set y-ticks and labels with fixed positions
+    ax.set_yticks([0])
+    ax.set_yticklabels([player_name], fontsize=20)
+
     # Hide unnecessary axes
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
-    ax.yaxis.set_ticks([])  # Hide y-axis ticks
+    ax.yaxis.set_ticks_position('none')  # Prevent extra padding caused by tick positions
 
     plt.tight_layout()
     return fig
