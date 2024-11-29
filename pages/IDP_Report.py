@@ -214,7 +214,7 @@ agility_test_match = agility_test_df.loc[agility_test_df['Name'] == player_name_
 # Pull the 'Final Time' column if a match is found
 if not agility_test_match.empty:
     agility_test_time = agility_test_match['Final Time'].values[0]
-    else:
+else:
     agility_test_time = 'N/A'  # Default value if no data is found
 
 # First Column: Player Picture and Stats
