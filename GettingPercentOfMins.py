@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 def format_percentage(value):
     """Format a float value with consistent length: 100 as 100.0, others as two decimal places."""
     if value == 100:
-        return '100.0%'  # Special case for 100
+        return '100%'  # Special case for 100
     return f'{value:.2f}%'  # Two decimal places for other numbers
 
 def create_horizontal_bar_chart(title, percentage_played):
@@ -23,12 +23,12 @@ def create_horizontal_bar_chart(title, percentage_played):
         format_percentage(percentage_played),  # Display formatted percentage
         va='center',  # Centered text vertically
         ha='left',  # Align text to the left
-        fontsize=20,
+        fontsize=30,
         color='black'
     )
 
     # Add title
-    ax.set_title(title, fontsize=20, pad=10)
+    ax.set_title(title, fontsize=40, pad=10)
 
     # Remove x-axis ticks and numbers
     ax.set_xticks([])
