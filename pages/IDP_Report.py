@@ -39,7 +39,7 @@ player_name = st.session_state['selected_player']
 team_name = st.session_state['selected_team']
 
 # Set Streamlit page configuration
-st.set_page_config(layout="wide")
+st.set_page_config(page_title="Bolts IDP Report App", layout="wide")
 
 # Add the logo
 logo_path = 'BostonBoltsLogo.png'
