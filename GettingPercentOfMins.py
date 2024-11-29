@@ -9,7 +9,9 @@ def format_percentage(value):
 def create_horizontal_bar_chart(title, percentage_played):
     # Create a horizontal bar chart
     fig, ax = plt.subplots(figsize=(10, 2))  # Consistent figure size
-    ax.barh(0, percentage_played, color='lightblue', height=0.5)  # Single bar centered at index 0
+    ax.barh(
+        0, percentage_played, color='lightblue', height=0.5, edgecolor='black', linewidth=2  # Add darker border
+    )
 
     # Set fixed x-axis range to ensure consistent bar scaling
     ax.set_xlim(0, 100)
@@ -28,14 +30,15 @@ def create_horizontal_bar_chart(title, percentage_played):
     # Add title
     ax.set_title(title, fontsize=20, pad=10)
 
-    # Remove y-ticks and labels
-    ax.set_yticks([])
-
-    # Hide unnecessary axes
+    # Remove x-axis ticks and numbers
+    ax.set_xticks([])
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['left'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
+
+    # Remove y-ticks and labels
+    ax.set_yticks([])
 
     plt.subplots_adjust(left=0.2, right=0.8)  # Consistent layout adjustments
     plt.tight_layout(pad=1.0)  # Ensure consistent spacing
