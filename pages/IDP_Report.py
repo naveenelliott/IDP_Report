@@ -209,14 +209,21 @@ agility_test_df = pd.read_csv(agility_test_file)
 # Ensure lowercase for matching
 agility_test_df['Name'] = agility_test_df['Name'].str.lower()
 player_name_lower = player_name.lower()
+
 # Filter the data for the specific player
 agility_test_match = agility_test_df.loc[agility_test_df['Name'] == player_name_lower]
+
 # Pull the 'Final Time' column if a match is found
 if not agility_test_match.empty:
     agility_test_time = agility_test_match['Final Time'].values[0]
+    # Check if the time is valid (not NaN) and append "Sec"
+    if pd.notna(agility_test_time):
+        agility_test_time = f"{agility_test_time} Sec"
+    else:
+        agility_test_time = "N/A"
 else:
-    agility_test_time = 'N/A'  # Default value if no data is found
-
+    agility_test_time = "N/A"  # Default value if no data is found
+    
 # First Column: Player Picture and Stats
 with col1:
     # Inner columns for Picture and Stats/Info
