@@ -9,7 +9,7 @@ def format_percentage(value):
 def create_horizontal_bar_chart(title, percentage_played):
     # Create a horizontal bar chart
     fig, ax = plt.subplots(figsize=(10, 2))  # Consistent figure size
-    ax.barh([0], [percentage_played], color='lightblue', height=0.5)  # Fixed bar height
+    ax.barh(0, percentage_played, color='lightblue', height=0.5)  # Single bar centered at index 0
 
     # Set fixed x-axis range to ensure consistent bar scaling
     ax.set_xlim(0, 100)
@@ -21,22 +21,24 @@ def create_horizontal_bar_chart(title, percentage_played):
         format_percentage(percentage_played),  # Display formatted percentage
         va='center',  # Centered text vertically
         ha='left',  # Align text to the left
-        fontsize=30,
+        fontsize=20,
         color='black'
     )
 
     # Add title
-    ax.set_title(title, fontsize=45)
+    ax.set_title(title, fontsize=20, pad=10)
 
     # Remove y-ticks and labels
-    ax.set_yticks([0])  # Maintain consistent y-tick structure
-    ax.set_yticklabels([''])  # Empty label for consistent alignment
+    ax.set_yticks([])
 
     # Hide unnecessary axes
-    ax.xaxis.set_ticks([])  # Hide x-axis ticks
-    ax.yaxis.set_ticks_position('none')  # Prevent extra padding caused by tick positions
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
 
-    plt.tight_layout()
+    plt.subplots_adjust(left=0.2, right=0.8)  # Consistent layout adjustments
+    plt.tight_layout(pad=1.0)  # Ensure consistent spacing
     return fig
 
 def plottingMinsPlayed(player_name, percentage_played):
