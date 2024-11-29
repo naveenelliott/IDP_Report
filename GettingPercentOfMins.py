@@ -28,9 +28,8 @@ def plottingMinsPlayed(player_name, percentage_played):
     # Add title
     ax.set_title('% of Available Mins Played', fontsize=45)
 
-    # Set y-ticks and labels with fixed positions
-    ax.set_yticks([0])
-    ax.set_yticklabels([player_name], fontsize=20)
+    # Remove y-ticks and labels
+    ax.set_yticks([])
 
     # Hide unnecessary axes
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
@@ -62,9 +61,8 @@ def plottingStarts(player_name, percentage_played):
     # Add title
     ax.set_title('% of Available Starts', fontsize=45)
 
-    # Set y-ticks and labels with fixed positions
-    ax.set_yticks([0])
-    ax.set_yticklabels([player_name], fontsize=20)
+    # Remove y-ticks and labels
+    ax.set_yticks([])
 
     # Hide unnecessary axes
     ax.xaxis.set_ticks([])  # Hide x-axis ticks
