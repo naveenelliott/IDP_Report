@@ -41,13 +41,6 @@ team_name = st.session_state['selected_team']
 # Set Streamlit page configuration
 st.set_page_config(layout="wide")
 
-# Inject custom HTML to hard-code the page title
-st.markdown("""
-    <script>
-        document.title = "Bolts IDP Report App";
-    </script>
-    """, unsafe_allow_html=True)
-
 # Add the logo
 logo_path = 'BostonBoltsLogo.png'
 
