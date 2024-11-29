@@ -206,7 +206,8 @@ else:
 agility_test_file = 'AgilityTest.csv'
 agility_test_df = pd.read_csv(agility_test_file)
 
-# Clean the 'Final Time' column to remove any extra 'sec' or trailing/leading spaces
+# Ensure the 'Final Time' column is string type and clean it
+agility_test_df['Final Time'] = agility_test_df['Final Time'].astype(str)
 agility_test_df['Final Time'] = agility_test_df['Final Time'].str.replace(r'\s*[sS][eE][cC]\s*', '', regex=True).str.strip()
 
 # Ensure lowercase for matching
