@@ -4,7 +4,7 @@ from GettingPSDLineupData import getting_PSD_data, getting_PSD_min_data
 from streamlit_gsheets import GSheetsConnection
 
 # Setting the title of the PMR App in web browser
-st.set_page_config(page_title='Bolts Post-Match Review App')
+st.set_page_config(page_title='Bolts IDP Report App')
 
 st.sidebar.success('Select a page above.')
 
