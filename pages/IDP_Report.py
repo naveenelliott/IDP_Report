@@ -221,7 +221,7 @@ agility_test_match = agility_test_df.loc[agility_test_df['Name'] == player_name_
 if not agility_test_match.empty:
     agility_test_time = agility_test_match['Final Time'].values[0]
     if pd.notna(agility_test_time) and agility_test_time.upper() != "N/A":
-        agility_test_time = f"{agility_test_time} Sec"
+        agility_test_time = f"{agility_test_time}"
     else:
         agility_test_time = "N/A"
 else:
