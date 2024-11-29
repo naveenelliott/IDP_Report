@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
 
 def format_percentage(value):
     """Format a float value with consistent length: 100 as 100.0, others as two decimal places."""
@@ -10,14 +11,13 @@ def create_horizontal_bar_chart(title, percentage_played):
     # Create a horizontal bar chart
     fig, ax = plt.subplots(figsize=(10, 2))  # Consistent figure size
     
-    # Add a full-length transparent bar to serve as the outline
-    ax.barh(
-        0, 100, color='none', edgecolor='black', height=0.5, linewidth=2  # Full 100% bar with solid black border
-    )
+    # Add a full-length black-bordered rectangle (manual outline)
+    rect = Rectangle((0, -0.25), 100, 0.5, edgecolor='black', facecolor='none', linewidth=2)  # Full black border
+    ax.add_patch(rect)
     
-    # Add the actual percentage bar
+    # Add the actual percentage bar inside
     ax.barh(
-        0, percentage_played, color='lightblue', height=0.5, edgecolor='black', linewidth=0  # Blue bar inside the outline
+        0, percentage_played, color='lightblue', height=0.5, edgecolor='none'  # Blue bar without borders
     )
 
     # Set fixed x-axis range to ensure consistent bar scaling
