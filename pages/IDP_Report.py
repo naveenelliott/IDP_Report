@@ -202,22 +202,23 @@ else:
     max_speed = idp_playdata['max_speed_kph'].max()
     max_speed = kmph_to_mph(max_speed)
 
-# Load Agility Test Time CSV
+# Load agility test data
 agility_test_file = 'AgilityTest.csv'
-agility_test_df = pd.read_csv(agility_test_file)
 
-# Ensure lowercase for matching
-agility_test_df['Name'] = agility_test_df['Name'].str.lower()
-player_name_lower = player_name.lower()
+# Read CSV file
+if os.path.exists(agility_test_file):
+    agility_test_df = pd.read_csv(agility_test_file)
 
-# Filter the data for the specific player
-agility_test_match = agility_test_df.loc[agility_test_df['Name'] == player_name_lower]
-
-# Pull the 'Final Time' column if a match is found
-if not agility_test_match.empty:
-    agility_test_time = agility_test_match['Final Time'].values[0]
+    # Match players and retrieve 'Final Time' value for the selected player
+    agility_test_time = agility_test_df.loc[agility_test_df['Name'] == player_name, 'Final Time']
+    
+    # Check if the time exists and is not NaN
+    if not agility_test_time.empty:
+        agility_test_time_value = f"{agility_test_time.values[0]} Sec"  # Append "Sec" to the time
+    else:
+        agility_test_time_value = "N/A"  # Default to "N/A" if no time is recorded
 else:
-    agility_test_time = 'N/A'  # Default value if no data is found
+    raise FileNotFoundError(f"File {agility_test_file} not found.")
 
 # First Column: Player Picture and Stats
 with col1:
