@@ -4,7 +4,9 @@ from GettingPSDLineupData import getting_PSD_data, getting_PSD_min_data
 from streamlit_gsheets import GSheetsConnection
 
 # Setting the title of the PMR App in web browser
-st.set_page_config(page_title='Bolts IDP Report App')
+st.set_page_config(page_title='Bolts IDP Report App'
+                   page_icon='BostonBoltsLogo.png',  # Path to the logo image
+)
 
 st.sidebar.success('Select a page above.')
 
