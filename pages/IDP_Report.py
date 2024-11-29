@@ -206,6 +206,9 @@ else:
 agility_test_file = 'AgilityTest.csv'
 agility_test_df = pd.read_csv(agility_test_file)
 
+# Clean the 'Final Time' column to remove any extra 'sec' or trailing/leading spaces
+agility_test_df['Final Time'] = agility_test_df['Final Time'].str.replace(r'\s*[sS][eE][cC]\s*', '', regex=True).str.strip()
+
 # Ensure lowercase for matching
 agility_test_df['Name'] = agility_test_df['Name'].str.lower()
 player_name_lower = player_name.lower()
@@ -216,8 +219,7 @@ agility_test_match = agility_test_df.loc[agility_test_df['Name'] == player_name_
 # Pull the 'Final Time' column if a match is found
 if not agility_test_match.empty:
     agility_test_time = agility_test_match['Final Time'].values[0]
-    # Check if the time is valid and append "Sec"
-    if pd.notna(agility_test_time) and agility_test_time != "N/A":
+    if pd.notna(agility_test_time) and agility_test_time.upper() != "N/A":
         agility_test_time = f"{agility_test_time} Sec"
     else:
         agility_test_time = "N/A"
