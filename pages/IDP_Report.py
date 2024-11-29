@@ -203,7 +203,7 @@ else:
     max_speed = kmph_to_mph(max_speed)
 
 # Load Agility Test Time CSV
-agility_test_file = 'agilitytest.csv'
+agility_test_file = 'AgilityTest.csv'
 agility_test_df = pd.read_csv(agility_test_file)
 
 # Ensure lowercase for matching
