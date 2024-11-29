@@ -3,12 +3,8 @@ import pandas as pd
 from GettingPSDLineupData import getting_PSD_data, getting_PSD_min_data
 from streamlit_gsheets import GSheetsConnection
 
-# Set Streamlit page configuration with custom title and icon
-st.set_page_config(
-    page_title='Bolts IDP Report App',
-    page_icon='BoltsLogo.png',  # Path to the logo image
-    layout='wide'
-)
+# Setting the title of the PMR App in web browser
+st.set_page_config(page_title='Bolts IDP Report App')
 
 st.sidebar.success('Select a page above.')
 
