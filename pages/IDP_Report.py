@@ -660,6 +660,8 @@ this_season = pd.merge(this_season, temp_all_primary_position[['Player Full Name
 
 combined_seasons = pd.concat([this_season, last_season], ignore_index=True)
 
+st.write(combined_seasons)
+
 
 player_season = combined_seasons.loc[combined_seasons['Player Full Name'] == player_name]
 player_season_raw = player_season.copy()
