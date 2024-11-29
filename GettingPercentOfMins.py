@@ -11,13 +11,13 @@ def create_horizontal_bar_chart(title, percentage_played):
     # Create a horizontal bar chart
     fig, ax = plt.subplots(figsize=(10, 2))  # Consistent figure size
     
-    # Add a full-length rectangle to serve as the black outline
-    ax.add_patch(Rectangle((0, -0.25), 100, 0.5, linewidth=2, edgecolor='black', facecolor='none', zorder=1))
-
-    # Add the actual percentage bar inside
+    # Draw the actual percentage bar first
     ax.barh(
-        0, percentage_played, color='lightblue', height=0.5, edgecolor='none', zorder=2  # Blue bar inside the outline
+        0, percentage_played, color='lightblue', height=0.5, edgecolor='none', zorder=1  # Blue bar without borders
     )
+    
+    # Add a full-length rectangle for the black outline, drawn last
+    ax.add_patch(Rectangle((0, -0.25), 100, 0.5, linewidth=2, edgecolor='black', facecolor='none', zorder=2))
 
     # Set fixed x-axis range to ensure consistent bar scaling
     ax.set_xlim(0, 100)
