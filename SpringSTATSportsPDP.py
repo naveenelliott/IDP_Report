@@ -35,6 +35,7 @@ def gettingPlayerDataPlot(player_df, other_player_df):
         age_player_df = player_df['Team Category'].iloc[0]
         player_df.loc[player_df['Position Tag'] == 'AM', 'Position Tag'] = 'CM' 
         position = player_df['Position Tag'].iloc[0]
+        st.write(position)
         positions.append(position)
     
         if position == 'ATT':
