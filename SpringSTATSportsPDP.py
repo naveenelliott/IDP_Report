@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
+import streamlit as st
 
 
 def gettingPlayerDataPlot(player_df, other_player_df):
