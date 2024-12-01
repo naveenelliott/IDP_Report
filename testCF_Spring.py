@@ -142,7 +142,7 @@ def creatingRawAtt(merged_df):
     def calculate_zscore(column, mean, std):
         return (column - mean) / std
 
-    per90 = ['Dribble',
+    per90 = ['Dribble', 'Att 1v1',
         'Stand. Tackle', 'Unsucc Stand. Tackle',
         'Progr Rec', 'Unprogr Rec', 'Progr Inter', 'Unprogr Inter',
         'Efforts on Goal',
