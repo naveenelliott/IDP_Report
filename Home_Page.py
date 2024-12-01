@@ -23,6 +23,8 @@ gks = ['Dylan Jacobson', 'Liam Muller', 'Jack Susi', 'Drew Cosby', 'Drew Crosby'
 
 end_df = end_df.loc[~end_df['Player Full Name'].isin(gks)].reset_index()
 
+end_df = end_df[~((end_df['Player Full Name'] == 'Julian Martinez') & (end_df['Team Name'] == 'Boston Bolts U16 MLS Next'))]
+
 teams = sorted(list(end_df['Team Name'].unique()))
 
 
