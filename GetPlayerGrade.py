@@ -72,6 +72,8 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
     # CAN WE CONCACATENATE THE EVENT DATA TO PLAYER_DATA
     # will be tough because the structure is limited to the time limits for each position
 
+    st.write(player_data)
+
     for index, row in player_data.iterrows():
         if row['Position Tag'] == 'ATT': 
             temp_df = player_data.loc[[index]]
@@ -133,7 +135,6 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
         
 
     final_grade_df = temp_df.copy()
-    st.write(final_grade_df)
 
     for index, row in final_grade_df.iterrows():
         if row['Position'] == 'ATT':
