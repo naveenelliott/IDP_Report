@@ -724,7 +724,7 @@ file_path = 'This_Year'
 this_season = gettingPostSpringGames(file_path)
 this_season['Year'] = '2024'
 this_season = pd.merge(this_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
-this_season.loc[this_season['Player'] == 'Julian Martinez', ['Team', 'Team Category']] = ['Boston Bolts U17 MLS Next', 'U17']
+this_season.loc[this_season['Player Full Name'] == 'Julian Martinez', ['Team Name', 'Team Category']] = ['Boston Bolts U17 MLS Next', 'U17']
 
 combined_seasons = pd.concat([this_season, last_season], ignore_index=True)
 
