@@ -498,7 +498,6 @@ fc_python['Match Date'] = pd.to_datetime(fc_python['Match Date']).dt.strftime('%
 
 # combining into xG idp_report we want
 combined_xg = pd.merge(fc_python, actions_new, on=['Bolts Team', 'Match Date', 'Time'], how='inner')
-st.write(combined_xg)
 
 # running the model on our idp_report
 xg = xGModel(combined_xg)
@@ -740,7 +739,6 @@ player_season_raw = player_season_raw.loc[player_season_raw['Year'] == '2024'].r
 
 
 age_groups = player_season.at[0, 'Team Category']
-st.write(age_groups)
 
 if not player_season_later.empty:
     player_season_later.at[0, 'Team Category'] = age_groups
@@ -752,7 +750,7 @@ combined_seasons.rename(columns={'Pass Completion ': 'Pass %',
 
 our_fig = plt.figure()
 
-st.write(xg_us_copy)
+
 this_season = pd.merge(this_season, xg_us_copy, on='Player Full Name', how='inner')
 this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
 this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
