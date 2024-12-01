@@ -498,6 +498,7 @@ fc_python['Match Date'] = pd.to_datetime(fc_python['Match Date']).dt.strftime('%
 
 # combining into xG idp_report we want
 combined_xg = pd.merge(fc_python, actions_new, on=['Bolts Team', 'Match Date', 'Time'], how='inner')
+st.write(combined_xg)
 
 # running the model on our idp_report
 xg = xGModel(combined_xg)
