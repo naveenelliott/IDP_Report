@@ -1677,7 +1677,6 @@ all_primary_position['Player Full Name'] = all_primary_position['Player Full Nam
 final_averages_pd = pd.merge(final_averages_pd, all_primary_position, left_on='athlete_name', right_on='Player Full Name', how='inner')
 final_averages_pd['Team Category'] = final_averages_pd['Team Name'].str.extract(r'(U\d+)')
 final_averages_pd.loc[final_averages_pd['Player Full Name'] == 'julian martinez', ['Team Name', 'Team Category']] = ['Boston Bolts U17 MLS Next', 'U17']
-st.write(final_averages_pd)
 
 our_player_avg = final_averages_pd.loc[final_averages_pd['athlete_name'] == player_name_lower]
 
@@ -1688,6 +1687,7 @@ fig_pd = gettingPlayerDataPlot(our_player_avg, final_averages_pd)
 with col2:
     st.pyplot(fig_pd)
 
+st.write(overall_player)
 
 fig_pizza = createNewPizzaChart(overall_player)
 
