@@ -92,7 +92,7 @@ weight = height_weight['Weight (lbs)'][0]
 mins_df = getting_available_played(team_name, player_name)
 if player_name == 'Julian Martinez':
     mins_df_2 = getting_available_played('Boston Bolts U16 MLS Next', player_name)
-    mins_df = pd.concat([mins_df, mins_df_2], ignore_index)
+    mins_df = pd.concat([mins_df, mins_df_2], ignore_index=True)
     st.write(mins_df)
 
 available_minutes = mins_df['Max Minutes'].sum()
