@@ -622,6 +622,8 @@ idp_report = read_all_csvs_from_folder(temp_folder_path)
 
 idp_report = idp_report.sort_values('Match Date').reset_index(drop=True)
 
+st.write(idp_report)
+
 # Create the plot
 fig = go.Figure()
 
