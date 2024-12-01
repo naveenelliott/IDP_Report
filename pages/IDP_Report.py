@@ -724,12 +724,13 @@ file_path = 'This_Year'
 this_season = gettingPostSpringGames(file_path)
 this_season['Year'] = '2024'
 this_season = pd.merge(this_season, temp_all_primary_position[['Player Full Name', 'Position Tag']], on='Player Full Name', how='inner')
-
+this_season.loc[this_season['Player'] == 'Julian Martinez', ['Team', 'Team Category']] = ['Boston Bolts U17 MLS Next', 'U17']
 
 combined_seasons = pd.concat([this_season, last_season], ignore_index=True)
 
 
 player_season = combined_seasons.loc[combined_seasons['Player Full Name'] == player_name]
+
 player_season_raw = player_season.copy()
 player_season_later = player_season.loc[player_season['Year'] == '2023'].reset_index()
 player_season = player_season.loc[player_season['Year'] == '2024'].reset_index()
@@ -750,7 +751,7 @@ combined_seasons.rename(columns={'Pass Completion ': 'Pass %',
 
 our_fig = plt.figure()
 
-
+st.write(xg_us_copy)
 this_season = pd.merge(this_season, xg_us_copy, on='Player Full Name', how='inner')
 this_season['Goal'] = (this_season['Goal']/this_season['mins played']) * 90
 this_season['xG Value'] = (this_season['xG']/this_season['mins played']) * 90
