@@ -94,6 +94,7 @@ mins_df = getting_available_played(team_name, player_name)
 available_minutes = mins_df['Max Minutes'].sum()
 
 player_mins = mins_df['mins played'].sum()
+st.write(player_mins)
 
 
 goals = mins_df['Goal'].sum()
