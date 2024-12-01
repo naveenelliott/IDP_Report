@@ -90,11 +90,14 @@ height = height_weight['Height (cm)'][0]
 weight = height_weight['Weight (lbs)'][0]
 
 mins_df = getting_available_played(team_name, player_name)
+if player_name == 'Julian Martinez':
+    mins_df_2 = getting_available_played('Boston Bolts U16 MLS Next', player_name)
+    mins_df = pd.concat([mins_df, mins_df_2], ignore_index)
+    st.write(mins_df)
 
 available_minutes = mins_df['Max Minutes'].sum()
 
 player_mins = mins_df['mins played'].sum()
-st.write(player_mins)
 
 
 goals = mins_df['Goal'].sum()
