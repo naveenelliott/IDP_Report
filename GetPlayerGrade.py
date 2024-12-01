@@ -133,6 +133,7 @@ def gettingFinalGradeForEachTeam(selected_team, selected_opp, selected_date, pla
         
 
     final_grade_df = temp_df.copy()
+    st.write(final_grade_df)
 
     for index, row in final_grade_df.iterrows():
         if row['Position'] == 'ATT':
