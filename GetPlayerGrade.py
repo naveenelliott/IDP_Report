@@ -224,7 +224,6 @@ def getPrimaryPosition(player_full_name):
     end['mins played'] = end['mins played'].astype(float)
     end['As At Date'] = pd.to_datetime(end['As At Date'])
     end = end.loc[end['Player Full Name'] == player_full_name]
-    st.write(end)
 
     # Sort by Player Full Name and Match Date in descending order
     end = end.sort_values(by=['Player Full Name', 'As At Date'], ascending=[True, False])
