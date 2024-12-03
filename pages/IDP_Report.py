@@ -227,9 +227,7 @@ six_min_run_match = six_min_run.loc[six_min_run['Name'] == player_name_lower]
 # Pull the 'Final Time' column if a match is found
 if not six_min_run_match.empty:
     six_min_run_time = six_min_run_match['6-Min Run (km)'].values[0]
-    if pd.notna(six_min_run_time):
-        six_min_run_time = f"{agility_test_time}"
-    else:
+    if pd.isna(six_min_run_time):
         six_min_run_time = "N/A"
 else:
     six_min_run_time = "N/A"  # Default value if no data is found
