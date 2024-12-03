@@ -343,7 +343,7 @@ with col1:
         st.markdown(
         f"""
         <div style='display: block; text-align: left;'>
-        <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Forty Yard Dash Test Time:</b> {forty_test_time}</span>
+        <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Forty Meter Dash Test Time:</b> {forty_test_time}</span>
         </div>
         """,
         unsafe_allow_html=True
