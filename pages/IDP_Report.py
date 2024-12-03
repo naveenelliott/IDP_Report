@@ -220,6 +220,11 @@ player_name_lower = player_name.lower()
 # Filter the data for the specific player
 agility_test_match = agility_test_df.loc[agility_test_df['Name'] == player_name_lower]
 
+six_min_run = pd.read_csv('6_Min_Run.csv')
+
+six_min_run_match = six_min_run.loc[six_min_run['Name'] == player_name_lower]
+st.write(six_min_run_match)
+
 # Pull the 'Final Time' column if a match is found
 if not agility_test_match.empty:
     agility_test_time = agility_test_match['Final Time'].values[0]
