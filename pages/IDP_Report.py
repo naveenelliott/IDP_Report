@@ -223,7 +223,16 @@ agility_test_match = agility_test_df.loc[agility_test_df['Name'] == player_name_
 six_min_run = pd.read_csv('6_Min_Run.csv')
 
 six_min_run_match = six_min_run.loc[six_min_run['Name'] == player_name_lower]
-st.write(six_min_run_match)
+
+# Pull the 'Final Time' column if a match is found
+if not six_min_run_match.empty:
+    six_min_run_time = six_min_run_match['6-Min Run (km)'].values[0]
+    if pd.notna(agility_test_time) and agility_test_time.upper() != "N/A":
+        six_min_run_time = f"{agility_test_time}"
+    else:
+        six_min_run_time = "N/A"
+else:
+    six_min_run_time = "N/A"  # Default value if no data is found
 
 # Pull the 'Final Time' column if a match is found
 if not agility_test_match.empty:
@@ -337,6 +346,14 @@ with col1:
         f"""
         <div style='display: block; text-align: left;'>
         <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Forty Yard Dash Test Time:</b> {forty_test_time}</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+        )
+        st.markdown(
+        f"""
+        <div style='display: block; text-align: left;'>
+        <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Six Minute Run Time:</b> {six_min_run_time} km</span>
         </div>
         """,
         unsafe_allow_html=True
