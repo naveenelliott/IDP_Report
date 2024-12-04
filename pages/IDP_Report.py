@@ -236,7 +236,7 @@ else:
 if not agility_test_match.empty:
     agility_test_time = agility_test_match['Final Time'].values[0]
     if pd.notna(agility_test_time) and agility_test_time.upper() != "N/A":
-        agility_test_time = f"{agility_test_time}"
+        agility_test_time = f"{agility_test_time} sec"
     else:
         agility_test_time = "N/A"
 else:
@@ -260,7 +260,7 @@ forty_test_match = forty_test_df.loc[forty_test_df['Name'] == player_name_lower]
 if not forty_test_match.empty:
     forty_test_time = forty_test_match['Final Time'].values[0]
     if pd.notna(forty_test_time) and forty_test_time.upper() != "N/A":
-        forty_test_time = f"{forty_test_time} sec"
+        forty_test_time = f"{forty_test_time}"
     else:
         forty_test_time = "N/A"
 else:
@@ -343,7 +343,7 @@ with col1:
         st.markdown(
         f"""
         <div style='display: block; text-align: left;'>
-        <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Forty Meter Dash Test Time:</b> {forty_test_time}</span>
+        <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Forty Meter Dash Test Time:</b> {forty_test_time} sec</span>
         </div>
         """,
         unsafe_allow_html=True
