@@ -389,12 +389,15 @@ def encode_image(image_path):
         return base64.b64encode(img_file.read()).decode()
 
 logo_base64 = encode_image(logo_path)
+mls_logo_path = 'MLSNextLogo.png'  # Path to the MLS Next logo
+mls_logo_base64 = encode_image(mls_logo_path)
 
 with col2:
     st.markdown(
         f"""
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <img src="data:image/png;base64,{logo_base64}" style="width: 215px; height: auto;">
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <img src="data:image/png;base64,{logo_base64}" style="width: 215px; height: auto; margin-bottom: 10px;">
+            <img src="data:image/png;base64,{mls_logo_base64}" style="width: 215px; height: auto;">
         </div>
         """,
         unsafe_allow_html=True
