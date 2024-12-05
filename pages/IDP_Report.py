@@ -236,7 +236,7 @@ else:
 if not agility_test_match.empty:
     agility_test_time = agility_test_match['Final Time'].values[0]
     if pd.notna(agility_test_time) and agility_test_time.upper() != "N/A":
-        agility_test_time = f"{agility_test_time} sec"
+        agility_test_time = f"{agility_test_time}"
     else:
         agility_test_time = "N/A"
 else:
