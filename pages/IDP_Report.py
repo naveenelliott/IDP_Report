@@ -396,7 +396,7 @@ with col2:
     st.markdown(
         f"""
         <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-            <img src="data:image/png;base64,{logo_base64}" style="width: 215px; height: auto; margin-bottom: 10px;">
+            <img src="data:image/png;base64,{logo_base64}" style="width: 215px; height: auto; margin-bottom: 30px;">
             <img src="data:image/png;base64,{mls_logo_base64}" style="width: 215px; height: auto;">
         </div>
         """,
