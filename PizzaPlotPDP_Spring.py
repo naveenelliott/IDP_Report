@@ -61,24 +61,24 @@ def createNewPizzaChart(bolts):
             'Dribble Percentile', 'Loss of Poss Percentile', 'Total Tackles Percentile',
             'Total Recoveries Percentile', 'Regain % Percentile', 'Total Passes Percentile',
             'Pass % Percentile', 'Forward Passes Percentile', 'Forward Pass % Percentile',
-            'Line Break Percentile', 'Passes into 18 Percentile', 'Shots Percentile'
+            'Passes into 18 Percentile', 'Shots Percentile'
         ],
         'DM': [
             'Total Passes Percentile', 'Forward Passes Percentile', 'Pass % Percentile',
             'Forward Pass % Percentile', 'Total Tackles Percentile', 'Total Recoveries Percentile',
             'Regain % Percentile', 'Tackle % Percentile', 'Dribble Percentile',
-            'Loss of Poss Percentile', 'Line Break Percentile'
+            'Loss of Poss Percentile'
         ],
         'CB': [
             'Total Recoveries Percentile', 'Regain % Percentile', 'Tackle % Percentile',
             'Forward Passes Percentile', 'Passing Total Percentile', 'Pass % Percentile',
-            'Forward Pass % Percentile', 'Line Break Percentile', 'Loss of Poss Percentile'
+            'Forward Pass % Percentile', 'Loss of Poss Percentile'
         ],
         'FB': [
             'Total Tackles Percentile', 'Total Recoveries Percentile', 'Regain % Percentile',
             'Tackle % Percentile', 'Forward Passes Percentile', 'Total Passes Percentile',
             'Pass % Percentile', 'Forward Pass % Percentile', 'Dribble Percentile',
-            'Loss of Poss Percentile', 'Line Break Percentile', 'Passes into 18 Percentile'
+            'Loss of Poss Percentile', 'Passes into 18 Percentile'
         ]
     }
 
