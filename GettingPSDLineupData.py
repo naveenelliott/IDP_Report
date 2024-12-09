@@ -10,6 +10,12 @@ def getting_available_played(teamName, playerName):
     elif teamName == 'Boston Bolts U14 MLS Next':
         folder_path = 'Team_Thresholds/BoltsFourteenGames/'
         maxMins = 80
+    elif teamName == 'Boston Bolts U13 NALB':
+        folder_path = 'Team_Thresholds/BoltsThirteenGames_NAL/'
+        maxMins = 70
+    elif teamName == 'Boston Bolts U14 NALB':
+        folder_path = 'Team_Thresholds/BoltsFourteenGames_NAL/'
+        maxMins = 80
     elif teamName == 'Boston Bolts U15 MLS Next':
         folder_path = 'Team_Thresholds/BoltsFifteenGames/'
         maxMins = 80
