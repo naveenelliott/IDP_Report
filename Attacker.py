@@ -95,7 +95,7 @@ def attacker_function(dataframe, age_group, pname, position):
                         color=value, 
                         label=key)
         player_row = dataframe[dataframe['Player Name'] == pname]
-        update_pname = pname + ' Spring 2024'
+        update_pname = pname + ' Fall 2024'
         plt.scatter(player_row['xG Value'], player_row['Goal'], color='orange', label=pname, s=70)
         custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor='orange', markersize=10, label=update_pname)]
         plt.xlabel('xG per 90', size = 11.5)
