@@ -16,7 +16,7 @@ st.markdown("Select the team and bolts player to see their performance this seas
 
 end_df = getting_PSD_data()
 
-#end_df = end_df[~end_df['Team Name'].str.contains('NAL', case=False, na=False)].reset_index()
+end_df = end_df[~end_df['Team Name'].str.contains('NALSS', case=False, na=False)].reset_index()
 
 gks = ['Dylan Jacobson', 'Liam Muller', 'Jack Susi', 'Drew Cosby', 'Drew Crosby', 'Milo Ketnouvong', 'Conor Downey', 'Ben Marro', 'Jack Seaborn',
       'Dean Lundqvist', 'Ethan Fine', 'Nate Sykora', 'Casey Powers', 'Aaron Choi', 'Henry Wasserman']
