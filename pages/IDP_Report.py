@@ -86,9 +86,9 @@ height_weight = pd.concat(data_frames, ignore_index=True)
 
 height_weight = height_weight.loc[height_weight['Athlete Name'] == player_name].reset_index(drop=True)
 
-if not filtered_data.empty:
-    height = filtered_data['Height (cm)'][0]
-    weight = filtered_data['Weight (lbs)'][0]
+if not height_weight.empty:
+    height = height_weight['Height (cm)'][0]
+    weight = height_weight['Weight (lbs)'][0]
 else:
     height = "N/A"
     weight = "N/A"
