@@ -1,4 +1,30 @@
 session_type,start_time,bolts team,athlete_name,total_distance_m,total_high_intensity_distance_m,max_speed_kph
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,Adrian Avini,0.0,0.0,0.0
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,Barton Byers,0.0,0.0,0.0
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,Benjamin Gill,0.0,0.0,0.0
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,Charlie Gallagher,0.0,0.0,0.0
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,Devin,0.0,0.0,0.0
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,Diego Liteplo,0.0,0.0,0.0
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,Drew Cosby,9.506087024652135,0.0,4.818780052185059
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,Mateo Kramer Gomez,0.0,0.0,0.0
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,Maxwell Moir,0.9071456320608101,0.0,0.0
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,neel kapur,0.0,0.0,0.0
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,Osiris Ramos,0.0,0.0,0.0
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,Phineas Tomsho,4727.009148490042,0.0,18.325386714935302
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,Rory Andrew,0.0,0.0,0.0
+TrainingSession,2024-12-04T22:00:00.000Z,Boston Bolts NAL Boston U15,William McKenna,14.91002667481375,0.0,2.6641799461841584
+TrainingSession,2024-12-03T22:30:00.000Z,Boston Bolts NAL Boston U15,Adrian Avini,4909.505350413092,0.0,20.17252807044983
+TrainingSession,2024-12-03T22:30:00.000Z,Boston Bolts NAL Boston U15,Barton Byers,5131.397444604163,0.0,19.16123447227478
+TrainingSession,2024-12-03T22:30:00.000Z,Boston Bolts NAL Boston U15,Benjamin Gill,4641.717486329171,20.19896784680638,21.77171994781494
+TrainingSession,2024-12-03T22:30:00.000Z,Boston Bolts NAL Boston U15,Charlie Gallagher,3931.8029669183247,9.154944264192787,22.22521169471741
+TrainingSession,2024-12-03T22:30:00.000Z,Boston Bolts NAL Boston U15,Diego Liteplo,5350.134670180385,13.825334053145028,21.96973843574524
+TrainingSession,2024-12-03T22:30:00.000Z,Boston Bolts NAL Boston U15,Mateo Kramer Gomez,4000.472830105399,0.0,18.910547887802124
+TrainingSession,2024-12-03T22:30:00.000Z,Boston Bolts NAL Boston U15,Maxwell Moir,3943.021629159606,0.0,19.320263872146604
+TrainingSession,2024-12-03T22:30:00.000Z,Boston Bolts NAL Boston U15,neel kapur,4941.93051298347,0.0,18.009035997390747
+TrainingSession,2024-12-03T22:30:00.000Z,Boston Bolts NAL Boston U15,Osiris Ramos,5117.28682427868,0.0,17.94679226875305
+TrainingSession,2024-12-03T22:30:00.000Z,Boston Bolts NAL Boston U15,Phineas Tomsho,4888.334114562492,13.722613704335966,21.121236127853393
+TrainingSession,2024-12-03T22:30:00.000Z,Boston Bolts NAL Boston U15,Rory Andrew,5447.030748061774,4.262385351940062,21.01384840965271
+TrainingSession,2024-12-03T22:30:00.000Z,Boston Bolts NAL Boston U15,William McKenna,4935.735003004513,9.979727645221228,22.89553203392029
 TrainingSession,2024-11-26T22:30:00.000Z,Boston Bolts NAL Boston U15,Adrian Avini,5308.3495642333955,0.0,19.725533689498903
 TrainingSession,2024-11-26T22:30:00.000Z,Boston Bolts NAL Boston U15,Barton Byers,5079.2112755818425,0.0,17.990568031311035
 TrainingSession,2024-11-26T22:30:00.000Z,Boston Bolts NAL Boston U15,Benjamin Gill,0.0,0.0,0.0
