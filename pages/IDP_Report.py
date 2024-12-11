@@ -207,6 +207,7 @@ else:
     max_total_dist = meters_to_kilometers(max_total_dist)
     # Handle maximum speed
     max_speed = idp_playdata['max_speed_kph'].max()
+    st.write(max_speed)
     max_speed = kmph_to_mph(max_speed)
 
 # Load agility test data
