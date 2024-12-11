@@ -207,10 +207,11 @@ else:
     max_total_dist = meters_to_kilometers(max_total_dist)
     # Handle maximum speed
     top_speeds = idp_playdata['max_speed_kph'].sort_values(ascending=False).reset_index(drop=True)
-    st.write(top_speeds.head(10))
-    max_speed = idp_playdata['max_speed_kph'].max()
-    st.write(max_speed)
-    max_speed = kmph_to_mph(max_speed)
+    if len(top_speeds) >= 4:
+        max_speed = top_speeds.iloc[3]
+        max_speed = kmph_to_mph(max_speed)
+    else:
+        max_speed = 'N/A'
 
 # Load agility test data
 agility_test_file = 'AgilityTest.csv'
