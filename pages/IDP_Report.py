@@ -206,8 +206,8 @@ else:
     max_total_dist = idp_playdata['total_distance_m'].max()
     max_total_dist = meters_to_kilometers(max_total_dist)
     # Handle maximum speed
-    idp_playdata['max_speed_kph'] = idp_playdata['max_speed_kph'].sort_values(ascending=False).reset_index(drop=True)
-    st.write(idp_playdata['max_speed_kph'].head(10))
+    top_speeds = idp_playdata['max_speed_kph'].sort_values(ascending=False).reset_index(drop=True)
+    st.write(top_speeds.head(10))
     max_speed = idp_playdata['max_speed_kph'].max()
     st.write(max_speed)
     max_speed = kmph_to_mph(max_speed)
