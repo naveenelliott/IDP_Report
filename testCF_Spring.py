@@ -56,7 +56,7 @@ def creatingPercentilesAtt(merged_df):
     defending = defending.loc[:, ['Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ']]
 
     shooting = merged_df[['Efforts on Goal', 'Shot on Target']]
-    shooting['Efficiency '] = (shooting['Shot on Target']/(shooting['Efforts on Goal'] + shooting['Shot on Target']))*100
+    shooting['Efficiency '] = (shooting['Shot on Target']/(shooting['Efforts on Goal']))*100
     shooting.fillna(0, inplace=True)
 
 
