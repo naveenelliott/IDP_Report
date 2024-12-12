@@ -167,7 +167,8 @@ def defender_function(dataframe, age_group, pname, position):
         other = ['U13', 'U14', 'U15', 'U16']
 
     colors = {age_group: '#429bf5', dual_age_band: 'black'}
-
+    for element in other:
+        colors[element] = 'gray'
 
 
     # Set DPI (dots per inch)
