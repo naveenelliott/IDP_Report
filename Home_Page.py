@@ -19,7 +19,8 @@ end_df = getting_PSD_data()
 end_df = end_df[~end_df['Team Name'].str.contains('NALSS', case=False, na=False)].reset_index()
 
 gks = ['Dylan Jacobson', 'Liam Muller', 'Jack Susi', 'Drew Cosby', 'Drew Crosby', 'Milo Ketnouvong', 'Conor Downey', 'Ben Marro', 'Jack Seaborn',
-      'Dean Lundqvist', 'Ethan Fine', 'Nate Sykora', 'Casey Powers', 'Aaron Choi', 'Henry Wasserman']
+      'Dean Lundqvist', 'Ethan Fine', 'Nate Sykora', 'Casey Powers', 'Aaron Choi', 'Henry Wasserman', 'Daniel Senichev', 'Griffin Taylor', 'Sy Perkins', 
+      'Torran Archer']
 
 end_df = end_df.loc[~end_df['Player Full Name'].isin(gks)].reset_index()
 
