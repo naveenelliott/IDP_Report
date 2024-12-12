@@ -767,6 +767,7 @@ player_season_later = player_season.loc[player_season['Year'] == '2023'].reset_i
 player_season = player_season.loc[player_season['Year'] == '2024'].reset_index()
 player_season_later_raw = player_season_raw.loc[player_season_raw['Year'] == '2023'].reset_index()
 player_season_raw = player_season_raw.loc[player_season_raw['Year'] == '2024'].reset_index()
+st.write(player_season_raw)
 
 
 age_groups = player_season.at[0, 'Team Category']
