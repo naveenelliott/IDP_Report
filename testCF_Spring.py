@@ -197,7 +197,7 @@ def creatingRawAtt(merged_df):
 
     # Shooting DataFrame
     shooting = merged_df[['Player Name', 'Year', 'Efforts on Goal', 'Shot on Target']]
-    shooting['Efficiency '] = (shooting['Shot on Target'] / (shooting['Efforts on Goal'] + shooting['Shot on Target'])) * 100
+    shooting['Efficiency '] = (shooting['Shot on Target'] / (shooting['Efforts on Goal'])) * 100
     shooting.fillna(0, inplace=True)
     shooting = shooting[['Player Name', 'Year', 'Efforts on Goal', 'Shot on Target', 'Efficiency ']]
 
