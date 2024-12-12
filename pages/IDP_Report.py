@@ -1713,8 +1713,7 @@ our_player_avg = final_averages_pd.loc[final_averages_pd['athlete_name'] == play
 
 final_averages_pd = final_averages_pd.loc[final_averages_pd['athlete_name'] != player_name_lower]
 
-st.write(final_averages_pd)
-st.write(our_player_avg)
+
 fig_pd = gettingPlayerDataPlot(our_player_avg, final_averages_pd)
 
 with col2:
