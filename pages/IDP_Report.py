@@ -761,6 +761,7 @@ combined_seasons = pd.concat([this_season, last_season], ignore_index=True)
 
 
 player_season = combined_seasons.loc[combined_seasons['Player Full Name'] == player_name]
+st.write(player_season)
 
 player_season_raw = player_season.copy()
 player_season_later = player_season.loc[player_season['Year'] == '2023'].reset_index()
