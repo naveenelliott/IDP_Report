@@ -1706,6 +1706,7 @@ final_averages_pd['athlete_name'] = final_averages_pd['athlete_name'].str.lower(
 all_primary_position['Player Full Name'] = all_primary_position['Player Full Name'].str.lower()
 
 final_averages_pd = pd.merge(final_averages_pd, all_primary_position, left_on='athlete_name', right_on='Player Full Name', how='inner')
+st.write(final_averages_pd)
 final_averages_pd['Team Category'] = final_averages_pd['Team Name'].str.extract(r'(U\d+)')
 final_averages_pd.loc[final_averages_pd['Player Full Name'] == 'julian martinez', ['Team Name', 'Team Category']] = ['Boston Bolts U17 MLS Next', 'U17']
 
