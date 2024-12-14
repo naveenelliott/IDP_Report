@@ -396,16 +396,27 @@ def encode_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
 
-logo_base64 = encode_image(logo_path)
-mls_logo_path = 'MLSNextLogo.png'  # Path to the MLS Next logo
+# Paths to the logos
+logo_base64 = encode_image(logo_path)  # Boston Bolts logo
+mls_logo_path = 'MLSNextLogo.png'  # MLS Next logo
+nal_logo_path = 'NALlogo.png'  # NAL logo
+
+# Encode the MLS and NAL logos
 mls_logo_base64 = encode_image(mls_logo_path)
+nal_logo_base64 = encode_image(nal_logo_path)
+
+# Conditional logic to determine the logo
+if team_name in ['Boston Bolts U13 NALB', 'Boston Bolts U14 NALB']:
+    league_logo_base64 = nal_logo_base64
+else:
+    league_logo_base64 = mls_logo_base64
 
 with col2:
     st.markdown(
         f"""
         <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
             <img src="data:image/png;base64,{logo_base64}" style="width: 215px; height: auto; margin-bottom: 60px;">
-            <img src="data:image/png;base64,{mls_logo_base64}" style="width: 215px; height: auto;">
+            <img src="data:image/png;base64,{league_logo_base64}" style="width: 215px; height: auto;">
         </div>
         """,
         unsafe_allow_html=True
