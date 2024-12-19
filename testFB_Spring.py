@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy.stats import norm
+import streamlit as st
 
 def creatingPercentilesFB(merged_df):
 
