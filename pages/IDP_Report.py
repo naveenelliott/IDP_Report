@@ -208,7 +208,9 @@ else:
     max_total_dist = meters_to_kilometers(max_total_dist)
     # Handle maximum speed
     temp_bolts_team = idp_playdata['bolts team'].iloc[0]
+    st.write(idp_playdata)
     top_speeds = idp_playdata['max_speed_kph'].sort_values(ascending=False).reset_index(drop=True)
+    st.write(top_speeds)
     max_speed = top_speeds['max_speed_kph'].iloc[0]
     max_speed = kmph_to_mph(max_speed)
     team_names = ['Boston Bolts U13 NALB', 'Boston Bolts U14 NALB']
