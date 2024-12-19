@@ -782,7 +782,7 @@ player_season_raw = player_season_raw.loc[player_season_raw['Year'] == '2024'].r
 
 age_groups = player_season.at[0, 'Team Category']
 
-if not player_season_later.empty:
+#if not player_season_later.empty:
 #    player_season_later.at[0, 'Team Category'] = age_groups
 #    player_season_later_raw.at[0, 'Team Category'] = age_groups
 
