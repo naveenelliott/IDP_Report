@@ -26,7 +26,6 @@ def creatingPercentilesFB(merged_df):
     for column in per90:
         merged_df[column] = merged_df[column] / merged_df['minutes per 90']
 
-    st.write(merged_df)
         
     merged_df = merged_df.drop(columns=['minutes per 90'])
     merged_df.fillna(0, inplace=True)
@@ -48,6 +47,8 @@ def creatingPercentilesFB(merged_df):
     defending['Inter Total'] = defending['Progr Inter'] + defending['Unprogr Inter']
     defending.fillna(0, inplace=True)
     defending = defending.loc[:, ['Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Stand. Tackle Success ', 'Progr Regain ']]
+
+    st.write(defending)
 
     attacking = merged_df[['Line Break', 'Pass into Oppo Box', 'Dribble', 'Att 1v1',
                             'Loss of Poss']]
@@ -180,6 +181,8 @@ def creatingRawFB(merged_df):
     defending.fillna(0, inplace=True)
     defending = defending[['Player Name', 'Year', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Stand. Tackle Success ', 'Progr Regain ']]
 
+    st.write(defending)
+    
     # Attacking DataFrame
     attacking = merged_df[['Player Name', 'Year', 'Line Break', 'Pass into Oppo Box', 'Dribble', 'Att 1v1', 'Loss of Poss']]
     attacking.fillna(0, inplace=True)
