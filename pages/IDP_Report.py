@@ -826,6 +826,8 @@ current_names = ['Forward Total', 'Pass Completion ', 'Total', 'Forward Completi
 
 new_names = ['Forward Passes', 'Pass %', 'Total Passes', 'Forward Pass %', 'Total Tackles', 'Total Recoveries', 'Total Interceptions', 'Regain %', 'Tackle %', 'Shots', 'Passes into 18']
 
+
+
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
     passing, dribbling, defending, shooting = creatingRawAtt(player_season_raw)
@@ -1559,6 +1561,8 @@ elif primary_position == 'CM':
         st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
+    st.write(player_season)
+    st.write(player_season_raw)
     overall_player = creatingPercentilesFB(player_season)
     passing, attacking, defending = creatingRawFB(player_season_raw)
     if not player_season_later.empty:
