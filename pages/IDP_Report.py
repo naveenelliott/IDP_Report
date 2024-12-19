@@ -208,7 +208,6 @@ else:
     max_total_dist = meters_to_kilometers(max_total_dist)
     # Handle maximum speed
     temp_bolts_team = idp_playdata['bolts team'].iloc[0]
-    st.write(idp_playdata)
     top_speeds = idp_playdata['max_speed_kph'].sort_values(ascending=False).reset_index(drop=True)
     max_speed = idp_playdata['max_speed_kph'].max()
     max_speed = kmph_to_mph(max_speed)
@@ -216,7 +215,7 @@ else:
     if (len(top_speeds) >= 3) and (temp_bolts_team in team_names):
         max_speed = top_speeds.iloc[2]
         max_speed = kmph_to_mph(max_speed)
-    else:
+    elif (len(top_speeds) < 3) and (temp_bolts_team in team_names):
         max_speed = 'N/A'
 
 # Load agility test data
