@@ -20,19 +20,7 @@ def creatingPercentilesFB(merged_df):
         'Shot on Target', 'Forward', 'Unsucc Forward', 'Line Break', 'Pass into Oppo Box',
         'Loss of Poss', 'Success', 'Unsuccess']
 
-    age_group = merged_df.at[0, 'Team Category']
-
-    per_70 = ['U13']
-    per_80 = ['U14', 'U15']
-
-    if age_group in per_70:
-        minutes_divide = 70
-    elif age_group in per_80:
-        minutes_divide = 80
-    else:
-        minutes_divide = 90
-
-    merged_df['minutes per 90'] = merged_df['mins played'] / minutes_divide
+    merged_df['minutes per 90'] = merged_df['mins played'] / 90
 
     for column in per90:
         merged_df[column] = merged_df[column] / merged_df['minutes per 90']
