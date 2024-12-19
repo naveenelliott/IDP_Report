@@ -20,6 +20,7 @@ def creatingPercentilesFB(merged_df):
         'Shot on Target', 'Forward', 'Unsucc Forward', 'Line Break', 'Pass into Oppo Box',
         'Loss of Poss', 'Success', 'Unsuccess']
 
+    age_group = merged_df.at[0, 'Team Category']
 
     per_70 = ['U13']
     per_80 = ['U14', 'U15']
