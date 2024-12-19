@@ -42,6 +42,9 @@ def creatingPercentilesFB(merged_df):
     merged_df.fillna(0, inplace=True)
 
     merged_df = merged_df.drop_duplicates()
+
+    st.write(merged_df)
+    
     raw_df = merged_df[raw_columns]
 
     passing = merged_df[['Forward', 'Unsucc Forward', 'Success', 'Unsuccess', 'Pass Completion ']]
@@ -59,7 +62,6 @@ def creatingPercentilesFB(merged_df):
     defending.fillna(0, inplace=True)
     defending = defending.loc[:, ['Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Stand. Tackle Success ', 'Progr Regain ']]
 
-    st.write(defending)
 
     attacking = merged_df[['Line Break', 'Pass into Oppo Box', 'Dribble', 'Att 1v1',
                             'Loss of Poss']]
@@ -170,6 +172,7 @@ def creatingRawFB(merged_df):
 
     merged_df.fillna(0, inplace=True)
     merged_df = merged_df.drop_duplicates()
+    st.write(merged_df)
     raw_df = merged_df[raw_columns]
 
     # Rename 'Player Full Name' to 'Player Name'
@@ -191,7 +194,6 @@ def creatingRawFB(merged_df):
     defending.fillna(0, inplace=True)
     defending = defending[['Player Name', 'Year', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Stand. Tackle Success ', 'Progr Regain ']]
 
-    st.write(defending)
     
     # Attacking DataFrame
     attacking = merged_df[['Player Name', 'Year', 'Line Break', 'Pass into Oppo Box', 'Dribble', 'Att 1v1', 'Loss of Poss']]
