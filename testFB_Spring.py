@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy.stats import norm
+import streamlit as st
 
 def creatingPercentilesFB(merged_df):
 
@@ -19,16 +20,17 @@ def creatingPercentilesFB(merged_df):
         'Shot on Target', 'Forward', 'Unsucc Forward', 'Line Break', 'Pass into Oppo Box',
         'Loss of Poss', 'Success', 'Unsuccess']
 
-
-    merged_df['minutes per 90'] = merged_df['mins played']/90
+    merged_df['minutes per 90'] = merged_df['mins played'] / 90
 
     for column in per90:
         merged_df[column] = merged_df[column] / merged_df['minutes per 90']
         
     merged_df = merged_df.drop(columns=['minutes per 90'])
+
     merged_df.fillna(0, inplace=True)
 
     merged_df = merged_df.drop_duplicates()
+    
     raw_df = merged_df[raw_columns]
 
     passing = merged_df[['Forward', 'Unsucc Forward', 'Success', 'Unsuccess', 'Pass Completion ']]
@@ -45,6 +47,7 @@ def creatingPercentilesFB(merged_df):
     defending['Inter Total'] = defending['Progr Inter'] + defending['Unprogr Inter']
     defending.fillna(0, inplace=True)
     defending = defending.loc[:, ['Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Stand. Tackle Success ', 'Progr Regain ']]
+
 
     attacking = merged_df[['Line Break', 'Pass into Oppo Box', 'Dribble', 'Att 1v1',
                             'Loss of Poss']]
@@ -151,6 +154,8 @@ def creatingRawFB(merged_df):
         merged_df[column] = merged_df[column] / merged_df['minutes per 90']
         
     merged_df = merged_df.drop(columns=['minutes per 90'])
+
+
     merged_df.fillna(0, inplace=True)
     merged_df = merged_df.drop_duplicates()
     raw_df = merged_df[raw_columns]
@@ -174,6 +179,7 @@ def creatingRawFB(merged_df):
     defending.fillna(0, inplace=True)
     defending = defending[['Player Name', 'Year', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Stand. Tackle Success ', 'Progr Regain ']]
 
+    
     # Attacking DataFrame
     attacking = merged_df[['Player Name', 'Year', 'Line Break', 'Pass into Oppo Box', 'Dribble', 'Att 1v1', 'Loss of Poss']]
     attacking.fillna(0, inplace=True)

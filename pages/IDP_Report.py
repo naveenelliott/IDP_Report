@@ -203,14 +203,19 @@ if idp_playdata.empty:
     max_speed = 0      # Default value when no data
 else:
     # Handle maximum total distance
+    idp_playdata.reset_index(drop=True, inplace=True)
     max_total_dist = idp_playdata['total_distance_m'].max()
     max_total_dist = meters_to_kilometers(max_total_dist)
     # Handle maximum speed
+    temp_bolts_team = idp_playdata['bolts team'].iloc[0]
     top_speeds = idp_playdata['max_speed_kph'].sort_values(ascending=False).reset_index(drop=True)
-    if len(top_speeds) >= 4:
-        max_speed = top_speeds.iloc[3]
+    max_speed = idp_playdata['max_speed_kph'].max()
+    max_speed = kmph_to_mph(max_speed)
+    team_names = ['Boston Bolts U13 NALB', 'Boston Bolts U14 NALB']
+    if (len(top_speeds) >= 3) and (temp_bolts_team in team_names):
+        max_speed = top_speeds.iloc[2]
         max_speed = kmph_to_mph(max_speed)
-    else:
+    elif (len(top_speeds) < 3) and (temp_bolts_team in team_names):
         max_speed = 'N/A'
 
 # Load agility test data
@@ -783,7 +788,7 @@ player_season_raw = player_season_raw.loc[player_season_raw['Year'] == '2024'].r
 age_groups = player_season.at[0, 'Team Category']
 
 if not player_season_later.empty:
-    player_season_later.at[0, 'Team Category'] = age_groups
+    player_season_later_raw.at[0, 'Team Category'] = age_groups
 
 combined_seasons.rename(columns={'Pass Completion ': 'Pass %',
                                  'Player Full Name': 'Player Name', 
@@ -825,6 +830,8 @@ def apply_color_change(value, base_value, index):
 current_names = ['Forward Total', 'Pass Completion ', 'Total', 'Forward Completion', 'Stand. Tackle Total', 'Rec Total', 'Inter Total', 'Progr Regain ', 'Stand. Tackle Success ', 'Efforts on Goal', 'Pass into Oppo Box']
 
 new_names = ['Forward Passes', 'Pass %', 'Total Passes', 'Forward Pass %', 'Total Tackles', 'Total Recoveries', 'Total Interceptions', 'Regain %', 'Tackle %', 'Shots', 'Passes into 18']
+
+
 
 if primary_position == 'ATT':
     overall_player = creatingPercentilesAtt(player_season)
