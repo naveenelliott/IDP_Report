@@ -56,7 +56,6 @@ mpmath==1.3.0
 networkx==3.3
 numpy==1.26.4
 oauthlib==3.2.2
-opencv-python==4.10.0.84
 packaging==24.0
 pandas==2.2.2
 patsy==0.5.6
@@ -111,8 +110,6 @@ tornado==6.4
 tqdm==4.66.4
 typing_extensions==4.12.0
 tzdata==2024.1
-ultralytics==8.2.70
-ultralytics-thop==2.0.0
 urllib3==2.0.7
 validators==0.33.0
 voluptuous==0.15.2
