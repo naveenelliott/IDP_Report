@@ -156,8 +156,7 @@ def creatingRawFB(merged_df):
         
     merged_df = merged_df.drop(columns=['minutes per 90'])
 
-    st.write(merged_df)
-    
+
     merged_df.fillna(0, inplace=True)
     merged_df = merged_df.drop_duplicates()
     raw_df = merged_df[raw_columns]
