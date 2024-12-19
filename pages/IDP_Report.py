@@ -198,6 +198,7 @@ def rearrange_team_name(team_name):
 playerdata_df['bolts team'] = playerdata_df['bolts team'].apply(rearrange_team_name)
 
 idp_playdata = playerdata_df.loc[playerdata_df['athlete_name'] == player_name_lower]
+st.write(idp_playdata)
 if idp_playdata.empty:
     max_total_dist = 0  # Default value when no data
     max_speed = 0      # Default value when no data
@@ -207,8 +208,10 @@ else:
     max_total_dist = meters_to_kilometers(max_total_dist)
     # Handle maximum speed
     top_speeds = idp_playdata['max_speed_kph'].sort_values(ascending=False).reset_index(drop=True)
-    if len(top_speeds) >= 4:
-        max_speed = top_speeds.iloc[3]
+    max_speed = top_speeds.iloc[0]
+    team_names = ['Boston Bolts U13 NALB', 'Boston Bolts U14 NALB']
+    if (len(top_speeds) >= 3):
+        max_speed = top_speeds.iloc[2]
         max_speed = kmph_to_mph(max_speed)
     else:
         max_speed = 'N/A'
