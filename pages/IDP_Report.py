@@ -1563,8 +1563,6 @@ elif primary_position == 'CM':
 elif primary_position == 'FB':
     overall_player = creatingPercentilesFB(player_season)
     passing, attacking, defending = creatingRawFB(player_season_raw)
-    st.write(player_season_later_raw)
-    st.write(player_season_later)
     if not player_season_later.empty:
         ls_passing, ls_attacking, ls_defending = creatingRawFB(player_season_later_raw)
         last_season_player = creatingPercentilesFB(player_season_later)
