@@ -34,8 +34,11 @@ def creatingPercentilesFB(merged_df):
 
     merged_df['minutes per 90'] = merged_df['mins played'] / minutes_divide
 
+    for column in per90:
+        merged_df[column] = merged_df[column] / merged_df['minutes per 90']
         
     merged_df = merged_df.drop(columns=['minutes per 90'])
+
     merged_df.fillna(0, inplace=True)
 
     merged_df = merged_df.drop_duplicates()
