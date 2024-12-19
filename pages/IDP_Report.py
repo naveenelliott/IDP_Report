@@ -786,6 +786,11 @@ if not player_season_later.empty:
     player_season_later.at[0, 'Team Category'] = age_groups
     player_season_later_raw.at[0, 'Team Category'] = age_groups
 
+st.write(player_season_raw)
+st.write(player_season)
+st.write(player_season_later)
+st.write(player_season_later_raw)
+
 combined_seasons.rename(columns={'Pass Completion ': 'Pass %',
                                  'Player Full Name': 'Player Name', 
                                  'Stand. Tackle Success ': 'Tackle %', 
