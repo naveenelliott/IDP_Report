@@ -1561,8 +1561,6 @@ elif primary_position == 'CM':
         st.write(playmaking_styled.to_html(table_attributes='style="width:100%"'), unsafe_allow_html=True)
     overall_player['Position'] = 'CM'
 elif primary_position == 'FB':
-    st.write(player_season)
-    st.write(player_season_raw)
     overall_player = creatingPercentilesFB(player_season)
     passing, attacking, defending = creatingRawFB(player_season_raw)
     if not player_season_later.empty:
