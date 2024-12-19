@@ -30,8 +30,6 @@ def creatingPercentilesFB(merged_df):
     merged_df.fillna(0, inplace=True)
 
     merged_df = merged_df.drop_duplicates()
-
-    st.write(merged_df)
     
     raw_df = merged_df[raw_columns]
 
@@ -160,7 +158,6 @@ def creatingRawFB(merged_df):
 
     merged_df.fillna(0, inplace=True)
     merged_df = merged_df.drop_duplicates()
-    st.write(merged_df)
     raw_df = merged_df[raw_columns]
 
     # Rename 'Player Full Name' to 'Player Name'
