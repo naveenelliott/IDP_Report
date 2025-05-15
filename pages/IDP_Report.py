@@ -3,14 +3,13 @@ import os
 import glob
 import base64
 import streamlit as st
-from PIL import Image, ImageOps
-from GettingPSDLineupData import getting_PSD_min_data, getting_weeklyReport, getting_WeeklyReportRank, getting_available_played
+from PIL import Image
+from GettingPSDLineupData import getting_weeklyReport, getting_WeeklyReportRank, getting_available_played
 import matplotlib.pyplot as plt
 from GettingPercentOfMins import plottingMinsPlayed, plottingStarts
-from GetPlayerGrade import gettingFinalGradeForEachTeam, getPrimaryPosition, getPlayerStatistics, getStandardizedValues, getRadarChart, getRadarChartAdvanced, getPrimaryPositionAll
+from GetPlayerGrade import gettingFinalGradeForEachTeam, getPrimaryPosition, getPlayerStatistics, getStandardizedValues, getPrimaryPositionAll
 from xGModel import xGModel
 import plotly.graph_objs as go
-from plottingTimeSeries import plottingStatistics
 from scipy.stats import norm
 from SpringSTATSportsPDP import gettingPlayerDataPlot
 from GettingScatterData import gettingPostSpringGames
@@ -288,7 +287,7 @@ with col1:
     # Player Picture and Info under it in the first inner column
     with picture_col:
         # Player Picture
-        st.image(player_pic, use_column_width=True)
+        st.image(player_pic, use_container_width=True)
         st.markdown(
             """
             <div style='display: block; text-align: left;'>

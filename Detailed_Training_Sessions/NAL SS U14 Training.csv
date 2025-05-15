@@ -1,7 +1,67 @@
 session_type,start_time,bolts team,athlete_name,total_distance_m,total_high_intensity_distance_m,max_speed_kph
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Aidan Fine,4910.5891472805415,59.603004783262485,18.445428331375123
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Andrew Spadea,4200.78373100518,120.29178945341016,21.353795906066892
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Charlie Toirac,4.306572373970235,0.0,6.447383999347688
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Cillian gorham,4109.738083265627,12.263186171798013,19.976562412261963
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Colin O’Malley,5498.837865281916,132.20998200344857,20.75597953033447
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Eamon Carr,4557.014135998129,101.43907687170443,20.839428005218505
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Jack Krantz,3.8469548970933896,0.0,6.566399853229523
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,James Sousa,4.268220454763012,0.0,7.52741991519928
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Jaxon Gray,5641.552794677111,125.4864745877761,24.653753963470457
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,JD Barrett,5523.7527788563275,166.16282104547588,20.198519817352295
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Nathan Lee Bateman,5163.990747694984,12.99528387226432,18.039132425308225
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Nathan Reis,3.1323734306890296,0.0,7.944659843444825
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Samuel Schneeweis,5403.450247764395,73.24272218316102,18.662255945205686
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Sawyer Emond,4.315811750353251,0.0,7.517159843444824
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Zane Weiner,3.8044201923875165,0.0,7.958339667320251
+TrainingSession,2025-03-31T22:00:00.000Z,Boston Bolts NAL South Shore U14,Z zz CC CC zz    C CC c       Cc  CcC  c. C C Liam Markiewicz,5086.0027388886965,146.68010303602873,22.778568031311035
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Aidan Fine,0.0,0.0,0.0
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Andrew Spadea,0.05685336875208922,0.0,0.0
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Charlie Toirac,6254.77940372119,55.3985072188846,18.877032033920287
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Cillian gorham,0.0,0.0,0.0
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Colin O’Malley,5805.064303161299,74.89894366723512,19.346939895629884
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Eamon Carr,0.0,0.0,0.0
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Jack Krantz,0.0,0.0,0.0
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,James Sousa,0.0,0.0,0.0
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Jaxon Gray,0.0,0.0,0.0
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Nathan Lee Bateman,0.08305535696340005,0.0,0.0
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Nathan Reis,4518.9461232275435,19.811814889377956,17.51518791389465
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Samuel Schneeweis,0.0,0.0,0.0
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Sawyer Emond,0.24669418335483034,0.0,0.0
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Zane Weiner,6308.097393150439,71.27316202537605,18.6369478225708
+TrainingSession,2025-03-25T23:30:00.000Z,Boston Bolts NAL South Shore U14,Z zz CC CC zz    C CC c       Cc  CcC  c. C C Liam Markiewicz,0.3653412817941929,0.0,0.0
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Aidan Fine,25.811957731581884,0.0,12.12407100391388
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Andrew Spadea,5675.5184290567795,281.6161332568769,24.836724237442017
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Charlie Toirac,26.1034022853171,0.0,12.554820176124572
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Cillian gorham,6511.4993477530315,216.53532291094018,21.94203599739075
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Colin O’Malley,5552.136703954315,333.41135006101524,21.324041616439818
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Eamon Carr,5344.059931875339,162.61722077122644,22.313448148727417
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Jack Krantz,6927.952361503567,202.94591767650064,22.640399934768677
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,James Sousa,6492.351445381942,173.30054484570746,21.27855581474304
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Jaxon Gray,6760.177577387507,159.92845501135363,24.61989597129822
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,JD Barrett,6712.319109560863,160.2223143328604,19.229292268753053
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Nathan Lee Bateman,5930.832777885416,37.328414365279805,17.96560237312317
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Nathan Reis,5705.783875054273,143.1381208706948,21.47418031311035
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Samuel Schneeweis,27.83088553797139,0.0,12.628008090019225
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Sawyer Emond,24.70687138974573,0.0,12.531563904762267
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Zane Weiner,0.0,0.0,0.0
+TrainingSession,2025-03-18T23:30:00.000Z,Boston Bolts NAL South Shore U14,Z zz CC CC zz    C CC c       Cc  CcC  c. C C Liam Markiewicz,28.623249634266966,0.0,12.531564230918883
+TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Aidan Fine,0.0,0.0,0.0
+TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Andrew Spadea,5.219733241154237,0.0,1.1457000285387038
 TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Charlie Toirac,0.0,0.0,0.0
+TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Cillian gorham,6.434211632843106,0.0,1.5738839993476867
+TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Colin O’Malley,4586.4385985925965,189.61185388894967,22.62398381996155
 TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Eamon Carr,0.0,0.0,0.0
+TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Jack Krantz,0.0,0.0,0.0
+TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,James Sousa,0.0,0.0,0.0
 TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Jaxon Gray,0.539310080152471,0.0,0.0
+TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Nathan Lee Bateman,0.0,0.0,0.0
+TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Nathan Reis,0.0,0.0,0.0
+TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Samuel Schneeweis,0.0,0.0,0.0
+TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Sawyer Emond,1539.166598386299,0.0,15.450876480102538
+TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Zane Weiner,0.0,0.0,0.0
+TrainingSession,2024-11-26T23:00:00.000Z,Boston Bolts NAL South Shore U14,Z zz CC CC zz    C CC c       Cc  CcC  c. C C Liam Markiewicz,0.0,0.0,0.0
+TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,Aidan Fine,0.0,0.0,0.0
 TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,Andrew Spadea,0.0,0.0,0.0
 TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,Charlie Toirac,5026.5399147825365,50.35090927304809,23.342183950424197
 TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,Cillian gorham,4560.95865477874,60.14207648056303,22.2936119556427
@@ -11,10 +71,12 @@ TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,Jack K
 TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,James Sousa,1.2382505392542797,0.0,5.246280133724213
 TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,Jaxon Gray,5464.126853922629,173.15224133482613,21.186215984344482
 TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,Nathan Lee Bateman,0.0,0.0,0.0
+TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,Nathan Reis,0.0,0.0,0.0
 TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,Samuel Schneeweis,5145.51600011459,152.94039478497984,23.878782033920288
 TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,Sawyer Emond,4750.549949139229,25.70385071740174,21.136284341812132
 TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,Zane Weiner,5260.156776340875,158.08876539429266,22.12671565818787
 TrainingSession,2024-11-19T23:00:00.000Z,Boston Bolts NAL South Shore U14,Z zz CC CC zz    C CC c       Cc  CcC  c. C C Liam Markiewicz,4263.562620987387,98.0602425965637,21.50632793998718
+TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,Aidan Fine,0.0,0.0,0.0
 TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,Andrew Spadea,0.0,0.0,0.0
 TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,Charlie Toirac,0.0,0.0,0.0
 TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,Cillian gorham,0.0,0.0,0.0
@@ -24,10 +86,12 @@ TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,Jack K
 TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,James Sousa,0.0,0.0,0.0
 TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,Jaxon Gray,0.0,0.0,0.0
 TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,Nathan Lee Bateman,0.0,0.0,0.0
+TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,Nathan Reis,0.0,0.0,0.0
 TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,Samuel Schneeweis,0.0,0.0,0.0
 TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,Sawyer Emond,0.0,0.0,0.0
 TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,Zane Weiner,0.0,0.0,0.0
 TrainingSession,2024-11-19T21:42:00.000Z,Boston Bolts NAL South Shore U14,Z zz CC CC zz    C CC c       Cc  CcC  c. C C Liam Markiewicz,0.0,0.0,0.0
+TrainingSession,2024-11-12T23:00:00.000Z,Boston Bolts NAL South Shore U14,Aidan Fine,0.0,0.0,0.0
 TrainingSession,2024-11-12T23:00:00.000Z,Boston Bolts NAL South Shore U14,Andrew Spadea,4370.452529623213,191.8178770734943,26.191727874755863
 TrainingSession,2024-11-12T23:00:00.000Z,Boston Bolts NAL South Shore U14,Charlie Toirac,0.13644808684405668,0.0,0.0
 TrainingSession,2024-11-12T23:00:00.000Z,Boston Bolts NAL South Shore U14,Cillian gorham,0.0,0.0,0.0
@@ -37,6 +101,7 @@ TrainingSession,2024-11-12T23:00:00.000Z,Boston Bolts NAL South Shore U14,Jack K
 TrainingSession,2024-11-12T23:00:00.000Z,Boston Bolts NAL South Shore U14,James Sousa,0.0,0.0,0.0
 TrainingSession,2024-11-12T23:00:00.000Z,Boston Bolts NAL South Shore U14,Jaxon Gray,0.0,0.0,0.0
 TrainingSession,2024-11-12T23:00:00.000Z,Boston Bolts NAL South Shore U14,Nathan Lee Bateman,0.0,0.0,0.0
+TrainingSession,2024-11-12T23:00:00.000Z,Boston Bolts NAL South Shore U14,Nathan Reis,0.0,0.0,0.0
 TrainingSession,2024-11-12T23:00:00.000Z,Boston Bolts NAL South Shore U14,Samuel Schneeweis,0.0,0.0,0.0
 TrainingSession,2024-11-12T23:00:00.000Z,Boston Bolts NAL South Shore U14,Sawyer Emond,0.0,0.0,0.0
 TrainingSession,2024-11-12T23:00:00.000Z,Boston Bolts NAL South Shore U14,Zane Weiner,4955.549623004504,77.66883529660318,21.45468560600281

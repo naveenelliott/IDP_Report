@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from GettingPSDLineupData import getting_PSD_data, getting_PSD_min_data
+from GettingPSDLineupData import getting_PSD_data
 from streamlit_gsheets import GSheetsConnection
 
 # Setting the title of the PMR App in web browser
@@ -51,7 +51,7 @@ st.session_state['selected_player'] = selected_player
 
 conn = st.connection('gsheets', type=GSheetsConnection)
 
-existing_data = conn.read(worksheet='IDP_Plan', ttl=5)
+existing_data = conn.read(worksheet='IDP_Plan_2', ttl=5)
 existing_data.dropna(how='all', inplace=True)
 existing_data['Bolts Team'] = existing_data['Bolts Team'].fillna('').astype(str)
 existing_data['Player Name'] = existing_data['Player Name'].fillna('').astype(str)
@@ -109,7 +109,7 @@ with st.form("input_form"):
             updated_df = pd.concat([existing_data, new_data], ignore_index=True)
         
         # Update the Google Sheet
-        conn.update(worksheet='IDP_Plan', data=updated_df)
+        conn.update(worksheet='IDP_Plan_2', data=updated_df)
         st.success("Input updated!")
         st.rerun()  # Rerun to refresh the displayed DataFrame
 
