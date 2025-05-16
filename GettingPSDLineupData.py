@@ -286,7 +286,7 @@ def getting_WeeklyReportRank():
 
     # Example usage
     # THIS COULD NEED CHANGED WITH 18 NEW TEAMS
-    folder_path = 'This_Year/'  # Replace with your folder path
+    folder_path = 'FullSeason/'  # Replace with your folder path
     end = read_all_csvs_from_folder(folder_path)
         
     end = end.drop_duplicates()

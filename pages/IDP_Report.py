@@ -587,6 +587,11 @@ idp_report = idp_report.sort_values('Match Date').reset_index(drop=True)
 fig = go.Figure()
 
 idp_report['More Opposition'] = 'vs ' + idp_report['Opposition']
+
+idp_report['Match Date'] = pd.to_datetime(idp_report['Match Date'])
+
+idp_report = idp_report.sort_values('Match Date', ascending=True).reset_index(drop=True)
+
 idp_report['Match Date'] = pd.to_datetime(idp_report['Match Date']).dt.strftime('%m/%d/%Y')
 
 statistic = 'Final Grade'
