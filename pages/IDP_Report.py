@@ -123,7 +123,7 @@ percentage_started = (player_starts / available_starts) * 100
 fig2 = plottingStarts(percentage_played=percentage_started, player_name=player_name)
 
 conn = st.connection('gsheets', type=GSheetsConnection)
-comp_level = conn.read(worksheet='IDP_Plan', ttl=0)
+comp_level = conn.read(worksheet='IDP_Plan_2', ttl=0)
 comp_level = comp_level.loc[comp_level['Player Name'] == player_name]
 comp_level.reset_index(drop=True, inplace=True)
 coach = comp_level.at[0, "Coach's Summary"]
@@ -217,67 +217,6 @@ else:
     elif (len(top_speeds) < 3) and (temp_bolts_team in team_names):
         max_speed = 'N/A'
 
-# Load agility test data
-agility_test_file = 'AgilityTest.csv'
-agility_test_df = pd.read_csv(agility_test_file)
-
-# Ensure the 'Final Time' column is string type and clean it
-agility_test_df['Final Time'] = agility_test_df['Final Time'].astype(str)
-agility_test_df['Final Time'] = agility_test_df['Final Time'].str.replace(r'\s*[sS][eE][cC]\s*', '', regex=True).str.strip()
-
-# Ensure lowercase for matching
-agility_test_df['Name'] = agility_test_df['Name'].str.lower()
-player_name_lower = player_name.lower()
-
-# Filter the data for the specific player
-agility_test_match = agility_test_df.loc[agility_test_df['Name'] == player_name_lower]
-
-six_min_run = pd.read_csv('6_Min_Run.csv')
-
-six_min_run_match = six_min_run.loc[six_min_run['Name'] == player_name_lower]
-
-# Pull the 'Final Time' column if a match is found
-if not six_min_run_match.empty:
-    six_min_run_time = six_min_run_match['6-Min Run (km)'].values[0]
-    if pd.isna(six_min_run_time):
-        six_min_run_time = "N/A"
-else:
-    six_min_run_time = "N/A"  # Default value if no data is found
-
-# Pull the 'Final Time' column if a match is found
-if not agility_test_match.empty:
-    agility_test_time = agility_test_match['Final Time'].values[0]
-    if pd.notna(agility_test_time) and agility_test_time.upper() != "N/A":
-        agility_test_time = f"{agility_test_time}"
-    else:
-        agility_test_time = "N/A"
-else:
-    agility_test_time = "N/A"  # Default value if no data is found
-
-# Load forty test dash data
-forty_test_file = 'FortyTestDash.csv'
-forty_test_df = pd.read_csv(forty_test_file)
-
-# Ensure the 'Final Time' column is string type and clean it
-forty_test_df['Final Time'] = forty_test_df['Final Time'].astype(str)
-forty_test_df['Final Time'] = forty_test_df['Final Time'].str.replace(r'\s*[sS][eE][cC]\s*', '', regex=True).str.strip()
-
-# Ensure lowercase for matching
-forty_test_df['Name'] = forty_test_df['Name'].str.lower()
-
-# Filter the data for the specific player
-forty_test_match = forty_test_df.loc[forty_test_df['Name'] == player_name_lower]
-
-# Pull the 'Final Time' column if a match is found
-if not forty_test_match.empty:
-    forty_test_time = forty_test_match['Final Time'].values[0]
-    if pd.notna(forty_test_time) and forty_test_time.upper() != "N/A":
-        forty_test_time = f"{forty_test_time}"
-    else:
-        forty_test_time = "N/A"
-else:
-    forty_test_time = "N/A"  # Default value if no data is found
-
     
 # First Column: Player Picture and Stats
 with col1:
@@ -343,30 +282,6 @@ with col1:
             </div>
             """.format(max_speed=max_speed),
             unsafe_allow_html=True
-        )
-        st.markdown(
-        f"""
-        <div style='display: block; text-align: left;'>
-            <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Agility Test Time:</b> {agility_test_time} sec</span>
-        </div>
-        """,
-        unsafe_allow_html=True
-        )
-        st.markdown(
-        f"""
-        <div style='display: block; text-align: left;'>
-        <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Forty Meter Dash Test Time:</b> {forty_test_time} sec</span>
-        </div>
-        """,
-        unsafe_allow_html=True
-        )
-        st.markdown(
-        f"""
-        <div style='display: block; text-align: left;'>
-        <span style='font-family: Arial; font-size: 10pt; color: black;'><b>Six Minute Run Time:</b> {six_min_run_time} km</span>
-        </div>
-        """,
-        unsafe_allow_html=True
         )
         st.markdown(
             """
