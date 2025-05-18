@@ -226,7 +226,7 @@ with col1:
     # Player Picture and Info under it in the first inner column
     with picture_col:
         # Player Picture
-        st.image(player_pic, use_container_width=True)
+        st.image(player_pic)
         st.markdown(
             """
             <div style='display: block; text-align: left;'>
