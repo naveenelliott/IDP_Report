@@ -6,6 +6,7 @@ import streamlit as st
 
 def gettingPlayerDataPlot(player_df, other_player_df):
 
+
     positions = []
 
     if player_df.empty:
@@ -75,12 +76,56 @@ def gettingPlayerDataPlot(player_df, other_player_df):
             plt.scatter(result_df[result_df['Team Category'] == category]['Avg_Total_Distance'], 
                     result_df[result_df['Team Category'] == category]['Avg_High_Intensity_Distance'], 
                     color=color, label=category)
-        plt.scatter(player_df['Avg_Total_Distance'], player_df['Avg_High_Intensity_Distance'], color='orange', label=player_name, s=70)
-        custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor='orange', markersize=10, label=player_name)]
-    
+        if len(player_df) > 1:
+            recent_td = player_df['Avg_Total_Distance'].iloc[0]
+            recent_hid = player_df['Avg_High_Intensity_Distance'].iloc[0]
+            prev_td = player_df['Avg_Total_Distance'].iloc[1]
+            prev_hid = player_df['Avg_High_Intensity_Distance'].iloc[1]
+
+            player_row = player_df.iloc[0]
+            player_row_late = player_df.iloc[1]
+
+            if (recent_td > prev_td) and (recent_hid > prev_hid):
+                update_color = 'green'
+                plt.scatter(player_row['Avg_Total_Distance'], player_row['Avg_High_Intensity_Distance'], color=update_color, label=player_name, s=70)
+                plt.scatter(player_row_late['Avg_Total_Distance'], player_row_late['Avg_High_Intensity_Distance'], color='pink', label=player_name, s=70)
+
+                update_pname = player_name + ' Spring'
+                later_pname = player_name + ' Fall'
+                custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor=update_color, markersize=10, label=update_pname),
+                                 Line2D([0], [0], marker='o', color='w', markerfacecolor='pink', markersize=10, label=later_pname)]
+                plt.legend(handles=custom_legend, loc='upper left')
+            elif (recent_td < prev_td) and (recent_hid < prev_hid):
+                update_color = 'red'
+                plt.scatter(player_row['Avg_Total_Distance'], player_row['Avg_High_Intensity_Distance'], color=update_color, label=player_name, s=70)
+                plt.scatter(player_row_late['Avg_Total_Distance'], player_row_late['Avg_High_Intensity_Distance'], color='pink', label=player_name, s=70)
+
+                update_pname = player_name + ' Spring'
+                later_pname = player_name + ' Fall'
+                custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor=update_color, markersize=10, label=update_pname),
+                                 Line2D([0], [0], marker='o', color='w', markerfacecolor='pink', markersize=10, label=later_pname)]
+                plt.legend(handles=custom_legend, loc='upper left')
+            else:
+                update_color = 'orange'
+                plt.scatter(player_row['Avg_Total_Distance'], player_row['Avg_High_Intensity_Distance'], color=update_color, label=player_name, s=70)
+                plt.scatter(player_row_late['Avg_Total_Distance'], player_row_late['Avg_High_Intensity_Distance'], color='pink', label=player_name, s=70)
+
+                update_pname = player_name + ' Spring'
+                later_pname = player_name + ' Fall'
+                custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor=update_color, markersize=10, label=update_pname),
+                                 Line2D([0], [0], marker='o', color='w', markerfacecolor='pink', markersize=10, label=later_pname)]
+                plt.legend(handles=custom_legend, loc='upper left')
+        else:
+            
+            plt.scatter(player_df['Avg_Total_Distance'], player_df['Avg_High_Intensity_Distance'], color='orange', label=player_name, s=70)
+            custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor='orange', markersize=10, label=player_name)]
+            # Place the legend in the upper left corner
+            plt.legend(handles=custom_legend, loc='upper left')
+        
         plt.xlabel('Avg Training Load Total Distance', size = 10.5)
         plt.ylabel('Avg Training Load High Intensity Distance', size = 10.5)
         plt.title(f'Distance and High Intensity Distance Training Load For {position}', size = 12)
+        
     
     
         ax = plt.gca()
@@ -88,9 +133,7 @@ def gettingPlayerDataPlot(player_df, other_player_df):
         ax.spines['right'].set_visible(False)
         fig.set_facecolor('white')
         plt.gca().set_facecolor('white')
-    
-        # Place the legend in the upper left corner
-        plt.legend(handles=custom_legend, loc='upper left')
+        
 
 
     return fig

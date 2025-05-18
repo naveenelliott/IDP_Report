@@ -80,10 +80,9 @@ def getting_available_played(teamName, playerName):
     end = read_all_csvs_from_folder(folder_path)
 
     end['Match Date'] = pd.to_datetime(end['Match Date'])
-    
+
     # Filter rows where 'Match Date' is after 08/01/2024
     end = end[end['Match Date'] > pd.Timestamp('2024-08-01')]
-    
     
     end = end.loc[end['Player Full Name'] == playerName].reset_index(drop=True)
         

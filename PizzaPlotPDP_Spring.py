@@ -93,14 +93,14 @@ def createNewPizzaChart(bolts):
         params = list(position_columns_wout)
 
         # Filter data by year
-        row_2024 = group[group['Date'] == '2024']
-        row_2023 = group[group['Date'] == '2023']
+        row_Spring = group[group['Date'] == 'Spring']
+        row_Fall = group[group['Date'] == 'Fall']
 
-        if not row_2024.empty:  # Ensure 2024 data exists
-            values = [int(row_2024[col].iloc[0]) for col in position_columns_list]
+        if not row_Spring.empty:  # Ensure Spring data exists
+            values = [int(row_Spring[col].iloc[0]) for col in position_columns_list]
 
-            if not row_2023.empty:  # If both 2024 and 2023 data exist
-                other_vals = [int(row_2023[col].iloc[0]) for col in position_columns_list]
+            if not row_Fall.empty:  # If both Spring and Fall data exist
+                other_vals = [int(row_Fall[col].iloc[0]) for col in position_columns_list]
 
                 # Define colors for slices and text
                 slice_colors = ["#6bb2e2"] * len(params)  # Slices always light blue
@@ -148,7 +148,7 @@ def createNewPizzaChart(bolts):
                         bbox=dict(edgecolor="#000000", boxstyle="round,pad=0.2", lw=1)
                     )
                 )
-            else:  # If only 2024 data exists
+            else:  # If only Spring data exists
                 slice_colors = ["#6bb2e2"] * len(params)  # Light blue slices
                 text_colors = ["#FFFFFF"] * len(params)  # White text for numbers
 

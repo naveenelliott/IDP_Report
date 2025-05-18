@@ -85,9 +85,9 @@ def midfielder_function(dataframe, age_group, pname, position):
                         color=value, 
                         label=key)
         player_row = dataframe[dataframe['Player Name'] == pname]
-        primary_player = player_row[player_row['Year'] == '2024'].reset_index(drop=True)
+        primary_player = player_row[player_row['Year'] == 'Spring'].reset_index(drop=True)
         if len(player_row) > 1:
-            compare_player = player_row[player_row['Year'] == '2023'].reset_index(drop=True)
+            compare_player = player_row[player_row['Year'] == 'Fall'].reset_index(drop=True)
             recent_pass = primary_player['Pass %'].iloc[0]
             recent_lb = primary_player['Line Break'].iloc[0]
             compare_pass = compare_player['Pass %'].iloc[0]
@@ -101,13 +101,13 @@ def midfielder_function(dataframe, age_group, pname, position):
             else:
                 update_color = 'orange'
                 plt.scatter(primary_player['Pass %'], primary_player['Line Break'], color=update_color, label=pname, s=70)
-            update_pname = pname + ' This Season'
-            later_pname = pname + ' Last Season'
+            update_pname = pname + ' Spring'
+            later_pname = pname + ' Fall'
             plt.scatter(compare_player['Pass %'], compare_player['Line Break'], color='pink', label=later_pname, s=70)
             custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor=update_color, markersize=10, label=update_pname),
                                  Line2D([0], [0], marker='o', color='w', markerfacecolor='pink', markersize=10, label=later_pname)]
         else:
-            update_pname = pname + ' This Season'
+            update_pname = pname + ' Spring'
             plt.scatter(player_row['Pass %'], player_row['Line Break'], color='orange', label=pname, s=70)
             custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor='orange', markersize=10, label=update_pname)]
         plt.xlabel('Pass Percentage', size = 11.5)
@@ -208,9 +208,9 @@ def defender_function(dataframe, age_group, pname, position):
                         color=value, 
                         label=key)
         player_row = dataframe[dataframe['Player Name'] == pname]
-        primary_player = player_row[player_row['Year'] == '2024'].reset_index(drop=True)
+        primary_player = player_row[player_row['Year'] == 'Spring'].reset_index(drop=True)
         if len(player_row) > 1:
-            compare_player = player_row[player_row['Year'] == '2023'].reset_index(drop=True)
+            compare_player = player_row[player_row['Year'] == 'Fall'].reset_index(drop=True)
             recent_regain = primary_player['Progr Regain %'].iloc[0]
             recent_tack = primary_player['Tackle %'].iloc[0]
             compare_regain = compare_player['Progr Regain %'].iloc[0]
@@ -224,13 +224,13 @@ def defender_function(dataframe, age_group, pname, position):
             else:
                 update_color = 'orange'
                 plt.scatter(player_row['Progr Regain %'], player_row['Tackle %'], color=update_color, label=pname, s=70)
-            update_pname = pname + ' This Season'
-            later_pname = pname + ' Last Season'
+            update_pname = pname + ' Spring'
+            later_pname = pname + ' Fall'
             plt.scatter(compare_player['Progr Regain %'], compare_player['Tackle %'], color='pink', label=later_pname, s=70)
             custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor=update_color, markersize=10, label=update_pname),
                                  Line2D([0], [0], marker='o', color='w', markerfacecolor='pink', markersize=10, label=later_pname)]
         else:
-            update_pname = pname + ' This Season'
+            update_pname = pname + ' Spring'
             plt.scatter(player_row['Progr Regain %'], player_row['Tackle %'], color='orange', label=pname, s=70)
             custom_legend = [Line2D([0], [0], marker='o', color='w', markerfacecolor='orange', markersize=10, label=update_pname)]
         plt.xlabel('Regain %', size = 11.5)
